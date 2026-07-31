@@ -48,8 +48,8 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="CaretBrush" Value="{StaticResource TextBrush}" />
-                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                <Setter Property="CaretBrush" Value="{DynamicResource TextBrushLight}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
             </DataTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6" />
@@ -122,8 +122,8 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-                <Setter Property="CaretBrush" Value="{StaticResource TextBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
+                <Setter Property="CaretBrush" Value="{DynamicResource TextBrushLight}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -151,8 +151,8 @@
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />
-        <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextBrushLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlIdleBorderBrush}"/>
         <Setter Property="BorderThickness" Value="0" />

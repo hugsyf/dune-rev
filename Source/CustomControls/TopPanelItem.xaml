@@ -78,7 +78,7 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
             </DataTrigger>
             <!--<Trigger Property="IsToggled" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource SelectedBrush}" />

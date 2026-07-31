@@ -161,7 +161,7 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
             </DataTrigger>
             <!--<Trigger Property="Selector.IsSelected" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource SelectedBrush}" />
@@ -257,6 +257,25 @@
                             <Setter Property="Visibility" Value="Hidden" TargetName="ContentSite" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ThemeExtras completion-status editor, styled with Dune Rev's normal ComboBox. -->
+    <Style x:Key="ThemeExtrasUserControlCompStatusStyle" TargetType="UserControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <ComboBox MinWidth="115"
+                              ItemsSource="{Binding CompletionStatusOptions}"
+                              SelectedItem="{Binding Value}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type CompletionStatus}">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

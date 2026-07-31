@@ -22,6 +22,48 @@
         </Style.Triggers>
     </Style>
 
+    <!-- DuplicateHider looks up this conventional resource key for source icons. -->
+    <Style x:Key="DuplicateHider_IconContentControlStyle1"
+           BasedOn="{StaticResource {x:Type ContentControl}}"
+           TargetType="ContentControl">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{x:Null}" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Border x:Name="IconBackground"
+                                CornerRadius="{DynamicResource ControlCornerRadius}"
+                                Background="{DynamicResource ControlHoverBackgroundBrush}"
+                                Opacity="0"
+                                Visibility="Hidden" />
+                        <Image Source="{Binding Icon}"
+                               RenderOptions.BitmapScalingMode="Fant"
+                               Margin="3"
+                               Opacity="0.95" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="IconBackground" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="IconBackground" Property="Opacity" Value="0.75" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                            <Setter TargetName="IconBackground" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="IconBackground" Property="Opacity" Value="1" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="GridViewItemTemplate" TargetType="{x:Type GameListItem}">
         <Setter Property="Template">
             <Setter.Value>
@@ -51,9 +93,11 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Style>
-                                    <!--<ContentControl x:Name="ThemeExtras_Banner" RenderOptions.BitmapScalingMode="Fant" Width="{Binding Width, ElementName=PART_ImageCover}"
-                                            Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"
-                                            Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+                                    <!--
+                                    ThemeExtras_Banner is intentionally not injected here. ThemeExtras requires
+                                    banner paths in themeExtras.yaml; creating the control without those assets
+                                    causes its BannerCache to throw while Grid View items are being realized.
+                                    -->
                                     <Grid>
                                         <Image Name="PART_ImageCover" Height="{Settings GridItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" StretchDirection="Both" Stretch="{Settings CoverArtStretch}" />

@@ -1,32 +1,38 @@
-#Ignore thumbnails created by Windows
-Thumbs.db
-#Ignore files built by Visual Studio
+# Playnite packages and local release output
+/dist/
+*.pthm
+
+# MSBuild / Visual Studio
+/Source/bin/
+/Source/obj/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug*/
+[Rr]elease*/
+.vs/
+*.user
+*.suo
+*.pdb
 *.obj
 *.exe
-*.pdb
-*.user
-*.aps
-*.pch
-*.vspscc
-*_i.c
-*_p.c
-*.ncb
-*.suo
-*.tlb
-*.tlh
-*.bak
 *.cache
-*.ilk
 *.log
-[Bb]in
-[Dd]ebug*/
-*.lib
-*.sbr
-*obj/
-[Rr]elease*/
+
+# IDEs and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary and backup files
+*.bak
+*.tmp
+*.temp
+*~
+
+# Local tooling
+/.dotnet/
+/packages/
+TestResults/
 _ReSharper*/
-[Tt]est[Rr]esult*
-.vs/
-#Nuget packages folder
-packages/
-/.dotnet

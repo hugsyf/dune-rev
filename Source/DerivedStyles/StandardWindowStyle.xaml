@@ -66,5 +66,20 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <!--
+            Extension settings views frequently rely on the host window foreground
+            instead of assigning a foreground to every child control. Keep that
+            inherited value in sync with Dune Rev's Fluent Dim palette.
+            -->
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                <Setter Property="Background" Value="{DynamicResource DarkPopupBackgroundBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
+                <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

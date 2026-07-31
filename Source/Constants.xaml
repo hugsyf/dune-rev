@@ -3,24 +3,38 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!--ThemeModifier Options-->
-        <sys:Boolean x:Key="ThemeDarkStyle">False</sys:Boolean>
+        <!--
+        Playnite 10 does not expose a theme state that injected extension controls
+        can follow. Use one supported Fluent Dim palette so every extension shares
+        the same foreground/background contract. The legacy light triggers remain
+        in the theme for a future Playnite theme API.
+        -->
+        <sys:Boolean x:Key="ThemeDarkStyle">True</sys:Boolean>
+        <sys:Boolean x:Key="DetailsViewAllowUseOfLogos">True</sys:Boolean>
+        <sys:Boolean x:Key="GridViewAllowUseOfLogos">True</sys:Boolean>
 
-        <sys:Double x:Key="GameOverviewWidth">1024</sys:Double>
-        <sys:Double x:Key="GameDetailInfoWidth">1024</sys:Double>
+        <sys:Double x:Key="GameOverviewWidth">1760</sys:Double>
+        <sys:Double x:Key="GameDetailInfoWidth">480</sys:Double>
+        <sys:Double x:Key="GridViewDetailsWidth">640</sys:Double>
+        <sys:Double x:Key="TopPanelHeight">60</sys:Double>
+        <sys:Double x:Key="GameLogoMaxWidth">480</sys:Double>
+        <sys:Double x:Key="GameLogoMaxHeight">120</sys:Double>
+        <sys:Double x:Key="GameActionButtonWidth">200</sys:Double>
+        <sys:Double x:Key="DetailsSummaryCardWidth">240</sys:Double>
+        <sys:Double x:Key="DetailsSummaryCardHeight">136</sys:Double>
+        <sys:Double x:Key="GridSummaryCardWidth">260</sys:Double>
+        <sys:Double x:Key="GridSummaryCardHeight">136</sys:Double>
+        <sys:Double x:Key="FeatureIconsHeight">24</sys:Double>
+        <sys:Double x:Key="SuccessStoryPanelMinHeight">300</sys:Double>
+        <sys:Double x:Key="ScreenshotsPanelHeight">500</sys:Double>
 
-        <sys:Boolean x:Key="GridViewImageCoverUseRoundedCorners">True</sys:Boolean>
-        <sys:Boolean x:Key="GridViewImageCoverShowPlatformBanner">True</sys:Boolean>
-        <sys:Boolean x:Key="GridViewListShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="ShowIconTextOnLink">True</sys:Boolean>
-
-        <SolidColorBrush x:Key="GridViewItemMaskBackgroundBrush" Color="#1e1e1e" />
         <CornerRadius x:Key="GridViewCoverCornerRadius">6</CornerRadius>
         <CornerRadius x:Key="GridViewCoverGridBackgroundDisabledCornerRadius">8,8,8,8</CornerRadius>
         <CornerRadius x:Key="GridViewSelectionBorderCornerRadius">16</CornerRadius>
 
         <!--ThemeModifier Grid View Settings-->
         <sys:Boolean x:Key="GridViewGameCoverUseRoundedCorners">True</sys:Boolean>
-        <sys:Boolean x:Key="GridViewGameCoverShowPlatformBanner">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
@@ -30,7 +44,7 @@
 
     <!--ThemeModifier Theme-->
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#EBEBEB" />
-        <SolidColorBrush x:Key="DarkWindowBackgroundBrush" Color="#141414" />
+        <SolidColorBrush x:Key="DarkWindowBackgroundBrush" Color="#20242B" />
 
         <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#000000" />
         <SolidColorBrush x:Key="DarkControlBackgroundBrush" Color="#FFFFFF" />
@@ -44,13 +58,19 @@
         <SolidColorBrush x:Key="PopupSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
     
         <SolidColorBrush x:Key="PopupBackgroundBrush" Color="#E0E0E0" />
-        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="#1F1F1F" />
+        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="#292E37" />
 
         <SolidColorBrush x:Key="PopupBorderBrush" Color="#BCBCBC" />
         <SolidColorBrush x:Key="DarkPopupBorderBrush" Color="#4C4C4C" />
 
     
-        <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
+        <!--
+        TextBrush is the conventional extension foreground. The supported Fluent
+        Dim palette is dark, so injected extension controls consistently use an
+        off-white foreground. TextBrushLight is retained for legacy light styles.
+        -->
+        <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="TextBrushLight" Color="{DynamicResource TextColor}" />
         <SolidColorBrush x:Key="TextBrushDarker" Color="{DynamicResource TextColorDarker}" />
         <SolidColorBrush x:Key="TextBrushLighter" Color="{DynamicResource TextColorLighter}" />
         <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource TextColorDark}" />
@@ -62,6 +82,30 @@
 
         <SolidColorBrush x:Key="AccentBackgroundBrush" Color="{DynamicResource AccentIdleColor}" />
         <SolidColorBrush x:Key="DarkAccentBackgroundBrush" Color="{DynamicResource AccentIdleColor}" />
+
+        <!--
+        Extension compatibility aliases.
+        A number of Playnite extensions use these conventional theme resource
+        names directly. Keep them mapped to Dune Rev's own palette so extension
+        settings and injected controls remain legible.
+        -->
+        <SolidColorBrush x:Key="WindowBackgourndBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="ControlForegroundBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="CommonToolTipBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="CommonToolTipBorderBrush" Color="{DynamicResource PanelSeparatorColor}" />
+        <SolidColorBrush x:Key="CaretBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="SelectionBrush" Color="{DynamicResource AccentSelectedColor}" />
+        <SolidColorBrush x:Key="SelectionLightBrush" Color="{DynamicResource AccentSelectedColor}" />
+        <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="LinkBrush" Color="{DynamicResource AccentSelectedColor}" />
+        <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentIdleColor}" />
+        <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentIdleColor}" />
+        <SolidColorBrush x:Key="AccentSecondaryBrush" Color="{DynamicResource AccentSelectedColor}" />
+        <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="SuccessBrush" Color="#2ecc71" />
+        <SolidColorBrush x:Key="OverlayBrush" Color="#99000000" />
+        <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="SectionHeaderBackgroundBrush" Color="#14FFFFFF" />
 
     <!--ThemeModifier Options Ends-->
 
@@ -93,11 +137,11 @@
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
     <Color x:Key="TextColor">#000000</Color>
-    <Color x:Key="TextColorDarker">#66FFFFFF</Color>
+    <Color x:Key="TextColorDarker">#B3FFFFFF</Color>
     <Color x:Key="TextColorLighter">#99000000</Color>
-    <Color x:Key="TextColorDark">#FFFFFF</Color>
+    <Color x:Key="TextColorDark">#F3F3F3</Color>
     <Color x:Key="MainColor">#2C3A67</Color>
-    <Color x:Key="MainColorDark">#0D1225</Color>
+    <Color x:Key="MainColorDark">#202735</Color>
     <Color x:Key="HoverColor">#247BA0</Color>
     <Color x:Key="GlyphColor">#FFFFFF</Color>
     <Color x:Key="HighlightGlyphColor">#FF0379FF</Color>
@@ -105,14 +149,14 @@
     <Color x:Key="AccentSelectedColor">#FF04A5FF</Color>
 
     <Color x:Key="BackgroundToneColor">#FFCC00</Color>
-    <Color x:Key="GridItemBackgroundColor">#151e3d</Color>
+    <Color x:Key="GridItemBackgroundColor">#293142</Color>
 
     <Color x:Key="PanelSeparatorColor">#33808080</Color>
 
     <Color x:Key="WindowPanelSeparatorColor">#14ffffff</Color>
     <Color x:Key="DataChangeNotifColor">#ffa500</Color>
 
-    <!--Dune Newly Added Color-->
+    <!--Dune Rev palette additions-->
     <Color x:Key="8%White">#14FFFFFF</Color>
     <Color x:Key="16%White">#29FFFFFF</Color>
     <Color x:Key="24%White">#3DFFFFFF</Color>
@@ -120,7 +164,7 @@
     <Color x:Key="40%White">#66FFFFFF</Color>
     <Color x:Key="Brown">#795548</Color>
     <Color x:Key="BrownDark">#280B0A</Color>
-    <!--Dune Newly Added Color Ends-->
+    <!--Dune Rev palette additions end-->
 
     
 

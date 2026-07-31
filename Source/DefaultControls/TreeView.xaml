@@ -77,7 +77,7 @@
                         </DataTrigger>
 
                         <DataTrigger Binding="{Binding Tag, ElementName=Root}" Value="False">
-                            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
                         </DataTrigger>
                         <Trigger Property="IsExpanded" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ItemsHost" />

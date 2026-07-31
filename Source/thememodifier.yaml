@@ -1,28 +1,38 @@
 Constants:
-    - "Appearance"
-    - ThemeDarkStyle: 'Switch to Dune night'
-  
-    - "Colors"
-    - GlyphBrush: 'Primary color'
-    - HighlightGlyphBrush: 'Accent color'
-    - WindowBackgroundBrush: 'Light theme background color'
-    - DarkWindowBackgroundBrush: 'Dark theme background color'
+    - "Colors / 配色"
+    - GlyphBrush: 'Icon color / 图标颜色'
+    - WindowBackgroundBrush: 'Light surface background / 浅色表面背景'
+    - DarkWindowBackgroundBrush: 'Fluent Dim background / Fluent Dim 背景'
 
-    - "Layouts"
-    - GameOverviewWidth(1024,2400): 'Maximum width of overview'
-    - GameDetailInfoWidth(200,800): 'Maximum width of details'
-  
-    - "General Settings"
-    - ShowIconTextOnLink: 'Show full link name next to the icon'  
-  
-    - "Grid View Settings"
-  
-    - GridViewGameCoverShowFavorite: 'Show favorite icon on game cover'
-    - GridViewGameCoverShowPlatformBanner: 'Show platform banners ("ThemeExtras" extension needed)'
-    - GridViewGameCoverUseRoundedCorners: 'Use rounded corners on game covers'
-    - GridViewGameCoverShowShineAnimation: 'Show luster on game cover when hover'
-    - GridViewGameCoverShowHighlightBorder: 'Show luster on the border of game cover when selected'
-    - GridViewGameCoverShowCompletionStatus: 'Display completion Status under game cover'
-    - GridViewGameCoverShowPlayedTime: 'Display played time under game covers'
-  
-  
+    - "Global layout / 全局布局"
+    - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'
+    - GameLogoMaxWidth(160,720): 'Game logo maximum width / 游戏 Logo 最大宽度'
+    - GameLogoMaxHeight(64,240): 'Game logo maximum height / 游戏 Logo 最大高度'
+    - GameActionButtonWidth(180,320): 'Game action button width / 游戏操作按钮宽度'
+    - ShowIconTextOnLink: 'Game links: show names / 游戏链接：显示名称'
+
+    - "Details View layout / 详情视图布局"
+    - GameOverviewWidth(960,2560): 'Details View content maximum width / 详情视图内容最大宽度'
+    - GameDetailInfoWidth(320,720): 'Details View information column width / 详情视图信息栏宽度'
+    - DetailsSummaryCardWidth(220,360): 'Details View summary card width / 详情视图摘要卡片宽度'
+    - DetailsSummaryCardHeight(136,220): 'Details View summary card height / 详情视图摘要卡片高度'
+    - DetailsViewAllowUseOfLogos: 'Details View: use game logos (Extra Metadata Loader) / 详情视图：使用游戏 Logo（需要 Extra Metadata Loader）'
+
+    - "Grid View layout / 网格视图布局"
+    - GridViewDetailsWidth(400,1200): 'Grid View details pane width / 网格视图详情栏宽度'
+    - GridSummaryCardWidth(220,520): 'Grid View summary card width / 网格视图摘要卡片宽度'
+    - GridSummaryCardHeight(136,220): 'Grid View summary card height / 网格视图摘要卡片高度'
+    - GridViewAllowUseOfLogos: 'Grid View: use game logos (Extra Metadata Loader) / 网格视图：使用游戏 Logo（需要 Extra Metadata Loader）'
+
+    - "Extension panels / 扩展面板"
+    - FeatureIconsHeight(16,40): 'Library Management feature icon height / Library Management 功能图标高度'
+    - SuccessStoryPanelMinHeight(200,800): 'Achievements panel minimum height / 成就面板最小高度'
+    - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
+
+    - "Grid cover display / 网格封面显示"
+    - GridViewGameCoverShowFavorite: 'Grid covers: show favorite icon / 网格封面：显示收藏图标'
+    - GridViewGameCoverUseRoundedCorners: 'Grid covers: use rounded corners / 网格封面：使用圆角'
+    - GridViewGameCoverShowShineAnimation: 'Grid covers: show hover shine / 网格封面：显示悬停光泽动画'
+    - GridViewGameCoverShowHighlightBorder: 'Grid covers: highlight selected border / 网格封面：高亮选中边框'
+    - GridViewGameCoverShowCompletionStatus: 'Grid covers: show completion status / 网格封面：显示完成状态'
+    - GridViewGameCoverShowPlayedTime: 'Grid covers: show play time / 网格封面：显示游玩时间'

@@ -76,8 +76,8 @@
                                         Content="&#xe106;" 
                                         FontSize="{DynamicResource FontSizeSmall}" VerticalAlignment="Top" Margin="0,0,0,0"
                                         Style="{StaticResource IconfontButton}"/>
-                                <Button Name="PART_ButtonClear" DockPanel.Dock="Left" Height="28"
-                                        Content="{StaticResource LOCClearFilters}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0"
+                                <Button Name="PART_ButtonClear" DockPanel.Dock="Left" Height="36" MinWidth="112" Padding="14,0"
+                                        Content="{StaticResource LOCClearFilters}" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0"
                                         Style="{StaticResource SecondaryButton}"/>
                             </DockPanel>
                             <!--Row 2-->
