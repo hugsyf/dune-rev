@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Playnite](https://img.shields.io/badge/Playnite-Desktop-6c5ce7.svg)](https://playnite.link/)
+![DownloadCount](https://img.shields.io/github/downloads/hugsyf/dune-rev/total.svg)
 
 [English](#english) · [简体中文](#简体中文)
 
@@ -35,8 +36,7 @@ layout flexibility, readability, and interaction feedback.
 2. Open the downloaded file and let Playnite install the theme.
 3. In Playnite, select **Dune Rev** under Desktop theme settings.
 
-When the theme is accepted into the Playnite add-on database, it will also be
-available from Playnite's built-in add-on browser.
+You can also install it via this [link](playnite://playnite/installaddon/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40), it is also available from Playnite's built-in add-on browser.
 
 ### Recommended setup
 
@@ -97,7 +97,7 @@ also reproducible in unmodified Dune, consult the
 ## 简体中文
 
 Dune Rev 是 [Dune](https://github.com/sakasakiking/Dune) 的个人分支，由
-[hugsyf](https://github.com/hugsyf) 独立维护。它保留了 Dune 简洁、宽松的
+[hugsyf](https://github.com/hugsyf) 维护。它保留了 Dune 简洁、宽松的
 Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容可读性与交互反馈。
 
 ### 主要特性
@@ -121,8 +121,7 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 2. 打开下载的文件，让 Playnite 安装主题。
 3. 在 Playnite 的桌面主题设置中选择 **Dune Rev**。
 
-主题被 Playnite 官方附加组件数据库收录后，也可以直接通过 Playnite 内置的
-附加组件浏览器安装。
+也可直接点击该[链接](playnite://playnite/installaddon/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40)，或通过 Playnite 内置的附加组件浏览器安装。
 
 ### 推荐设置
 
