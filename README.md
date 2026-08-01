@@ -8,8 +8,7 @@
 
 ## English
 
-Dune Rev is a personal fork of [Dune](https://github.com/sakasakiking/Dune),
-maintained by [hugsyf](https://github.com/hugsyf). It preserves Dune's clean,
+Dune Rev is a personal fork of [Dune](https://github.com/sakasakiking/Dune). It preserves Dune's clean,
 spacious, Fluent-inspired design while improving extension compatibility,
 layout flexibility, readability, and interaction feedback.
 
@@ -36,7 +35,7 @@ layout flexibility, readability, and interaction feedback.
 2. Open the downloaded file and let Playnite install the theme.
 3. In Playnite, select **Dune Rev** under Desktop theme settings.
 
-You can also install it via this [link](playnite://playnite/installaddon/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40), it is also available from Playnite's built-in add-on browser.
+You can also install it via this [link](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40), it is also available from Playnite's built-in add-on browser.
 
 ### Recommended setup
 
@@ -96,8 +95,7 @@ also reproducible in unmodified Dune, consult the
 
 ## 简体中文
 
-Dune Rev 是 [Dune](https://github.com/sakasakiking/Dune) 的个人分支，由
-[hugsyf](https://github.com/hugsyf) 维护。它保留了 Dune 简洁、宽松的
+Dune Rev 是 [Dune](https://github.com/sakasakiking/Dune) 的个人分支。它保留了 Dune 简洁、宽松的
 Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容可读性与交互反馈。
 
 ### 主要特性
@@ -121,7 +119,7 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 2. 打开下载的文件，让 Playnite 安装主题。
 3. 在 Playnite 的桌面主题设置中选择 **Dune Rev**。
 
-也可直接点击该[链接](playnite://playnite/installaddon/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40)，或通过 Playnite 内置的附加组件浏览器安装。
+也可直接点击该[链接](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40)，或通过 Playnite 内置的附加组件浏览器安装。
 
 ### 推荐设置
 
