@@ -41,18 +41,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid MinHeight="24">
-                        <Border x:Name="HoverBg" IsHitTestVisible="False" Style="{DynamicResource HoverBg}" Opacity="0" />
+                        <Border x:Name="HoverBg" IsHitTestVisible="False" Style="{DynamicResource HoverBg}" Opacity="0"  Background="{DynamicResource ControlOverlayBrush}"/>
                         <Border Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" Margin="12,0,12,0" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Opacity" Value="0.08" TargetName="HoverBg" />
                         </Trigger>
@@ -72,26 +66,16 @@
         </Setter>
     </Style>
 
-
     <Style x:Key="ExplorerPanelListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Grid>
-                        <Border x:Name="HoverBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" MinHeight="28" Opacity="0" />
-                        <Border x:Name="SelectedBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" MinHeight="28" Opacity="0" />
+                        <Border x:Name="HoverBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" MinHeight="28" Opacity="0"  Background="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="SelectedBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" MinHeight="28" Opacity="0"  Background="{DynamicResource ControlOverlayBrush}"/>
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" Margin="12,0,12,0" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Opacity" Value="0.08" TargetName="SelectedBg" />
                         </Trigger>

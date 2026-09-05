@@ -29,13 +29,14 @@
     </Style>
 
     <Style TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
-                    <StackPanel x:Name="Root" Margin="0,0,0,8" Tag="{DynamicResource ThemeDarkStyle}">
+                    <StackPanel x:Name="Root" Margin="0,0,0,8">
                         <Border x:Name="SelectionBorder" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}">
                             <DockPanel>
                                 <ToggleButton x:Name="Expander" ClickMode="Press" DockPanel.Dock="Left" Margin="0,0,6,0"
@@ -72,13 +73,6 @@
                         <ItemsPresenter x:Name="ItemsHost" Margin="18,8,0,0" />
                     </StackPanel>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, ElementName=Root}" Value="True">
-                            <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-                        </DataTrigger>
-
-                        <DataTrigger Binding="{Binding Tag, ElementName=Root}" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-                        </DataTrigger>
                         <Trigger Property="IsExpanded" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ItemsHost" />
                         </Trigger>

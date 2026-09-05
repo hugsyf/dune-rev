@@ -4,10 +4,9 @@
 
     <!--ThemeModifier Options-->
         <!--
-        Playnite 10 does not expose a theme state that injected extension controls
-        can follow. Use one supported Fluent Dim palette so every extension shares
-        the same foreground/background contract. The legacy light triggers remain
-        in the theme for a future Playnite theme API.
+        One Fluent Dim palette, shared by theme controls and extensions.
+        ThemeDarkStyle remains a compatibility flag only; no theme template
+        switches palettes or uses Tag to carry a color-mode setting.
         -->
         <sys:Boolean x:Key="ThemeDarkStyle">True</sys:Boolean>
         <sys:Boolean x:Key="DetailsViewAllowUseOfLogos">True</sys:Boolean>
@@ -41,42 +40,53 @@
         <Visibility x:Key="GridViewGameCoverShowCompletionStatus">Visible</Visibility>
         <Visibility x:Key="GridViewGameCoverShowPlayedTime">Visible</Visibility>
 
+    <!--Fluent Dim semantic palette. Opaque surfaces are distinct from overlays.-->
+        <Color x:Key="WindowSurfaceColor">#282D35</Color>
+        <Color x:Key="CardSurfaceColor">#303640</Color>
+        <Color x:Key="PopupSurfaceColor">#383F4A</Color>
+        <Color x:Key="HoverSurfaceColor">#414957</Color>
+        <Color x:Key="SurfaceBorderColor">#505A69</Color>
+        <Color x:Key="PrimaryTextColor">#E7EAF0</Color>
+        <Color x:Key="SecondaryTextColor">#B5BDC9</Color>
+        <Color x:Key="MutedTextColor">#9EA8B7</Color>
+        <SolidColorBrush x:Key="CardSurfaceBrush" Color="{DynamicResource CardSurfaceColor}" />
+        <SolidColorBrush x:Key="ControlOverlayBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="ControlShadeBrush" Color="#000000" />
+        <SolidColorBrush x:Key="ControlTrackBrush" Color="#29FFFFFF" />
 
-    <!--ThemeModifier Theme-->
-        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#EBEBEB" />
-        <SolidColorBrush x:Key="DarkWindowBackgroundBrush" Color="#20242B" />
+    <!--Public theme resources: always usable directly by extension controls.-->
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowSurfaceColor}" />
+        <SolidColorBrush x:Key="DarkWindowBackgroundBrush" Color="{DynamicResource WindowSurfaceColor}" />
 
-        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#000000" />
-        <SolidColorBrush x:Key="DarkControlBackgroundBrush" Color="#FFFFFF" />
-    
-        <SolidColorBrush x:Key="ControlBorderBrush" Color="#000000" />
-        <SolidColorBrush x:Key="DarkControlBorderBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+        <SolidColorBrush x:Key="DarkControlBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
 
-        <SolidColorBrush x:Key="ControlAccentBorderBrush" Color="#000000" />
-        <SolidColorBrush x:Key="DarkControlAccentBorderBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="ControlBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
+        <SolidColorBrush x:Key="DarkControlBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
+
+        <SolidColorBrush x:Key="ControlAccentBorderBrush" Color="{DynamicResource AccentSelectedColor}" />
+        <SolidColorBrush x:Key="DarkControlAccentBorderBrush" Color="{DynamicResource AccentSelectedColor}" />
 
         <SolidColorBrush x:Key="PopupSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
-    
-        <SolidColorBrush x:Key="PopupBackgroundBrush" Color="#E0E0E0" />
-        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="#292E37" />
 
-        <SolidColorBrush x:Key="PopupBorderBrush" Color="#BCBCBC" />
-        <SolidColorBrush x:Key="DarkPopupBorderBrush" Color="#4C4C4C" />
+        <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
 
-    
+        <SolidColorBrush x:Key="PopupBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
+        <SolidColorBrush x:Key="DarkPopupBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
+
         <!--
-        TextBrush is the conventional extension foreground. The supported Fluent
-        Dim palette is dark, so injected extension controls consistently use an
-        off-white foreground. TextBrushLight is retained for legacy light styles.
+        Legacy light/dark resource names are compatibility aliases for the same
+        palette. Internal templates use the ordinary, semantic resource names.
         -->
-        <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColorDark}" />
-        <SolidColorBrush x:Key="TextBrushLight" Color="{DynamicResource TextColor}" />
-        <SolidColorBrush x:Key="TextBrushDarker" Color="{DynamicResource TextColorDarker}" />
-        <SolidColorBrush x:Key="TextBrushLighter" Color="{DynamicResource TextColorLighter}" />
-        <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource TextColorDark}" />
-        <SolidColorBrush x:Key="NormalBrush" Color="{DynamicResource MainColor}" />
-        <SolidColorBrush x:Key="NormalBrushDark" Color="Transparent" />
-        <SolidColorBrush x:Key="NormalBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="TextBrushLight" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="TextBrushDarker" Color="{DynamicResource SecondaryTextColor}" />
+        <SolidColorBrush x:Key="TextBrushLighter" Color="{DynamicResource MutedTextColor}" />
+        <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="NormalBrush" Color="{DynamicResource SurfaceBorderColor}" />
+        <SolidColorBrush x:Key="NormalBrushDark" Color="{DynamicResource SurfaceBorderColor}" />
+        <SolidColorBrush x:Key="NormalBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
         <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
         <SolidColorBrush x:Key="HighlightGlyphBrush" Color="{DynamicResource HighlightGlyphColor}" />
 
@@ -89,22 +99,22 @@
         names directly. Keep them mapped to Dune Rev's own palette so extension
         settings and injected controls remain legible.
         -->
-        <SolidColorBrush x:Key="WindowBackgourndBrush" Color="{DynamicResource MainColorDark}" />
-        <SolidColorBrush x:Key="ControlForegroundBrush" Color="{DynamicResource TextColorDark}" />
-        <SolidColorBrush x:Key="CommonToolTipBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="WindowBackgourndBrush" Color="{DynamicResource WindowSurfaceColor}" />
+        <SolidColorBrush x:Key="ControlForegroundBrush" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="CommonToolTipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
         <SolidColorBrush x:Key="CommonToolTipBorderBrush" Color="{DynamicResource PanelSeparatorColor}" />
-        <SolidColorBrush x:Key="CaretBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="CaretBrush" Color="{DynamicResource PrimaryTextColor}" />
         <SolidColorBrush x:Key="SelectionBrush" Color="{DynamicResource AccentSelectedColor}" />
         <SolidColorBrush x:Key="SelectionLightBrush" Color="{DynamicResource AccentSelectedColor}" />
-        <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
         <SolidColorBrush x:Key="LinkBrush" Color="{DynamicResource AccentSelectedColor}" />
         <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentIdleColor}" />
         <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentIdleColor}" />
         <SolidColorBrush x:Key="AccentSecondaryBrush" Color="{DynamicResource AccentSelectedColor}" />
-        <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="{DynamicResource TextColorDark}" />
+        <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="{DynamicResource PrimaryTextColor}" />
         <SolidColorBrush x:Key="SuccessBrush" Color="#2ecc71" />
         <SolidColorBrush x:Key="OverlayBrush" Color="#99000000" />
-        <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource MainColorDark}" />
+        <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
         <SolidColorBrush x:Key="SectionHeaderBackgroundBrush" Color="#14FFFFFF" />
 
     <!--ThemeModifier Options Ends-->
@@ -128,7 +138,7 @@
     <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="ControlCornerRadiusLarge">16</CornerRadius>
     <CornerRadius x:Key="ControlCornerRadiusLargeX">24</CornerRadius>
-    
+
     <Thickness x:Key="PopupBorderThickness">1</Thickness>
     <Thickness x:Key="ControlBorderThickness">1</Thickness>
     <Thickness x:Key="SidebarItemPadding">8</Thickness>
@@ -136,20 +146,20 @@
 
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
-    <Color x:Key="TextColor">#000000</Color>
-    <Color x:Key="TextColorDarker">#B3FFFFFF</Color>
-    <Color x:Key="TextColorLighter">#99000000</Color>
-    <Color x:Key="TextColorDark">#F3F3F3</Color>
-    <Color x:Key="MainColor">#2C3A67</Color>
-    <Color x:Key="MainColorDark">#202735</Color>
-    <Color x:Key="HoverColor">#247BA0</Color>
-    <Color x:Key="GlyphColor">#FFFFFF</Color>
-    <Color x:Key="HighlightGlyphColor">#FF0379FF</Color>
-    <Color x:Key="AccentIdleColor">#FF0379FF</Color>
-    <Color x:Key="AccentSelectedColor">#FF04A5FF</Color>
+    <Color x:Key="TextColor">#E7EAF0</Color>
+    <Color x:Key="TextColorDarker">#B5BDC9</Color>
+    <Color x:Key="TextColorLighter">#9EA8B7</Color>
+    <Color x:Key="TextColorDark">#E7EAF0</Color>
+    <Color x:Key="MainColor">#505A69</Color>
+    <Color x:Key="MainColorDark">#282D35</Color>
+    <Color x:Key="HoverColor">#414957</Color>
+    <Color x:Key="GlyphColor">#E7EAF0</Color>
+    <Color x:Key="HighlightGlyphColor">#59B5EF</Color>
+    <Color x:Key="AccentIdleColor">#59B5EF</Color>
+    <Color x:Key="AccentSelectedColor">#78C5F5</Color>
 
-    <Color x:Key="BackgroundToneColor">#FFCC00</Color>
-    <Color x:Key="GridItemBackgroundColor">#293142</Color>
+    <Color x:Key="BackgroundToneColor">#383F4A</Color>
+    <Color x:Key="GridItemBackgroundColor">#303640</Color>
 
     <Color x:Key="PanelSeparatorColor">#33808080</Color>
 
@@ -166,66 +176,57 @@
     <Color x:Key="BrownDark">#280B0A</Color>
     <!--Dune Rev palette additions end-->
 
-    
-
     <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="Transparent" />
-    
+
     <!--InputStyle-->
-    <SolidColorBrush x:Key="ControlIdleBackgroundBrush" Color="#29000000" />
-    <SolidColorBrush x:Key="ControlIdleBorderBrush" Color="#CCCCCC" />
+    <SolidColorBrush x:Key="ControlIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <SolidColorBrush x:Key="ControlIdleBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 
-    <SolidColorBrush x:Key="ControlHoverBackgroundBrush" Color="#33000000" />
-    <SolidColorBrush x:Key="ControlHoverBorderBrush" Color="#CCCCCC" />
+    <SolidColorBrush x:Key="ControlHoverBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
+    <SolidColorBrush x:Key="ControlHoverBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 
-    <SolidColorBrush x:Key="ControlSelectedBackgroundBrush" Color="#CCCCCC" />
+    <SolidColorBrush x:Key="ControlSelectedBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
     <!--InputStyle Ends-->
 
     <SolidColorBrush x:Key="ControlFilledHoverBackgroundBrush" Color="{DynamicResource 24%White}" />
-
-
 
     <SolidColorBrush x:Key="WhiteBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="White60Brush" Color="#99FFFFFF" />
     <SolidColorBrush x:Key="White40Brush" Color="#66FFFFFF" />
 
     <!--ButtonStyle-->
-    <SolidColorBrush x:Key="ButtonIdleBackgroundBrush" Color="#212121" />
-    <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="#333333" />
-    <SolidColorBrush x:Key="ButtonBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ButtonIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
+    <SolidColorBrush x:Key="ButtonBrush" Color="{DynamicResource PrimaryTextColor}" />
 
-    <SolidColorBrush x:Key="SecondaryButtonIdleBackgroundBrush" Color="#DBDBDB" />
-    <SolidColorBrush x:Key="SecondaryButtonHoverBackgroundBrush" Color="#CCCCCC" />
-    <SolidColorBrush x:Key="SecondaryButtonBrush" Color="#212121" />
+    <SolidColorBrush x:Key="SecondaryButtonIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <SolidColorBrush x:Key="SecondaryButtonHoverBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
+    <SolidColorBrush x:Key="SecondaryButtonBrush" Color="{DynamicResource PrimaryTextColor}" />
     <!--ButtonStyle Ends-->
 
-    <SolidColorBrush x:Key="DisabledBrush" Color="#CCCCCC" />
-    <SolidColorBrush x:Key="LinkButtonBrush" Color="#6800D1" />
-    <SolidColorBrush x:Key="PromptBrush" Color="#999999" />
-    <SolidColorBrush x:Key="SubtalBrush" Color="#666666" />
-    <SolidColorBrush x:Key="IdleBrush" Color="#333333" />
-    <SolidColorBrush x:Key="HoverBrush" Color="#212121" />
-    <SolidColorBrush x:Key="SelectedBrush" Color="#212121" />
+    <SolidColorBrush x:Key="DisabledBrush" Color="{DynamicResource MutedTextColor}" />
+    <SolidColorBrush x:Key="LinkButtonBrush" Color="{DynamicResource AccentSelectedColor}" />
+    <SolidColorBrush x:Key="PromptBrush" Color="{DynamicResource SecondaryTextColor}" />
+    <SolidColorBrush x:Key="SubtalBrush" Color="{DynamicResource MutedTextColor}" />
+    <SolidColorBrush x:Key="IdleBrush" Color="{DynamicResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="SelectedBrush" Color="{DynamicResource PrimaryTextColor}" />
 
     <SolidColorBrush x:Key="AccentIdleBrush" Color="{DynamicResource AccentIdleColor}" />
     <SolidColorBrush x:Key="AccentHoverBrush" Color="{DynamicResource AccentSelectedColor}" />
     <SolidColorBrush x:Key="AccentDisabledBrush" Color="#024DA3" />
 
-    
+    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
 
-    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource BackgroundToneColor}" />
-    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#0a0e1e" />
-    <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="{DynamicResource GridItemBackgroundColor}" />
-    
-    
     <SolidColorBrush x:Key="WindowPanelSeparatorBrush" Color="Transparent" />
-    
+
     <SolidColorBrush x:Key="PanelSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
 
-    
-
     <SolidColorBrush x:Key="CardSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
-    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#99FFFFFF" />
-    <SolidColorBrush x:Key="CardBorderBrush" Color="#D4D0B8" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 
     <SolidColorBrush x:Key="CheckBoxCheckMarkBkBrush" Color="{DynamicResource MainColorDark}" />
     <SolidColorBrush x:Key="DataChangeNotifBrush" Color="{DynamicResource DataChangeNotifColor}" />
@@ -275,9 +276,10 @@
         <GradientStop Color="#B2000000" Offset="1"/>
     </LinearGradientBrush>
 
+    <!--Compatibility name: masks follow the single palette as well.-->
     <LinearGradientBrush x:Key="LightMaskBrush" StartPoint="0.5,0.4" EndPoint="0.5,1" >
-        <GradientStop Color="#00FFFFFF" Offset="0.56"/>
-        <GradientStop Color="#FFF1F1F1" Offset="1"/>
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#B2000000" Offset="1"/>
     </LinearGradientBrush>
 
     <RadialGradientBrush x:Key="RGLayerBackgroundBrush" GradientOrigin="0.5,1" Center="0.5,1" RadiusX="1" RadiusY="1">

@@ -13,21 +13,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border x:Name="HoverBg" Style="{DynamicResource HoverBg}" Opacity="0.08"/>
+                        <Border x:Name="HoverBg" Style="{DynamicResource HoverBg}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
                         <!-- <Border x:Name="SelectedBg" Style="{DynamicResource SelectedBg}" Opacity="0" /> -->
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <!-- <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="SelectedBg" /> -->
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <!-- <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="SelectedBg" /> -->
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg"/>
                             <!-- <Setter Property="Opacity" Value="0.16" TargetName="SelectedBg"/> -->
@@ -52,15 +44,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="HoverBg" Background="{TemplateBinding Background}" 
-                            Height="{TemplateBinding Height}" BorderBrush="{TemplateBinding BorderBrush}" 
+                    <Border x:Name="HoverBg" Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{DynamicResource ControlCornerRadius}">
                         <StackPanel Orientation="Horizontal" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center">
                             <TextBlock x:Name="FavoriteIcon" Text="&#xe1ce;" Margin="0,0,8,0" VerticalAlignment="Center"
                                        FontSize="{DynamicResource FontSize}" Style="{DynamicResource IconFontStyle}"
                                        Foreground="{TemplateBinding Foreground}"/>
-                            <TextBlock Text="{DynamicResource LOCFavoriteGame}" FontSize="{TemplateBinding FontSize}" 
+                            <TextBlock Text="{DynamicResource LOCFavoriteGame}" FontSize="{TemplateBinding FontSize}"
                                        Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
@@ -74,7 +66,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetName="HoverBg"
-                                                         Storyboard.TargetProperty="Background.Color" 
+                                                         Storyboard.TargetProperty="Background.Color"
                                                          To="#CCCCCC" Duration="0:0:0.4">
                                         </ColorAnimation>
                                     </Storyboard>
@@ -84,7 +76,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetName="HoverBg"
-                                                         Storyboard.TargetProperty="Background.Color" 
+                                                         Storyboard.TargetProperty="Background.Color"
                                                          To="#DBDBDB" Duration="0:0:0.4">
                                         </ColorAnimation>
                                     </Storyboard>

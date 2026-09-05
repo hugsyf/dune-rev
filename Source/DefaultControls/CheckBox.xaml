@@ -7,17 +7,17 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Border x:Name="CheckboxBorder" Background="Transparent" Padding="{TemplateBinding Padding}" Tag="{DynamicResource ThemeDarkStyle}">
+                    <Border x:Name="CheckboxBorder" Background="Transparent" Padding="{TemplateBinding Padding}">
                         <DockPanel>
                             <Grid DockPanel.Dock="Left" VerticalAlignment="Center">
-                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="0" Opacity="0.08"/>
-                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Opacity="0.2"/>
+                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="0" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
+                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Opacity="0.2" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
                                 <Grid Width="20" Height="20">
                                     <Viewbox x:Name="CheckIcon" Visibility="Collapsed">
                                         <TextBlock Text="&#xf13e;" Margin="1,0,0,1" Style="{DynamicResource IconFontStyle}" />
@@ -29,17 +29,8 @@
                             </Grid>
                             <ContentPresenter DockPanel.Dock="Left" RecognizesAccessKey="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                         </DockPanel>
-                    </Border>                    
+                    </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, ElementName=CheckboxBorder}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="BulletBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="BulletHoverBorder" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, ElementName=CheckboxBorder}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="BulletBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="BulletHoverBorder" />
-                        </DataTrigger>
-                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="{x:Null}" />
@@ -65,16 +56,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
-
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6" />
             </Trigger>
         </Style.Triggers>
-    </Style>                  
+    </Style>
 </ResourceDictionary>

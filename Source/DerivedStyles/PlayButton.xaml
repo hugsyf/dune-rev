@@ -3,7 +3,7 @@
 
     <Style x:Key="PlayButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Background" Value="{DynamicResource PlayButtonBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource PlayButtonBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentHoverBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -16,10 +16,10 @@
                             BorderThickness="{TemplateBinding BorderThickness}"  Background="{TemplateBinding Background}"
                             CornerRadius="{DynamicResource ControlCornerRadius}">
                         <StackPanel Orientation="Horizontal" Margin="{TemplateBinding Padding}">
-                            <TextBlock Text="&#xf5b0;" Style="{DynamicResource IconFontStyle}" Margin="-4,0,8,0" 
-                                       Foreground="{DynamicResource WhiteBrush}" FontSize="{DynamicResource FontSize}"/>
+                            <TextBlock Text="&#xf5b0;" Style="{DynamicResource IconFontStyle}" Margin="-4,0,8,0"
+                                       Foreground="{TemplateBinding Foreground}" FontSize="{DynamicResource FontSize}"/>
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               RecognizesAccessKey="True" />
                         </StackPanel>
                     </Border>
@@ -37,7 +37,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource PlayButtonBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -59,8 +59,8 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          Margin="{TemplateBinding Padding}" 
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -96,8 +96,8 @@
                         <Border x:Name="DefaultBorder"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" />
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          Margin="{TemplateBinding Padding}" 
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -134,8 +134,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             CornerRadius="0,8,8,0">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      Margin="{TemplateBinding Padding}" 
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -205,13 +205,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Foreground" Value="{DynamicResource PlayButtonBrush}" />
             </Trigger>
-
         </Style.Triggers>
     </Style>
 
@@ -232,8 +228,8 @@
                         <Border x:Name="DefaultBorder"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" />
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      Margin="{TemplateBinding Padding}" 
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Grid>
                     <ControlTemplate.Triggers>

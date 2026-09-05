@@ -93,15 +93,15 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize }"/>
         <Setter Property="Padding" Value="12,6,12,6" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="TabGrid" Margin="0,0,8,0">
-                        <Border x:Name="HoverBg"  CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
+                        <Border x:Name="HoverBg"  CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <TextBlock x:Name="TextContent" VerticalAlignment="Center" Opacity="0.4" Margin="{TemplateBinding Padding}"
                                    Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}">
                             <ContentPresenter x:Name="ContentSite" RecognizesAccessKey="True" ContentSource="Header" HorizontalAlignment="Center" Margin="0"
@@ -118,12 +118,7 @@
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="BorderThickness" Value="0,2,0,0" TargetName="SelectedBorder" />
                         </Trigger>-->
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
+
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Opacity" Value="1" TargetName="TextContent"/>
                             <Setter Property="Opacity" Value="0.08" TargetName="HoverBg"/>
@@ -140,15 +135,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="DetailViewTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource {x:Type TabControl}}">
@@ -242,6 +229,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 </ResourceDictionary>

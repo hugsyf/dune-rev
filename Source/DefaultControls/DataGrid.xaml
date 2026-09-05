@@ -22,9 +22,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
                     <Grid>
-                        <Border x:Name="HoverBg" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                        <Border x:Name="HoverBg" SnapsToDevicePixels="True" BorderBrush="{DynamicResource ControlOverlayBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" Opacity="0.08" />
-                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false" Background="{DynamicResource PopupBackgroundBrush}">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid>
@@ -69,18 +69,7 @@
                         </ScrollViewer>
 
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkPopupBackgroundBrush}" TargetName="DG_ScrollViewer" />
-                            <!--<Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />-->
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" TargetName="DG_ScrollViewer" />
-                            <!--<Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />-->
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -93,9 +82,9 @@
 
     <!--Style and template for the DataGridCell.-->
     <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -107,14 +96,8 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -133,7 +116,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border x:Name="DGR_Border" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"                            
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="True">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -196,21 +179,21 @@
                                     <SolidColorBrush Color="Transparent" />
                                 </Border.Background>
                                 <DataGridCellsPresenter x:Name="CellPresenter"
-                                                        ItemsPanel="{TemplateBinding ItemsPanel}" 
+                                                        ItemsPanel="{TemplateBinding ItemsPanel}"
                                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                     <DataGridCellsPresenter.Foreground>
-                                        <SolidColorBrush Color="{StaticResource TextColor}" />
+                                        <SolidColorBrush Color="{StaticResource PrimaryTextColor}" />
                                     </DataGridCellsPresenter.Foreground>
                                 </DataGridCellsPresenter>
                             </Border>
-                            <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1"                                                      
+                            <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1"
                                                       Visibility="{TemplateBinding DetailsVisibility}"
                                                       SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                             <Border Grid.RowSpan="2" x:Name="BorderRowHeader">
                                 <Border.Background>
                                     <SolidColorBrush Color="Transparent" />
                                 </Border.Background>
-                                <DataGridRowHeader SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" 
+                                <DataGridRowHeader SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                                Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                             </Border>
                         </SelectiveScrollingGrid>
@@ -243,10 +226,10 @@
                                 Background="GreenYellow">
                             <StackPanel Orientation="Horizontal">
                                 <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                <Control SnapsToDevicePixels="false" Template="{Binding ValidationErrorTemplate, 
+                                <Control SnapsToDevicePixels="false" Template="{Binding ValidationErrorTemplate,
                                           RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
-                                         Visibility="{Binding (Validation.HasError), 
-                                          Converter={StaticResource BooleanToVisibilityConverter}, 
+                                         Visibility="{Binding (Validation.HasError),
+                                          Converter={StaticResource BooleanToVisibilityConverter},
                                           RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
                             </StackPanel>
                         </Border>
@@ -282,7 +265,7 @@
                                 BorderBrush="{DynamicResource NormalBorderBrush}"
                                 Background="{DynamicResource ControlBackgroundBrush}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}" />
@@ -294,9 +277,9 @@
     </Style>
 
     <Style TargetType="{x:Type DataGridColumnHeadersPresenter}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
@@ -307,13 +290,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
-        </Style.Triggers>
+
     </Style>
 </ResourceDictionary>

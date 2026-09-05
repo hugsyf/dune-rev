@@ -2,6 +2,12 @@
 
 All notable Dune Rev changes are documented here.
 
+## 1.0.1 — 2026-09-05
+
+### Fixed
+
+- Broken Color Logic
+
 ## 1.0.0 — 2026-07-31
 
 First independent release of Dune Rev, based on Dune by sakasakiking.

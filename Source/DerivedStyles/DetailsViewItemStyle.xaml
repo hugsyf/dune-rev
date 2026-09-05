@@ -2,38 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="DetailsViewItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid>
-                        <Border x:Name="HoverBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
-                        <Border x:Name="SelectedBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
+                        <Border x:Name="HoverBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="SelectedBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <ContentPresenter />
                     </Grid>
-                    
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
 
-                        
+                    <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsInstalled}" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource IdleBrush}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsInstalled}" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource DisabledBrush}" />
                         </DataTrigger>
-                        
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
@@ -72,31 +62,13 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
-
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
-            
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+
                     <Condition Binding="{Binding IsInstalled}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
                     <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False" />
-                    <Condition Binding="{Binding IsInstalled}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Foreground" Value="{DynamicResource TextBrushLighter}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
         </Style.Triggers>

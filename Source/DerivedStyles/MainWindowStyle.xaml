@@ -19,9 +19,9 @@
                         <sys:Boolean x:Key="True">True</sys:Boolean>
                     </ControlTemplate.Resources>
                     <AdornerDecorator>
-                        <Border x:Name="WindowBorder" BorderBrush="{DynamicResource PopupBorderBrush}" CornerRadius="0" Tag="{DynamicResource ThemeDarkStyle}"
+                        <Border x:Name="WindowBorder" BorderBrush="{DynamicResource PopupBorderBrush}" CornerRadius="0"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}">
+                                Background="{DynamicResource WindowBackgroundBrush}">
                             <Grid>
                                 <ContentPresenter Margin="0,0,0,0"/>
                                 <DockPanel DockPanel.Dock="Top" LastChildFill="False">
@@ -45,12 +45,6 @@
                         </Border>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, ElementName=WindowBorder}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkWindowBackgroundBrush}" TargetName="WindowBorder" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, ElementName=WindowBorder}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" TargetName="WindowBorder" />
-                        </DataTrigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Content" Value="&#xf5ef;" TargetName="PART_ButtonMaximize"/>
                             <Setter Property="Padding" Value="8" TargetName="WindowBorder"/>

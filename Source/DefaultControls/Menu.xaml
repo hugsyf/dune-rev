@@ -15,7 +15,7 @@
                 <ControlTemplate TargetType="{x:Type Separator}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}" 
+                            Background="{TemplateBinding Background}"
                             Height="1"
                             SnapsToDevicePixels="true"/>
                 </ControlTemplate>
@@ -25,7 +25,7 @@
 
     <Style TargetType="{x:Type Menu}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -42,7 +42,7 @@
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border x:Name="Border">
             <Grid>
-                <Border x:Name="HoverBorder" Background="{DynamicResource HoverBrush}" Visibility="Collapsed"  />
+                <Border x:Name="HoverBorder" Background="{DynamicResource ControlHoverBackgroundBrush}" Visibility="Collapsed" />
                 <TextBlock VerticalAlignment="Center" Padding="5" Style="{DynamicResource BaseTextBlockStyle}"
                            Foreground="{TemplateBinding Foreground}">
                     <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" />
@@ -80,9 +80,9 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Border x:Name="HoverBorder" Grid.Column="0" Grid.ColumnSpan="4" CornerRadius="{DynamicResource ControlCornerRadius}"
-                    Opacity="0"  />
-            
-            <ContentPresenter x:Name="Icon" Grid.Column="0" Margin="8,0,0,0" MaxHeight="16" MaxWidth="16" 
+                    Opacity="0"   Background="{DynamicResource ControlOverlayBrush}"/>
+
+            <ContentPresenter x:Name="Icon" Grid.Column="0" Margin="8,0,0,0" MaxHeight="16" MaxWidth="16"
                               VerticalAlignment="Center" ContentSource="Icon" />
 
             <Grid x:Name="GlyphPanel" Grid.Column="0" Visibility="Collapsed"
@@ -95,7 +95,6 @@
                 <ContentPresenter RecognizesAccessKey="True" Margin="8,0,8,0" ContentSource="Header"/>
             </TextBlock>
 
-
             <TextBlock x:Name="GestureText" Grid.Column="2" Text="{TemplateBinding InputGestureText}"
                        TextAlignment="Left" HorizontalAlignment="Stretch" Margin="20,0,8,0"
                        VerticalAlignment="Center" Background="Transparent" Opacity="0.6"/>
@@ -103,7 +102,7 @@
             <Grid Grid.Column="3" Margin="0,0,8,0">
                 <TextBlock Text="&#xe00f;" FontSize="14" VerticalAlignment="Center" Style="{DynamicResource IconFontStyle}" />
             </Grid>
-            
+
             <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right"
                    Focusable="False" AllowsTransparency="True" VerticalOffset="-10">
                 <Border Style="{DynamicResource PopupBorder}">
@@ -115,12 +114,6 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBorder" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBorder" />
-            </DataTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter Property="Visibility" Value="Collapsed" TargetName="Icon" />
             </Trigger>
@@ -140,7 +133,7 @@
     <!-- T1 Menuitem without children-->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Grid>
-            <Border x:Name="HoverBorder" Height="28" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08"/>
+            <Border x:Name="HoverBorder" Height="28" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
@@ -164,12 +157,6 @@
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBorder" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBorder" />
-            </DataTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter Property="Visibility" Value="Collapsed" TargetName="Icon" />
             </Trigger>
@@ -187,11 +174,10 @@
     </ControlTemplate>
 
     <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
                 <Setter Property="Template" Value="{DynamicResource {x:Static MenuItem.TopLevelHeaderTemplateKey}}" />
@@ -206,13 +192,6 @@
             <Trigger Property="Role" Value="SubmenuItem">
                 <Setter Property="Template" Value="{DynamicResource {x:Static MenuItem.SubmenuItemTemplateKey}}" />
             </Trigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
-
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

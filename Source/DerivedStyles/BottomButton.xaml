@@ -4,12 +4,11 @@
     <Style x:Key="BottomButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Padding" Value="16,8,16,8" />
         <Setter Property="MinWidth" Value="72" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Margin="4,0,4,8">
-                        <Border x:Name="HoverBg" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08" />
+                        <Border x:Name="HoverBg" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08"  Background="{DynamicResource ControlOverlayBrush}"/>
 
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
@@ -17,12 +16,6 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
                         </Trigger>
@@ -55,5 +48,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

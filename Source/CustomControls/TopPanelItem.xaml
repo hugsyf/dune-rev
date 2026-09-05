@@ -2,21 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TopPanelItem}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Height" Value="32" />
         <Setter Property="Margin" Value="4,0,0,0" />
         <Setter Property="Padding" Value="8,0,8,0" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TopPanelItem}">
                     <Grid Height="{TemplateBinding Height}" MinWidth="{TemplateBinding Height}">
-                        <Border x:Name="HoverBg" Background="{DynamicResource ControlBackgroundBrush}"
+                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}"
                                 Opacity="0" CornerRadius="{DynamicResource ControlCornerRadius}"/>
-                        <Border x:Name="SelectedBg" Background="{TemplateBinding Background}" Opacity="0.08"
+                        <Border x:Name="SelectedBg" Background="{DynamicResource ControlOverlayBrush}" Opacity="0.08"
                                 Visibility="Collapsed" CornerRadius="{DynamicResource ControlCornerRadius}"/>
                         <Viewbox Width="20" Height="20"
                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -25,14 +25,6 @@
                         </Viewbox>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
@@ -42,7 +34,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="HoverBg"
-                                                        Storyboard.TargetProperty="Opacity" 
+                                                        Storyboard.TargetProperty="Opacity"
                                                         To="0.16" Duration="0:0:0.4">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase EasingMode="EaseOut"/>
@@ -55,7 +47,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="HoverBg"
-                                                        Storyboard.TargetProperty="Opacity" 
+                                                        Storyboard.TargetProperty="Opacity"
                                                         To="0" Duration="0:0:0.4">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase EasingMode="EaseOut"/>
@@ -73,13 +65,6 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
-
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
             <!--<Trigger Property="IsToggled" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource SelectedBrush}" />
             </Trigger>

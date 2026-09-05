@@ -9,18 +9,17 @@
     <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <BulletDecorator>
                         <BulletDecorator.Bullet>
-                            <Border x:Name="RadioButtonBorder" Background="Transparent" Tag="{DynamicResource ThemeDarkStyle}">
+                            <Border x:Name="RadioButtonBorder" Background="Transparent">
                                 <Grid Width="20" Height="20">
-                                    <Border x:Name="BulletBorder" Width="20" Height="20" CornerRadius="10" 
-                                            BorderThickness="0" Opacity="0.08"/>
-                                    <Border x:Name="BulletHoverBorder" Width="20" Height="20" CornerRadius="10" 
-                                            BorderThickness="{TemplateBinding BorderThickness}" Opacity="0.2"/>
+                                    <Border x:Name="BulletBorder" Width="20" Height="20" CornerRadius="10"
+                                            BorderThickness="0" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
+                                    <Border x:Name="BulletHoverBorder" Width="20" Height="20" CornerRadius="10"
+                                            BorderThickness="{TemplateBinding BorderThickness}" Opacity="0.2" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
                                     <Viewbox x:Name="CheckIcon" Visibility="Collapsed" >
                                         <TextBlock Text="h" FontFamily="Marlett" Style="{DynamicResource BaseTextBlockStyle}"
                                                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -33,15 +32,6 @@
                         </Border>
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, ElementName=RadioButtonBorder}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="BulletBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="BulletHoverBorder" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, ElementName=RadioButtonBorder}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="BulletBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="BulletHoverBorder" />
-                        </DataTrigger>
-
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />

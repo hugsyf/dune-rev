@@ -1,11 +1,10 @@
-﻿ <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type NotificationPanel}">
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="NotificationPanel">
@@ -15,7 +14,7 @@
                         </Grid.Effect>
                         <Border x:Name="PopBg" BorderThickness="1" BorderBrush="{DynamicResource PopupBorderBrush}"
                                 CornerRadius="{DynamicResource ControlCornerRadiusLarge}" d:DesignWidth="260" d:DesignHeight="400"
-                                d:DataContext="{x:Static DesignMainViewModel.DesignIntance}" />
+                                d:DataContext="{x:Static DesignMainViewModel.DesignIntance}"  Background="{DynamicResource PopupBackgroundBrush}"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -47,18 +46,9 @@
                         </Grid>
 
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkPopupBackgroundBrush}" TargetName="PopBg" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkPopupBorderBrush}" TargetName="PopBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" TargetName="PopBg" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" TargetName="PopBg" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-</ResourceDictionary> 
+</ResourceDictionary>

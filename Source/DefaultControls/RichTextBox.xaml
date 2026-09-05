@@ -10,8 +10,8 @@
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />
-        <Setter Property="CaretBrush" Value="{DynamicResource TextBrushLight}" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="Red"/>
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />

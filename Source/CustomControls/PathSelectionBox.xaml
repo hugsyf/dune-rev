@@ -12,8 +12,8 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <DockPanel>
                         <Button x:Name="PART_ButtonDirectorySelect" DockPanel.Dock="Right" Margin="8,0,0,0"
-                                Content="&#xe838;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" 
-                                MaxHeight="{TemplateBinding ActualHeight}" 
+                                Content="&#xe838;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                                MaxHeight="{TemplateBinding ActualHeight}"
                                 ToolTip="{DynamicResource LOCSelectDirectoryTooltip}" />
                         <Button x:Name="PART_ButtonFileSelect" DockPanel.Dock="Right" Margin="8,0,0,0"
                                 Content="&#xe130;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
@@ -21,22 +21,14 @@
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 ToolTip="{DynamicResource LOCSelectFileTitle}"/>
                         <Grid DockPanel.Dock="Left">
-                            <Border x:Name="HoverBg" BorderThickness="0" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.08"/>
-                            <Border x:Name="SelectedBg" BorderThickness="1" Background="Transparent" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0"/>
+                            <Border x:Name="HoverBg" BorderThickness="0" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
+                            <Border x:Name="SelectedBg" BorderThickness="1" Background="Transparent" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                     HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}" />
 
                         </Grid>
                     </DockPanel>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
                         </Trigger>

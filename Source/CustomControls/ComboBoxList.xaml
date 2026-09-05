@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <ControlTemplate x:Key="ComboBoxListBaseTemplate" TargetType="{x:Type ComboBoxListBase}">
@@ -31,12 +31,8 @@
                     ContentTemplate="{DynamicResource ClearTextIconTemplate}">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=Root}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
+                        <Setter Property="Visibility" Value="Visible" />
+
                     </Style>
                 </Button.Style>
             </Button>
@@ -52,8 +48,8 @@
     <!--Selector in Edit panle-->
     <ControlTemplate x:Key="FilterComboBoxListTemplate" TargetType="{x:Type ComboBoxListBase}">
         <Grid x:Name="Root">
-            <Border x:Name="HoverBg" BorderThickness="0" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08"/>
-            <Border x:Name="SelectedBg" BorderThickness="{DynamicResource ControlBorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" Background="Transparent" Opacity="0"/>
+            <Border x:Name="HoverBg" BorderThickness="0" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
+            <Border x:Name="SelectedBg" BorderThickness="{DynamicResource ControlBorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" Background="Transparent" Opacity="0" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
             <DockPanel>
                 <Viewbox Margin="0,0,12,0" DockPanel.Dock="Right" Width="10">
                     <TextBlock Text="&#xf08e;" Foreground="{DynamicResource SubtalBrush}" FontSize="{DynamicResource FontSizeSmaller}" Style="{StaticResource IconFontStyle}" />
@@ -80,14 +76,9 @@
                     VerticalAlignment="Center" BorderThickness="0" Padding="0" ContentTemplate="{DynamicResource ClearTextIconTemplate}">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Visibility" Value="Visible" />
 
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=Root}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </DataTrigger>
-                        </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
@@ -110,14 +101,6 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="SelectedBg" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="SelectedBg" />
-            </DataTrigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
             </Trigger>
@@ -127,7 +110,7 @@
     <Style x:Key="ComboBoxListItemStyle" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
         <Setter Property="Padding" Value="8,0,8,8" />
     </Style>
-    
+
     <Style TargetType="{x:Type ComboBoxList}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Height" Value="24" />
@@ -137,7 +120,6 @@
     <Style TargetType="{x:Type DdItemListSelectionBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Height" Value="28" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template" Value="{DynamicResource FilterComboBoxListTemplate}" />
     </Style>
 </ResourceDictionary>

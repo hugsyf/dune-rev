@@ -1,8 +1,10 @@
 Constants:
     - "Colors / 配色"
     - GlyphBrush: 'Icon color / 图标颜色'
-    - WindowBackgroundBrush: 'Light surface background / 浅色表面背景'
-    - DarkWindowBackgroundBrush: 'Fluent Dim background / Fluent Dim 背景'
+    - WindowSurfaceColor: 'Window surface / 窗口底色'
+    - CardSurfaceColor: 'Card and control surface / 卡片与控件表面'
+    - PopupSurfaceColor: 'Popup and notification surface / 浮层与通知表面'
+    - SurfaceBorderColor: 'Surface border / 表面边框'
 
     - "Global layout / 全局布局"
     - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'

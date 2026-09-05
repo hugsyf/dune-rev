@@ -16,21 +16,13 @@
                         <ProgressBar x:Name="PART_ProgressStatus"
                                      BorderThickness="0" Background="Transparent"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                        <Border x:Name="HoverBg" Width="32" Height="32" Style="{DynamicResource HoverBg}" Opacity="0"/>
+                        <Border x:Name="HoverBg" Width="32" Height="32" Style="{DynamicResource HoverBg}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <Viewbox MinWidth="32" Height="32">
                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8" />
                         </Viewbox>
 
                     </Grid>
                     <ControlTemplate.Triggers>
-
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                        </DataTrigger>
-
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
                         </Trigger>
@@ -51,8 +43,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            
-        </Style.Triggers>
+
     </Style>
 </ResourceDictionary>

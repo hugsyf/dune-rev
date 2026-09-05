@@ -18,7 +18,7 @@
                             </Border>
                             <Border x:Name="SelectedBorder" BorderThickness="2" Margin="-4" Visibility="Collapsed" Style="{DynamicResource SelectedCoverBorder}"
                                     Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
-                                <TextBlock x:Name="ThemeSwitchBorder" Visibility="Collapsed" Tag="{DynamicResource ThemeDarkStyle}" />
+
                             </Border>
                             <TextBlock Name="EnableHighlightBorder" Visibility="Collapsed" Tag="{DynamicResource GridViewGameCoverShowHighlightBorder}" />
                         </Grid>
@@ -68,12 +68,11 @@
                                            Style="{StaticResource IconFontStyle}" />
 
                                 <TextBlock x:Name="CompletionStatusName" Text="{Binding CompletionStatus.Name, Mode=OneWay, IsAsync=True}" TextAlignment="Left"
-                                           TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}" 
+                                           TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"
                                            FontSize="{DynamicResource FontSizeSmall}" VerticalAlignment="Center"
                                            Margin="4,0,0,0" Style="{DynamicResource BaseTextBlockStyle}" />
                             </DockPanel>
                         </StackPanel>
-
 
                     </StackPanel>
 
@@ -140,16 +139,11 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="SelectedCoverBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlOverlayBrush}" />
         <Setter Property="CornerRadius" Value="0" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag, Mode=OneWay}" Value="True">
                 <Setter Property="CornerRadius" Value="{DynamicResource GridViewSelectionBorderCornerRadius}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=ThemeSwitchBorder, Path=Tag, Mode=OneWay}" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource DarkControlAccentBorderBrush}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=ThemeSwitchBorder, Path=Tag, Mode=OneWay}" Value="False">
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlAccentBorderBrush}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

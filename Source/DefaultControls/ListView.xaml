@@ -7,6 +7,7 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -14,8 +15,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                     <Grid Margin="2,0,0,0">
-                        <Border x:Name="HoverBg" BorderThickness="1,1,1,1" Height="28" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" Opacity="0.08" />
-                        <Border x:Name="SelectedBg" BorderThickness="0" Height="28" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" Opacity="0" />
+                        <Border x:Name="HoverBg" BorderThickness="1,1,1,1" Height="28" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" Opacity="0.08"  BorderBrush="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="SelectedBg" BorderThickness="0" Height="28" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" Opacity="0"  Background="{DynamicResource ControlOverlayBrush}"/>
                         <TextBlock x:Name="ColumnHeader" Style="{DynamicResource BaseTextBlockStyle}" VerticalAlignment="Center" Margin="8,0,8,0">
                                 <ContentPresenter VerticalAlignment="Center" />
                         </TextBlock>
@@ -39,14 +40,6 @@
                         </Thumb>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource DarkControlBorderBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -75,15 +68,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}" TargetType="ScrollViewer">
@@ -140,7 +125,6 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListView}">
@@ -155,30 +139,22 @@
     </Style>
 
     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Tag" Value="{DynamicResource ThemeDarkStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                     <Grid Margin="2,0,2,0">
-                        <Border x:Name="HoverBg" MinHeight="32" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
-                        <Border x:Name="SelectedBg" MinHeight="32" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" />
+                        <Border x:Name="HoverBg" MinHeight="32" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="SelectedBg" MinHeight="32" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"  Background="{DynamicResource ControlOverlayBrush}"/>
                         <Border Padding="{TemplateBinding Padding}" Background="Transparent" Height="32">
                             <GridViewRowPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Stretch" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource DarkControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="HoverBg" />
-                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" TargetName="SelectedBg" />
-                        </DataTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="False" />
@@ -214,14 +190,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource TextBrushDark}" />
-            </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource TextBrushLight}" />
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>
