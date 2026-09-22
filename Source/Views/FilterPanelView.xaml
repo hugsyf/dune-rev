@@ -78,7 +78,7 @@
                                         Style="{StaticResource IconfontButton}"/>
                                 <Button Name="PART_ButtonClear" DockPanel.Dock="Left" Height="36" MinWidth="112" Padding="14,0"
                                         Content="{StaticResource LOCClearFilters}" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0"
-                                        Style="{StaticResource SecondaryButton}"/>
+                                        Style="{StaticResource DuneSecondaryButton}"/>
                             </DockPanel>
                             <!--Row 2-->
                             <DockPanel Margin="16,16,16,0" DockPanel.Dock="Top">

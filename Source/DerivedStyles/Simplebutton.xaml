@@ -260,7 +260,8 @@
 
     </Style>
 
-    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+    <!-- Use a theme-specific key internally; extensions also define SecondaryButton. -->
+    <Style x:Key="DuneSecondaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonIdleBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource SecondaryButtonBrush}" />
@@ -295,6 +296,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- Retain the legacy key for consumers outside the theme. -->
+    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource DuneSecondaryButton}" />
 
     <Style x:Key="WinSysButton" TargetType="Button">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
