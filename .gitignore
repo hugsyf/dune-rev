@@ -1,5 +1,8 @@
 # Playnite packages and local release output
 /dist/
+/release/
+/scripts/
+/package.ps1
 *.pthm
 
 # MSBuild / Visual Studio

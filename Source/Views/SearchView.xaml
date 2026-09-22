@@ -136,7 +136,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Content" Value="&#xe946;" />
         <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
-        <!--<Setter Property="Background" Value="Transparent" />-->
         <Setter Property="BorderThickness" Value="0" />
     </Style>
 
@@ -148,7 +147,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Content" Value="&#xe115;" />
         <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
-        <!--<Setter Property="Background" Value="Transparent" />-->
         <Setter Property="BorderThickness" Value="0" />
     </Style>
 

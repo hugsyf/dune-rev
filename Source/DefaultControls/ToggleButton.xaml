@@ -14,7 +14,6 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
                         <Border x:Name="HoverBg" Style="{DynamicResource HoverBg}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
-                        <!-- <Border x:Name="SelectedBg" Style="{DynamicResource SelectedBg}" Opacity="0" /> -->
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
                     </Grid>
@@ -22,7 +21,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg"/>
-                            <!-- <Setter Property="Opacity" Value="0.16" TargetName="SelectedBg"/> -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -30,15 +28,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="FavoriteRoundedToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="FavoriteRoundedToggleButton" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonIdleBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource SecondaryButtonBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
-        <!--<Setter Property="FontWeight" Value="Bold"/>-->
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="12"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryButtonBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
         <Setter Property="IsChecked" Value="False" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -52,44 +49,29 @@
                             <TextBlock x:Name="FavoriteIcon" Text="&#xe1ce;" Margin="0,0,8,0" VerticalAlignment="Center"
                                        FontSize="{DynamicResource FontSize}" Style="{DynamicResource IconFontStyle}"
                                        Foreground="{TemplateBinding Foreground}"/>
-                            <TextBlock Text="{DynamicResource LOCFavoriteGame}" FontSize="{TemplateBinding FontSize}"
+                            <TextBlock x:Name="FavoriteAction" Text="{DynamicResource LOCFavoriteGame}" FontSize="{TemplateBinding FontSize}"
                                        Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="TextBlock.Text" Value="&#xe00a;" TargetName="FavoriteIcon" />
-                            <Setter Property="TextBlock.Foreground" Value="{DynamicResource SecondaryButtonBrush}"/>
-                        </DataTrigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="HoverBg"
-                                                         Storyboard.TargetProperty="Background.Color"
-                                                         To="#CCCCCC" Duration="0:0:0.4">
-                                        </ColorAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="HoverBg"
-                                                         Storyboard.TargetProperty="Background.Color"
-                                                         To="#DBDBDB" Duration="0:0:0.4">
-                                        </ColorAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Text" Value="&#xe00a;" TargetName="FavoriteIcon" />
+                            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" TargetName="FavoriteIcon" />
+                            <Setter Property="Text" Value="{DynamicResource LOCRemoveFavoriteGame}" TargetName="FavoriteAction" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ControlHoverBackgroundBrush}" />
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SecondaryButtonIdleBackgroundBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>

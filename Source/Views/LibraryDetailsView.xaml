@@ -13,13 +13,6 @@
 
                         <Grid DockPanel.Dock="{Settings DetailsListPosition}" Background="Transparent"
                               Width="{Settings DetailsListWitdh}">
-                            <!--<Grid.OpacityMask>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Offset="0" Color="#00000000"/>
-                                    <GradientStop Offset="0.5" Color="#FF000000"/>
-                                    <GradientStop Offset="1" Color="#00000000"/>
-                                </LinearGradientBrush>
-                            </Grid.OpacityMask>-->
 
                             <ExtendedListBox x:Name="PART_ListGames" Padding="16,16,16,16"
                                              BorderBrush="{DynamicResource PanelSeparatorBrush}"

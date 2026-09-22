@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -770,37 +770,6 @@
                                                                                 <TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue='-'}" />
                                                                                 <TextBlock Text="/" />
                                                                                 <TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue='-'}" />
-                                                                                <!--<ProgressBar x:Name="progressBar" FontSize="10" Margin="4,0,0,0" VerticalAlignment="Center"
-                                                Maximum="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue=0}"
-                                                Value="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue=0}" HorizontalAlignment="Left"
-                                                Background="{DynamicResource ControlHoverBackgroundBrush }" Foreground="{DynamicResource GlyphBrush}"
-                                                Width="60" Height="10" Style="{DynamicResource RoundedProgressBar}">
-                                            <ProgressBar.Resources>
-                                                <Style x:Key="RoundedProgressBar" TargetType="ProgressBar">
-                                                    <Setter Property="Background" Value="{DynamicResource NormalBrushDark}" />
-                                                    <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                                                <Border BorderThickness="{TemplateBinding BorderThickness}"
-                                                                        CornerRadius="{DynamicResource ControlCornerRadius}">
-                                                                    <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                                                        <Rectangle Fill="{TemplateBinding Background}" RadiusY="4" RadiusX="4" />
-                                                                        <Rectangle x:Name="PART_Track" Margin="0" RadiusY="4" RadiusX="4" />
-                                                                        <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left"
-                                                                                VerticalAlignment="Stretch">
-                                                                            <Grid>
-                                                                                <Rectangle Fill="{TemplateBinding Foreground}" RadiusY="4" RadiusX="4" />
-                                                                            </Grid>
-                                                                        </Decorator>
-                                                                    </Grid>
-                                                                </Border>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ProgressBar.Resources>
-                                        </ProgressBar>-->
                                                                             </StackPanel>
                                                                             <Label Content="{DynamicResource LOCSuccessStoryAchievements}" />
                                                                         </StackPanel>
@@ -838,68 +807,6 @@
                                                                             </StackPanel>
                                                                         </StackPanel>
 
-                                                                        <!--Game relations-->
-                                                                        <!--<StackPanel Margin="0,24,0,0" Visibility="{Binding ElementName=GameRelationsVisibilityProxy, Path=Tag}">
-
-                                                                            <TextBlock Text="{DynamicResource LOCGameRelations_RelatedGamesLabel}" Margin="0,0,0,16"
-                                                                                    FontSize="{DynamicResource FontSizeLarge20}" FontWeight="Bold"
-                                                                                    Foreground="{DynamicResource SelectedBrush}" />
-
-                                                                            <TextBlock x:Name="GameRelationsVisibilityProxy" Visibility="Collapsed">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock">
-                                                                                        <Setter Property="Tag" Value="Collapsed" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger
-                                                                                                    Binding="{Binding ElementName=Panel_GameRelations_SimilarGamesControl, Path=Visibility}"
-                                                                                                    Value="Visible">
-                                                                                                <Setter Property="Tag" Value="Visible" />
-                                                                                            </DataTrigger>
-                                                                                            <DataTrigger
-                                                                                                    Binding="{Binding ElementName=Panel_GameRelations_SameSeriesControl, Path=Visibility}"
-                                                                                                    Value="Visible">
-                                                                                                <Setter Property="Tag" Value="Visible" />
-                                                                                            </DataTrigger>
-                                                                                            <DataTrigger
-                                                                                                    Binding="{Binding ElementName=Panel_GameRelations_SameDeveloperControl, Path=Visibility}"
-                                                                                                    Value="Visible">
-                                                                                                <Setter Property="Tag" Value="Visible" />
-                                                                                            </DataTrigger>
-                                                                                            <DataTrigger
-                                                                                                    Binding="{Binding ElementName=Panel_GameRelations_SamePublisherControl, Path=Visibility}"
-                                                                                                    Value="Visible">
-                                                                                                <Setter Property="Tag" Value="Visible" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
-                                                                            <Expander x:Name="Panel_GameRelations_SimilarGamesControl"
-                                                                                    Header="{DynamicResource LOCGameRelations_SimilarGamesLabel}" IsExpanded="True" Margin="0,8,0,0"
-                                                                                    Visibility="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                                                                                <ContentControl x:Name="GameRelations_SimilarGamesControl" Margin="0,16,0,0" />
-                                                                            </Expander>
-
-                                                                            <Expander x:Name="Panel_GameRelations_SameSeriesControl"
-                                                                                    Header="{DynamicResource LOCGameRelations_SameSeriesLabel}" IsExpanded="True" Margin="0,8,0,0"
-                                                                                    Visibility="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                                                                                <ContentControl x:Name="GameRelations_SameSeriesControl" Margin="0,16,0,0" />
-                                                                            </Expander>
-
-                                                                            <Expander x:Name="Panel_GameRelations_SameDeveloperControl"
-                                                                                    Header="{DynamicResource LOCGameRelations_SameDeveloperLabel}" IsExpanded="True"
-                                                                                    Margin="0,8,0,0"
-                                                                                    Visibility="{PluginSettings Plugin=GameRelations, Path=SameDeveloperControlSettings.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                                                                                <ContentControl x:Name="GameRelations_SameDeveloperControl" Margin="0,16,0,0" />
-                                                                            </Expander>
-
-                                                                            <Expander x:Name="Panel_GameRelations_SamePublisherControl"
-                                                                                    Header="{DynamicResource LOCGameRelations_SamePublisherLabel}" IsExpanded="True"
-                                                                                    Margin="0,8,0,0"
-                                                                                    Visibility="{PluginSettings Plugin=GameRelations, Path=SamePublisherControlSettings.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                                                                                <ContentControl x:Name="GameRelations_SamePublisherControl" Margin="0,16,0,0" />
-                                                                            </Expander>
-                                                                        </StackPanel>-->
 
                                                                     </StackPanel>
                                                                 </TabItem>
