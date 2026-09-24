@@ -4,7 +4,7 @@
     <Style x:Key="DetailsViewItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DuneKeyboardFocus}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
@@ -14,6 +14,8 @@
                         <Border x:Name="HoverBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <Border x:Name="SelectedBg" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <ContentPresenter />
+                        <Border x:Name="SelectionIndicator" Width="3" Margin="0,6" CornerRadius="1.5"
+                                HorizontalAlignment="Left" Background="{DynamicResource AccentBrush}" Visibility="Collapsed" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -55,7 +57,8 @@
                         </MultiTrigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Opacity" Value="0.08" TargetName="SelectedBg"/>
+                            <Setter Property="Opacity" Value="0.12" TargetName="SelectedBg"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="SelectionIndicator" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

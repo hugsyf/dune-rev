@@ -23,6 +23,8 @@
                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter RecognizesAccessKey="True"/>
                         </Viewbox>
+                        <Border x:Name="SelectionIndicator" Width="16" Height="2" CornerRadius="1"
+                                VerticalAlignment="Bottom" Background="{DynamicResource AccentBrush}" Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -59,6 +61,7 @@
                         </MultiTrigger>
                         <Trigger Property="IsToggled" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="SelectedBg"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="SelectionIndicator" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

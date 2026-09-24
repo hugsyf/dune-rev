@@ -6,7 +6,24 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
+    <Style x:Key="DuneKeyboardFocus" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Border Margin="2" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}"
+                            BorderBrush="{DynamicResource TextBrush}" IsHitTestVisible="False" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- English fallback; Playnite loads localized overrides from Localization/. -->
+    <sys:String x:Key="LOCDuneSystemRequirements">System requirements</sys:String>
+    <sys:String x:Key="LOCDuneRequirementsReady">View requirements</sys:String>
+    <sys:String x:Key="LOCDuneMainStory">Main story &#x00B7; HowLongToBeat</sys:String>
+
     <Style x:Key="BaseStyle" TargetType="Control">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneKeyboardFocus}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />

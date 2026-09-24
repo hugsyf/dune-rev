@@ -80,15 +80,15 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DetailPlayButton" TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="48"/>
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+    <Style x:Key="DetailPlayButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Background" Value="{DynamicResource PlayButtonBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource PlayButtonBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBackgroundBrush}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0,0,16,4" />
+        <Setter Property="Padding" Value="12,0,44,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -117,9 +117,10 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DetailPlayButtonRightPart" TargetType="{x:Type Button}" >
+    <Style x:Key="DetailPlayButtonRightPart" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Height" Value="40" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets"/>
         <Setter Property="Background" Value="{DynamicResource PlayButtonBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource PlayButtonBrush}" />

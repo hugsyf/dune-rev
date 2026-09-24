@@ -18,7 +18,10 @@
         <sys:Double x:Key="TopPanelHeight">60</sys:Double>
         <sys:Double x:Key="GameLogoMaxWidth">480</sys:Double>
         <sys:Double x:Key="GameLogoMaxHeight">120</sys:Double>
-        <sys:Double x:Key="GameActionButtonWidth">200</sys:Double>
+        <sys:Double x:Key="DuneGridLogoMaxWidth">240</sys:Double>
+        <sys:Double x:Key="DuneGridLogoMaxHeight">72</sys:Double>
+        <sys:Double x:Key="GameActionButtonWidth">320</sys:Double>
+        <!-- Legacy card-size keys retained for saved overrides; modular summaries use fixed proportions. -->
         <sys:Double x:Key="DetailsSummaryCardWidth">240</sys:Double>
         <sys:Double x:Key="DetailsSummaryCardHeight">136</sys:Double>
         <sys:Double x:Key="GridSummaryCardWidth">260</sys:Double>
@@ -130,7 +133,7 @@
     <sys:Double x:Key="FontSizeLarge32">32</sys:Double>
     <sys:Double x:Key="FontSizeLarge40">40</sys:Double>
     <sys:Double x:Key="FontSizeLarge48">48</sys:Double>
-    <FontFamily x:Key="FontFamily">Trebuchet MS</FontFamily>
+    <FontFamily x:Key="FontFamily">Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI</FontFamily>
     <FontFamily x:Key="MonospaceFontFamily">Consolas</FontFamily>
 
     <sys:Double x:Key="EllipseBorderThickness">1</sys:Double>

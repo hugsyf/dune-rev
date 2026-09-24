@@ -76,6 +76,39 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="DuneFavoriteIconToggle" TargetType="ToggleButton" BasedOn="{StaticResource FavoriteRoundedToggleButton}">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ToolTip" Value="{DynamicResource LOCFavoriteGame}" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="HoverBg" Background="{TemplateBinding Background}"
+                            CornerRadius="{DynamicResource ControlCornerRadius}"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <TextBlock x:Name="FavoriteIcon" Text="&#xe734;" FontSize="18" FontWeight="Normal"
+                                   Style="{DynamicResource IconFontStyle}" Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="FavoriteIcon" Property="Text" Value="&#xe735;" />
+                            <Setter TargetName="FavoriteIcon" Property="Foreground" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="HoverBg" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="HoverBg" Property="BorderThickness" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="ToolTip" Value="{DynamicResource LOCRemoveFavoriteGame}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="FavoriteTubeToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource ControlHoverBackgroundBrush}" />
         <Setter Property="Foreground" Value="Yellow" />

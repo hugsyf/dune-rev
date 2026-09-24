@@ -42,12 +42,20 @@ You can also install it via this [link](https://playnite.link/addons.html#DuneRe
 - Install the **Segoe Fluent Icons** font if it is unavailable on the system.
   Microsoft provides it with the
   [Windows design resources](https://learn.microsoft.com/windows/apps/design/downloads/#fonts).
-- Details View uses a 1760 px maximum content width and a 480 px information
-  column by default, leaving the summary-card area enough room on common
-  widescreen displays.
-- Grid View uses a 640 px details pane by default. Its summary cards wrap into
-  additional rows, and the information panel is placed below them so narrow
-  sidebars do not compress either section.
+- Details View keeps its large hero and a 1760 px maximum content width.
+  Statistics share proportional columns on wide screens and compact rows in
+  narrow panes. Missing plugin cards are repacked, and achievements include a
+  progress bar. With no statistics plugins, basic information forms one compact
+  strip; with at most one, the summary sits beside the metadata column.
+  Description and metadata use proportional columns, with metadata capped
+  at 480 px.
+- Grid View uses a 640 px details pane by default. Media keeps a 16:9 canvas
+  without cropping; actions and media controls overlay the hero's lower edge.
+  Narrow heroes retain a 320 px minimum frame height for readable controls.
+  Metadata precedes the content tabs in narrow panes and sits beside them when
+  the content area reaches 900 px.
+- Edit and favorite icons sit beside Play, with localized tooltips and keyboard
+  focus indicators. The action row defaults to 320 px and shrinks to fit the pane.
 - Content, pane, card, logo, extension-panel, action-button, and top-bar sizes
   can be adjusted through ThemeModifier. Options are grouped by view and use
   consistent bilingual English and Simplified Chinese labels.
@@ -126,11 +134,16 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 - 如果系统中没有 **Segoe Fluent Icons** 字体，请先安装。Microsoft 在
   [Windows 设计资源页面](https://learn.microsoft.com/windows/apps/design/downloads/#fonts)
   提供该字体。
-- 详情视图默认将总览内容最大宽度设为 1760 px、游戏信息栏最大宽度设为
-  480 px，使常见宽屏分辨率下的概览卡片保有足够空间。
-- 网格视图默认使用 640 px 宽的详情栏。概览卡片会自动换行，游戏信息面板位于
-  卡片下方，避免狭窄侧栏过度挤压内容。
-- 内容区域、详情栏、卡片、Logo、扩展面板、操作按钮和顶部栏等尺寸均可通过
+- 详情视图保留大头图，总览最大宽度为 1760 px。宽屏统计按比例分配列宽，窄栏
+  改为紧凑排列，缺失的插件卡片不占位；成就卡显示进度条。无统计插件时，基础
+  信息合并为一条摘要；至多一个统计插件有数据时，摘要与右侧信息栏并排。
+  介绍与游戏信息按比例分栏，信息栏最大宽度为 480 px。
+- 网格视图默认使用 640 px 宽的详情栏。原生图片以 16:9 画布完整显示，操作区和
+  媒体控件位于头图内部下方；窄栏头图框最小高度为 320 px，为控件保留空间。
+  详情信息在窄栏中位于内容标签页之前，内容区域达到 900 px 时与标签页并排。
+- 编辑与收藏改为游玩按钮旁的图标按钮，支持本地化提示与键盘焦点。操作区默认
+  宽度为 320 px，窄侧栏下会自动收缩。
+- 内容区域、详情栏、Logo、扩展面板、操作按钮和顶部栏等尺寸均可通过
   ThemeModifier 调整。选项按视图分类，并使用统一的英中双语名称。
 - 安装或更新会向主题注入控件的扩展后，建议重启 Playnite。
 

@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="LOCDuneSystemRequirements">System requirements</sys:String>
+    <sys:String x:Key="LOCDuneRequirementsReady">View requirements</sys:String>
+    <sys:String x:Key="LOCDuneMainStory">Main story &#x00B7; HowLongToBeat</sys:String>
+</ResourceDictionary>

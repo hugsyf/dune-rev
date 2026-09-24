@@ -20,7 +20,7 @@
 
     <Style x:Key="DetailViewCardBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlOverlayBrush}" />
-        <Setter Property="Opacity" Value="0.04" />
+        <Setter Property="Opacity" Value="0.06" />
         <Setter Property="BorderThickness" Value="0" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -58,13 +58,13 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                             To="1.025" Duration="0:0:0.16">
+                                             To="1.01" Duration="0:0:0.16">
                                 <DoubleAnimation.EasingFunction>
                                     <QuadraticEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                             To="1.025" Duration="0:0:0.16">
+                                             To="1.01" Duration="0:0:0.16">
                                 <DoubleAnimation.EasingFunction>
                                     <QuadraticEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
@@ -86,4 +86,883 @@
         </Style.Triggers>
     </Style>
 
+    <!-- BEGIN GENERATED SUMMARY LAYOUTS -->
+    <!-- Regenerate with tools/Update-SummaryLayoutStyles.ps1. 60 tracks divide exactly into 2, 3, 4, 5 and 6 columns. -->
+    <Style x:Key="DunePlayTimeLayout" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneHowLongToBeatLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="1" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="12" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="12" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="10" />
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneLastPlayedLayout" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="2" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="24" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="24" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneCompletionLayout" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="3" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="24" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="24" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="15" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="20" />
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneActivityLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="4" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="36" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneRequirementsLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="96" />
+        <Setter Property="Grid.Row" Value="5" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Collapsed">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="36" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="30" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="30" />
+                <Setter Property="Grid.ColumnSpan" Value="10" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneAchievementsLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
+        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="MinHeight" Value="112" />
+        <Setter Property="Grid.Row" Value="6" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="60" />
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="Tag" Value="Compact" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="3" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Collapsed|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="48" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="3" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Collapsed|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="48" />
+                <Setter Property="Grid.ColumnSpan" Value="12" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="3" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Collapsed|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="45" />
+                <Setter Property="Grid.ColumnSpan" Value="15" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Regular|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="3" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="Wide|Visible|Visible|Visible|Visible">
+                <Setter Property="Grid.Row" Value="0" />
+                <Setter Property="Grid.Column" Value="40" />
+                <Setter Property="Grid.ColumnSpan" Value="20" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="MinHeight" Value="204" />
+                <Setter Property="Tag" Value="Expanded" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!-- END GENERATED SUMMARY LAYOUTS -->
 </ResourceDictionary>

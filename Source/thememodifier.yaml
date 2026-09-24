@@ -8,22 +8,20 @@ Constants:
 
     - "Global layout / 全局布局"
     - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'
-    - GameLogoMaxWidth(160,720): 'Game logo maximum width / 游戏 Logo 最大宽度'
-    - GameLogoMaxHeight(64,240): 'Game logo maximum height / 游戏 Logo 最大高度'
-    - GameActionButtonWidth(180,320): 'Game action button width / 游戏操作按钮宽度'
+    - GameLogoMaxWidth(160,720): 'Details logo maximum width / 详情页 Logo 最大宽度'
+    - GameLogoMaxHeight(64,240): 'Details logo maximum height / 详情页 Logo 最大高度'
+    - GameActionButtonWidth(240,480): 'Game action row width / 游玩、编辑与收藏操作区宽度'
     - ShowIconTextOnLink: 'Game links: show names / 游戏链接：显示名称'
 
     - "Details View layout / 详情视图布局"
     - GameOverviewWidth(960,2560): 'Details View content maximum width / 详情视图内容最大宽度'
-    - GameDetailInfoWidth(320,720): 'Details View information column width / 详情视图信息栏宽度'
-    - DetailsSummaryCardWidth(220,360): 'Details View summary card width / 详情视图摘要卡片宽度'
-    - DetailsSummaryCardHeight(136,220): 'Details View summary card height / 详情视图摘要卡片高度'
+    - GameDetailInfoWidth(240,480): 'Details View information column maximum width / 详情视图信息栏最大宽度'
     - DetailsViewAllowUseOfLogos: 'Details View: use game logos (Extra Metadata Loader) / 详情视图：使用游戏 Logo（需要 Extra Metadata Loader）'
 
     - "Grid View layout / 网格视图布局"
     - GridViewDetailsWidth(400,1200): 'Grid View details pane width / 网格视图详情栏宽度'
-    - GridSummaryCardWidth(220,520): 'Grid View summary card width / 网格视图摘要卡片宽度'
-    - GridSummaryCardHeight(136,220): 'Grid View summary card height / 网格视图摘要卡片高度'
+    - DuneGridLogoMaxWidth(120,360): 'Grid View logo maximum width / 网格视图 Logo 最大宽度'
+    - DuneGridLogoMaxHeight(48,120): 'Grid View logo maximum height / 网格视图 Logo 最大高度'
     - GridViewAllowUseOfLogos: 'Grid View: use game logos (Extra Metadata Loader) / 网格视图：使用游戏 Logo（需要 Extra Metadata Loader）'
 
     - "Extension panels / 扩展面板"

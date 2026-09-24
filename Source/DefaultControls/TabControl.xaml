@@ -93,7 +93,7 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize }"/>
         <Setter Property="Padding" Value="12,6,12,6" />
@@ -102,20 +102,25 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="TabGrid" Margin="0,0,8,0">
                         <Border x:Name="HoverBg"  CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
-                        <TextBlock x:Name="TextContent" VerticalAlignment="Center" Opacity="0.4" Margin="{TemplateBinding Padding}"
+                        <TextBlock x:Name="TextContent" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"
                                    Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}">
                             <ContentPresenter x:Name="ContentSite" RecognizesAccessKey="True" ContentSource="Header" HorizontalAlignment="Center" Margin="0"
                                     VerticalAlignment="Center" />
                         </TextBlock>
+                        <Border x:Name="SelectionIndicator" Height="2" Margin="12,0,12,0" CornerRadius="1"
+                                VerticalAlignment="Bottom" Background="{DynamicResource AccentBrush}" Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="SelectionIndicator" />
                             <Setter Property="Opacity" Value="1" TargetName="TextContent"/>
                             <Setter Property="Opacity" Value="0.08" TargetName="HoverBg"/>
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
                             <Setter Property="Opacity" Value="1" TargetName="TextContent" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">

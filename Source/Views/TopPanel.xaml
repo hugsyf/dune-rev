@@ -86,8 +86,13 @@
                                 CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
                         <TextBlock Name="Iconfont" Text="&#xe16e;" FontSize="16" Foreground="{TemplateBinding Foreground}" Style="{DynamicResource IconFontStyle}"/>
                         <Ellipse Name="TextFilter" Margin="22,-24,0,0" Width="10" Height="10" Fill="OrangeRed" Visibility="Collapsed"/>
+                        <Border x:Name="SelectionIndicator" Width="16" Height="2" CornerRadius="1"
+                                VerticalAlignment="Bottom" Background="{DynamicResource AccentBrush}" Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="SelectionIndicator" />
+                        </Trigger>
                         <Trigger Property="Tag" Value="{StaticResource True}">
                             <Setter Property="Visibility" Value="Visible" TargetName="TextFilter" />
                         </Trigger>
@@ -227,7 +232,10 @@
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                 <StackPanel x:Name="PART_PanelMainItems" Orientation="Horizontal"
                                             VerticalAlignment="Stretch" Margin="12,6,0,6" />
+                                <Border Width="1" Height="20" Margin="8,0,0,0"
+                                        Background="{DynamicResource PanelSeparatorBrush}" VerticalAlignment="Center" />
                                 <CheckBox x:Name="PART_ToggleFilter" ToolTip="{DynamicResource LOCFilters}"
+                                              Margin="12,0,0,0"
                                               Style="{DynamicResource TopPanelFilterToggle}" />
                             </StackPanel>
 

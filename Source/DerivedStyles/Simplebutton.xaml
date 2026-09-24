@@ -297,6 +297,16 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="DuneIconActionButton" TargetType="Button" BasedOn="{StaticResource DuneSecondaryButton}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
+    </Style>
+
     <!-- Retain the legacy key for consumers outside the theme. -->
     <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource DuneSecondaryButton}" />
 

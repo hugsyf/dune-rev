@@ -9,6 +9,7 @@
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MinHeight" Value="28" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -16,15 +17,13 @@
                     <Border x:Name="CheckboxBorder" Background="Transparent" Padding="{TemplateBinding Padding}">
                         <DockPanel>
                             <Grid DockPanel.Dock="Left" VerticalAlignment="Center">
-                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="0" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
-                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Opacity="0.2" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
+                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="0" Background="{DynamicResource ControlIdleBackgroundBrush}"/>
+                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="1" Background="Transparent" BorderBrush="{DynamicResource TextBrushDarker}"/>
                                 <Grid Width="20" Height="20">
                                     <Viewbox x:Name="CheckIcon" Visibility="Collapsed">
-                                        <TextBlock Text="&#xf13e;" Margin="1,0,0,1" Style="{DynamicResource IconFontStyle}" />
+                                        <TextBlock Text="&#xf13e;" Margin="1,0,0,1" Foreground="{DynamicResource ControlShadeBrush}" Style="{DynamicResource IconFontStyle}" />
                                     </Viewbox>
-                                    <Viewbox x:Name="IndeterminateIcon" Visibility="Collapsed" Margin="2">
-                                        <TextBlock Text="g" FontFamily="Marlett" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Viewbox>
+                                    <Border x:Name="IndeterminateIcon" Visibility="Collapsed" Width="10" Height="2" CornerRadius="1" Background="{DynamicResource ControlShadeBrush}" />
                                 </Grid>
                             </Grid>
                             <ContentPresenter DockPanel.Dock="Left" RecognizesAccessKey="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
@@ -37,19 +36,24 @@
                                 <Condition Property="IsThreeState" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Visibility" Value="Visible" TargetName="IndeterminateIcon"/>
+                            <Setter Property="Background" Value="{DynamicResource AccentBrush}" TargetName="BulletBorder" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" TargetName="BulletHoverBorder" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="CheckIcon" />
+                            <Setter Property="Background" Value="{DynamicResource AccentBrush}" TargetName="BulletBorder" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" TargetName="BulletHoverBorder" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Opacity" Value="0.16" TargetName="BulletBorder" />
-                            <Setter Property="Opacity" Value="0.24" TargetName="BulletHoverBorder" />
+                            <Setter Property="Background" Value="{DynamicResource ControlHoverBackgroundBrush}" TargetName="BulletBorder" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" TargetName="BulletHoverBorder" />
                         </MultiTrigger>
-                        <Trigger Property="IsFocused" Value="True">
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.75" TargetName="BulletBorder" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

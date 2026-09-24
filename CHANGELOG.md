@@ -2,6 +2,59 @@
 
 All notable Dune Rev changes are documented here.
 
+## v1.1.0 - 2026-09-24
+
+### Changed
+
+- Match summary card corners to the links and details containers. Refresh native
+  checkboxes, combo boxes and filter/multi-select controls with accent selection,
+  compact chevrons, focus underlines and consistent popup surfaces.
+- Share the standard combo template with ExplorerComboBox; remove legacy yellow,
+  red and brown selector surfaces while retaining host template parts.
+- Place compact edit and favorite icons beside the play action in both views,
+  with localized tooltips and keyboard focus feedback.
+- Keep Grid View media on a 16:9 canvas and overlay actions and media controls
+  inside its rounded hero frame. Keep the full Details View hero.
+- Place Grid View metadata before content tabs in narrow panes and alongside
+  them in wide panes. Match completion status typography to normal dropdowns.
+- Arrange statistics in proportional columns or compact rows according to pane
+  width and available plugin data. Repack individual cards instead of reserving
+  fixed pairs, and use the full row width without a trailing empty strip.
+- Combine basic information into one compact surface when statistics plugins
+  have no data. Place sparse summaries beside metadata; preserve zero counts.
+- Keep completion controls compact, standardize typography, and show achievement
+  progress in a card that changes size with the available space.
+- Use Segoe UI typography, readable secondary text, persistent selection
+  indicators, and localized system-requirements labels.
+- Update ThemeModifier controls for the action row and per-view logos; retain
+  old card-size constants as compatibility keys without exposing obsolete options.
+
+### Fixed
+
+- Keep hero action placement stable when video controls are absent in either
+  view. Protect primary-action text from narrow saved row widths and align edit
+  and favorite glyph sizing with lighter primary-button typography.
+- Use Extra Metadata Loader's view-aware player in Grid View to avoid the
+  configured player's Details-only context. Hide media controls when the local
+  player has no video or the image thumbnail is selected.
+- Remove the rectangular translucent backing behind the Grid View hero footer.
+- Defer cross-dictionary keyboard-focus resource lookup so Playnite can preflight
+  the grid and details item styles before loading the custom common resources.
+- Isolate the clear-filter button style from extensions that also define
+  `SecondaryButton`, preventing their style from replacing its dark template.
+- Keep favorite and clear-filter buttons readable on the Fluent Dim palette,
+  including hover, focus, pressed, and disabled states.
+- Update the favorite label and accent icon when a game is already a favorite.
+- Restore the top-panel filter icon's foreground and show its active-filter dot
+  only while filters are applied.
+
+### Maintenance
+
+- Remove obsolete palette triggers, commented-out layouts, two broken unused
+  background resources, and 10.21 MiB of unreferenced theme images.
+- Preserve Playnite's standard dictionaries and extension compatibility resources.
+- Add an offscreen WPF regression check for the affected controls.
+
 ## 1.0.1 — 2026-09-05
 
 ### Fixed

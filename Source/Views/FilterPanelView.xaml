@@ -16,12 +16,8 @@
     <Style x:Key="FilterPanelLabel" TargetType="Label">
         <Setter Property="Margin" Value="16,12,16,4" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="Foreground" Value="#808080" />
-        <Style.Triggers>
-            <Trigger Property="Tag" Value="{StaticResource False}">
-                <Setter Property="Opacity" Value="0.6" />
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     
     <Style x:Key="FilterPanelFilterSearchBox" TargetType="SearchBox" BasedOn="{StaticResource {x:Type SearchBox}}">
