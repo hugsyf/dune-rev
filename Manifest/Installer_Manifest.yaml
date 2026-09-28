@@ -1,5 +1,15 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 1.1.1
+    RequiredApiVersion: 2.9.0
+    ReleaseDate: 2026-09-28
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v1.1.1/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_1_1_1.pthm
+    Changelog:
+      - Improve compatibility with Playnite Achievements:
+        - Fix clipped content and sideways jumps in legacy achievement lists after PA theme migration by using a single vertically scrolling column.
+        - Improve scrollbar visibility and drag targets while preventing content overlap.
+        - Refine the achievement toolbar and the styling and spacing of achievement, screenshot, activity, review and other plugin panels.
+      - Remove blank space from hidden or unloaded plugin controls, and add tooltips and keyboard focus feedback to plugin cards.
   - Version: 1.1.0
     RequiredApiVersion: 2.9.0
     ReleaseDate: 2026-09-24

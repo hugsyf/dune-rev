@@ -2,6 +2,21 @@
 
 All notable Dune Rev changes are documented here.
 
+## v1.1.1 - 2026-09-28
+
+- Keep legacy achievement lists in one vertical column, avoiding clipped
+  neighboring columns and sideways focus jumps after PA theme migration.
+- Keep overflowing scrollbars visible with a 12 px drag area and separate
+  content space; use a real horizontal track instead of rotating a vertical one.
+- Reduce padding on legacy achievement-list buttons to fit their 40 px toolbar
+  columns, without changing the SS/PA migration path.
+- Give embedded plugin tabs consistent surfaces, padding and normal-weight text
+  without replacing the plugins' own templates. Remove empty space from absent
+  or plugin-hidden content and avoid overriding Review Viewer's UserControl style.
+- Add summary-card tooltips and keyboard focus feedback.
+- Remove unused tab transforms and consolidate development checks into a small
+  XAML/resource check; retain the adaptive card layout generator.
+
 ## v1.1.0 - 2026-09-24
 
 ### Changed

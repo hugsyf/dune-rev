@@ -116,4 +116,22 @@
         </Setter>
     </Style>
 
+    <!-- Legacy achievement controls supply a vertical WrapPanel, which fills
+         down then creates offscreen columns despite disabling horizontal scroll.
+         A template-owned items host keeps these full-width rows in one column. -->
+    <Style x:Key="DuneAchievementList" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <ScrollViewer x:Name="PART_ScrollViewer" Focusable="False"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical"
+                                                KeyboardNavigation.DirectionalNavigation="Contained" />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -788,7 +788,7 @@
                                                 <StackPanel Grid.Row="4" Grid.Column="2"></StackPanel>
                                             </Grid>
                                         </Grid>
-                                        <Grid x:Name="DuneHowLongToBeatCard" Style="{DynamicResource DuneHowLongToBeatLayout}" Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Grid x:Name="DuneHowLongToBeatCard" ToolTip="{DynamicResource LOCDuneMainStory}" AutomationProperties.Name="{DynamicResource LOCDuneMainStory}" Style="{DynamicResource DuneHowLongToBeatLayout}" Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                 <Border.Style>
                                                     <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
@@ -1110,7 +1110,7 @@
                                                 <StackPanel Grid.Row="4" Grid.Column="2"></StackPanel>
                                             </Grid>
                                         </Grid>
-                                        <Grid x:Name="DuneActivityCard" Style="{DynamicResource DuneActivityLayout}" Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Grid x:Name="DuneActivityCard" ToolTip="{DynamicResource LOCGameActivityTitle}" AutomationProperties.Name="{DynamicResource LOCGameActivityTitle}" Style="{DynamicResource DuneActivityLayout}" Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                 <Border.Style>
                                                     <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
@@ -1222,7 +1222,7 @@
                                             <TextBlock Text="&#xE76C;" Style="{DynamicResource IconFontStyle}" FontSize="12" Margin="0,12,12,0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushDarker}" />
                                             <ContentControl x:Name="GameActivity_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                         </Grid>
-                                        <Grid x:Name="DuneRequirementsCard" Style="{DynamicResource DuneRequirementsLayout}" Visibility="{PluginSettings Plugin=SystemChecker, Path=EnableIntegrationButton, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Grid x:Name="DuneRequirementsCard" ToolTip="{DynamicResource LOCDuneSystemRequirements}" AutomationProperties.Name="{DynamicResource LOCDuneSystemRequirements}" Style="{DynamicResource DuneRequirementsLayout}" Visibility="{PluginSettings Plugin=SystemChecker, Path=EnableIntegrationButton, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                 <Border.Style>
                                                     <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
@@ -1350,7 +1350,7 @@
                                             <TextBlock Text="&#xE76C;" Style="{DynamicResource IconFontStyle}" FontSize="12" Margin="0,12,12,0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushDarker}" />
                                             <ContentControl x:Name="SystemChecker_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                         </Grid>
-                                        <Grid x:Name="DuneAchievementsCard" Style="{DynamicResource DuneAchievementsLayout}" Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Grid x:Name="DuneAchievementsCard" ToolTip="{DynamicResource LOCSuccessStoryAchievements}" AutomationProperties.Name="{DynamicResource LOCSuccessStoryAchievements}" Style="{DynamicResource DuneAchievementsLayout}" Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                 <Border.Style>
                                                     <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
@@ -1730,59 +1730,61 @@
                                                 </TabItem>
                                                 <!--Tab Notes Ends-->
 
-                                                <TabItem Header="{DynamicResource LOCSuccessStoryAchievements}"
-                         Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <StackPanel Margin="0,24,0,0">
-                                                        <ContentControl x:Name="SuccessStory_PluginCompactUnlocked" Margin="0,0,0,24" />
-                                                        <ContentControl x:Name="SuccessStory_PluginCompactLocked" Margin="0,0,0,24" />
-                                                        <ContentControl x:Name="SuccessStory_PluginUserStats" Margin="0,0,0,24" />
-                                                        <ContentControl x:Name="SuccessStory_PluginList" Margin="0,0,0,24" MinHeight="{DynamicResource SuccessStoryPanelMinHeight}" />
-                                                        <ContentControl x:Name="SuccessStory_PluginChart" Margin="0,0,0,24" />
-                                                    </StackPanel>
-                                                </TabItem>
-
-                                                <TabItem Header="{DynamicResource LOCSsvTitle}"
-                         Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <StackPanel Orientation="Vertical" Background="{TemplateBinding Background}" Margin="0,24,0,0">
-                                                        <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshotsVertical" Margin="0,0,0,0" Height="{DynamicResource ScreenshotsPanelHeight}"/>
-                                                        <ContentControl x:Name="ScreenshotsVisualizer_PluginSinglePicture" />
-                                                        <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshots" />
-                                                    </StackPanel>
-
-                                                </TabItem>
-
-                                                <TabItem Header="HowLongToBeat"
-                                                         Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <StackPanel Margin="0,24,0,0">
-                                                        <ContentControl x:Name="HowLongToBeat_PluginProgressBar" />
-                                                    </StackPanel>
-                                                </TabItem>
-
-                                                <TabItem Header="{DynamicResource LOCGameActivityTitle}"
-                                                         Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <StackPanel Margin="0,24,0,0">
-                                                        <ContentControl x:Name="GameActivity_PluginChartTime" />
-                                                    </StackPanel>
-                                                </TabItem>
-
-                                                <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}"
-                                                         Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <ContentControl x:Name="ReviewViewer_ReviewsControl"
-                                                                    Margin="0,24,0,0"
-                                                                    Foreground="{DynamicResource TextBrush}"
-                                                                    TextElement.Foreground="{DynamicResource TextBrush}">
+                                                <TabItem Header="{DynamicResource LOCSuccessStoryAchievements}" Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <StackPanel>
+                                                      <ContentControl x:Name="SuccessStory_PluginCompactUnlocked" Style="{DynamicResource DunePluginContent}" />
+                                                      <ContentControl x:Name="SuccessStory_PluginCompactLocked" Style="{DynamicResource DunePluginContent}" />
+                                                      <ContentControl x:Name="SuccessStory_PluginUserStats" Style="{DynamicResource DunePluginContent}" />
+                                                      <ContentControl x:Name="SuccessStory_PluginList" MinHeight="{DynamicResource SuccessStoryPanelMinHeight}" Style="{DynamicResource DunePluginContent}" >
                                                         <ContentControl.Resources>
-                                                            <Style TargetType="UserControl">
-                                                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-                                                                <Setter Property="TextElement.Foreground" Value="{DynamicResource TextBrush}" />
-                                                            </Style>
+                                                          <Style TargetType="ListBox" BasedOn="{StaticResource DuneAchievementList}" />
+                                                          <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                            <Setter Property="Padding" Value="4" />
+                                                          </Style>
                                                         </ContentControl.Resources>
-                                                    </ContentControl>
+                                                      </ContentControl>
+                                                      <ContentControl x:Name="SuccessStory_PluginChart" Style="{DynamicResource DunePluginContent}" />
+                                                    </StackPanel>
+                                                  </Border>
                                                 </TabItem>
 
-                                                <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}"
-                                                         Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <ContentControl x:Name="NewsViewer_NewsViewerControl" Margin="0,24,0,0" />
+                                                <TabItem Header="{DynamicResource LOCSsvTitle}" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <StackPanel Orientation="Vertical">
+                                                      <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshotsVertical" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{DynamicResource DunePluginContent}" />
+                                                      <ContentControl x:Name="ScreenshotsVisualizer_PluginSinglePicture" Style="{DynamicResource DunePluginContent}" />
+                                                      <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshots" Style="{DynamicResource DunePluginContent}" />
+                                                    </StackPanel>
+                                                  </Border>
+                                                </TabItem>
+
+                                                <TabItem Header="HowLongToBeat" Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <StackPanel>
+                                                      <ContentControl x:Name="HowLongToBeat_PluginProgressBar" Style="{DynamicResource DunePluginContent}" />
+                                                    </StackPanel>
+                                                  </Border>
+                                                </TabItem>
+
+                                                <TabItem Header="{DynamicResource LOCGameActivityTitle}" Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <StackPanel>
+                                                      <ContentControl x:Name="GameActivity_PluginChartTime" Style="{DynamicResource DunePluginContent}" />
+                                                    </StackPanel>
+                                                  </Border>
+                                                </TabItem>
+
+                                                <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}" Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <ContentControl x:Name="ReviewViewer_ReviewsControl" Foreground="{DynamicResource TextBrush}" TextElement.Foreground="{DynamicResource TextBrush}" Style="{DynamicResource DunePluginContent}"></ContentControl>
+                                                  </Border>
+                                                </TabItem>
+
+                                                <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}" Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                  <Border Style="{DynamicResource DunePluginPanel}">
+                                                    <ContentControl x:Name="NewsViewer_NewsViewerControl" Style="{DynamicResource DunePluginContent}" />
+                                                  </Border>
                                                 </TabItem>
 
                                             </TabControl>
