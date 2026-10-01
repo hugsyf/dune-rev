@@ -4,8 +4,13 @@ InstallerManifestUrl: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Man
 Name: Dune Rev
 Author: hugsyf
 SourceUrl: https://github.com/hugsyf/dune-rev
-ShortDescription: A Fluent-inspired Playnite Desktop theme with broad extension support.
-Description: A personal fork of Dune maintained by hugsyf, with a low-glare Fluent Dim palette, responsive layouts, and extensive extension integration.
+ShortDescription: A dark, Fluent-inspired Desktop theme with adaptive layouts and native achievement support.
+Description: >-
+    Dune Rev brings a low-glare Fluent-inspired design to Playnite Desktop, with
+    responsive Details and Grid views, adaptive summary cards, and native Playnite
+    Achievements integration. Optional extensions add activity statistics,
+    HowLongToBeat estimates, system requirements, screenshots, Steam reviews and
+    news. ThemeModifier provides layout and display options.
 Tags: ["Theme", "Fluent", "Dark", "Desktop"]
 IconUrl: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Source/Images/applogo.png
 Links:

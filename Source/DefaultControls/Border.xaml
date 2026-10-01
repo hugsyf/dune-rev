@@ -23,6 +23,9 @@
         <Setter Property="Opacity" Value="0.06" />
         <Setter Property="BorderThickness" Value="0" />
         <Style.Triggers>
+            <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
+                <Setter Property="Opacity" Value="0.1" />
+            </DataTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6" />
             </Trigger>
@@ -47,9 +50,6 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ControlHoverBackgroundBrush}" />
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Panel.ZIndex" Value="10" />
                 <Setter Property="Effect">

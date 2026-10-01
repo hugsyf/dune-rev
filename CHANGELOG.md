@@ -17,6 +17,9 @@ All notable Dune Rev changes are documented here.
   menus and window chrome; make progress bars honor their foreground color.
 - Restore missing brush resources and remove an unused favorite-setting reference.
 - Restore dark text for the public TextBrushDark resource used on light plugin buttons.
+- Keep plugin-card focus feedback on the rounded surface instead of painting the
+  rectangular layout grid after an extension window closes.
+- Rewrite the add-on description around theme features.
 
 ## v2.0.0 - 2026-10-02
 
