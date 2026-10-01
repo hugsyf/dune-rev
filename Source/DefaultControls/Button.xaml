@@ -7,6 +7,8 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <!-- Plugin templates can bind Background even when Dune's template uses its own overlay. -->
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
@@ -56,6 +58,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonHoverBackgroundBrush}" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6" />
             </Trigger>

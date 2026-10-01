@@ -3,10 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!-- System Colors overrides for unthemed plugin dialogs -->
-    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#282D35" />
-    <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="#E7EAF0" />
-    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#282D35" />
-    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="#E7EAF0" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{DynamicResource WindowSurfaceColor}" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="{DynamicResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource WindowSurfaceColor}" />
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{DynamicResource PrimaryTextColor}" />
 
     <!--ThemeModifier Options-->
         <!--
@@ -46,6 +46,7 @@
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
+        <sys:Boolean x:Key="GridViewEnablePlayingGlowBorder">False</sys:Boolean>
         <Visibility x:Key="GridViewGameCoverShowCompletionStatus">Visible</Visibility>
         <Visibility x:Key="GridViewGameCoverShowPlayedTime">Visible</Visibility>
 
@@ -85,14 +86,15 @@
         <SolidColorBrush x:Key="DarkPopupBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 
         <!--
-        Legacy light/dark resource names are compatibility aliases for the same
-        palette. Internal templates use the ordinary, semantic resource names.
+        Legacy resource names remain available within the same palette.
+        TextBrushDark supplies dark ink for light surfaces used by extensions.
+        Internal templates use the ordinary, semantic resource names.
         -->
         <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource PrimaryTextColor}" />
         <SolidColorBrush x:Key="TextBrushLight" Color="{DynamicResource PrimaryTextColor}" />
         <SolidColorBrush x:Key="TextBrushDarker" Color="{DynamicResource SecondaryTextColor}" />
         <SolidColorBrush x:Key="TextBrushLighter" Color="{DynamicResource MutedTextColor}" />
-        <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource WindowSurfaceColor}" />
         <SolidColorBrush x:Key="NormalBrush" Color="{DynamicResource SurfaceBorderColor}" />
         <SolidColorBrush x:Key="NormalBrushDark" Color="{DynamicResource SurfaceBorderColor}" />
         <SolidColorBrush x:Key="NormalBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
@@ -158,7 +160,7 @@
     <Color x:Key="TextColor">#E7EAF0</Color>
     <Color x:Key="TextColorDarker">#B5BDC9</Color>
     <Color x:Key="TextColorLighter">#9EA8B7</Color>
-    <Color x:Key="TextColorDark">#E7EAF0</Color>
+    <Color x:Key="TextColorDark">#282D35</Color>
     <Color x:Key="MainColor">#505A69</Color>
     <Color x:Key="MainColorDark">#282D35</Color>
     <Color x:Key="HoverColor">#414957</Color>
@@ -195,6 +197,7 @@
     <SolidColorBrush x:Key="ControlHoverBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 
     <SolidColorBrush x:Key="ControlSelectedBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
+    <SolidColorBrush x:Key="ControlSelectedBorderBrush" Color="{DynamicResource AccentSelectedColor}" />
     <!--InputStyle Ends-->
 
     <SolidColorBrush x:Key="ControlFilledHoverBackgroundBrush" Color="{DynamicResource 24%White}" />
@@ -207,6 +210,7 @@
     <SolidColorBrush x:Key="ButtonIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
     <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />
     <SolidColorBrush x:Key="ButtonBrush" Color="{DynamicResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="ButtonIdleBrush" Color="{DynamicResource PrimaryTextColor}" />
 
     <SolidColorBrush x:Key="SecondaryButtonIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
     <SolidColorBrush x:Key="SecondaryButtonHoverBackgroundBrush" Color="{DynamicResource HoverSurfaceColor}" />

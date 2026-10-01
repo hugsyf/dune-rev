@@ -1397,6 +1397,7 @@
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <TextBlock Text="&#xF272;">
                                                     <TextBlock.Style>
@@ -1495,9 +1496,31 @@
                                                 <StackPanel Grid.Row="4" Grid.ColumnSpan="3">
                                                     <ProgressBar Height="4" VerticalAlignment="Bottom" Minimum="0" Maximum="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue=1}" Value="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue=0}" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource ControlBackgroundBrush}" IsHitTestVisible="False" Margin="0,12,0,0" />
                                                 </StackPanel>
+                                                <ContentControl x:Name="PlayniteAchievements_AchievementButton" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3"
+                                                                Panel.ZIndex="10" Opacity="0.01" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                                <Grid Grid.Row="5" Grid.ColumnSpan="3" Style="{StaticResource DuneLatestAchievement}"
+                                                      Tag="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasLatestAchievementData, FallbackValue=False}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="56" />
+                                                        <ColumnDefinition Width="12" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <ContentControl x:Name="PlayniteAchievements_AchievementCompactLatest" Width="56" Height="56"
+                                                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                                    <StackPanel Grid.Column="2" VerticalAlignment="Center"
+                                                                DataContext="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.LatestAchievementData}">
+                                                        <TextBlock Text="{DynamicResource LOCDuneLatestAchievement}" FontSize="12"
+                                                                   Foreground="{DynamicResource TextBrushDarker}" />
+                                                        <TextBlock Text="{Binding DisplayName, FallbackValue='', TargetNullValue=''}"
+                                                                   FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
+                                                                   TextWrapping="NoWrap" Margin="0,2,0,0" />
+                                                        <TextBlock Text="{Binding DateUnlocked, StringFormat={}{0:g}, FallbackValue='', TargetNullValue=''}"
+                                                                   FontSize="12" Foreground="{DynamicResource TextBrushDarker}" TextTrimming="CharacterEllipsis"
+                                                                   TextWrapping="NoWrap" Margin="0,2,0,0" />
+                                                    </StackPanel>
+                                                </Grid>
                                             </Grid>
                                             <TextBlock Text="&#xE76C;" Style="{DynamicResource IconFontStyle}" FontSize="12" Margin="0,12,12,0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushDarker}" />
-                                            <ContentControl x:Name="PlayniteAchievements_AchievementButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                         </Grid>
                                     </Grid>
                                     <!--Right Side-->

@@ -92,6 +92,11 @@ integration settings. ThemeModifier controls the panel's maximum height; PA's ow
 height and row-limit settings still apply. No automatic theme migration is needed.
 SuccessStory users should stay on Dune Rev 1.1.1.
 
+Starting with Dune Rev 2.1, PA 4.0 or newer also shows the latest unlocked
+achievement in the summary card, with its native icon, tooltip, title and unlock
+date. This row hides when no achievement has been unlocked or an older PA version
+is installed.
+
 ### Credits and license
 
 Dune Rev is based on **Dune** by
@@ -184,6 +189,9 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 集成设置中启用成就列表（AchievementDataGrid）。ThemeModifier 可调整面板最大高度；
 PA 自身的高度和行数限制仍然生效。无需自动迁移主题。继续使用 SuccessStory 的用户
 请保留 Dune Rev 1.1.1。
+
+从 Dune Rev 2.1 开始，PA 4.0 或更新版本还会在成就摘要卡中显示最近解锁成就，
+包括原生图标与提示、成就名称和解锁时间。没有解锁记录或使用旧版 PA 时，此行隐藏。
 
 ### 致谢与许可
 

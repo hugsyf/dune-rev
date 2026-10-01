@@ -222,7 +222,8 @@
 
     </Style>
 
-    <Style TargetType="{x:Type DatePickerTextBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style TargetType="{x:Type DatePickerTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Padding" Value="0" />
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

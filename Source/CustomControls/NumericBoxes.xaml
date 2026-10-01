@@ -20,28 +20,32 @@
 
     </ControlTemplate>
 
-    <Style TargetType="{x:Type LongNumericBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style x:Key="DuneNumericBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="{x:Type LongNumericBox}" BasedOn="{StaticResource DuneNumericBoxStyle}">
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{DynamicResource NumericBoxTemplate}" />
 
     </Style>
 
-    <Style TargetType="{x:Type UlongNumericBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style TargetType="{x:Type UlongNumericBox}" BasedOn="{StaticResource DuneNumericBoxStyle}">
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{DynamicResource NumericBoxTemplate}" />
 
     </Style>
 
-    <Style TargetType="{x:Type NullIntNumericBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style TargetType="{x:Type NullIntNumericBox}" BasedOn="{StaticResource DuneNumericBoxStyle}">
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{DynamicResource NumericBoxTemplate}" />
 
     </Style>
 
-    <Style TargetType="{x:Type DoubleNumericBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style TargetType="{x:Type DoubleNumericBox}" BasedOn="{StaticResource DuneNumericBoxStyle}">
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{DynamicResource NumericBoxTemplate}" />

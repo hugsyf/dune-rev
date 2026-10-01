@@ -7,6 +7,7 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource AccentBackgroundBrush}" />
         <Setter Property="Background" Value="{DynamicResource ControlTrackBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0"/>
@@ -28,7 +29,7 @@
                             <Rectangle Name="PART_Track" Margin="0" Fill="Transparent"/>
                             <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                                 <Grid>
-                                    <Rectangle x:Name="Slider" Fill="{DynamicResource AccentBackgroundBrush}"/>
+                                    <Rectangle x:Name="Slider" Fill="{TemplateBinding Foreground}"/>
                                     <Grid x:Name="Animation" Visibility="Hidden">
                                         <Rectangle x:Name="LeftCover" Margin="0,0,50,0" Opacity="1" Fill="{DynamicResource ControlBorderBrush}">
                                             <Rectangle.RenderTransform>

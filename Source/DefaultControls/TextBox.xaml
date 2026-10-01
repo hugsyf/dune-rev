@@ -7,6 +7,12 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource SelectionBrush}" />
+        <Setter Property="SelectionTextBrush" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="SelectionOpacity" Value="1" />
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
@@ -42,7 +48,7 @@
     </Style>
 
     <!--@TopPanel-->
-    <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource BaseStyle}">
+    <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
@@ -112,7 +118,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DetailViewTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
+    <Style x:Key="DetailViewTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />

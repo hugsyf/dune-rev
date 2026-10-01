@@ -2,6 +2,22 @@
 
 All notable Dune Rev changes are documented here.
 
+## v2.1.0 - Unreleased
+
+- Show the latest unlocked achievement in Details and Grid achievement cards
+  using PA 4.0's native compact control, alongside its title and unlock date.
+- Hide the latest-unlock row when no achievement is unlocked or when the
+  installed PA version does not expose the new binding.
+- Keep the native icon's tooltip and interaction accessible in Details View.
+- Give buttons an explicit themed background so GameActivity's session actions
+  and chart navigation do not fall back to pale system button colors.
+- Complete input, toggle, tooltip and context-menu color properties for plugin
+  templates, and share readable selection colors with date and numeric inputs.
+- Replace leftover placeholder colors in rich-text borders, table row headers,
+  menus and window chrome; make progress bars honor their foreground color.
+- Restore missing brush resources and remove an unused favorite-setting reference.
+- Restore dark text for the public TextBrushDark resource used on light plugin buttons.
+
 ## v2.0.0 - 2026-10-02
 
 - Require Playnite Desktop theme API 2.10.0 (Playnite 10.57 or newer).

@@ -36,7 +36,7 @@
                                 <Condition Property="ContentTemplate" Value="{x:Null}" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Background" Value="Transparent" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
