@@ -1,5 +1,15 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.0.0
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-02
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.0.0/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_0_0.pthm
+    Changelog:
+      - Requires Playnite 10.57 or newer (Desktop theme API 2.10.0).
+      - Replaces SuccessStory integration with native Playnite Achievements controls and ModernTheme statistics in Details and Grid views. SuccessStory users should retain version 1.1.1.
+      - Uses PA's achievement data grid with a configurable maximum height, preserving its scrolling, filtering, sorting and column settings. Automatic theme migration is no longer required.
+      - Fixes unreadable selected DataGrid rows and adds system color fallbacks.
+      - Adds the themed Load More button, wraps date/time and install-size fields, and prevents description focus from jumping the view.
   - Version: 1.1.1
     RequiredApiVersion: 2.9.0
     ReleaseDate: 2026-09-28
