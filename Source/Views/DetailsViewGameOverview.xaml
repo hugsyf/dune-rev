@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:pbeh="clr-namespace:Playnite.Behaviors;assembly=Playnite"
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type DetailsViewGameOverview}">
@@ -754,7 +755,7 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Grid.Style>
-                                                    <TextBlock Name="PART_TextPlayTime">
+                                                    <TextBlock Name="PART_TextPlayTime" TextWrapping="Wrap">
                                                         <TextBlock.Style>
                                                             <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
                                                                 <Setter Property="FontSize" Value="16" />
@@ -972,7 +973,7 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Grid.Style>
-                                                    <TextBlock Name="PART_TextLastActivity">
+                                                    <TextBlock Name="PART_TextLastActivity" TextWrapping="Wrap">
                                                         <TextBlock.Style>
                                                             <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
                                                                 <Setter Property="FontSize" Value="16" />
@@ -1350,7 +1351,7 @@
                                             <TextBlock Text="&#xE76C;" Style="{DynamicResource IconFontStyle}" FontSize="12" Margin="0,12,12,0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushDarker}" />
                                             <ContentControl x:Name="SystemChecker_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                         </Grid>
-                                        <Grid x:Name="DuneAchievementsCard" ToolTip="{DynamicResource LOCSuccessStoryAchievements}" AutomationProperties.Name="{DynamicResource LOCSuccessStoryAchievements}" Style="{DynamicResource DuneAchievementsLayout}" Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Grid x:Name="DuneAchievementsCard" ToolTip="{DynamicResource LOCDuneAchievements}" AutomationProperties.Name="{DynamicResource LOCDuneAchievements}" Style="{DynamicResource DuneAchievementsLayout}" Visibility="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                 <Border.Style>
                                                     <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
@@ -1424,9 +1425,9 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Grid.Style>
-                                                    <StackPanel Name="PART_SuccessStory">
+                                                    <StackPanel Name="PART_DuneAchievements">
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue='-'}">
+                                                            <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue='-'}">
                                                                 <TextBlock.Style>
                                                                     <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
                                                                         <Setter Property="FontSize" Value="16" />
@@ -1458,7 +1459,7 @@
                                                                     </Style>
                                                                 </TextBlock.Style>
                                                             </TextBlock>
-                                                            <TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue='-'}">
+                                                            <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue='-'}">
                                                                 <TextBlock.Style>
                                                                     <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
                                                                         <Setter Property="FontSize" Value="16" />
@@ -1489,14 +1490,14 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </StackPanel.Style>
-                                                    <Label Content="{DynamicResource LOCSuccessStoryAchievements}" />
+                                                    <Label Content="{DynamicResource LOCDuneAchievements}" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Row="4" Grid.ColumnSpan="3">
-                                                    <ProgressBar Height="4" VerticalAlignment="Bottom" Minimum="0" Maximum="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue=1}" Value="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue=0}" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource ControlBackgroundBrush}" IsHitTestVisible="False" Margin="0,12,0,0" />
+                                                    <ProgressBar Height="4" VerticalAlignment="Bottom" Minimum="0" Maximum="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue=1}" Value="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue=0}" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource ControlBackgroundBrush}" IsHitTestVisible="False" Margin="0,12,0,0" />
                                                 </StackPanel>
                                             </Grid>
                                             <TextBlock Text="&#xE76C;" Style="{DynamicResource IconFontStyle}" FontSize="12" Margin="0,12,12,0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushDarker}" />
-                                            <ContentControl x:Name="SuccessStory_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                            <ContentControl x:Name="PlayniteAchievements_AchievementButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                         </Grid>
                                     </Grid>
                                     <!--Right Side-->
@@ -1561,10 +1562,10 @@
                                                             <ItemsControl Name="PART_ItemsRegions" />
 
                                                             <Label Name="PART_ElemAdded" Content="{DynamicResource LOCDateAddedLabel}" />
-                                                            <TextBlock Name="PART_TextAdded" Margin="0,12,0,0" />
+                                                            <TextBlock Name="PART_TextAdded" Margin="0,12,0,0" TextWrapping="Wrap" />
 
                                                             <Label Name="PART_ElemRecentActivity" Content="{DynamicResource LOCRecentActivityLabel}" />
-                                                            <TextBlock Name="PART_TextRecentActivity" Margin="0,12,0,0" />
+                                                            <TextBlock Name="PART_TextRecentActivity" Margin="0,12,0,0" TextWrapping="Wrap" />
 
                                                             <Label Name="PART_ElemCategories" Content="{DynamicResource LOCGameCategoriesTitle}" />
                                                             <ItemsControl Name="PART_ItemsCategories" />
@@ -1588,7 +1589,7 @@
                                                         <Separator Background="{StaticResource PanelSeparatorBrush}" Height="1" Margin="0,16,0,16" />
                                                         <TextBlock Text="{DynamicResource LOCGameInstallDirTitle}" FontWeight="Bold" />
                                                         <Button Name="PART_ButtonInstallDirectory" VerticalAlignment="Center" Margin="0,8,0,4" />
-                                                        <TextBlock Name="PART_TextInstallSize" FontSize="{StaticResource FontSizeSmall}" Foreground="{DynamicResource TextBrushDarker}"/>
+                                                        <TextBlock Name="PART_TextInstallSize" FontSize="{StaticResource FontSizeSmall}" Foreground="{DynamicResource TextBrushDarker}" TextWrapping="Wrap"/>
                                                     </StackPanel>
                                                     <!--Features-->
                                                     <StackPanel Name="PART_ElemFeatures">
@@ -1692,7 +1693,7 @@
                                                                 <HtmlTextView Name="PART_HtmlDescription" Margin="0,0,0,0" HorizontalAlignment="Stretch"
                                                                         HtmlFontSize="{DynamicResource FontSize}" HtmlFontFamily="{DynamicResource FontFamily}"
                                                                         LinkForeground="{DynamicResource AccentSelectedColor}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                                                        ScrollViewer.VerticalScrollBarVisibility="Disabled" pbeh:FocusBahaviors.BlockBringIntoViewRequest="True">
                                                                     <HtmlTextView.Style>
                                                                         <Style TargetType="HtmlTextView">
                                                                             <Setter Property="HtmlForeground" Value="{DynamicResource PrimaryTextColor}" />
@@ -1730,22 +1731,9 @@
                                                 </TabItem>
                                                 <!--Tab Notes Ends-->
 
-                                                <TabItem Header="{DynamicResource LOCSuccessStoryAchievements}" Visibility="{PluginSettings Plugin=SuccessStory, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                <TabItem Header="{DynamicResource LOCDuneAchievements}" Visibility="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                   <Border Style="{DynamicResource DunePluginPanel}">
-                                                    <StackPanel>
-                                                      <ContentControl x:Name="SuccessStory_PluginCompactUnlocked" Style="{DynamicResource DunePluginContent}" />
-                                                      <ContentControl x:Name="SuccessStory_PluginCompactLocked" Style="{DynamicResource DunePluginContent}" />
-                                                      <ContentControl x:Name="SuccessStory_PluginUserStats" Style="{DynamicResource DunePluginContent}" />
-                                                      <ContentControl x:Name="SuccessStory_PluginList" MinHeight="{DynamicResource SuccessStoryPanelMinHeight}" Style="{DynamicResource DunePluginContent}" >
-                                                        <ContentControl.Resources>
-                                                          <Style TargetType="ListBox" BasedOn="{StaticResource DuneAchievementList}" />
-                                                          <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                                            <Setter Property="Padding" Value="4" />
-                                                          </Style>
-                                                        </ContentControl.Resources>
-                                                      </ContentControl>
-                                                      <ContentControl x:Name="SuccessStory_PluginChart" Style="{DynamicResource DunePluginContent}" />
-                                                    </StackPanel>
+                                                    <ContentControl x:Name="PlayniteAchievements_AchievementDataGrid" MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}" VerticalContentAlignment="Stretch" Style="{DynamicResource DunePluginContent}" />
                                                   </Border>
                                                 </TabItem>
 

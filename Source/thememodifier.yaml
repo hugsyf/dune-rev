@@ -26,7 +26,7 @@ Constants:
 
     - "Extension panels / 扩展面板"
     - FeatureIconsHeight(16,40): 'Library Management feature icon height / Library Management 功能图标高度'
-    - SuccessStoryPanelMinHeight(200,800): 'Achievements panel minimum height / 成就面板最小高度'
+    - DuneAchievementsPanelMaxHeight(300,900): 'Achievements panel maximum height / 成就面板最大高度'
     - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
 
     - "Grid cover display / 网格封面显示"

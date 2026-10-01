@@ -2,6 +2,22 @@
 
 All notable Dune Rev changes are documented here.
 
+## v2.0.0 - 2026-10-02
+
+- Require Playnite Desktop theme API 2.10.0 (Playnite 10.57 or newer).
+- Add the themed Load More button style, wrap date/time and install-size fields,
+  and prevent description focus requests from jumping the surrounding view.
+- Fix unreadable selected DataGrid rows and add system color fallbacks for
+  controls that use system window and control brushes.
+- Replace SuccessStory integration with native Playnite Achievements controls and
+  ModernTheme statistics in both Details and Grid views (PA 3.2.1 API).
+- Use PA's achievement data grid with a bounded, configurable maximum height.
+  Preserve its own scrolling, filtering, sorting and column settings.
+- Remove legacy achievement list templates, toolbar overrides and redundant
+  compact lists/charts. Automatic theme migration is no longer required.
+- Keep achievement cards and tabs hidden when PA has no data or is unavailable.
+- SuccessStory support remains available in Dune Rev 1.1.1.
+
 ## v1.1.1 - 2026-09-28
 
 - Keep legacy achievement lists in one vertical column, avoiding clipped

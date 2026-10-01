@@ -30,6 +30,9 @@ layout flexibility, readability, and interaction feedback.
 
 ### Installation
 
+Version 2.0 requires Playnite 10.57 or newer and replaces SuccessStory integration
+with native Playnite Achievements support. SuccessStory users can keep version 1.1.1.
+
 1. Download the latest `.pthm` file from the
    [Releases page](https://github.com/hugsyf/dune-rev/releases).
 2. Open the downloaded file and let Playnite install the theme.
@@ -66,7 +69,7 @@ You can also install it via this [link](https://playnite.link/addons.html#DuneRe
 
 | Feature | Extension |
 | --- | --- |
-| Achievements | SuccessStory and Playnite Achievements automatic migration |
+| Achievements | Playnite Achievements (native controls; developed against 3.2.1) |
 | Alternative backgrounds | BackgroundChanger |
 | Duplicate copies | DuplicateHider |
 | Feature icons | Library Management |
@@ -82,6 +85,12 @@ You can also install it via this [link](https://playnite.link/addons.html#DuneRe
 
 Extensions are optional. Their cards and tabs are hidden when an extension is
 unavailable or has no data for the selected game.
+
+Native achievements use PA's desktop-theme data grid and its own scrolling, sorting,
+filtering and column settings. Enable the achievement data grid in PA's theme
+integration settings. ThemeModifier controls the panel's maximum height; PA's own
+height and row-limit settings still apply. No automatic theme migration is needed.
+SuccessStory users should stay on Dune Rev 1.1.1.
 
 ### Credits and license
 
@@ -122,6 +131,9 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 
 ### 安装
 
+2.0 版本要求 Playnite 10.57 或更新版本，并以原生 Playnite Achievements 集成
+替代 SuccessStory 集成。SuccessStory 用户可保留 1.1.1 版本。
+
 1. 从 [Releases 页面](https://github.com/hugsyf/dune-rev/releases)下载最新版
    `.pthm` 文件。
 2. 打开下载的文件，让 Playnite 安装主题。
@@ -151,7 +163,7 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 
 | 功能 | 扩展 |
 | --- | --- |
-| 成就 | SuccessStory，以及 Playnite Achievements 的自动主题迁移 |
+| 成就 | Playnite Achievements（原生控件，以 3.2.1 为开发基准） |
 | 替代背景 | BackgroundChanger |
 | 重复副本 | DuplicateHider |
 | 功能图标 | Library Management |
@@ -167,6 +179,11 @@ Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容�
 
 所有扩展均为可选依赖。扩展未安装，或当前游戏没有相应数据时，对应卡片和标签页
 会自动隐藏。
+
+成就页使用 PA 原生桌面主题列表，保留其滚动、排序、筛选和列设置。请在 PA 的主题
+集成设置中启用成就列表（AchievementDataGrid）。ThemeModifier 可调整面板最大高度；
+PA 自身的高度和行数限制仍然生效。无需自动迁移主题。继续使用 SuccessStory 的用户
+请保留 Dune Rev 1.1.1。
 
 ### 致谢与许可
 

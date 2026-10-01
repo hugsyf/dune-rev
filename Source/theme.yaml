@@ -1,8 +1,8 @@
-ThemeApiVersion: 2.9.0
+ThemeApiVersion: 2.10.0
 Id: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Name: Dune Rev
 Author: hugsyf
-Version: 1.1.1
+Version: 2.0.0
 Links:
 - Name: GitHub
   Url: https://github.com/hugsyf/dune-rev

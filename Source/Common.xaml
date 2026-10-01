@@ -18,6 +18,7 @@
     </Style>
 
     <!-- English fallback; Playnite loads localized overrides from Localization/. -->
+    <sys:String x:Key="LOCDuneAchievements">Achievements</sys:String>
     <sys:String x:Key="LOCDuneSystemRequirements">System requirements</sys:String>
     <sys:String x:Key="LOCDuneRequirementsReady">View requirements</sys:String>
     <sys:String x:Key="LOCDuneMainStory">Main story &#x00B7; HowLongToBeat</sys:String>
