@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.1.1 - 2026-10-03
+
+### Fixed
+
+- Keep Grid View covers and selection feedback visible when ThemeModifier
+  makes control backgrounds transparent or translucent. Rounded clipping now
+  uses independent opaque visuals and preserves the configured image margins.
+- Animate indeterminate progress directly instead of covering it with theme
+  surface colors, so transparent backgrounds cannot expose a fully filled bar.
+
 ## v2.1.0 - 2026-10-02
 
 ### Added

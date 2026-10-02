@@ -6,6 +6,8 @@
                     xmlns:popt="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                     mc:Ignorable="d">
 
+    <!-- The visible cover background may be transparent. Keep it separate from
+         the opaque visuals used for clipping covers and selection feedback. -->
     <Style TargetType="Border" x:Key="VisualBrushBorderMask">
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
@@ -81,7 +83,13 @@
                                                 <DataTrigger Binding="{Binding ElementName=Mask, Path=Tag}" Value="True">
                                                     <Setter Property="OpacityMask">
                                                         <Setter.Value>
-                                                            <VisualBrush Visual="{Binding ElementName=Mask}" />
+                                                            <VisualBrush>
+                                                                <VisualBrush.Visual>
+                                                                    <Border Background="White" CornerRadius="{DynamicResource ControlCornerRadiusLarge}"
+                                                                            Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemWidth}"
+                                                                            Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemHeight}" />
+                                                                </VisualBrush.Visual>
+                                                            </VisualBrush>
                                                         </Setter.Value>
                                                     </Setter>
                                                 </DataTrigger>
@@ -145,7 +153,13 @@
                                                     <DataTrigger Binding="{Binding ElementName=Mask, Path=Tag}" Value="True">
                                                         <Setter Property="OpacityMask">
                                                             <Setter.Value>
-                                                                <VisualBrush Visual="{Binding ElementName=Mask}" />
+                                                                <VisualBrush>
+                                                                    <VisualBrush.Visual>
+                                                                        <Border Background="White" CornerRadius="{DynamicResource ControlCornerRadiusLarge}"
+                                                                                Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemWidth}"
+                                                                                Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemHeight}" />
+                                                                    </VisualBrush.Visual>
+                                                                </VisualBrush>
                                                             </Setter.Value>
                                                         </Setter>
                                                     </DataTrigger>

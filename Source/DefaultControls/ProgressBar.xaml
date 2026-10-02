@@ -30,17 +30,18 @@
                             <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                                 <Grid>
                                     <Rectangle x:Name="Slider" Fill="{TemplateBinding Foreground}"/>
-                                    <Grid x:Name="Animation" Visibility="Hidden">
-                                        <Rectangle x:Name="LeftCover" Margin="0,0,50,0" Opacity="1" Fill="{DynamicResource ControlBorderBrush}">
-                                            <Rectangle.RenderTransform>
-                                                <ScaleTransform x:Name="HiderPreTransform" ScaleX="0"/>
-                                            </Rectangle.RenderTransform>
-                                        </Rectangle>
-                                        <Rectangle x:Name="RightCover" RenderTransformOrigin="1, 0" Margin="50,0,0,0" Opacity="1" Fill="{DynamicResource ControlBackgroundBrush}">
-                                            <Rectangle.RenderTransform>
-                                                <ScaleTransform x:Name="HiderPostTransform" ScaleX="1" />
-                                            </Rectangle.RenderTransform>
-                                        </Rectangle>
+                                    <!-- Animate the indicator itself so transparent surface brushes
+                                         cannot expose a stationary, fully filled progress bar. -->
+                                    <Grid x:Name="Animation" Visibility="Hidden" ClipToBounds="True">
+                                        <Viewbox Stretch="Fill">
+                                            <Grid Width="100" Height="1">
+                                                <Rectangle Width="30" HorizontalAlignment="Left" Fill="{TemplateBinding Foreground}">
+                                                    <Rectangle.RenderTransform>
+                                                        <TranslateTransform x:Name="IndicatorTranslation" X="-30" />
+                                                    </Rectangle.RenderTransform>
+                                                </Rectangle>
+                                            </Grid>
+                                        </Viewbox>
                                     </Grid>
                                 </Grid>
                             </Decorator>
@@ -49,16 +50,18 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsIndeterminate" Value="True">
                             <Setter TargetName="Animation" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Slider" Property="Visibility" Value="Hidden" />
                             <Trigger.EnterActions>
-                                <BeginStoryboard>
+                                <BeginStoryboard Name="BeginIndicatorAnimation">
                                     <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimation Storyboard.TargetName="HiderPreTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                                         To="1" Duration="0:00:2" AutoReverse="True"/>
-                                        <DoubleAnimation Storyboard.TargetName="HiderPostTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                                         To="0" Duration="0:00:2" AutoReverse="True"/>
+                                        <DoubleAnimation Storyboard.TargetName="IndicatorTranslation" Storyboard.TargetProperty="(TranslateTransform.X)"
+                                                         From="-30" To="100" Duration="0:00:2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="BeginIndicatorAnimation" />
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
