@@ -85,10 +85,26 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
-                    <ComboBox MinWidth="115" MaxWidth="180" Margin="-8,0,0,0" FontSize="{TemplateBinding FontSize}" ItemsSource="{Binding CompletionStatusOptions}" SelectedItem="{Binding Value}" Height="28">
+                    <ComboBox MinWidth="115" MaxWidth="180" Margin="-8,0,0,0" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" ItemsSource="{Binding CompletionStatusOptions}" SelectedItem="{Binding Value}" Height="28">
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type CompletionStatus}">
-                                <TextBlock Text="{Binding Name}" FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=ComboBox}}" FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=ComboBox}}" FontWeight="Normal" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                                <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource FontFamily}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="FontWeight" Value="Normal" />
+                                            <Style.Triggers>
+                                                <!-- The closed selector uses ContentSite; popup items keep menu typography. -->
+                                                <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="ContentSite">
+                                                    <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=ComboBox}}" />
+                                                    <Setter Property="FontWeight" Value="{Binding FontWeight, RelativeSource={RelativeSource AncestorType=ComboBox}}" />
+                                                    <Setter Property="LineHeight" Value="28" />
+                                                    <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>

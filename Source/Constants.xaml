@@ -27,6 +27,17 @@
         <sys:Double x:Key="DuneGridLogoMaxWidth">240</sys:Double>
         <sys:Double x:Key="DuneGridLogoMaxHeight">72</sys:Double>
         <sys:Double x:Key="GameActionButtonWidth">320</sys:Double>
+        <sys:Boolean x:Key="DuneShowHowLongToBeatCard">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowActivityCard">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowRequirementsCard">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowAchievementsCard">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneSummaryDetailed">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowLatestAchievement">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowLanguagesSummary">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowLanguagesTab">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowDlcTab">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowDlcSummary">True</sys:Boolean>
+        <sys:Double x:Key="DuneDlcPanelHeight">360</sys:Double>
         <!-- Legacy card-size keys retained for saved overrides; modular summaries use fixed proportions. -->
         <sys:Double x:Key="DetailsSummaryCardWidth">240</sys:Double>
         <sys:Double x:Key="DetailsSummaryCardHeight">136</sys:Double>

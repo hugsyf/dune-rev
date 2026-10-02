@@ -3,95 +3,121 @@
 param([switch]$Check)
 $ErrorActionPreference = 'Stop'
 $path = Join-Path $PSScriptRoot '..\Source\DefaultControls\Border.xaml'
-$keys = @('PlayTime','HowLongToBeat','LastPlayed','Completion','Activity','Requirements','Achievements')
-$optional = @('HowLongToBeat','Activity','Requirements','Achievements')
+$keys = @('PlayTime','LastPlayed','Completion','Requirements','HowLongToBeat','Activity','Achievements','Catalog')
+$optional = @('HowLongToBeat','Activity','Requirements','Achievements','Languages','Dlc')
+$sourceKeys = @('HowLongToBeat','Activity')
 $states = @{}
 foreach ($key in $keys) { $states[$key] = [Collections.Generic.List[string]]::new() }
-function Placement($row, $column, $span, $rowSpan = 1, $height = 96, $expanded = $false) {
-    return @{ 'Grid.Row'=$row; 'Grid.Column'=$column; 'Grid.ColumnSpan'=$span; 'Grid.RowSpan'=$rowSpan; 'MinHeight'=$height; 'Tag'=$(if ($expanded) { 'Expanded' } else { 'Compact' }) }
+$sourceStates = @{}
+foreach ($key in $sourceKeys) { $sourceStates[$key] = [Collections.Generic.List[string]]::new() }
+function Placement($row, $column, $span) {
+    return @{ 'Grid.Row'=$row; 'Grid.Column'=$column; 'Grid.ColumnSpan'=$span }
 }
-for ($mask = 0; $mask -lt 16; $mask++) {
+for ($mask = 0; $mask -lt 64; $mask++) {
     $present = @{}
-    $flags = for ($bit = 0; $bit -lt 4; $bit++) {
+    $flags = for ($bit = 0; $bit -lt 6; $bit++) {
         $present[$optional[$bit]] = ($mask -band (1 -shl $bit)) -ne 0
         if ($present[$optional[$bit]]) { 'Visible' } else { 'Collapsed' }
     }
     foreach ($mode in 'Regular','Wide') {
         $positions = @{}
-        if ($mask -eq 0) {
-            # A single compact baseline strip, rather than three tall empty tiles.
-            $positions.PlayTime = Placement 0 0 20
-            $positions.LastPlayed = Placement 0 20 20
-            $positions.Completion = Placement 0 40 20
-        } elseif ($mode -eq 'Regular') {
-            $items = @($keys | Where-Object { $_ -ne 'Achievements' -and (-not $present.ContainsKey($_) -or $present[$_]) })
-            for ($index = 0; $index -lt $items.Count; $index++) {
-                $span = if ($index -eq $items.Count - 1 -and $index % 2 -eq 0) { 60 } else { 30 }
-                $positions[$items[$index]] = Placement ([int][Math]::Floor($index / 2)) (($index % 2) * 30) $span
+        # Keep simple values together; each Auto row grows only to its own content.
+        $simple = @('PlayTime','LastPlayed','Completion')
+        if ($present.Requirements) { $simple += 'Requirements' }
+        $nextRow = 1
+        if ($mode -eq 'Regular' -and $simple.Count -eq 4) {
+            for ($index = 0; $index -lt $simple.Count; $index++) {
+                $positions[$simple[$index]] = Placement ([int][Math]::Floor($index / 2)) (($index % 2) * 30) 30
             }
-            if ($present.Achievements) { $positions.Achievements = Placement ([int][Math]::Ceiling($items.Count / 2)) 0 60 1 112 }
+            $nextRow = 2
         } else {
-            $small = @('LastPlayed','Completion')
-            if ($present.Activity) { $small += 'Activity' }
-            if ($present.Requirements) { $small += 'Requirements' }
-            $achievementUnits = if ($mask -eq 15) { 2 } else { 1 }
-            $units = 1 + [int]$present.HowLongToBeat + [int][Math]::Ceiling($small.Count / 2) + ([int]$present.Achievements * $achievementUnits)
-            $track = 60 / $units
-            $column = 0
-            $positions.PlayTime = Placement 0 $column $track 2 204 $true
-            $column += $track
-            if ($present.HowLongToBeat) {
-                $positions.HowLongToBeat = Placement 0 $column $track 2 204 $true
-                $column += $track
+            $track = 60 / $simple.Count
+            for ($index = 0; $index -lt $simple.Count; $index++) {
+                $positions[$simple[$index]] = Placement 0 ($index * $track) $track
             }
-            for ($index = 0; $index -lt $small.Count; $index += 2) {
-                if ($index + 1 -lt $small.Count) {
-                    $positions[$small[$index]] = Placement 0 $column $track
-                    $positions[$small[$index + 1]] = Placement 1 $column $track
+        }
+        $items = @('HowLongToBeat','Activity' | Where-Object { $present[$_] })
+        if ($mode -eq 'Wide' -and $present.Achievements) { $items += 'Achievements' }
+        if ($mode -eq 'Wide') { $items += @('Languages','Dlc' | Where-Object { $present[$_] }) }
+        if ($items.Count) {
+            $track = 60 / $items.Count
+            for ($index = 0; $index -lt $items.Count; $index++) {
+                if ($items[$index] -in @('Languages','Dlc')) {
+                    if (-not $positions.ContainsKey('Catalog')) {
+                        $catalogCount = [int]$present.Languages + [int]$present.Dlc
+                        $positions.Catalog = Placement $nextRow ($index * $track) ($catalogCount * $track)
+                    }
                 } else {
-                    $positions[$small[$index]] = Placement 0 $column $track 2 204
+                    $positions[$items[$index]] = Placement $nextRow ($index * $track) $track
                 }
-                $column += $track
             }
-            if ($present.Achievements) { $positions.Achievements = Placement 0 $column ($track * $achievementUnits) 2 204 $true }
+            $nextRow++
+        }
+        if ($mode -eq 'Regular') {
+            if ($present.Achievements) { $positions.Achievements = Placement $nextRow 0 60; $nextRow++ }
+            if ($present.Languages -or $present.Dlc) { $positions.Catalog = Placement $nextRow 0 60 }
         }
         $state = $mode + '|' + ($flags -join '|')
         foreach ($key in $keys) {
             if (-not $positions.ContainsKey($key)) { continue }
             $lines = [Collections.Generic.List[string]]::new()
             $lines.Add('            <DataTrigger Binding="{Binding Tag, ElementName=DuneSummary}" Value="' + $state + '">')
-            $defaults = Placement ([Array]::IndexOf($keys,$key)) 0 60 1 $(if ($key -eq 'Achievements') { 112 } else { 96 })
-            foreach ($property in @('Grid.Row','Grid.Column','Grid.ColumnSpan','Grid.RowSpan','MinHeight','Tag')) {
+            $defaults = Placement ([Array]::IndexOf($keys,$key)) 0 60
+            foreach ($property in @('Grid.Row','Grid.Column','Grid.ColumnSpan')) {
                 if ($positions[$key][$property] -eq $defaults[$property]) { continue }
                 $lines.Add('                <Setter Property="' + $property + '" Value="' + $positions[$key][$property] + '" />')
             }
             $lines.Add('            </DataTrigger>')
             $states[$key].Add(($lines -join "`n"))
         }
+        foreach ($key in $sourceKeys) {
+            # Derive source visibility from placement, not a separate width assumption.
+            if (-not $positions.ContainsKey($key) -or -not $positions.ContainsKey('Achievements')) { continue }
+            if ($positions[$key]['Grid.Row'] -ne $positions.Achievements['Grid.Row']) { continue }
+            $sourceStates[$key].Add(@"
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, ElementName=DuneSummary}" Value="$state" />
+                    <Condition Binding="{Binding Visibility, ElementName=DuneLatestAchievementRow}" Value="Visible" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+"@)
+        }
     }
 }
 $styles = foreach ($key in $keys) {
     $basedOn = if ($optional -contains $key) { ' BasedOn="{StaticResource ClickableDetailCard}"' } else { '' }
+    $margin = if ($key -eq 'Catalog') { '0' } else { '0,0,12,12' }
+    $minHeight = if ($key -eq 'Catalog') { '0' } else { '96' }
     $index = [Array]::IndexOf($keys, $key)
-    $height = if ($key -eq 'Achievements') { 112 } else { 96 }
     @"
     <Style x:Key="Dune${key}Layout" TargetType="Grid"$basedOn>
-        <Setter Property="Margin" Value="0,0,12,12" />
-        <Setter Property="MinHeight" Value="$height" />
+        <Setter Property="Margin" Value="$margin" />
+        <Setter Property="MinHeight" Value="$minHeight" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="$index" />
         <Setter Property="Grid.Column" Value="0" />
         <Setter Property="Grid.ColumnSpan" Value="60" />
         <Setter Property="Grid.RowSpan" Value="1" />
-        <Setter Property="Tag" Value="Compact" />
         <Style.Triggers>
 $($states[$key] -join "`n")
         </Style.Triggers>
     </Style>
 "@
 }
+$styles += foreach ($key in $sourceKeys) {
+    @"
+    <Style x:Key="Dune${key}SourceLayout" TargetType="Grid" BasedOn="{StaticResource DuneSummarySourceFooter}">
+        <Style.Triggers>
+$($sourceStates[$key] -join "`n")
+        </Style.Triggers>
+    </Style>
+"@
+}
 $start = '    <!-- BEGIN GENERATED SUMMARY LAYOUTS -->'
 $end = '    <!-- END GENERATED SUMMARY LAYOUTS -->'
-$generated = $start + "`n    <!-- Regenerate with tools/Update-SummaryLayoutStyles.ps1. 60 tracks divide exactly into 2, 3, 4, 5 and 6 columns. -->`n" + ($styles -join "`n") + "`n" + $end
+$generated = $start + "`n    <!-- Regenerate with tools/Update-SummaryLayoutStyles.ps1. Equal-height cards use content-sized Auto rows and 60 responsive tracks. -->`n" + ($styles -join "`n") + "`n" + $end
 $generated = $generated.Replace("`r`n", "`n")
 $text = [IO.File]::ReadAllText($path).Replace("`r`n", "`n")
 if ($text.Contains($start)) {

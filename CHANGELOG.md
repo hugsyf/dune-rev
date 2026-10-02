@@ -1,151 +1,81 @@
 # Changelog
 
-All notable Dune Rev changes are documented here.
+## v2.1.0 - 2026-10-02
 
-## v2.1.0 - Unreleased
+### Added
 
-- Show the latest unlocked achievement in Details and Grid achievement cards
-  using PA 4.0's native compact control, alongside its title and unlock date.
-- Hide the latest-unlock row when no achievement is unlocked or when the
-  installed PA version does not expose the new binding.
-- Keep the native icon's tooltip and interaction accessible in Details View.
-- Give buttons an explicit themed background so GameActivity's session actions
-  and chart navigation do not fall back to pale system button colors.
-- Complete input, toggle, tooltip and context-menu color properties for plugin
-  templates, and share readable selection colors with date and numeric inputs.
-- Replace leftover placeholder colors in rich-text borders, table row headers,
-  menus and window chrome; make progress bars honor their foreground color.
-- Restore missing brush resources and remove an unused favorite-setting reference.
-- Restore dark text for the public TextBrushDark resource used on light plugin buttons.
-- Keep plugin-card focus feedback on the rounded surface instead of painting the
-  rectangular layout grid after an extension window closes.
-- Rewrite the add-on description around theme features.
+- Show the latest unlocked achievement, including its icon, name and date,
+  with Playnite Achievements 4.0 or newer.
+- Add CheckLocalizations language summaries and language lists, and CheckDlc
+  summaries with all/owned/not-owned DLC lists.
+- Expand Grid View summaries for HowLongToBeat, GameActivity and SystemChecker.
+  Show additional completion estimates, recent activity and configuration results.
+- Add ThemeModifier switches for individual summaries, detailed information,
+  latest achievements and language/DLC tabs, plus a DLC list height setting.
+
+### Changed
+
+- Combine summary cards into one adaptive layout, with two rows on wide panes,
+  content-sized heights, aligned values and consistent spacing.
+- Make plugin entry points clearer with icons, hover feedback and source labels.
+- Use installed plugin icons with Fluent fallbacks, and Fluent icons for system
+  requirements and DLC.
+- Unify tab headings and completion-status typography, and improve dark colors
+  throughout plugin controls and dialogs.
+- Refresh screenshots and simplify the setup documentation.
+
+### Fixed
+
+- Correct Grid View hero actions and media placement; remove unused bottom space
+  when videos are unavailable.
+- Fix the language tab's default button appearance and achievement progress display.
+- Keep focus feedback within rounded cards after closing an extension window.
+- Fix theme loading and startup failures during plugin integration.
 
 ## v2.0.0 - 2026-10-02
 
-- Require Playnite Desktop theme API 2.10.0 (Playnite 10.57 or newer).
-- Add the themed Load More button style, wrap date/time and install-size fields,
-  and prevent description focus requests from jumping the surrounding view.
-- Fix unreadable selected DataGrid rows and add system color fallbacks for
-  controls that use system window and control brushes.
-- Replace SuccessStory integration with native Playnite Achievements controls and
-  ModernTheme statistics in both Details and Grid views (PA 3.2.1 API).
-- Use PA's achievement data grid with a bounded, configurable maximum height.
-  Preserve its own scrolling, filtering, sorting and column settings.
-- Remove legacy achievement list templates, toolbar overrides and redundant
-  compact lists/charts. Automatic theme migration is no longer required.
-- Keep achievement cards and tabs hidden when PA has no data or is unavailable.
-- SuccessStory support remains available in Dune Rev 1.1.1.
+- Require Playnite 10.57 or newer.
+- Replace SuccessStory integration with native Playnite Achievements summaries
+  and lists in both Details and Grid views. SuccessStory users can keep 1.1.1.
+- Preserve achievement filtering, sorting and scrolling, with a configurable list height.
+- Improve the Load More button and wrapping of date, time and install-size fields.
+- Fix unreadable selected table rows and extension dialogs.
+- Prevent description focus from unexpectedly scrolling the surrounding view.
 
 ## v1.1.1 - 2026-09-28
 
-- Keep legacy achievement lists in one vertical column, avoiding clipped
-  neighboring columns and sideways focus jumps after PA theme migration.
-- Keep overflowing scrollbars visible with a 12 px drag area and separate
-  content space; use a real horizontal track instead of rotating a vertical one.
-- Reduce padding on legacy achievement-list buttons to fit their 40 px toolbar
-  columns, without changing the SS/PA migration path.
-- Give embedded plugin tabs consistent surfaces, padding and normal-weight text
-  without replacing the plugins' own templates. Remove empty space from absent
-  or plugin-hidden content and avoid overriding Review Viewer's UserControl style.
+- Improve achievement-list layout and horizontal/vertical scrolling.
+- Make extension panels more consistent and hide empty or disabled content.
 - Add summary-card tooltips and keyboard focus feedback.
-- Remove unused tab transforms and consolidate development checks into a small
-  XAML/resource check; retain the adaptive card layout generator.
 
 ## v1.1.0 - 2026-09-24
 
 ### Changed
 
-- Match summary card corners to the links and details containers. Refresh native
-  checkboxes, combo boxes and filter/multi-select controls with accent selection,
-  compact chevrons, focus underlines and consistent popup surfaces.
-- Share the standard combo template with ExplorerComboBox; remove legacy yellow,
-  red and brown selector surfaces while retaining host template parts.
-- Place compact edit and favorite icons beside the play action in both views,
-  with localized tooltips and keyboard focus feedback.
-- Keep Grid View media on a 16:9 canvas and overlay actions and media controls
-  inside its rounded hero frame. Keep the full Details View hero.
-- Place Grid View metadata before content tabs in narrow panes and alongside
-  them in wide panes. Match completion status typography to normal dropdowns.
-- Arrange statistics in proportional columns or compact rows according to pane
-  width and available plugin data. Repack individual cards instead of reserving
-  fixed pairs, and use the full row width without a trailing empty strip.
-- Combine basic information into one compact surface when statistics plugins
-  have no data. Place sparse summaries beside metadata; preserve zero counts.
-- Keep completion controls compact, standardize typography, and show achievement
-  progress in a card that changes size with the available space.
-- Use Segoe UI typography, readable secondary text, persistent selection
-  indicators, and localized system-requirements labels.
-- Update ThemeModifier controls for the action row and per-view logos; retain
-  old card-size constants as compatibility keys without exposing obsolete options.
+- Refresh dropdowns, filters and selectors with Fluent styling and readable colors.
+- Place compact edit and favorite buttons beside the play action.
+- Improve Grid View hero media and responsive placement of metadata and content tabs.
+- Adapt summary cards to the available width and plugin data, with achievement progress.
+- Improve typography, selection indicators and localized system-requirements labels.
+- Organize ThemeModifier settings and remove unused images and obsolete layout options.
 
 ### Fixed
 
-- Keep hero action placement stable when video controls are absent in either
-  view. Protect primary-action text from narrow saved row widths and align edit
-  and favorite glyph sizing with lighter primary-button typography.
-- Use Extra Metadata Loader's view-aware player in Grid View to avoid the
-  configured player's Details-only context. Hide media controls when the local
-  player has no video or the image thumbnail is selected.
-- Remove the rectangular translucent backing behind the Grid View hero footer.
-- Defer cross-dictionary keyboard-focus resource lookup so Playnite can preflight
-  the grid and details item styles before loading the custom common resources.
-- Isolate the clear-filter button style from extensions that also define
-  `SecondaryButton`, preventing their style from replacing its dark template.
-- Keep favorite and clear-filter buttons readable on the Fluent Dim palette,
-  including hover, focus, pressed, and disabled states.
-- Update the favorite label and accent icon when a game is already a favorite.
-- Restore the top-panel filter icon's foreground and show its active-filter dot
-  only while filters are applied.
+- Stabilize hero actions in narrow panes and when videos are unavailable.
+- Fix Grid View video playback and unwanted background behind hero controls.
+- Fix theme loading, favorite and filter-button colors, and active-filter feedback.
 
-### Maintenance
+## v1.0.1 - 2026-09-05
 
-- Remove obsolete palette triggers, commented-out layouts, two broken unused
-  background resources, and 10.21 MiB of unreferenced theme images.
-- Preserve Playnite's standard dictionaries and extension compatibility resources.
-- Add an offscreen WPF regression check for the affected controls.
+- Fix theme color behavior.
 
-## 1.0.1 — 2026-09-05
+## v1.0.0 - 2026-07-31
 
-### Fixed
+First independent Dune Rev release, based on Dune by sakasakiking.
 
-- Broken Color Logic
-
-## 1.0.0 — 2026-07-31
-
-First independent release of Dune Rev, based on Dune by sakasakiking.
-
-### Added
-
-- Extension integration for BackgroundChanger, DuplicateHider, GameActivity,
-  HowLongToBeat, Library Management, Review Viewer, Steam News and Players
-  Viewer, SystemChecker, ThemeExtras, and ThemeModifier.
-- Adaptive achievement, activity, HLTB, and system-requirement cards.
-- Clickable-card hover feedback and extension-specific Details View tabs.
-- ThemeModifier controls for the actual Grid View details-pane width, card and
-  logo sizing, extension panel heights, action buttons, and top-panel height.
-- Bilingual English and Simplified Chinese labels for theme-specific options.
-
-### Changed
-
-- Reworked the theme around a single low-glare Fluent Dim palette.
-- Moved feature icons into the right side of the links bar.
-- Improved metadata alignment, filters, controls, and embedded extension colors.
-- Separated Details View and Grid View sizing so each layout can be tuned
-  independently, with consistent ThemeModifier names grouped by view.
-- Changed Grid View details content to a narrow-pane layout with wrapping
-  summary cards and the information panel below them.
-- Updated the project identity, manifests, and theme API for Playnite 10.56.
-- Replaced the upstream screenshots with current Dune Rev captures and added a
-  complete English/简体中文 README for the independently maintained fork.
-
-### Fixed
-
-- Grid View crashes caused by incompatible layout resources.
-- Extra Metadata Loader logo selection and display.
-- Unreadable achievement and review text on dark surfaces.
-- Clipped activity labels and filter controls.
-- Missing Details View cards caused by the information column consuming the
-  entire overview width, and compressed cards in Grid View details panes.
-- Details View hero videos failing to resume after switching from Grid View,
-  caused by shared playback state and cached player hosts across both views.
+- Introduce a Fluent Dim palette and adaptive Details and Grid layouts.
+- Integrate optional extensions for achievements, activity, completion estimates,
+  backgrounds, reviews, news and system requirements.
+- Add ThemeModifier customization and English/Simplified Chinese labels.
+- Improve metadata, controls, extension colors and card interactions.
+- Fix Grid View loading, missing or clipped content, game logos and video playback.

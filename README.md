@@ -6,202 +6,140 @@
 
 [English](#english) · [简体中文](#简体中文)
 
-## English
+## Screenshots / 截图
 
-Dune Rev is a personal fork of [Dune](https://github.com/sakasakiking/Dune). It preserves Dune's clean,
-spacious, Fluent-inspired design while improving extension compatibility,
-layout flexibility, readability, and interaction feedback.
-
-### Highlights
-
-- Responsive Details and Grid views with game logos, screenshots, and videos.
-- Adaptive summary cards for achievements, activity, play time, HLTB, and
-  system requirements.
-- Fluent hover feedback for cards that open extension views.
-- Extension-aware backgrounds, duplicate selectors, favorites, completion
-  status, feature icons, reviews, news, and player counts.
-- Consistent colors for extension settings and embedded controls.
-- ThemeModifier options for layout sizing and presentation preferences.
-
-### Screenshots
+**Details View / 详情视图**
 
 ![Dune Rev Details View](Screenshots/Details%20View.png)
+
+**Grid Details View / 网格详情视图**
+
 ![Dune Rev Grid Details View](Screenshots/Grid%20Details%20View.png)
+
+## English
+
+Dune Rev is a dark, Fluent-inspired Desktop theme for Playnite, based on
+[Dune](https://github.com/sakasakiking/Dune) by sakasakiking.
+
+### Features
+
+- Responsive Details and Grid views with game logos, screenshots and videos.
+- Adaptive cards for play time, achievements, activity, completion estimates,
+  system requirements, language support and DLC.
+- Clear plugin entry points and consistent dark controls.
+- Customizable layout and display options through ThemeModifier.
 
 ### Installation
 
-Version 2.0 requires Playnite 10.57 or newer and replaces SuccessStory integration
-with native Playnite Achievements support. SuccessStory users can keep version 1.1.1.
+Requires **Playnite 10.57 or newer**. Extensions are optional; install the ones
+you want to use. Achievement integration uses **Playnite Achievements**; its latest
+unlock display requires version **4.0 or newer**. SuccessStory users can use Dune Rev 1.1.1.
 
-1. Download the latest `.pthm` file from the
-   [Releases page](https://github.com/hugsyf/dune-rev/releases).
-2. Open the downloaded file and let Playnite install the theme.
-3. In Playnite, select **Dune Rev** under Desktop theme settings.
+1. Download the latest `.pthm` from [Releases](https://github.com/hugsyf/dune-rev/releases)
+   and open it to install.
+2. Select **Dune Rev** in Playnite's Desktop theme settings.
 
-You can also install it via this [link](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40), it is also available from Playnite's built-in add-on browser.
+You can also install through Playnite's add-on browser or the
+[add-on page](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40).
 
-### Recommended setup
+### Supported extensions
 
-- Install the **Segoe Fluent Icons** font if it is unavailable on the system.
-  Microsoft provides it with the
-  [Windows design resources](https://learn.microsoft.com/windows/apps/design/downloads/#fonts).
-- Details View keeps its large hero and a 1760 px maximum content width.
-  Statistics share proportional columns on wide screens and compact rows in
-  narrow panes. Missing plugin cards are repacked, and achievements include a
-  progress bar. With no statistics plugins, basic information forms one compact
-  strip; with at most one, the summary sits beside the metadata column.
-  Description and metadata use proportional columns, with metadata capped
-  at 480 px.
-- Grid View uses a 640 px details pane by default. Media keeps a 16:9 canvas
-  without cropping; actions and media controls overlay the hero's lower edge.
-  Narrow heroes retain a 320 px minimum frame height for readable controls.
-  Metadata precedes the content tabs in narrow panes and sits beside them when
-  the content area reaches 900 px.
-- Edit and favorite icons sit beside Play, with localized tooltips and keyboard
-  focus indicators. The action row defaults to 320 px and shrinks to fit the pane.
-- Content, pane, card, logo, extension-panel, action-button, and top-bar sizes
-  can be adjusted through ThemeModifier. Options are grouped by view and use
-  consistent bilingual English and Simplified Chinese labels.
-- Restart Playnite after installing or updating extensions that inject theme
-  controls.
-
-### Extension compatibility
-
-| Feature | Extension |
+| Extension | Integration |
 | --- | --- |
-| Achievements | Playnite Achievements (native controls; developed against 3.2.1) |
-| Alternative backgrounds | BackgroundChanger |
-| Duplicate copies | DuplicateHider |
-| Feature icons | Library Management |
-| Favorites and completion controls | ThemeExtras |
-| Activity and statistics | GameActivity |
-| Completion estimates | HowLongToBeat |
-| Logos and videos | Extra Metadata Loader |
-| Screenshots | ScreenshotsVisualizer |
-| Steam news and players online | Steam News and Players Viewer |
-| Steam reviews | Review Viewer |
-| System requirements | SystemChecker |
-| Theme customization | ThemeModifier |
+| Playnite Achievements | Achievement progress, latest unlock and achievement list |
+| HowLongToBeat | Completion estimates and progress |
+| GameActivity | Last session, recent activity and activity chart |
+| SystemChecker | System requirements status and details |
+| CheckLocalizations | Preferred-language summary and interface/audio/subtitle list |
+| CheckDlc | DLC counts, ownership and all/owned/not-owned lists |
+| Extra Metadata Loader | Game logos and videos |
+| BackgroundChanger | Alternative backgrounds |
+| DuplicateHider | Duplicate-copy selector |
+| Library Management | Feature icons |
+| ThemeExtras | Favorites and editable completion status |
+| ScreenshotsVisualizer | Screenshots |
+| Steam News and Players Viewer | News and players online |
+| Review Viewer | Steam reviews |
+| ThemeModifier | Layout and display customization |
 
-Extensions are optional. Their cards and tabs are hidden when an extension is
-unavailable or has no data for the selected game.
+### Setup tips
 
-Native achievements use PA's desktop-theme data grid and its own scrolling, sorting,
-filtering and column settings. Enable the achievement data grid in PA's theme
-integration settings. ThemeModifier controls the panel's maximum height; PA's own
-height and row-limit settings still apply. No automatic theme migration is needed.
-SuccessStory users should stay on Dune Rev 1.1.1.
+- Enable the desired theme integrations in each extension's settings.
+- Use **ThemeModifier → Summary and extension content** to choose which cards,
+  details and tabs to display. Cards automatically rearrange to fit the window.
+- Set preferred languages in **CheckLocalizations** for the language summary.
+- If icons are missing, install **Segoe Fluent Icons** from
+  [Microsoft's font downloads](https://learn.microsoft.com/windows/apps/design/downloads/#fonts).
+- Restart Playnite after installing or updating extensions.
 
-Starting with Dune Rev 2.1, PA 4.0 or newer also shows the latest unlocked
-achievement in the summary card, with its native icon, tooltip, title and unlock
-date. This row hides when no achievement has been unlocked or an older PA version
-is installed.
+### Credits and support
 
-### Credits and license
+Based on [Dune](https://github.com/sakasakiking/Dune), with inspiration from Mythic.
+Distributed under the [MIT License](LICENSE).
 
-Dune Rev is based on **Dune** by
-[sakasakiking](https://github.com/sakasakiking). The extension integration
-approach also takes inspiration from Playnite themes such as Mythic.
-
-Distributed under the [MIT License](LICENSE). The original copyright notice is
-retained as required by the license.
-
-### Support
-
-Please report Dune Rev problems through the
-[issue tracker](https://github.com/hugsyf/dune-rev/issues). For an issue that is
-also reproducible in unmodified Dune, consult the
-[upstream project](https://github.com/sakasakiking/Dune).
+See the [changelog](CHANGELOG.md) for release notes, and report theme issues through
+[GitHub Issues](https://github.com/hugsyf/dune-rev/issues).
 
 ---
 
 ## 简体中文
 
-Dune Rev 是 [Dune](https://github.com/sakasakiking/Dune) 的个人分支。它保留了 Dune 简洁、宽松的
-Fluent 风格设计，同时改善了扩展兼容性、布局灵活性、内容可读性与交互反馈。
+Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 sakasakiking 的
+[Dune](https://github.com/sakasakiking/Dune) 开发。
 
 ### 主要特性
 
-- 响应式详情视图与网格视图，支持游戏 Logo、截图和视频。
-- 可自适应排列的概览卡片，可显示成就、活动记录、游玩时间、HLTB 和系统需求。
-- 可打开扩展页面的卡片带有 Fluent 风格的悬停反馈。
-- 支持替代背景、重复副本选择、收藏与完成状态、功能图标、评论、新闻和在线人数。
-- 改善扩展设置页面与嵌入式控件的配色一致性。
-- 通过 ThemeModifier 调整布局尺寸与显示偏好。
-
-### 截图
-
-![Dune Rev 详情视图](Screenshots/Details%20View.png)
-![Dune Rev 网格详情视图](Screenshots/Grid%20Details%20View.png)
+- 响应式详情与网格视图，支持游戏 Logo、截图和视频。
+- 自适应卡片展示游玩时间、成就、活动、通关估时、系统需求、语言支持与 DLC。
+- 清晰的插件入口和统一的深色控件。
+- 通过 ThemeModifier 自定义布局与显示内容。
 
 ### 安装
 
-2.0 版本要求 Playnite 10.57 或更新版本，并以原生 Playnite Achievements 集成
-替代 SuccessStory 集成。SuccessStory 用户可保留 1.1.1 版本。
+需要 **Playnite 10.57 或更新版本**。扩展均为可选，可按需安装。成就集成使用
+**Playnite Achievements**，最近解锁展示需要 **4.0 或更新版本**。
+使用 SuccessStory 的用户可选择 Dune Rev 1.1.1。
 
-1. 从 [Releases 页面](https://github.com/hugsyf/dune-rev/releases)下载最新版
-   `.pthm` 文件。
-2. 打开下载的文件，让 Playnite 安装主题。
-3. 在 Playnite 的桌面主题设置中选择 **Dune Rev**。
+1. 从 [Releases](https://github.com/hugsyf/dune-rev/releases) 下载最新 `.pthm` 文件，打开安装。
+2. 在 Playnite 的桌面主题设置中选择 **Dune Rev**。
 
-也可直接点击该[链接](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40)，或通过 Playnite 内置的附加组件浏览器安装。
+也可以通过 Playnite 内置附加组件浏览器或
+[附加组件页面](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40) 安装。
 
-### 推荐设置
+### 支持的扩展
 
-- 如果系统中没有 **Segoe Fluent Icons** 字体，请先安装。Microsoft 在
-  [Windows 设计资源页面](https://learn.microsoft.com/windows/apps/design/downloads/#fonts)
-  提供该字体。
-- 详情视图保留大头图，总览最大宽度为 1760 px。宽屏统计按比例分配列宽，窄栏
-  改为紧凑排列，缺失的插件卡片不占位；成就卡显示进度条。无统计插件时，基础
-  信息合并为一条摘要；至多一个统计插件有数据时，摘要与右侧信息栏并排。
-  介绍与游戏信息按比例分栏，信息栏最大宽度为 480 px。
-- 网格视图默认使用 640 px 宽的详情栏。原生图片以 16:9 画布完整显示，操作区和
-  媒体控件位于头图内部下方；窄栏头图框最小高度为 320 px，为控件保留空间。
-  详情信息在窄栏中位于内容标签页之前，内容区域达到 900 px 时与标签页并排。
-- 编辑与收藏改为游玩按钮旁的图标按钮，支持本地化提示与键盘焦点。操作区默认
-  宽度为 320 px，窄侧栏下会自动收缩。
-- 内容区域、详情栏、Logo、扩展面板、操作按钮和顶部栏等尺寸均可通过
-  ThemeModifier 调整。选项按视图分类，并使用统一的英中双语名称。
-- 安装或更新会向主题注入控件的扩展后，建议重启 Playnite。
-
-### 扩展兼容性
-
-| 功能 | 扩展 |
+| 扩展 | 集成内容 |
 | --- | --- |
-| 成就 | Playnite Achievements（原生控件，以 3.2.1 为开发基准） |
-| 替代背景 | BackgroundChanger |
-| 重复副本 | DuplicateHider |
-| 功能图标 | Library Management |
-| 收藏与完成状态控制 | ThemeExtras |
-| 活动记录与统计 | GameActivity |
-| 通关时间估算 | HowLongToBeat |
-| Logo 与视频 | Extra Metadata Loader |
-| 截图 | ScreenshotsVisualizer |
-| Steam 新闻与在线人数 | Steam News and Players Viewer |
-| Steam 评论 | Review Viewer |
-| 系统需求 | SystemChecker |
-| 主题自定义 | ThemeModifier |
+| Playnite Achievements | 成就进度、最近解锁与成就列表 |
+| HowLongToBeat | 通关估时与进度 |
+| GameActivity | 上次游玩、近期活动与活动图表 |
+| SystemChecker | 系统配置状态与详情 |
+| CheckLocalizations | 首选语言摘要与界面／语音／字幕列表 |
+| CheckDlc | DLC 数量、拥有情况与全部／已拥有／未拥有列表 |
+| Extra Metadata Loader | 游戏 Logo 与视频 |
+| BackgroundChanger | 替代背景 |
+| DuplicateHider | 重复副本选择 |
+| Library Management | 功能图标 |
+| ThemeExtras | 收藏与可编辑的完成状态 |
+| ScreenshotsVisualizer | 截图 |
+| Steam News and Players Viewer | 新闻与在线人数 |
+| Review Viewer | Steam 评论 |
+| ThemeModifier | 布局与显示设置 |
 
-所有扩展均为可选依赖。扩展未安装，或当前游戏没有相应数据时，对应卡片和标签页
-会自动隐藏。
+### 使用提示
 
-成就页使用 PA 原生桌面主题列表，保留其滚动、排序、筛选和列设置。请在 PA 的主题
-集成设置中启用成就列表（AchievementDataGrid）。ThemeModifier 可调整面板最大高度；
-PA 自身的高度和行数限制仍然生效。无需自动迁移主题。继续使用 SuccessStory 的用户
-请保留 Dune Rev 1.1.1。
+- 在各扩展设置中启用所需的主题集成。
+- 在 **ThemeModifier → 摘要与扩展内容** 中选择显示的卡片、详细信息与页签。
+  卡片会随窗口宽度自动重排。
+- 语言摘要的首选语言在 **CheckLocalizations** 中设置。
+- 如果图标缺失，可从 [Microsoft 字体下载页面](https://learn.microsoft.com/windows/apps/design/downloads/#fonts)
+  安装 **Segoe Fluent Icons**。
+- 安装或更新扩展后，建议重启 Playnite。
 
-从 Dune Rev 2.1 开始，PA 4.0 或更新版本还会在成就摘要卡中显示最近解锁成就，
-包括原生图标与提示、成就名称和解锁时间。没有解锁记录或使用旧版 PA 时，此行隐藏。
+### 致谢与反馈
 
-### 致谢与许可
+基于 [Dune](https://github.com/sakasakiking/Dune)，部分设计参考 Mythic。
+项目采用 [MIT 许可](LICENSE)。
 
-Dune Rev 基于 [sakasakiking](https://github.com/sakasakiking) 制作的
-**Dune**。扩展集成方式也参考了 Mythic 等 Playnite 主题。
-
-本项目采用 [MIT License](LICENSE) 发布，并依照许可证要求保留原始版权声明。
-
-### 问题反馈
-
-Dune Rev 的问题请提交至 [Issue Tracker](https://github.com/hugsyf/dune-rev/issues)。
-如果问题在未经修改的 Dune 中也能复现，请同时参考
-[上游项目](https://github.com/sakasakiking/Dune)。
+版本更新见 [changelog](CHANGELOG.md)，主题问题可通过
+[GitHub Issues](https://github.com/hugsyf/dune-rev/issues) 反馈。

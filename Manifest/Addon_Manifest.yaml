@@ -9,8 +9,9 @@ Description: >-
     Dune Rev brings a low-glare Fluent-inspired design to Playnite Desktop, with
     responsive Details and Grid views, adaptive summary cards, and native Playnite
     Achievements integration. Optional extensions add activity statistics,
-    HowLongToBeat estimates, system requirements, screenshots, Steam reviews and
-    news. ThemeModifier provides layout and display options.
+    HowLongToBeat estimates, system requirements, language support, DLC,
+    screenshots, Steam reviews and news. ThemeModifier provides layout and
+    display options.
 Tags: ["Theme", "Fluent", "Dark", "Desktop"]
 IconUrl: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Source/Images/applogo.png
 Links:
@@ -18,7 +19,7 @@ Links:
     Issues Tracker: https://github.com/hugsyf/dune-rev/issues
     Original Dune: https://github.com/sakasakiking/Dune
 Screenshots:
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Thumb_Details_View.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Details%20View.png
       Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Details%20View.png
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Thumb_Grid_Details_View.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png
       Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png

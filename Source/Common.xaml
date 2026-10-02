@@ -22,16 +22,44 @@
     <sys:String x:Key="LOCDuneLatestAchievement">Latest unlock</sys:String>
     <sys:String x:Key="LOCDuneSystemRequirements">System requirements</sys:String>
     <sys:String x:Key="LOCDuneRequirementsReady">View requirements</sys:String>
-    <sys:String x:Key="LOCDuneMainStory">Main story &#x00B7; HowLongToBeat</sys:String>
+    <sys:String x:Key="LOCDuneMainStory">Main story estimate &#x00B7; HowLongToBeat</sys:String>
+
+    <sys:String x:Key="LOCDuneMainStoryLabel">Main story estimate</sys:String>
+    <sys:String x:Key="LOCDuneMainExtra">Main + extras</sys:String>
+    <sys:String x:Key="LOCDuneCompletionist">Completionist</sys:String>
+    <sys:String x:Key="LOCDuneLastSession">Last session</sys:String>
+    <sys:String x:Key="LOCDuneMinimumMet">Minimum met</sys:String>
+    <sys:String x:Key="LOCDuneRecommendedMet">Recommended met</sys:String>
+    <sys:String x:Key="LOCDuneLanguages">Languages</sys:String>
+    <sys:String x:Key="LOCDuneDlc">DLC</sys:String>
+    <sys:String x:Key="LOCDuneLanguageDetails">View language support</sys:String>
+    <sys:String x:Key="LOCDunePreferredLanguageListed">Preferred language listed</sys:String>
+    <sys:String x:Key="LOCDunePreferredLanguageMissing">Preferred language not listed</sys:String>
+    <sys:String x:Key="LOCDunePreferredLanguageHint">Matches the preferred languages configured in CheckLocalizations. Interface, audio and subtitles are listed separately in Languages.</sys:String>
+    <sys:String x:Key="LOCDuneLanguagesRecorded">languages recorded</sys:String>
+    <sys:String x:Key="LOCDuneDlcCatalogHint">Catalog and ownership are reported by CheckDlc, including manual ownership and ignored entries.</sys:String>
+    <sys:String x:Key="LOCDuneDlcCatalog">DLC catalog</sys:String>
+    <sys:String x:Key="LOCDuneDlcItems">DLC entries</sys:String>
+    <sys:String x:Key="LOCDuneDlcAll">All</sys:String>
+    <sys:String x:Key="LOCDuneDlcOwned">Owned</sys:String>
+    <sys:String x:Key="LOCDuneDlcNotOwned">Not owned</sys:String>
+    <sys:String x:Key="LOCDuneLanguageListHint">Interface, audio and subtitle support are reported separately. Scroll horizontally for all columns.</sys:String>
+    <sys:String x:Key="LOCDuneEmptyDlcCategory">No DLC in this category.</sys:String>
+    <sys:String x:Key="LOCDuneSource">Source:</sys:String>
 
     <Style x:Key="DuneLatestAchievement" TargetType="Grid">
         <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="Margin" Value="0,12,0,0" />
         <Setter Property="MinHeight" Value="56" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Tag, ElementName=DuneShowLatestAchievementPreference}" Value="True" />
+                    <Condition Binding="{Binding Tag, ElementName=DuneSummaryDetailedPreference}" Value="True" />
+                </MultiDataTrigger.Conditions>
                 <Setter Property="Visibility" Value="Visible" />
-            </DataTrigger>
+            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 
@@ -107,5 +135,198 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
         <Setter Property="Padding" Value="16,16,16,0" />
         <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style x:Key="DuneCatalogOpener" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Opacity" Value="0.01" />
+        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Tag holds a local plugin icon path; Content supplies the Fluent fallback. -->
+    <Style x:Key="DuneLocalPluginIcon" TargetType="ContentControl">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Image x:Name="PluginImage" Source="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"
+                               Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
+                        <TextBlock x:Name="FallbackGlyph" Text="{TemplateBinding Content}" Visibility="Collapsed"
+                                   Style="{StaticResource IconFontStyle}" FontSize="16" FontWeight="Normal"
+                                   Foreground="{DynamicResource TextBrushDarker}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="PluginImage" Property="Source" Value="{x:Null}">
+                            <Setter TargetName="PluginImage" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="FallbackGlyph" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DuneSummaryProviderGlyph" TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+
+    <!-- Heading and primary rows share fixed origins across every card size. -->
+    <Style x:Key="DuneSummaryPrimaryText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="28" />
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+    </Style>
+    <Style x:Key="DuneSummaryCompletionButton" TargetType="Button" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock Style="{StaticResource DuneSummaryPrimaryText}"
+                               Text="{TemplateBinding Content, Converter={StaticResource ObjectToStringConverter}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Opacity" Value="0.6" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Secondary information shares one density rule in both views. -->
+    <Style x:Key="DuneSummarySecondaryText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="16" />
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+        <Setter Property="Margin" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Text" Value=""><Setter Property="Visibility" Value="Collapsed" /></Trigger>
+            <Trigger Property="Text" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneWideSummaryDetails" TargetType="StackPanel">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, ElementName=DuneSummaryDetailedPreference}" Value="True" />
+                    <Condition Binding="{Binding ActualWidth, ElementName=DuneSummaryDetailBreakpoint}" Value="900" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Visibility, ElementName=DuneMainExtraDetail}" Value="Collapsed" />
+                    <Condition Binding="{Binding Visibility, ElementName=DuneCompletionistDetail}" Value="Collapsed" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Collapsed" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneActivitySummaryDetails" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,12,0,0" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Visibility, ElementName=DuneLastSessionDate}" Value="Collapsed" />
+                    <Condition Binding="{Binding Visibility, ElementName=DuneRecentActivity}" Value="Collapsed" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Collapsed" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DunePositiveSummaryValue" TargetType="Grid">
+        <Setter Property="Visibility" Value="Visible" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="0">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneRecentActivityText" TargetType="TextBlock" BasedOn="{StaticResource DuneSummarySecondaryText}">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, ElementName=DuneSummaryDetailedPreference}" Value="True" />
+                    <Condition Binding="{Binding ActualWidth, ElementName=DuneSummaryDetailBreakpoint}" Value="900" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+            <Trigger Property="Text" Value=""><Setter Property="Visibility" Value="Collapsed" /></Trigger>
+            <Trigger Property="Text" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneSummaryProgress" TargetType="ProgressBar" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="PART_Track" ClipToBounds="True">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="2" />
+                        <Border x:Name="PART_Indicator" HorizontalAlignment="Left"
+                                Background="{TemplateBinding Foreground}" CornerRadius="2" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- One semantic state drives the requirements icon and label together. -->
+    <Style x:Key="DuneRequirementsStatusIcon" TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Text" Value="&#xE721;" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Ready">
+                <Setter Property="Text" Value="&#xE946;" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Minimum">
+                <Setter Property="Text" Value="&#xE73E;" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Recommended">
+                <Setter Property="Text" Value="&#xE930;" />
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneRequirementsStatusText" TargetType="TextBlock" BasedOn="{StaticResource DuneSummaryPrimaryText}">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Text" Value="{DynamicResource LOCOpen}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Ready">
+                <Setter Property="Text" Value="{DynamicResource LOCDuneRequirementsReady}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Minimum">
+                <Setter Property="Text" Value="{DynamicResource LOCDuneMinimumMet}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Grid}}" Value="Recommended">
+                <Setter Property="Text" Value="{DynamicResource LOCDuneRecommendedMet}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

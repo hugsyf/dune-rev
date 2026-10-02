@@ -11,6 +11,9 @@ foreach($file in Get-ChildItem $source -Recurse -File -Filter '*.xaml') {
 }
 $app=[Windows.Application]::new()
 try {
+    # Playnite preflights each dictionary before merging the theme resources.
+    # Border must resolve its own custom BasedOn styles without themed Common.xaml.
+    [void][Windows.Markup.XamlReader]::Parse([IO.File]::ReadAllText((Join-Path $source 'DefaultControls/Border.xaml')))
     foreach($relative in @('Constants.xaml','Common.xaml','DefaultControls/Border.xaml','DefaultControls/TabControl.xaml','DefaultControls/ScrollViewer.xaml','DefaultControls/ListBox.xaml')) {
         $dictionary=[Windows.Markup.XamlReader]::Parse([IO.File]::ReadAllText((Join-Path $source $relative)))
         $app.Resources.MergedDictionaries.Add($dictionary)
@@ -46,5 +49,5 @@ try {
     }
     $scroll.ScrollToVerticalOffset(200); $scroll.ScrollToHorizontalOffset(100); $scroll.UpdateLayout()
     if($scroll.VerticalOffset -le 0 -or $scroll.HorizontalOffset -le 0 -or $scroll.ViewportWidth -gt 308 -or $scroll.ViewportHeight -gt 188) { throw 'Scrolling or reserved scrollbar space failed.' }
-    Write-Output 'PASS: XAML, shared resources, plugin visibility, scrolling.'
+    Write-Output 'PASS: XAML, isolated dictionary preflight, shared resources, plugin visibility, scrolling.'
 } finally { $app.Shutdown() }

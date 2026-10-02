@@ -233,13 +233,22 @@
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="Auto" />
                                                                 <RowDefinition Height="Auto" />
-                                                                <RowDefinition Height="Auto" MinHeight="57" />
+                                                                <RowDefinition Height="Auto" />
                                                             </Grid.RowDefinitions>
-                                                            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+                                                            <Border x:Name="DuneHeroFooterBreakpoint" Width="900" Height="0" MaxWidth="{Binding ActualWidth, ElementName=DuneGridHeroFooter}" HorizontalAlignment="Left" IsHitTestVisible="False" Grid.ColumnSpan="2" />
+<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
   <StackPanel.Style>
     <Style TargetType="StackPanel">
       <Setter Property="Visibility" Value="Collapsed" />
-      <Style.Triggers>
+      <Setter Property="Grid.Row" Value="2" />
+      <Setter Property="Grid.ColumnSpan" Value="2" />
+<Setter Property="Margin" Value="0,12,0,0" />
+<Setter Property="VerticalAlignment" Value="Bottom" />
+      <Style.Triggers><DataTrigger Binding="{Binding ActualWidth, ElementName=DuneHeroFooterBreakpoint}" Value="900">
+    <Setter Property="Grid.Row" Value="0" /><Setter Property="Grid.RowSpan" Value="2" />
+    <Setter Property="Grid.Column" Value="1" /><Setter Property="Grid.ColumnSpan" Value="1" />
+    <Setter Property="Margin" Value="16,0,0,0" />
+</DataTrigger>
         <MultiDataTrigger>
           <MultiDataTrigger.Conditions>
             <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=EnableVideoPlayer, FallbackValue=False}" Value="True" />
@@ -359,7 +368,12 @@
   </Grid>
 </StackPanel>
                                                             <!--GameInfo-->
-                                                            <WrapPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" Grid.ColumnSpan="2" Grid.Row="1">
+                                                            <WrapPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" Grid.Row="1"><WrapPanel.Style><Style TargetType="WrapPanel">
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+        <Style.Triggers><DataTrigger Binding="{Binding ActualWidth, ElementName=DuneHeroFooterBreakpoint}" Value="900">
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+        </DataTrigger></Style.Triggers>
+    </Style></WrapPanel.Style>
                                                                 <Button Name="PART_ButtonReleaseDate" Margin="0,0,4,0" Padding="0,0,0,0" BorderThickness="0" Background="{x:Null}" Style="{DynamicResource PropertyItemSmallButton}" />
                                                                 <StackPanel Name="PART_ElemPlatform" Orientation="Horizontal">
                                                                     <StackPanel.Style>
@@ -421,7 +435,12 @@
                                                                 </StackPanel>
                                                             </WrapPanel>
                                                             <!-- Primary command followed by compact edit and favorite actions. -->
-                                                            <Grid x:Name="DuneGameActions" Grid.ColumnSpan="2" HorizontalAlignment="Left" MinWidth="252" Width="{DynamicResource GameActionButtonWidth}" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}">
+                                                            <Grid x:Name="DuneGameActions" HorizontalAlignment="Left" MinWidth="252" Width="{DynamicResource GameActionButtonWidth}" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"><Grid.Style><Style TargetType="Grid">
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+        <Style.Triggers><DataTrigger Binding="{Binding ActualWidth, ElementName=DuneHeroFooterBreakpoint}" Value="900">
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+        </DataTrigger></Style.Triggers>
+    </Style></Grid.Style>
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="*" />
                                                                     <ColumnDefinition Width="Auto" />
@@ -615,16 +634,18 @@
                                                     <!--Left Side-->
                                                     <StackPanel Grid.Column="0" Grid.Row="2" Margin="0" Grid.ColumnSpan="2">
                                                         <StackPanel Margin="0">
-                                                            <Grid x:Name="DuneSummary" Margin="0,0,-12,12">
+                                                            <Grid x:Name="DuneSummary" Margin="0,0,-12,0">
                                                                 <Grid.Resources>
                                                                     <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
                                                                         <Setter Property="Padding" Value="0" />
+                                                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                                        <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
                                                                         <Setter Property="Margin" Value="0" />
-                                                                        <Setter Property="VerticalContentAlignment" Value="Top" />
+
                                                                         <Setter Property="ContentTemplate">
                                                                             <Setter.Value>
                                                                                 <DataTemplate>
-                                                                                    <TextBlock Text="{Binding}" FontSize="12" FontWeight="Normal" Foreground="{DynamicResource TextBrushDarker}" TextWrapping="Wrap" Margin="0" />
+                                                                                    <TextBlock Text="{Binding}" FontSize="12" FontWeight="Normal" Foreground="{DynamicResource TextBrushDarker}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Margin="0" />
                                                                                 </DataTemplate>
                                                                             </Setter.Value>
                                                                         </Setter>
@@ -710,15 +731,33 @@
                                                                     <RowDefinition Height="Auto" />
                                                                     <RowDefinition Height="Auto" />
                                                                     <RowDefinition Height="Auto" />
-                                                                </Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                                                <!-- Resolve installed icons through Playnite; missing files use the Fluent fallback. -->
+<TextBlock x:Name="DuneHowLongToBeatIconPath" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" IsHitTestVisible="False"
+    Text="{Api Paths.ConfigurationPath, StringFormat='{}{0}/Extensions/playnite-howlongtobeat-plugin/icon.png', FallbackValue=''}" />
+<TextBlock x:Name="DuneActivityIconPath" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" IsHitTestVisible="False"
+    Text="{Api Paths.ConfigurationPath, StringFormat='{}{0}/Extensions/playnite-gameactivity-plugin/icon.png', FallbackValue=''}" />
+<TextBlock x:Name="DuneAchievementsIconPath" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" IsHitTestVisible="False"
+    Text="{Api Paths.ConfigurationPath, StringFormat='{}{0}/Extensions/PlayniteAchievements/icon.png', FallbackValue=''}" />
+<TextBlock x:Name="DuneLanguagesIconPath" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" IsHitTestVisible="False"
+    Text="{Api Paths.ConfigurationPath, StringFormat='{}{0}/Extensions/playnite-checklocalizations-plugin/icon.png', FallbackValue=''}" />
+<Border x:Name="DuneShowHowLongToBeatCardPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneShowHowLongToBeatCard}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneShowActivityCardPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneShowActivityCard}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneShowRequirementsCardPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneShowRequirementsCard}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneShowAchievementsCardPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneShowAchievementsCard}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneSummaryDetailedPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneSummaryDetailed}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneShowLatestAchievementPreference" Height="0" Visibility="Collapsed" Grid.ColumnSpan="60" Tag="{DynamicResource DuneShowLatestAchievement}" IsHitTestVisible="False" />
+                                                                <Border x:Name="DuneSummaryDetailBreakpoint" Height="0" Width="{Binding ActualWidth, ElementName=DuneSummary}" MaxWidth="900" Grid.ColumnSpan="60" IsHitTestVisible="False" />
                                                                 <TextBlock x:Name="DuneSummaryState" Height="0" Visibility="Hidden" Grid.ColumnSpan="60" IsHitTestVisible="False">
                                                                     <TextBlock.Text>
-                                                                        <MultiBinding StringFormat="{}{0}|{1}|{2}|{3}|{4}">
+                                                                        <MultiBinding StringFormat="{}{0}|{1}|{2}|{3}|{4}|{5}|{6}">
                                                                             <Binding ElementName="DuneLayoutMode" Path="Tag" />
                                                                             <Binding ElementName="DuneHowLongToBeatCard" Path="Visibility" FallbackValue="Collapsed" />
                                                                             <Binding ElementName="DuneActivityCard" Path="Visibility" FallbackValue="Collapsed" />
                                                                             <Binding ElementName="DuneRequirementsCard" Path="Visibility" FallbackValue="Collapsed" />
                                                                             <Binding ElementName="DuneAchievementsCard" Path="Visibility" FallbackValue="Collapsed" />
+<Binding ElementName="DuneLanguagesSummary" Path="Visibility" FallbackValue="Collapsed" />
+<Binding ElementName="DuneDlcSummary" Path="Visibility" FallbackValue="Collapsed" />
                                                                         </MultiBinding>
                                                                     </TextBlock.Text>
                                                                 </TextBlock>
@@ -751,6 +790,8 @@
                                                                                         <Condition Binding="{Binding Visibility, ElementName=DuneActivityCard, FallbackValue=Collapsed}" Value="Collapsed" />
                                                                                         <Condition Binding="{Binding Visibility, ElementName=DuneRequirementsCard, FallbackValue=Collapsed}" Value="Collapsed" />
                                                                                         <Condition Binding="{Binding Visibility, ElementName=DuneAchievementsCard, FallbackValue=Collapsed}" Value="Collapsed" />
+<Condition Binding="{Binding Visibility, ElementName=DuneLanguagesSummary, FallbackValue=Collapsed}" Value="Collapsed" />
+<Condition Binding="{Binding Visibility, ElementName=DuneDlcSummary, FallbackValue=Collapsed}" Value="Collapsed" />
                                                                                     </MultiDataTrigger.Conditions>
                                                                                     <Setter Property="Visibility" Value="Visible" />
                                                                                 </MultiDataTrigger>
@@ -771,100 +812,122 @@
                                                                         </Border.Style>
                                                                     </Border>
                                                                     <Grid Margin="16">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="24" />
-                                                                            <ColumnDefinition Width="12" />
-                                                                            <ColumnDefinition Width="*" />
-                                                                        </Grid.ColumnDefinitions>
                                                                         <Grid.RowDefinitions>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="*" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
                                                                             <RowDefinition Height="Auto" />
                                                                             <RowDefinition Height="Auto" />
                                                                         </Grid.RowDefinitions>
-                                                                        <TextBlock Text="&#xED5A;">
-                                                                            <TextBlock.Style>
-                                                                                <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
-                                                                                    <Setter Property="Grid.Row" Value="2" />
-                                                                                    <Setter Property="FontSize" Value="20" />
-                                                                                    <Setter Property="HorizontalAlignment" Value="Left" />
-                                                                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Row" Value="0" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </TextBlock.Style>
-                                                                        </TextBlock>
-                                                                        <Grid Grid.Row="2" MinHeight="28">
-                                                                            <Grid.Style>
-                                                                                <Style TargetType="Grid">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </Grid.Style>
-                                                                            <TextBlock Name="PART_TextPlayTime" TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                                                                                        <Setter Property="FontSize" Value="16" />
-                                                                                        <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                        <Setter Property="TextWrapping" Value="Wrap" />
-                                                                                        <Setter Property="Margin" Value="0" />
-                                                                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                                <Setter Property="FontSize" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
+                                                                        <Grid x:Name="DunePlayTimeHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="16" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xED5A;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Name="PART_ElemPlayTime" Grid.Column="2" Content="{DynamicResource LOCTimePlayed}" Margin="0" />
                                                                         </Grid>
-                                                                        <StackPanel Grid.Row="3" MinHeight="18">
-                                                                            <StackPanel.Style>
-                                                                                <Style TargetType="StackPanel">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DunePlayTimeCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </StackPanel.Style>
-                                                                            <Label Name="PART_ElemPlayTime" Content="{DynamicResource LOCTimePlayed}" Margin="0" />
-                                                                        </StackPanel>
-                                                                        <StackPanel Grid.Row="4" Grid.Column="2"></StackPanel>
+                                                                        <Grid x:Name="DunePlayTimeValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <TextBlock Name="PART_TextPlayTime" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                        </Grid>
+
                                                                     </Grid>
+                                                                </Grid>
+                                                                <Grid x:Name="DuneHowLongToBeatCard" ToolTip="{DynamicResource LOCDuneMainStory}" AutomationProperties.Name="{DynamicResource LOCDuneMainStory}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid" BasedOn="{StaticResource DuneHowLongToBeatLayout}">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                        <Condition Binding="{Binding Tag, ElementName=DuneShowHowLongToBeatCardPreference}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
+                                                                        <Border.Style>
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DuneSummaryPluginCardBorder}">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Visibility, ElementName=DuneBasicSurface}" Value="Visible">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Border.Style>
+                                                                    </Border>
+                                                                    <Grid Margin="16">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="*" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <Grid x:Name="DuneHowLongToBeatHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE916;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneMainStoryLabel}" ToolTip="{DynamicResource LOCDuneMainStory}" Margin="0" />
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <ContentControl x:Name="DuneHowLongToBeatProviderIcon" Tag="{Binding Text, ElementName=DuneHowLongToBeatIconPath}" Content="&#xE916;">
+                                                                                    <ContentControl.Style>
+                                                                                        <Style TargetType="ContentControl" BasedOn="{StaticResource DuneLocalPluginIcon}">
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Visibility, ElementName=DuneHowLongToBeatSourceFooter}" Value="Visible">
+                                                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                </DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </ContentControl.Style>
+                                                                                </ContentControl>
+                                                                                <TextBlock x:Name="DuneHowLongToBeatOpenChevron" Text="&#xE76C;" Style="{StaticResource IconFontStyle}" FontSize="12" Width="12" Foreground="{DynamicResource TextBrushDarker}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneHowLongToBeatValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <TextBlock Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat, FallbackValue='&#x2014;'}" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                        </Grid>
+                                                                        <StackPanel Grid.Row="3" VerticalAlignment="Top" Margin="0,12,0,0" Style="{StaticResource DuneWideSummaryDetails}">
+                                                                            <Grid x:Name="DuneMainExtraDetail" Margin="0,0,0,4" Tag="{PluginSettings Plugin=HowLongToBeat, Path=MainExtra, FallbackValue=0}" Style="{StaticResource DunePositiveSummaryValue}">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <TextBlock Text="{DynamicResource LOCDuneMainExtra}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,8,0" />
+                                                                                <TextBlock Grid.Column="1" Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat, FallbackValue=''}" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                            </Grid>
+                                                                            <Grid x:Name="DuneCompletionistDetail" Tag="{PluginSettings Plugin=HowLongToBeat, Path=Completionist, FallbackValue=0}" Style="{StaticResource DunePositiveSummaryValue}">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <TextBlock Text="{DynamicResource LOCDuneCompletionist}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,8,0" />
+                                                                                <TextBlock Grid.Column="1" Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat, FallbackValue=''}" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                            </Grid>
+                                                                        </StackPanel>
+                                                                        <Grid x:Name="DuneHowLongToBeatSourceFooter" Grid.Row="4" Style="{StaticResource DuneHowLongToBeatSourceLayout}">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="16" />
+                                                                                <ColumnDefinition Width="6" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="{DynamicResource LOCDuneSource}" Style="{StaticResource DuneSummarySecondaryText}"
+                                                                                       VerticalAlignment="Center" Margin="0,0,6,0" />
+                                                                            <ContentControl Style="{StaticResource DuneLocalPluginIcon}" Margin="0" Grid.Column="1" Tag="{Binding Text, ElementName=DuneHowLongToBeatIconPath}" Content="&#xE916;" Width="16" Height="16" VerticalAlignment="Center" />
+                                                                            <TextBlock Grid.Column="3" Text="HowLongToBeat" Style="{StaticResource DuneSummarySecondaryText}"
+                                                                                       VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="HowLongToBeat" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <ContentControl x:Name="HowLongToBeat_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                                                 </Grid>
                                                                 <Grid x:Name="DuneLastPlayedCard" Style="{DynamicResource DuneLastPlayedLayout}" Visibility="{Binding Visibility, ElementName=PART_ElemLastPlayed, Mode=OneWay}">
                                                                     <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
@@ -879,99 +942,26 @@
                                                                         </Border.Style>
                                                                     </Border>
                                                                     <Grid Margin="16">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="24" />
-                                                                            <ColumnDefinition Width="12" />
-                                                                            <ColumnDefinition Width="*" />
-                                                                        </Grid.ColumnDefinitions>
                                                                         <Grid.RowDefinitions>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="*" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
                                                                             <RowDefinition Height="Auto" />
                                                                             <RowDefinition Height="Auto" />
                                                                         </Grid.RowDefinitions>
-                                                                        <TextBlock Text="&#xE163;">
-                                                                            <TextBlock.Style>
-                                                                                <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
-                                                                                    <Setter Property="Grid.Row" Value="2" />
-                                                                                    <Setter Property="FontSize" Value="20" />
-                                                                                    <Setter Property="HorizontalAlignment" Value="Left" />
-                                                                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Row" Value="0" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </TextBlock.Style>
-                                                                        </TextBlock>
-                                                                        <Grid Grid.Row="2" MinHeight="28">
-                                                                            <Grid.Style>
-                                                                                <Style TargetType="Grid">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </Grid.Style>
-                                                                            <TextBlock Name="PART_TextLastActivity" TextWrapping="Wrap">
-                                                                                <TextBlock.Style>
-                                                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                                                                                        <Setter Property="FontSize" Value="16" />
-                                                                                        <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                        <Setter Property="TextWrapping" Value="Wrap" />
-                                                                                        <Setter Property="Margin" Value="0" />
-                                                                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                                <Setter Property="FontSize" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </TextBlock.Style>
-                                                                            </TextBlock>
+                                                                        <Grid x:Name="DuneLastPlayedHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="16" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE163;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Name="PART_ElemLastPlayed" Grid.Column="2" Content="{DynamicResource LOCLastPlayed}" Margin="0" />
                                                                         </Grid>
-                                                                        <StackPanel Grid.Row="3" MinHeight="18">
-                                                                            <StackPanel.Style>
-                                                                                <Style TargetType="StackPanel">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneLastPlayedCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </StackPanel.Style>
-                                                                            <Label Name="PART_ElemLastPlayed" Content="{DynamicResource LOCLastPlayed}" Margin="0" />
-                                                                        </StackPanel>
-                                                                        <StackPanel Grid.Row="4" Grid.Column="2"></StackPanel>
+                                                                        <Grid x:Name="DuneLastPlayedValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <TextBlock Name="PART_TextLastActivity" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                        </Grid>
+
                                                                     </Grid>
                                                                 </Grid>
                                                                 <Grid x:Name="DuneCompletionCard" Style="{DynamicResource DuneCompletionLayout}" Visibility="{Binding Visibility, ElementName=PART_ElemCompletionStatus, Mode=OneWay}">
@@ -987,101 +977,59 @@
                                                                         </Border.Style>
                                                                     </Border>
                                                                     <Grid Margin="16">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="24" />
-                                                                            <ColumnDefinition Width="12" />
-                                                                            <ColumnDefinition Width="*" />
-                                                                        </Grid.ColumnDefinitions>
                                                                         <Grid.RowDefinitions>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneCompletionCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneCompletionCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="*" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
                                                                             <RowDefinition Height="Auto" />
                                                                             <RowDefinition Height="Auto" />
                                                                         </Grid.RowDefinitions>
-                                                                        <TextBlock Text="&#xE129;">
-                                                                            <TextBlock.Style>
-                                                                                <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
-                                                                                    <Setter Property="Grid.Row" Value="2" />
-                                                                                    <Setter Property="FontSize" Value="20" />
-                                                                                    <Setter Property="HorizontalAlignment" Value="Left" />
-                                                                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneCompletionCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Row" Value="0" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </TextBlock.Style>
-                                                                        </TextBlock>
-                                                                        <Grid Grid.Row="2" MinHeight="28">
-                                                                            <Grid.Style>
-                                                                                <Style TargetType="Grid">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneCompletionCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </Grid.Style>
+                                                                        <Grid x:Name="DuneCompletionHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="16" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE129;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Name="PART_ElemCompletionStatus" Grid.Column="2" Content="{DynamicResource LOCCompletionStatus}" Margin="0" />
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneCompletionValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
                                                                             <Grid Margin="0" MaxWidth="180" HorizontalAlignment="Left">
                                                                                 <Border Tag="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=Tag, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                                                                    <Button Name="PART_ButtonCompletionStatus" FontWeight="Normal" Style="{DynamicResource PropertyItemButton}" FontSize="{DynamicResource FontSize}" Margin="0" />
+                                                                                    <Button Name="PART_ButtonCompletionStatus" Style="{StaticResource DuneSummaryCompletionButton}" Margin="0" />
                                                                                 </Border>
                                                                                 <ContentControl x:Name="ThemeExtras_SettableCompletionStatus" Visibility="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}">
                                                                                     <ContentControl.Resources>
                                                                                         <Style TargetType="UserControl" BasedOn="{StaticResource ThemeExtrasUserControlCompStatusStyle}">
-                                                                                            <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+                                                                                            <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+                                                                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                                                                            <Setter Property="FontSize" Value="20" />
                                                                                         </Style>
                                                                                     </ContentControl.Resources>
                                                                                 </ContentControl>
                                                                             </Grid>
                                                                         </Grid>
-                                                                        <StackPanel Grid.Row="3" MinHeight="18">
-                                                                            <StackPanel.Style>
-                                                                                <Style TargetType="StackPanel">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneCompletionCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </StackPanel.Style>
-                                                                            <Label Name="PART_ElemCompletionStatus" Content="{DynamicResource LOCCompletionStatus}" Margin="0" />
-                                                                        </StackPanel>
-                                                                        <StackPanel Grid.Row="4" Grid.Column="2"></StackPanel>
+
                                                                     </Grid>
                                                                 </Grid>
-                                                                <Grid x:Name="DuneAchievementsCard" ToolTip="{DynamicResource LOCDuneAchievements}" AutomationProperties.Name="{DynamicResource LOCDuneAchievements}" Style="{DynamicResource DuneAchievementsLayout}" Visibility="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                                <Grid x:Name="DuneActivityCard" ToolTip="{DynamicResource LOCGameActivityTitle}" AutomationProperties.Name="{DynamicResource LOCGameActivityTitle}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid" BasedOn="{StaticResource DuneActivityLayout}">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                        <Condition Binding="{Binding Tag, ElementName=DuneShowActivityCardPreference}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
                                                                     <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
                                                                         <Border.Style>
-                                                                            <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DuneSummaryPluginCardBorder}">
                                                                                 <Style.Triggers>
                                                                                     <DataTrigger Binding="{Binding Visibility, ElementName=DuneBasicSurface}" Value="Visible">
                                                                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -1091,162 +1039,493 @@
                                                                         </Border.Style>
                                                                     </Border>
                                                                     <Grid Margin="16">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="24" />
-                                                                            <ColumnDefinition Width="12" />
-                                                                            <ColumnDefinition Width="*" />
-                                                                        </Grid.ColumnDefinitions>
                                                                         <Grid.RowDefinitions>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="24" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
-                                                                            <RowDefinition>
-                                                                                <RowDefinition.Style>
-                                                                                    <Style TargetType="RowDefinition">
-                                                                                        <Setter Property="Height" Value="0" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                                <Setter Property="Height" Value="*" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>
-                                                                                </RowDefinition.Style>
-                                                                            </RowDefinition>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
                                                                             <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="*" />
                                                                             <RowDefinition Height="Auto" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <Grid x:Name="DuneActivityHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE9D9;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneLastSession}" Margin="0" />
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <ContentControl x:Name="DuneActivityProviderIcon" Tag="{Binding Text, ElementName=DuneActivityIconPath}" Content="&#xE9D9;">
+                                                                                    <ContentControl.Style>
+                                                                                        <Style TargetType="ContentControl" BasedOn="{StaticResource DuneLocalPluginIcon}">
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Visibility, ElementName=DuneActivitySourceFooter}" Value="Visible">
+                                                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                </DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </ContentControl.Style>
+                                                                                </ContentControl>
+                                                                                <TextBlock x:Name="DuneActivityOpenChevron" Text="&#xE76C;" Style="{StaticResource IconFontStyle}" FontSize="12" Width="12" Foreground="{DynamicResource TextBrushDarker}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneActivityValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <TextBlock Text="{PluginSettings Plugin=GameActivity, Path=LastPlaytimeSession, FallbackValue='&#x2014;'}" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                        </Grid>
+                                                                        <StackPanel Grid.Row="3" VerticalAlignment="Top" Style="{StaticResource DuneActivitySummaryDetails}">
+                                                                            <TextBlock x:Name="DuneLastSessionDate" Text="{PluginSettings Plugin=GameActivity, Path=LastDateSession, FallbackValue=''}" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                            <TextBlock x:Name="DuneRecentActivity" Text="{PluginSettings Plugin=GameActivity, Path=RecentActivity, FallbackValue=''}" Margin="0,4,0,0" Style="{StaticResource DuneRecentActivityText}" />
+                                                                        </StackPanel>
+                                                                        <Grid x:Name="DuneActivitySourceFooter" Grid.Row="4" Style="{StaticResource DuneActivitySourceLayout}">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="16" />
+                                                                                <ColumnDefinition Width="6" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="{DynamicResource LOCDuneSource}" Style="{StaticResource DuneSummarySecondaryText}"
+                                                                                       VerticalAlignment="Center" Margin="0,0,6,0" />
+                                                                            <ContentControl Style="{StaticResource DuneLocalPluginIcon}" Margin="0" Grid.Column="1" Tag="{Binding Text, ElementName=DuneActivityIconPath}" Content="&#xE9D9;" Width="16" Height="16" VerticalAlignment="Center" />
+                                                                            <TextBlock Grid.Column="3" Text="GameActivity" Style="{StaticResource DuneSummarySecondaryText}"
+                                                                                       VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="GameActivity" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <ContentControl x:Name="GameActivity_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                                                </Grid>
+                                                                <Grid x:Name="DuneRequirementsCard" ToolTip="{DynamicResource LOCDuneSystemRequirements}" AutomationProperties.Name="{DynamicResource LOCDuneSystemRequirements}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid" BasedOn="{StaticResource DuneRequirementsLayout}">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{PluginSettings Plugin=SystemChecker, Path=EnableIntegrationButton, FallbackValue=False}" Value="True" />
+                                                                                        <Condition Binding="{Binding Tag, ElementName=DuneShowRequirementsCardPreference}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
+                                                                        <Border.Style>
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DuneSummaryPluginCardBorder}">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Visibility, ElementName=DuneBasicSurface}" Value="Visible">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Border.Style>
+                                                                    </Border>
+                                                                    <Grid Margin="16">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
                                                                             <RowDefinition Height="Auto" />
                                                                             <RowDefinition Height="Auto" />
                                                                         </Grid.RowDefinitions>
-                                                                        <TextBlock Text="&#xF272;">
-                                                                            <TextBlock.Style>
-                                                                                <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
-                                                                                    <Setter Property="Grid.Row" Value="2" />
-                                                                                    <Setter Property="FontSize" Value="20" />
-                                                                                    <Setter Property="HorizontalAlignment" Value="Left" />
-                                                                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Row" Value="0" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </TextBlock.Style>
-                                                                        </TextBlock>
-                                                                        <Grid Grid.Row="2" MinHeight="28">
+                                                                        <Grid x:Name="DuneRequirementsHeading" Grid.Row="0">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE9D2;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneSystemRequirements}" Margin="0" />
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <TextBlock x:Name="DuneRequirementsProviderIcon" Text="&#xE770;" Style="{StaticResource DuneSummaryProviderGlyph}" />
+                                                                                <TextBlock x:Name="DuneRequirementsOpenChevron" Text="&#xE76C;" Style="{StaticResource IconFontStyle}" FontSize="12" Width="12" Foreground="{DynamicResource TextBrushDarker}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneRequirementsValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="28" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                            </Grid.ColumnDefinitions>
                                                                             <Grid.Style>
                                                                                 <Style TargetType="Grid">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
+                                                                                    <Setter Property="Tag" Value="Lookup" />
                                                                                     <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
+                                                                                        <DataTrigger Binding="{PluginSettings Plugin=SystemChecker, Path=HasData, FallbackValue=False}" Value="True">
+                                                                                            <Setter Property="Tag" Value="Ready" />
                                                                                         </DataTrigger>
+                                                                                        <MultiDataTrigger>
+                                                                                            <MultiDataTrigger.Conditions>
+                                                                                                <Condition Binding="{PluginSettings Plugin=SystemChecker, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                                <Condition Binding="{PluginSettings Plugin=SystemChecker, Path=IsMinimumOK, FallbackValue=False}" Value="True" />
+                                                                                            </MultiDataTrigger.Conditions>
+                                                                                            <Setter Property="Tag" Value="Minimum" />
+                                                                                        </MultiDataTrigger>
+                                                                                        <MultiDataTrigger>
+                                                                                            <MultiDataTrigger.Conditions>
+                                                                                                <Condition Binding="{PluginSettings Plugin=SystemChecker, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                                <Condition Binding="{PluginSettings Plugin=SystemChecker, Path=IsRecommendedOK, FallbackValue=False}" Value="True" />
+                                                                                            </MultiDataTrigger.Conditions>
+                                                                                            <Setter Property="Tag" Value="Recommended" />
+                                                                                        </MultiDataTrigger>
                                                                                     </Style.Triggers>
                                                                                 </Style>
                                                                             </Grid.Style>
-                                                                            <StackPanel Name="PART_DuneAchievements">
-                                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                                    <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue='-'}">
-                                                                                        <TextBlock.Style>
-                                                                                            <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                                                                                                <Setter Property="FontSize" Value="16" />
-                                                                                                <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                                                                <Setter Property="Margin" Value="0" />
-                                                                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                                <Style.Triggers>
-                                                                                                    <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                                        <Setter Property="FontSize" Value="28" />
-                                                                                                    </DataTrigger>
-                                                                                                </Style.Triggers>
-                                                                                            </Style>
-                                                                                        </TextBlock.Style>
-                                                                                    </TextBlock>
-                                                                                    <TextBlock Text="/">
-                                                                                        <TextBlock.Style>
-                                                                                            <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                                                                                                <Setter Property="FontSize" Value="16" />
-                                                                                                <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                                                                <Setter Property="Margin" Value="0" />
-                                                                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                                <Style.Triggers>
-                                                                                                    <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                                        <Setter Property="FontSize" Value="28" />
-                                                                                                    </DataTrigger>
-                                                                                                </Style.Triggers>
-                                                                                            </Style>
-                                                                                        </TextBlock.Style>
-                                                                                    </TextBlock>
-                                                                                    <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue='-'}">
-                                                                                        <TextBlock.Style>
-                                                                                            <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                                                                                                <Setter Property="FontSize" Value="16" />
-                                                                                                <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                                                                <Setter Property="Margin" Value="0" />
-                                                                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                                                                <Style.Triggers>
-                                                                                                    <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                                        <Setter Property="FontSize" Value="28" />
-                                                                                                    </DataTrigger>
-                                                                                                </Style.Triggers>
-                                                                                            </Style>
-                                                                                        </TextBlock.Style>
-                                                                                    </TextBlock>
-                                                                                </StackPanel>
-                                                                            </StackPanel>
+                                                                            <TextBlock x:Name="DuneRequirementsStatusGlyph" Style="{StaticResource DuneRequirementsStatusIcon}" IsHitTestVisible="False" />
+                                                                            <TextBlock x:Name="DuneRequirementsStatusLabel" Grid.Column="1" Style="{StaticResource DuneRequirementsStatusText}" />
                                                                         </Grid>
-                                                                        <StackPanel Grid.Row="3" MinHeight="18">
-                                                                            <StackPanel.Style>
-                                                                                <Style TargetType="StackPanel">
-                                                                                    <Setter Property="Grid.Column" Value="2" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneAchievementsCard}" Value="Expanded">
-                                                                                            <Setter Property="Grid.Column" Value="0" />
-                                                                                            <Setter Property="Grid.ColumnSpan" Value="3" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </StackPanel.Style>
-                                                                            <Label Content="{DynamicResource LOCDuneAchievements}" />
-                                                                        </StackPanel>
-                                                                        <StackPanel Grid.Row="4" Grid.ColumnSpan="3">
-                                                                            <ProgressBar Height="4" VerticalAlignment="Bottom" Minimum="0" Maximum="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue=1}" Value="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue=0}" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource ControlBackgroundBrush}" IsHitTestVisible="False" Margin="0,12,0,0" />
-                                                                        </StackPanel>
-                                                                        <Grid Grid.Row="5" Grid.ColumnSpan="3" Style="{StaticResource DuneLatestAchievement}"
-                                                                              Tag="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasLatestAchievementData, FallbackValue=False}">
+
+                                                                    </Grid>
+                                                                    <ContentControl x:Name="SystemChecker_PluginButton" Panel.ZIndex="10" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                                                </Grid>
+                                                                <Grid x:Name="DuneAchievementsCard" ToolTip="{DynamicResource LOCDuneAchievements}" AutomationProperties.Name="{DynamicResource LOCDuneAchievements}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid" BasedOn="{StaticResource DuneAchievementsLayout}">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=False}" Value="True" />
+                                                                                        <Condition Binding="{Binding Tag, ElementName=DuneShowAchievementsCardPreference}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
+                                                                        <Border.Style>
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DuneSummaryPluginCardBorder}">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Visibility, ElementName=DuneBasicSurface}" Value="Visible">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Border.Style>
+                                                                    </Border>
+                                                                    <Grid Margin="16">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <Grid x:Name="DuneAchievementsHeading" Grid.Row="0">
                                                                             <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="56" />
-                                                                                <ColumnDefinition Width="12" />
+                                                                                <ColumnDefinition Width="24" />
+                                                                                <ColumnDefinition Width="8" />
                                                                                 <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
                                                                             </Grid.ColumnDefinitions>
-                                                                            <ContentControl x:Name="PlayniteAchievements_AchievementCompactLatest" Width="56" Height="56"
-                                                                                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
-                                                                            <StackPanel Grid.Column="2" VerticalAlignment="Center"
-                                                                                        DataContext="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.LatestAchievementData}">
-                                                                                <TextBlock Text="{DynamicResource LOCDuneLatestAchievement}" FontSize="12"
-                                                                                           Foreground="{DynamicResource TextBrushDarker}" />
-                                                                                <TextBlock Text="{Binding DisplayName, FallbackValue='', TargetNullValue=''}"
-                                                                                           FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
-                                                                                           TextWrapping="NoWrap" Margin="0,2,0,0" />
-                                                                                <TextBlock Text="{Binding DateUnlocked, StringFormat={}{0:g}, FallbackValue='', TargetNullValue=''}"
-                                                                                           FontSize="12" Foreground="{DynamicResource TextBrushDarker}" TextTrimming="CharacterEllipsis"
-                                                                                           TextWrapping="NoWrap" Margin="0,2,0,0" />
+                                                                            <TextBlock Text="&#xF272;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneAchievements}" Margin="0" />
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <ContentControl x:Name="DuneAchievementsProviderIcon" Tag="{Binding Text, ElementName=DuneAchievementsIconPath}" Content="&#xF272;" Style="{StaticResource DuneLocalPluginIcon}" />
+                                                                                <TextBlock x:Name="DuneAchievementsOpenChevron" Text="&#xE76C;" Style="{StaticResource IconFontStyle}" FontSize="12" Width="12" Foreground="{DynamicResource TextBrushDarker}" />
                                                                             </StackPanel>
                                                                         </Grid>
+                                                                        <Grid x:Name="DuneAchievementsValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <StackPanel Name="PART_DuneAchievements" Orientation="Horizontal">
+                                                                                <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue='-'}" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                                <TextBlock Text="/" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                                <TextBlock Text="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue='-'}" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <StackPanel Grid.Row="3" Margin="0,12,0,0">
+                                                                            <ProgressBar Style="{StaticResource DuneSummaryProgress}" Height="4" Minimum="0"
+                                                                                         Maximum="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.AchievementCount, FallbackValue=1}"
+                                                                                         Value="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.UnlockedCount, FallbackValue=0}"
+                                                                                         Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource ControlBackgroundBrush}" IsHitTestVisible="False" />
+                                                                            <Grid x:Name="DuneLatestAchievementRow" Style="{StaticResource DuneLatestAchievement}"
+                                                                                  Tag="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasLatestAchievementData, FallbackValue=False}">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="56" />
+                                                                                    <ColumnDefinition Width="12" />
+                                                                                    <ColumnDefinition Width="*" />
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <ContentControl x:Name="PlayniteAchievements_AchievementCompactLatest" Width="56" Height="56"
+                                                                                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                                                                <StackPanel Grid.Column="2" VerticalAlignment="Center"
+                                                                                            DataContext="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.LatestAchievementData}">
+                                                                                    <TextBlock Text="{DynamicResource LOCDuneLatestAchievement}" FontSize="12"
+                                                                                               Foreground="{DynamicResource TextBrushDarker}" />
+                                                                                    <TextBlock Text="{Binding DisplayName, FallbackValue='', TargetNullValue=''}"
+                                                                                               FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
+                                                                                               TextWrapping="NoWrap" Margin="0,2,0,0" />
+                                                                                    <TextBlock Text="{Binding DateUnlocked, StringFormat={}{0:g}, FallbackValue='', TargetNullValue=''}"
+                                                                                               FontSize="12" Foreground="{DynamicResource TextBrushDarker}" TextTrimming="CharacterEllipsis"
+                                                                                               TextWrapping="NoWrap" Margin="0,2,0,0" />
+                                                                                </StackPanel>
+                                                                            </Grid>
+                                                                        </StackPanel>
+                                                                        <!-- Keep the native latest icon reachable; the achievement opener covers only the heading and value. -->
+                                                                        <ContentControl x:Name="PlayniteAchievements_AchievementButton" Grid.RowSpan="3" Panel.ZIndex="10" Opacity="0.01"
+                                                                                        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                                                     </Grid>
                                                                 </Grid>
+                                                            <Grid x:Name="DuneCatalogSummary" Style="{StaticResource DuneCatalogLayout}" Tag="{PluginSettings Plugin=CheckDlc, Path=ListDlcs}">
+                                                                <Grid.Resources>
+                                                                    <!-- Bridge plugin data through the visual root: direct PluginSettings expressions on template resources are not shareable. -->
+                                                                    <CollectionViewSource x:Key="DuneDlcOwnership" Source="{Binding Tag, ElementName=DuneCatalogSummary}">
+                                                                        <CollectionViewSource.SortDescriptions><scm:SortDescription xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" PropertyName="IsOwned" Direction="Descending" /></CollectionViewSource.SortDescriptions>
+                                                                        <CollectionViewSource.GroupDescriptions><PropertyGroupDescription PropertyName="IsOwned" /></CollectionViewSource.GroupDescriptions>
+                                                                    </CollectionViewSource>
+                                                                </Grid.Resources>
+                                                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                                                <Border x:Name="DuneCatalogBreakpoint" Grid.ColumnSpan="2" Width="600" Height="0"
+                                                                        MaxWidth="{Binding ActualWidth, ElementName=DuneCatalogSummary}" HorizontalAlignment="Left" IsHitTestVisible="False" />
+                                                                <Grid x:Name="DuneLanguagesSummary" Tag="{DynamicResource DuneShowLanguagesSummary}" ToolTip="{DynamicResource LOCDunePreferredLanguageHint}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Setter Property="Margin" Value="0,0,12,12" />
+                                                                            <Setter Property="MinHeight" Value="120" />
+                                                                            <Setter Property="Grid.Row" Value="0" />
+                                                                            <Setter Property="Grid.ColumnSpan" Value="2" />
+                                                                            <Setter Property="Background" Value="Transparent" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                        <Condition Binding="{PluginSettings Plugin=CheckLocalizations, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                                <DataTrigger Binding="{PluginSettings Plugin=CheckLocalizations, Path=ListNativeSupport.Count, FallbackValue=0}" Value="0">
+                                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                                </DataTrigger>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{Binding Visibility, ElementName=DuneDlcSummary}" Value="Visible" />
+                                                                                        <Condition Binding="{Binding ActualWidth, ElementName=DuneCatalogBreakpoint}" Value="600" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Grid.Row" Value="0" />
+                                                                                    <Setter Property="Grid.Column" Value="0" />
+                                                                                    <Setter Property="Grid.ColumnSpan" Value="1" />
+                                                                                </MultiDataTrigger>
+                                                                                <DataTrigger Binding="{Binding Visibility, ElementName=DuneLanguagesSummary}" Value="Collapsed">
+                                                                                    <Setter Property="Grid.Row" Value="0" />
+                                                                                </DataTrigger>
+                                                                                <MultiDataTrigger>
+            <MultiDataTrigger.Conditions>
+                <Condition Binding="{Binding Visibility, ElementName=DuneDlcSummary}" Value="Visible" />
+                <Condition Binding="{Binding ActualWidth, ElementName=DuneWideBreakpoint}" Value="1320" />
+            </MultiDataTrigger.Conditions>
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+        </MultiDataTrigger>
+        <DataTrigger Binding="{Binding Visibility, ElementName=CheckLocalizations_PluginButton}" Value="Visible">
+                                                                                    <Setter Property="Cursor" Value="Hand" />
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
+                                                                        <Border.Style>
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+                                                                                <Style.Triggers>
+                                                                                    <MultiDataTrigger>
+                                                                                        <MultiDataTrigger.Conditions>
+                                                                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckLocalizations_PluginButton}" Value="Visible" />
+                                                                                        </MultiDataTrigger.Conditions>
+                                                                                        <Setter Property="Opacity" Value="0.1" />
+                                                                                    </MultiDataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Border.Style>
+                                                                    </Border>
+                                                                    <Grid Margin="16">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                                                        <Grid x:Name="DuneLanguagesCatalogHeading">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" /><ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE774;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneLanguages}" Margin="0" FontSize="12" FontWeight="Normal"><Label.ContentTemplate><DataTemplate><TextBlock Text="{Binding}" FontSize="12" FontWeight="Normal" Foreground="{DynamicResource TextBrushDarker}" TextTrimming="CharacterEllipsis" /></DataTemplate></Label.ContentTemplate></Label>
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <ContentControl x:Name="DuneLanguagesCatalogProviderIcon" Tag="{Binding Text, ElementName=DuneLanguagesIconPath}" Content="&#xE774;" ><ContentControl.Style><Style TargetType="ContentControl" BasedOn="{StaticResource DuneLocalPluginIcon}"><Style.Triggers>
+      <DataTrigger Binding="{Binding Visibility, ElementName=DuneLanguagesSourceFooter}" Value="Visible"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+  </Style.Triggers></Style></ContentControl.Style></ContentControl>
+                                                                                <TextBlock Text="&#xE76C;" Style="{StaticResource IconFontStyle}" Width="12" FontSize="12" Foreground="{DynamicResource TextBrushDarker}"
+                                                                                           Visibility="{Binding Visibility, ElementName=CheckLocalizations_PluginButton}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneLanguagesCatalogValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <TextBlock x:Name="DunePreferredLanguageStatus" ToolTip="{DynamicResource LOCDunePreferredLanguageHint}">
+                                                                                <TextBlock.Style>
+                                                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummaryPrimaryText}">
+                                                                                        <Setter Property="Text" Value="{DynamicResource LOCDuneLanguageDetails}" />
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{PluginSettings Plugin=CheckLocalizations, Path=HasNativeSupport, FallbackValue=Unknown}" Value="False">
+                                                                                                <Setter Property="Text" Value="{DynamicResource LOCDunePreferredLanguageMissing}" />
+                                                                                            </DataTrigger>
+                                                                                            <DataTrigger Binding="{PluginSettings Plugin=CheckLocalizations, Path=HasNativeSupport, FallbackValue=Unknown}" Value="True">
+                                                                                                <Setter Property="Text" Value="{DynamicResource LOCDunePreferredLanguageListed}" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </TextBlock.Style>
+                                                                            </TextBlock>
+                                                                        </Grid>
+                                                                        <Grid Grid.Row="3" Margin="0,8,0,0" VerticalAlignment="Top">
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <TextBlock x:Name="DuneLanguageCount" Text="{PluginSettings Plugin=CheckLocalizations, Path=ListNativeSupport.Count, FallbackValue=0}" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                                <TextBlock Text="{DynamicResource LOCDuneLanguagesRecorded}" Margin="6,0,0,0" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    <Grid x:Name="DuneLanguagesSourceFooter" Grid.Row="4">
+    <Grid.Style><Style TargetType="Grid" BasedOn="{StaticResource DuneSummarySourceFooter}">
+        <Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions>
+            <Condition Binding="{Binding ActualWidth, ElementName=DuneWideBreakpoint}" Value="1320" />
+            <Condition Binding="{Binding Visibility, ElementName=DuneAchievementsCard}" Value="Visible" />
+            <Condition Binding="{Binding Visibility, ElementName=DuneLatestAchievementRow}" Value="Visible" />
+        </MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible" /></MultiDataTrigger></Style.Triggers>
+    </Style></Grid.Style>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="16" /><ColumnDefinition Width="8" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+    <TextBlock Text="{DynamicResource LOCDuneSource}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+    <Grid Grid.Column="1" VerticalAlignment="Center"><ContentControl Tag="{Binding Text, ElementName=DuneLanguagesIconPath}" Content="&#xE774;" Style="{StaticResource DuneLocalPluginIcon}" Margin="0" /></Grid>
+    <TextBlock Grid.Column="3" Text="CheckLocalizations" Style="{StaticResource DuneSummarySecondaryText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+</Grid></Grid>
+                                                                    <ContentControl x:Name="CheckLocalizations_PluginButton" Style="{StaticResource DuneCatalogOpener}" />
+                                                                </Grid>
+                                                                <Grid x:Name="DuneDlcSummary" Tag="{DynamicResource DuneShowDlcSummary}" ToolTip="{DynamicResource LOCDuneDlcCatalogHint}">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                            <Setter Property="Margin" Value="0,0,12,12" />
+                                                                            <Setter Property="MinHeight" Value="120" />
+                                                                            <Setter Property="Grid.Row" Value="1" />
+                                                                            <Setter Property="Grid.ColumnSpan" Value="2" />
+                                                                            <Setter Property="Background" Value="Transparent" />
+                                                                            <Style.Triggers>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                        <Condition Binding="{PluginSettings Plugin=CheckDlc, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </MultiDataTrigger>
+                                                                                <DataTrigger Binding="{PluginSettings Plugin=CheckDlc, Path=ListDlcs.Count, FallbackValue=0}" Value="0">
+                                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                                </DataTrigger>
+                                                                                <MultiDataTrigger>
+                                                                                    <MultiDataTrigger.Conditions>
+                                                                                        <Condition Binding="{Binding Visibility, ElementName=DuneLanguagesSummary}" Value="Visible" />
+                                                                                        <Condition Binding="{Binding ActualWidth, ElementName=DuneCatalogBreakpoint}" Value="600" />
+                                                                                    </MultiDataTrigger.Conditions>
+                                                                                    <Setter Property="Grid.Row" Value="0" />
+                                                                                    <Setter Property="Grid.Column" Value="1" />
+                                                                                    <Setter Property="Grid.ColumnSpan" Value="1" />
+                                                                                </MultiDataTrigger>
+                                                                                <DataTrigger Binding="{Binding Visibility, ElementName=DuneLanguagesSummary}" Value="Collapsed">
+                                                                                    <Setter Property="Grid.Row" Value="0" />
+                                                                                </DataTrigger>
+                                                                                <MultiDataTrigger>
+            <MultiDataTrigger.Conditions>
+                <Condition Binding="{Binding Visibility, ElementName=DuneLanguagesSummary}" Value="Visible" />
+                <Condition Binding="{Binding ActualWidth, ElementName=DuneWideBreakpoint}" Value="1320" />
+            </MultiDataTrigger.Conditions>
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+        </MultiDataTrigger>
+        <DataTrigger Binding="{Binding Visibility, ElementName=CheckDlc_PluginButton}" Value="Visible">
+                                                                                    <Setter Property="Cursor" Value="Hand" />
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}">
+                                                                        <Border.Style>
+                                                                            <Style TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+                                                                                <Style.Triggers>
+                                                                                    <MultiDataTrigger>
+                                                                                        <MultiDataTrigger.Conditions>
+                                                                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginButton}" Value="Visible" />
+                                                                                        </MultiDataTrigger.Conditions>
+                                                                                        <Setter Property="Opacity" Value="0.1" />
+                                                                                    </MultiDataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Border.Style>
+                                                                    </Border>
+                                                                    <Grid Margin="16">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="24" />
+                                                                            <RowDefinition Height="12" />
+                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                                                        <Grid x:Name="DuneDlcCatalogHeading">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="24" /><ColumnDefinition Width="8" />
+                                                                                <ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="&#xE7B8;" Style="{StaticResource IconFontStyle}" FontSize="20" HorizontalAlignment="Left" />
+                                                                            <Label Grid.Column="2" Content="{DynamicResource LOCDuneDlcCatalog}" Margin="0" FontSize="12" FontWeight="Normal"><Label.ContentTemplate><DataTemplate><TextBlock Text="{Binding}" FontSize="12" FontWeight="Normal" Foreground="{DynamicResource TextBrushDarker}" TextTrimming="CharacterEllipsis" /></DataTemplate></Label.ContentTemplate></Label>
+                                                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="8,0,0,0" IsHitTestVisible="False">
+                                                                                <TextBlock x:Name="DuneDlcCatalogProviderIcon" Text="&#xE7B8;" ><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummaryProviderGlyph}"><Style.Triggers>
+      <DataTrigger Binding="{Binding Visibility, ElementName=DuneDlcSourceFooter}" Value="Visible"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+  </Style.Triggers></Style></TextBlock.Style></TextBlock>
+                                                                                <TextBlock Text="&#xE76C;" Style="{StaticResource IconFontStyle}" Width="12" FontSize="12" Foreground="{DynamicResource TextBrushDarker}"
+                                                                                           Visibility="{Binding Visibility, ElementName=CheckDlc_PluginButton}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid x:Name="DuneDlcCatalogValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <TextBlock x:Name="DuneDlcCount" Text="{PluginSettings Plugin=CheckDlc, Path=ListDlcs.Count, FallbackValue=0}" Style="{StaticResource DuneSummaryPrimaryText}" />
+                                                                                <TextBlock Text="{DynamicResource LOCDuneDlcItems}" Margin="6,0,0,0" VerticalAlignment="Center" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                        <Grid Grid.Row="3" Margin="0,8,0,0" VerticalAlignment="Top">
+                                                                            <ItemsControl x:Name="DuneDlcOwnershipCounts" ItemsSource="{Binding Groups, Source={StaticResource DuneDlcOwnership}}" Margin="0">
+                                                                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                                                                <ItemsControl.ItemTemplate>
+                                                                                    <DataTemplate>
+                                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                                                                                            <TextBlock Margin="0,0,6,0">
+                                                                                                <TextBlock.Style>
+                                                                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummarySecondaryText}">
+                                                                                                        <Setter Property="Text" Value="{DynamicResource LOCDuneDlcNotOwned}" />
+                                                                                                        <Style.Triggers>
+                                                                                                            <DataTrigger Binding="{Binding Name}" Value="True"><Setter Property="Text" Value="{DynamicResource LOCDuneDlcOwned}" /></DataTrigger>
+                                                                                                        </Style.Triggers>
+                                                                                                    </Style>
+                                                                                                </TextBlock.Style>
+                                                                                            </TextBlock>
+                                                                                            <TextBlock Text="{Binding ItemCount}" Style="{StaticResource DuneSummarySecondaryText}" />
+                                                                                        </StackPanel>
+                                                                                    </DataTemplate>
+                                                                                </ItemsControl.ItemTemplate>
+                                                                            </ItemsControl>
+                                                                        </Grid>
+                                                                    <Grid x:Name="DuneDlcSourceFooter" Grid.Row="4">
+    <Grid.Style><Style TargetType="Grid" BasedOn="{StaticResource DuneSummarySourceFooter}">
+        <Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions>
+            <Condition Binding="{Binding ActualWidth, ElementName=DuneWideBreakpoint}" Value="1320" />
+            <Condition Binding="{Binding Visibility, ElementName=DuneAchievementsCard}" Value="Visible" />
+            <Condition Binding="{Binding Visibility, ElementName=DuneLatestAchievementRow}" Value="Visible" />
+        </MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible" /></MultiDataTrigger></Style.Triggers>
+    </Style></Grid.Style>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="16" /><ColumnDefinition Width="8" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+    <TextBlock Text="{DynamicResource LOCDuneSource}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+    <Grid Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="&#xE7B8;" Style="{StaticResource DuneSummaryProviderGlyph}" Margin="0" /></Grid>
+    <TextBlock Grid.Column="3" Text="CheckDlc" Style="{StaticResource DuneSummarySecondaryText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+</Grid></Grid>
+                                                                    <ContentControl x:Name="CheckDlc_PluginButton" Style="{StaticResource DuneCatalogOpener}" />
+                                                                </Grid>
                                                             </Grid>
+</Grid>
+
                                                         </StackPanel>
                                                         <!--Tab Table-->
                                                         <!--Tab Table Ends-->
@@ -1305,12 +1584,12 @@
                                                                 </StackPanel>
                                                             </TabItem>
                                                             <!--Tab Notes Ends-->
-                                                            <TabItem Header="{DynamicResource LOCDuneAchievements}" Visibility="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOCDuneAchievements}" Visibility="{PluginSettings Plugin=PlayniteAchievements, Path=ModernTheme.HasAchievements, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <ContentControl x:Name="PlayniteAchievements_AchievementDataGrid" MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}" VerticalContentAlignment="Stretch" Style="{DynamicResource DunePluginContent}" />
                                                               </Border>
                                                             </TabItem>
-                                                            <TabItem Header="{DynamicResource LOCSsvTitle}" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOCSsvTitle}" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <StackPanel Orientation="Vertical">
                                                                   <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshotsVertical" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{DynamicResource DunePluginContent}" />
@@ -1319,28 +1598,166 @@
                                                                 </StackPanel>
                                                               </Border>
                                                             </TabItem>
-                                                            <TabItem Header="HowLongToBeat" Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOCDuneLanguages}" Tag="{DynamicResource DuneShowLanguagesTab}" FontSize="16">
+                                                                <TabItem.Style>
+                                                                    <Style TargetType="TabItem">
+        <Setter Property="Template" Value="{DynamicResource DuneTabItemTemplate}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="Padding" Value="12,6,12,6" />
+                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                        <Style.Triggers>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                    <Condition Binding="{PluginSettings Plugin=CheckLocalizations, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    <Condition Binding="{Binding Visibility, ElementName=CheckLocalizations_PluginListLanguages, FallbackValue=Collapsed}" Value="Visible" />
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                            </MultiDataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TabItem.Style>
+                                                                <Border Style="{DynamicResource DunePluginPanel}">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="{DynamicResource LOCDuneLanguageListHint}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,0,12" />
+                                                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                                                            <ContentControl x:Name="CheckLocalizations_PluginListLanguages" Style="{DynamicResource DunePluginContent}" MinWidth="600" MinHeight="160" Margin="0" />
+                                                                        </ScrollViewer>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </TabItem>
+                                                            <TabItem Header="{DynamicResource LOCDuneDlc}" Tag="{DynamicResource DuneShowDlcTab}" FontSize="16">
+                                                                <TabItem.Style>
+                                                                    <Style TargetType="TabItem">
+        <Setter Property="Template" Value="{DynamicResource DuneTabItemTemplate}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="Padding" Value="12,6,12,6" />
+                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                        <Style.Triggers>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                    <Condition Binding="{PluginSettings Plugin=CheckDlc, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcAll, FallbackValue=Collapsed}" Value="Visible" />
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                            </MultiDataTrigger>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                    <Condition Binding="{PluginSettings Plugin=CheckDlc, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcOwned, FallbackValue=Collapsed}" Value="Visible" />
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                            </MultiDataTrigger>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                    <Condition Binding="{PluginSettings Plugin=CheckDlc, Path=HasData, FallbackValue=False}" Value="True" />
+                                                                                    <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcNotOwned, FallbackValue=Collapsed}" Value="Visible" />
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                            </MultiDataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TabItem.Style>
+                                                                <Border Style="{DynamicResource DunePluginPanel}">
+                                                                    <TabControl x:Name="DuneDlcLists">
+                                                                        <TabControl.Style>
+                                                                            <Style TargetType="TabControl" BasedOn="{StaticResource DetailViewTabControl}">
+                                                                                <Style.Triggers>
+                                                                                    <MultiDataTrigger>
+                                                                                        <MultiDataTrigger.Conditions>
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcAll}" Value="Collapsed" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcOwned}" Value="Visible" />
+                                                                                        </MultiDataTrigger.Conditions>
+                                                                                        <Setter Property="SelectedIndex" Value="1" />
+                                                                                    </MultiDataTrigger>
+                                                                                    <MultiDataTrigger>
+                                                                                        <MultiDataTrigger.Conditions>
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcAll}" Value="Collapsed" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcOwned}" Value="Collapsed" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginListDlcNotOwned}" Value="Visible" />
+                                                                                        </MultiDataTrigger.Conditions>
+                                                                                        <Setter Property="SelectedIndex" Value="2" />
+                                                                                    </MultiDataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TabControl.Style>
+                                                                        <TabItem Header="{DynamicResource LOCDuneDlcAll}" Visibility="{Binding Visibility, ElementName=CheckDlc_PluginListDlcAll}">
+                                                                            <Grid>
+                                                                                <ContentControl x:Name="CheckDlc_PluginListDlcAll" Style="{DynamicResource DunePluginContent}" Height="{DynamicResource DuneDlcPanelHeight}" Margin="0,8,0,0" Tag="{Binding Content.DataContext.ItemsSource.Count, RelativeSource={RelativeSource Self}, FallbackValue=-1}" />
+                                                                                <TextBlock Text="{DynamicResource LOCDuneEmptyDlcCategory}" Margin="0,24,0,0" VerticalAlignment="Top">
+                                                                                    <TextBlock.Style>
+                                                                                        <Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummarySecondaryText}">
+                                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Tag, ElementName=CheckDlc_PluginListDlcAll}" Value="0"><Setter Property="Visibility" Value="Visible" /></DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </TextBlock.Style>
+                                                                                </TextBlock>
+                                                                            </Grid>
+                                                                        </TabItem>
+                                                                        <TabItem Header="{DynamicResource LOCDuneDlcOwned}" Visibility="{Binding Visibility, ElementName=CheckDlc_PluginListDlcOwned}">
+                                                                            <Grid>
+                                                                                <ContentControl x:Name="CheckDlc_PluginListDlcOwned" Style="{DynamicResource DunePluginContent}" Height="{DynamicResource DuneDlcPanelHeight}" Margin="0,8,0,0" Tag="{Binding Content.DataContext.ItemsSource.Count, RelativeSource={RelativeSource Self}, FallbackValue=-1}" />
+                                                                                <TextBlock Text="{DynamicResource LOCDuneEmptyDlcCategory}" Margin="0,24,0,0" VerticalAlignment="Top">
+                                                                                    <TextBlock.Style>
+                                                                                        <Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummarySecondaryText}">
+                                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Tag, ElementName=CheckDlc_PluginListDlcOwned}" Value="0"><Setter Property="Visibility" Value="Visible" /></DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </TextBlock.Style>
+                                                                                </TextBlock>
+                                                                            </Grid>
+                                                                        </TabItem>
+                                                                        <TabItem Header="{DynamicResource LOCDuneDlcNotOwned}" Visibility="{Binding Visibility, ElementName=CheckDlc_PluginListDlcNotOwned}">
+                                                                            <Grid>
+                                                                                <ContentControl x:Name="CheckDlc_PluginListDlcNotOwned" Style="{DynamicResource DunePluginContent}" Height="{DynamicResource DuneDlcPanelHeight}" Margin="0,8,0,0" Tag="{Binding Content.DataContext.ItemsSource.Count, RelativeSource={RelativeSource Self}, FallbackValue=-1}" />
+                                                                                <TextBlock Text="{DynamicResource LOCDuneEmptyDlcCategory}" Margin="0,24,0,0" VerticalAlignment="Top">
+                                                                                    <TextBlock.Style>
+                                                                                        <Style TargetType="TextBlock" BasedOn="{StaticResource DuneSummarySecondaryText}">
+                                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Tag, ElementName=CheckDlc_PluginListDlcNotOwned}" Value="0"><Setter Property="Visibility" Value="Visible" /></DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </TextBlock.Style>
+                                                                                </TextBlock>
+                                                                            </Grid>
+                                                                        </TabItem>
+                                                                    </TabControl>
+                                                                </Border>
+                                                            </TabItem>
+                                                            <TabItem Header="HowLongToBeat" Visibility="{PluginSettings Plugin=HowLongToBeat, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <StackPanel>
-                                                                  <ContentControl x:Name="HowLongToBeat_PluginButton" HorizontalAlignment="Left" Style="{DynamicResource DunePluginContent}" />
+
                                                                   <ContentControl x:Name="HowLongToBeat_PluginProgressBar" Style="{DynamicResource DunePluginContent}" />
                                                                 </StackPanel>
                                                               </Border>
                                                             </TabItem>
-                                                            <TabItem Header="{DynamicResource LOCGameActivityTitle}" Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOCGameActivityTitle}" Visibility="{PluginSettings Plugin=GameActivity, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <StackPanel>
-                                                                  <ContentControl x:Name="GameActivity_PluginButton" HorizontalAlignment="Left" Style="{DynamicResource DunePluginContent}" />
+
                                                                   <ContentControl x:Name="GameActivity_PluginChartTime" Style="{DynamicResource DunePluginContent}" />
                                                                 </StackPanel>
                                                               </Border>
                                                             </TabItem>
-                                                            <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}" Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}" Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <ContentControl x:Name="ReviewViewer_ReviewsControl" Foreground="{DynamicResource TextBrush}" TextElement.Foreground="{DynamicResource TextBrush}" Style="{DynamicResource DunePluginContent}"></ContentControl>
                                                               </Border>
                                                             </TabItem>
-                                                            <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}" Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}" Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16">
                                                               <Border Style="{DynamicResource DunePluginPanel}">
                                                                 <ContentControl x:Name="NewsViewer_NewsViewerControl" Style="{DynamicResource DunePluginContent}" />
                                                               </Border>
