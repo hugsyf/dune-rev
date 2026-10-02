@@ -1,5 +1,17 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.1.0
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-02
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.1.0/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_1_0.pthm
+    Changelog:
+      - Add CheckLocalizations language summaries and lists, and CheckDlc counts and ownership lists.
+      - Show the latest unlocked achievement with its icon, name and date (Playnite Achievements 4.0 or newer).
+      - Expand HowLongToBeat, GameActivity and system requirements summaries in Details and Grid views.
+      - Fit summary cards into two rows on wide panes with aligned content, consistent spacing and clearer plugin entry points.
+      - Use installed plugin icons with Fluent fallbacks, and add ThemeModifier switches for cards, detailed content and language/DLC tabs.
+      - Fix Grid View hero placement, tab and completion-status typography, rounded-card focus feedback and theme loading failures.
+      - Refresh screenshots and simplify documentation. Requires Playnite 10.57 or newer.
   - Version: 2.0.0
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-02
