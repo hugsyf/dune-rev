@@ -35,6 +35,7 @@ Desktop.ini
 *~
 
 # Local tooling
+/.kilo/
 /.dotnet/
 /packages/
 TestResults/
