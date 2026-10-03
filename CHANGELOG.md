@@ -1,9 +1,12 @@
 # Changelog
 
-## Unreleased
+## v2.1.3 - 2026-10-03
 
 ### Fixed
 
+- Include the Grid View cover startup fix verified in the 2.1.2 pre-release:
+  read mask dimensions directly from application settings before the main view
+  model is available.
 - Extend the native library background behind the sidebar in all dock positions,
   with a translucent dark sidebar surface that preserves icon readability.
 - Keep extension store-list selections readable by mapping the legacy hover
@@ -24,10 +27,6 @@
   previous binding could leave the masks empty after startup.
 - Cover the theme-before-view-model startup order in the transparency regression
   check, preserving the actual settings path instead of bypassing it.
-
-### Changed
-
-- Include theme XAML in GitHub language statistics and exclude development tools.
 
 ## v2.1.1 - 2026-10-03
 

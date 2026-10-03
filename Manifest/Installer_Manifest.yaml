@@ -1,5 +1,14 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.1.3
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-03
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.1.3/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_1_3.pthm
+    Changelog:
+      - Fix missing Grid View covers after startup, including the fix verified in the 2.1.2 pre-release.
+      - Extend the native blurred library background behind the sidebar in all dock positions while preserving icon readability.
+      - Fix extension store-list selection colors and selected text visibility in text, password and rich text fields.
+      - Improve Grid View play and install button contrast and notification action readability. Requires Playnite 10.57 or newer.
   - Version: 2.1.1
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-03
