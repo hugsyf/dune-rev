@@ -83,11 +83,13 @@
                                                 <DataTrigger Binding="{Binding ElementName=Mask, Path=Tag}" Value="True">
                                                     <Setter Property="OpacityMask">
                                                         <Setter.Value>
+                                                            <!-- Theme brushes are parsed before MainModel exists.
+                                                                 Read settings directly from the application. -->
                                                             <VisualBrush>
                                                                 <VisualBrush.Visual>
                                                                     <Border Background="White" CornerRadius="{DynamicResource ControlCornerRadiusLarge}"
-                                                                            Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemWidth}"
-                                                                            Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemHeight}" />
+                                                                            Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=AppSettings.GridItemWidth}"
+                                                                            Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=AppSettings.GridItemHeight}" />
                                                                 </VisualBrush.Visual>
                                                             </VisualBrush>
                                                         </Setter.Value>
@@ -156,8 +158,8 @@
                                                                 <VisualBrush>
                                                                     <VisualBrush.Visual>
                                                                         <Border Background="White" CornerRadius="{DynamicResource ControlCornerRadiusLarge}"
-                                                                                Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemWidth}"
-                                                                                Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.GridItemHeight}" />
+                                                                                Width="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=AppSettings.GridItemWidth}"
+                                                                                Height="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=AppSettings.GridItemHeight}" />
                                                                     </VisualBrush.Visual>
                                                                 </VisualBrush>
                                                             </Setter.Value>

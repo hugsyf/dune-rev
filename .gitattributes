@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Theme layouts are the product source; development tools are auxiliary.
+Source/**/*.xaml linguist-detectable=true
+tools/** linguist-detectable=false
