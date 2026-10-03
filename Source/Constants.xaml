@@ -133,7 +133,7 @@
         <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentIdleColor}" />
         <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentIdleColor}" />
         <SolidColorBrush x:Key="AccentSecondaryBrush" Color="{DynamicResource AccentSelectedColor}" />
-        <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="{DynamicResource PrimaryTextColor}" />
+        <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="#212121" />
         <SolidColorBrush x:Key="SuccessBrush" Color="#2ecc71" />
         <SolidColorBrush x:Key="OverlayBrush" Color="#99000000" />
         <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
@@ -233,7 +233,8 @@
     <SolidColorBrush x:Key="PromptBrush" Color="{DynamicResource SecondaryTextColor}" />
     <SolidColorBrush x:Key="SubtalBrush" Color="{DynamicResource MutedTextColor}" />
     <SolidColorBrush x:Key="IdleBrush" Color="{DynamicResource PrimaryTextColor}" />
-    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource PrimaryTextColor}" />
+    <!-- Extensions use HoverBrush as a row background; foregrounds use TextBrush. -->
+    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource HoverSurfaceColor}" />
     <SolidColorBrush x:Key="SelectedBrush" Color="{DynamicResource PrimaryTextColor}" />
 
     <SolidColorBrush x:Key="AccentIdleBrush" Color="{DynamicResource AccentIdleColor}" />

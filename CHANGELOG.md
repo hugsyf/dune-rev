@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Keep extension store-list selections readable by mapping the legacy hover
+  background resource to a dark surface and using text resources for foregrounds.
+- Preserve selected text and password glyphs in both WPF selection rendering
+  modes, including rich text fields.
+- Improve Grid View play/install button contrast on light and dark covers, and
+  replace the white hover glow with clear hover, press and keyboard-focus states.
+- Give the notification panel's primary action contrasting text and an accent
+  background.
+
 ## v2.1.2 (pre-release) - 2026-10-03
 
 ### Fixed
