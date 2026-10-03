@@ -71,6 +71,7 @@
         <Color x:Key="SecondaryTextColor">#B5BDC9</Color>
         <Color x:Key="MutedTextColor">#9EA8B7</Color>
         <SolidColorBrush x:Key="CardSurfaceBrush" Color="{DynamicResource CardSurfaceColor}" />
+        <SolidColorBrush x:Key="DuneSidebarBackgroundBrush" Color="{DynamicResource WindowSurfaceColor}" Opacity="0.55" />
         <SolidColorBrush x:Key="ControlOverlayBrush" Color="#FFFFFF" />
         <SolidColorBrush x:Key="ControlShadeBrush" Color="#000000" />
         <SolidColorBrush x:Key="ControlTrackBrush" Color="#29FFFFFF" />

@@ -4,6 +4,8 @@
 
 ### Fixed
 
+- Extend the native library background behind the sidebar in all dock positions,
+  with a translucent dark sidebar surface that preserves icon readability.
 - Keep extension store-list selections readable by mapping the legacy hover
   background resource to a dark surface and using text resources for foregrounds.
 - Preserve selected text and password glyphs in both WPF selection rendering

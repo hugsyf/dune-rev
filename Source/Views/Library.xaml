@@ -18,18 +18,37 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <FadeImage x:Name="PART_ImageBackground" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Top" >
+                        <!-- Keep Playnite's background part in Library so native image,
+                             blur and transition bindings remain intact. The zero-sized
+                             canvas lets it draw behind the adjacent sidebar without
+                             changing the library's measured size. -->
+                        <Canvas x:Name="DuneWindowBackgroundAnchor" Grid.RowSpan="2" Width="0" Height="0"
+                                HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False">
+                            <FadeImage x:Name="PART_ImageBackground" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                       Canvas.Right="0" Canvas.Top="0">
+                                <FadeImage.Width>
+                                    <PriorityBinding>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=MainWindow}" />
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </PriorityBinding>
+                                </FadeImage.Width>
+                                <FadeImage.Height>
+                                    <PriorityBinding>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=MainWindow}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </PriorityBinding>
+                                </FadeImage.Height>
 
-                            <FadeImage.ImageOpacityMask>
-                                <RadialGradientBrush GradientOrigin="0.5,0" Center="0.5,0" RadiusX="1" RadiusY="0.7">
-                                    <RadialGradientBrush.GradientStops>
-                                        <GradientStop Color="#99000000" Offset="0.4" />
-                                        <GradientStop Color="Transparent" Offset="1" />
-                                    </RadialGradientBrush.GradientStops>
-                                </RadialGradientBrush>
-                            </FadeImage.ImageOpacityMask>
-                        </FadeImage>
+                                <FadeImage.ImageOpacityMask>
+                                    <RadialGradientBrush GradientOrigin="0.5,0" Center="0.5,0" RadiusX="1" RadiusY="0.7">
+                                        <RadialGradientBrush.GradientStops>
+                                            <GradientStop Color="#99000000" Offset="0.4" />
+                                            <GradientStop Color="Transparent" Offset="1" />
+                                        </RadialGradientBrush.GradientStops>
+                                    </RadialGradientBrush>
+                                </FadeImage.ImageOpacityMask>
+                            </FadeImage>
+                        </Canvas>
 
                         <DockPanel Grid.Row="1">
                             <FilterPanel x:Name="PART_FilterPanel"
@@ -50,6 +69,26 @@
 
                         <TopPanel VerticalAlignment="Top" Grid.Row="0"/>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Settings SidebarPosition}" Value="Right">
+                            <Setter TargetName="DuneWindowBackgroundAnchor" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Right" Value="NaN" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Left" Value="0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Settings SidebarPosition}" Value="Top">
+                            <Setter TargetName="DuneWindowBackgroundAnchor" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="DuneWindowBackgroundAnchor" Property="VerticalAlignment" Value="Bottom" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Right" Value="NaN" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Left" Value="0" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Top" Value="NaN" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Bottom" Value="0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Settings SidebarPosition}" Value="Bottom">
+                            <Setter TargetName="DuneWindowBackgroundAnchor" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Right" Value="NaN" />
+                            <Setter TargetName="PART_ImageBackground" Property="Canvas.Left" Value="0" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
