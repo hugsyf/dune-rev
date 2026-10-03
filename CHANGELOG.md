@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.1.2 (pre-release) - 2026-10-03
+
+### Fixed
+
+- Read Grid View cover and selection-mask dimensions directly from application
+  settings. Theme resources load before the main view model exists, so the
+  previous binding could leave the masks empty after startup.
+- Cover the theme-before-view-model startup order in the transparency regression
+  check, preserving the actual settings path instead of bypassing it.
+
+### Changed
+
+- Include theme XAML in GitHub language statistics and exclude development tools.
+
 ## v2.1.1 - 2026-10-03
 
 ### Fixed

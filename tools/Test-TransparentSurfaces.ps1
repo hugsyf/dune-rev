@@ -1,4 +1,4 @@
-# Render the actual cover-mask and progress templates with transparent theme colors.
+# Render cover masks through Playnite's theme-before-MainModel startup order.
 # Run: powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tools/Test-TransparentSurfaces.ps1
 [CmdletBinding()]
 param([string]$SourceDirectory)
@@ -12,6 +12,15 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 namespace DuneSurfaceTests {
+    public class AppState {
+        public static readonly AppState Instance = new AppState();
+        public CoverSettings AppSettings { get; set; }
+        public AppState() { AppSettings = CoverSettings.Instance; }
+        // Playnite loads theme resources before assigning MainModel; that setter
+        // does not raise PropertyChanged. Preserve that startup order here.
+        public ModelState MainModel { get; set; }
+    }
+    public class ModelState { public CoverSettings AppSettings { get; set; } }
     public class CoverSettings : INotifyPropertyChanged {
         public static readonly CoverSettings Instance = new CoverSettings();
         private double width = 200, height = 300;
@@ -27,7 +36,7 @@ namespace DuneSurfaceTests {
         public override object ProvideValue(IServiceProvider services) {
             IProvideValueTarget target = (IProvideValueTarget)services.GetService(typeof(IProvideValueTarget));
             if (target.TargetObject.GetType().FullName == "System.Windows.SharedDp") return this;
-            Binding binding = new Binding(path) { Source = CoverSettings.Instance, Mode = BindingMode.OneWay };
+            Binding binding = new Binding("AppSettings." + path) { Source = AppState.Instance, Mode = BindingMode.OneWay };
             DependencyProperty property = target.TargetProperty as DependencyProperty;
             if (property != null) return BindingOperations.SetBinding((DependencyObject)target.TargetObject, property, binding);
             PropertyInfo member = target.TargetProperty as PropertyInfo;
@@ -76,10 +85,11 @@ try {
         $style=if($layer -eq 'cover') {$coverStyle.OuterXml} else {$selectionStyle.OuterXml}
         $markup='<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fixture="clr-namespace:DuneSurfaceTests;assembly='+$assembly+'" TargetType="Control"><ControlTemplate.Resources>'+$maskStyle.OuterXml+'</ControlTemplate.Resources><Grid Width="{Settings GridItemWidth}" Height="{Settings GridItemHeight}"><Border Name="Mask" Style="{StaticResource VisualBrushBorderMask}" Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}"/><'+$panel+'>'+$style+'<Image Name="FixtureCover" Height="{Settings GridItemHeight}" Stretch="Uniform"/></'+$panel+'></Grid></ControlTemplate>'
         $markup=$markup.Replace('{Settings ','{fixture:Settings ').Replace(' xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"','')
-        $markup=$markup.Replace('Source={x:Static p:PlayniteApplication.Current}, Path=MainModel.AppSettings.','Source={x:Static fixture:CoverSettings.Instance}, Path=')
+        $markup=$markup.Replace('Source={x:Static p:PlayniteApplication.Current}','Source={x:Static fixture:AppState.Instance}')
         $markup=$markup.Replace('<ControlTemplate xmlns:x=', '<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x=')
         $templates[$layer]=[Windows.Markup.XamlReader]::Parse($markup)
     }
+    [DuneSurfaceTests.AppState]::Instance.MainModel=[DuneSurfaceTests.ModelState]@{AppSettings=[DuneSurfaceTests.CoverSettings]::Instance}
     $count=0
     foreach($color in @('#FF303640','#00303640','#33303640')) {
         foreach($opacity in @(1.0,0.0)) {
@@ -145,5 +155,5 @@ try {
         $left=Pixel $pixels $width ([int]($width*0.1)) 5; $right=Pixel $pixels $width ([int]($width*0.6)) 5
         if($left[2] -ne 255 -or $right[3] -ne 0 -or $animation.Visibility -eq 'Visible') { throw 'Progress must restore its value after leaving indeterminate mode.' }
     }
-    Write-Output "PASS: $count cover/selection renders; transparent and translucent colors, brush opacity, corner toggles, shared templates, zoom, letterboxing; determinate and indeterminate progress."
+    Write-Output "PASS: theme-before-MainModel startup; $count cover/selection renders; transparent and translucent colors, brush opacity, corner toggles, shared templates, zoom, letterboxing; determinate and indeterminate progress."
 } finally { $app.Shutdown() }
