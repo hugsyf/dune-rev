@@ -18,7 +18,6 @@
                                    Margin="0" MinHeight="12" BorderThickness="0" Background="{DynamicResource ControlOverlayBrush}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True" />
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverRectangle" />
                         </Trigger>
@@ -43,7 +42,6 @@
                                  Margin="0" Opacity="1" Fill="{DynamicResource ControlOverlayBrush}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True" />
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="1" TargetName="HoverRectangle" />
                         </Trigger>

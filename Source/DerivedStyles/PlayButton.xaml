@@ -24,7 +24,6 @@
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="HoverBg" Value="0.4" />
                         </Trigger>
@@ -64,7 +63,6 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="HoverBg" Value="0.4" />
                         </Trigger>
@@ -101,7 +99,6 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="Grid" Value="0.6" />
                         </Trigger>
@@ -140,7 +137,6 @@
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="HoverBg" Value="0.4" />
                         </Trigger>
@@ -177,7 +173,6 @@
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="Grid" Value="0.5" />
                         </Trigger>
@@ -232,7 +227,6 @@
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True" />
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="Grid" Value="0.5" />
                         </Trigger>

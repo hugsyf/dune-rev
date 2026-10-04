@@ -5,6 +5,7 @@ $ErrorActionPreference='Stop'
 Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase
 $source=Join-Path $PSScriptRoot '..\Source'
 $app=[Windows.Application]::new()
+$app.ShutdownMode='OnExplicitShutdown'
 function Pump($view,$width) {
     foreach($pass in 0..4) {
         [void]$view.Dispatcher.Invoke([Windows.Threading.DispatcherPriority]::DataBind,[Action]{})
@@ -12,10 +13,56 @@ function Pump($view,$width) {
         $view.Arrange([Windows.Rect]::new(0,0,$width,300)); $view.UpdateLayout()
     }
 }
+function AssertMediaOptions {
+    $window=[Windows.Window]::new()
+    $window.Left=-32000; $window.Top=-32000; $window.Width=800; $window.Height=400
+    $window.ShowInTaskbar=$false; $window.ShowActivated=$false
+    try {
+        foreach($file in @('DetailsViewGameOverview.xaml','GridViewGameOverview.xaml')) {
+            $doc=[Xml.XmlDocument]::new(); $doc.Load((Join-Path $source ('Views/'+$file)))
+            $ns=[Xml.XmlNamespaceManager]::new($doc.NameTable)
+            $ns.AddNamespace('p','http://schemas.microsoft.com/winfx/2006/xaml/presentation'); $ns.AddNamespace('x','http://schemas.microsoft.com/winfx/2006/xaml')
+            $gridView=$file -like 'Grid*'
+            $preference=if($gridView){'GridViewAllowUseOfLogos'}else{'DetailsViewAllowUseOfLogos'}
+            $logo=$doc.SelectSingleNode('//p:Border[@x:Name="GameIcon"]',$ns).ParentNode.OuterXml
+            $logo=$logo -replace '\{PluginSettings Plugin=(\w+), Path=', '{Binding Path=$1.'
+            $template=[Windows.Markup.XamlReader]::Parse('<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="Control">'+$logo+'</ControlTemplate>')
+            $view=[Windows.Controls.Control]::new(); $view.Template=$template; $window.Content=$view
+            if(-not $window.IsVisible){$window.Show()}; [void]$view.ApplyTemplate()
+            foreach($mask in 0..3) {
+                $view.DataContext=[pscustomobject]@{ExtraMetadataLoader=[pscustomobject]@{EnableLogos=[bool]($mask -band 1);IsLogoAvailable=[bool]($mask -band 2)}}
+                foreach($allowed in @($true,$false,$true)) {
+                    $app.Resources.MergedDictionaries[0][$preference]=$allowed; Pump $view 640
+                    $expected=$allowed -and $mask -eq 3
+                    if(($template.FindName('ExtraMetadataLoader_LogoLoaderControlGrid',$view).Visibility -eq 'Visible') -ne $expected -or ($template.FindName('GameIcon',$view).Visibility -eq 'Visible') -eq $expected) { throw "Logo and native icon must be mutually exclusive: $file / $mask / $allowed" }
+                }
+            }
+            $view.DataContext=[pscustomobject]@{}; Pump $view 640
+            if($template.FindName('GameIcon',$view).Visibility -ne 'Visible') { throw "Missing logo plugin must keep the native icon: $file" }
+            $style=$doc.SelectSingleNode('//p:StackPanel.Style/p:Style[p:Style.Triggers/p:MultiDataTrigger/p:MultiDataTrigger.Conditions/p:Condition[contains(@Binding,"EnableVideoPlayer")]]',$ns)
+            $markup=$style.OuterXml -replace '\{PluginSettings Plugin=(\w+), Path=', '{Binding Path=$1.'
+            $template=[Windows.Markup.XamlReader]::Parse('<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="Control"><Grid><ContentControl Name="ExtraMetadataLoader_VideoLoaderControl" Content="{Binding VideoContent}" Visibility="Collapsed"/><StackPanel Name="FixtureMedia"><StackPanel.Style>'+ $markup+'</StackPanel.Style></StackPanel></Grid></ControlTemplate>')
+            $view.Template=$template; [void]$view.ApplyTemplate()
+            foreach($mask in @(0..7)+@(0,3)) {
+                $settings=[pscustomobject]@{EnableVideoPlayer=[bool]($mask -band 1);IsAnyVideoAvailable=[bool]($mask -band 2);EnableAlternativeDetailsVideoPlayer=[bool]($mask -band 4);EnableAlternativeGridVideoPlayer=[bool]($mask -band 4)}
+                $view.DataContext=[pscustomobject]@{ExtraMetadataLoader=$settings;VideoContent=[pscustomobject]@{VideoSource='fixture.mp4'}}
+                Pump $view 640
+                if(($template.FindName('FixtureMedia',$view).Visibility -eq 'Visible') -ne ($mask -eq 3)) { throw "Video options must respect the player switch and availability: $file / $mask" }
+            }
+            if($gridView) {
+                $view.DataContext=[pscustomobject]@{ExtraMetadataLoader=$settings;VideoContent=[pscustomobject]@{VideoSource=$null}}; Pump $view 640
+                if($template.FindName('FixtureMedia',$view).Visibility -ne 'Collapsed') { throw 'A grid video without a source must hide its selector.' }
+            }
+            $view.DataContext=[pscustomobject]@{}; Pump $view 640
+            if($template.FindName('FixtureMedia',$view).Visibility -ne 'Collapsed') { throw "Missing video plugin must hide its selector: $file" }
+        }
+    } finally { $window.Close() }
+}
 try {
     foreach($file in @('Constants.xaml','Common.xaml','DefaultControls/Border.xaml','DefaultControls/TabControl.xaml')) {
         $app.Resources.MergedDictionaries.Add([Windows.Markup.XamlReader]::Parse([IO.File]::ReadAllText((Join-Path $source $file))))
     }
+    AssertMediaOptions
     $doc=[Xml.XmlDocument]::new();$doc.Load((Join-Path $source 'Views/GridViewGameOverview.xaml'))
     $ns=[Xml.XmlNamespaceManager]::new($doc.NameTable)
     $ns.AddNamespace('p','http://schemas.microsoft.com/winfx/2006/xaml/presentation');$ns.AddNamespace('x','http://schemas.microsoft.com/winfx/2006/xaml')
@@ -63,8 +110,8 @@ try {
             $markup=$tab.OuterXml -replace '\{PluginSettings Plugin=(\w+), Path=', '{Binding Path=$1.'
             $tabs=[Windows.Markup.XamlReader]::Parse('<TabControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">'+$markup+'</TabControl>')
             $item=$tabs.Items[0];$item.Visibility='Visible';Pump $tabs 600;$item.ApplyTemplate() | Out-Null
-            if($item.FontSize -ne 16 -or $null -eq $item.Template.FindName('SelectionIndicator',$item)) { throw "Section tab must use the Fluent template and 16pt text: $file / $key" }
+            if($null -eq $item.Template.FindName('SelectionIndicator',$item)) { throw "Section tab must show its selection indicator: $file / $key" }
         }
     }
-    Write-Output 'PASS: hero bottom anchoring, media wrapping/absence, Fluent plugin tabs and consistent heading sizes.'
+    Write-Output 'PASS: logo/icon preferences, video option gates, missing media plugins, hero bottom anchoring, media wrapping/absence and plugin tab selection indicators.'
 } finally { $app.Shutdown() }

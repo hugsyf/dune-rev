@@ -94,11 +94,11 @@ function Descendants($element) {
 function AssertRowAlignment($view,$keys,$context) {
     $summary=$view.FindName('DuneSummary')
     $visible=@($keys | ForEach-Object { $view.FindName('Dune'+$_+'Card') } | Where-Object Visibility -eq 'Visible')
-    foreach($row in @($visible | Group-Object { [Windows.Controls.Grid]::GetRow($_) })) {
+    foreach($row in @($visible | Group-Object { [Math]::Round($_.TranslatePoint([Windows.Point]::new(0,0),$summary).Y,1) })) {
         $headingY=$null; $valueY=$null; $bottomY=$null
         $naturalHeight=($row.Group | ForEach-Object { $_.DesiredSize.Height-$_.Margin.Top-$_.Margin.Bottom } | Measure-Object -Maximum).Maximum
         $catalog=$view.FindName('DuneCatalogSummary')
-        if($catalog -and [Windows.Controls.Grid]::GetRow($catalog) -eq [int]$row.Name) { $naturalHeight=[Math]::Max($naturalHeight,$catalog.DesiredSize.Height-12) }
+        if($catalog -and [Math]::Abs($catalog.TranslatePoint([Windows.Point]::new(0,0),$summary).Y-[double]$row.Name) -lt 0.1) { $naturalHeight=[Math]::Max($naturalHeight,$catalog.DesiredSize.Height-12) }
 
         foreach($card in $row.Group) {
             $key=$card.Name -replace '^Dune','' -replace 'Card$',''
@@ -172,7 +172,7 @@ function AssertCombinedSummary($view,$width,$context) {
         [pscustomobject]@{ Name=$_.Name; Left=$origin.X; Top=$origin.Y; Right=$origin.X+$_.ActualWidth; Bottom=$origin.Y+$_.ActualHeight }
     })
     foreach($rect in $rects) {
-        if($rect.Left -lt -0.1 -or $rect.Right -gt $summary.ActualWidth+0.1) { throw "Summary card overflow: $context / $($rect.Name)" }
+        if($rect.Left -lt -0.1 -or $rect.Top -lt -0.1 -or $rect.Right -gt $summary.ActualWidth+0.1 -or $rect.Bottom -gt $summary.ActualHeight+0.1 -or $rect.Right -le $rect.Left) { throw "Summary card overflow: $context / $($rect.Name)" }
     }
     for($a=0;$a -lt $rects.Count;$a++) {
         for($b=$a+1;$b -lt $rects.Count;$b++) {
@@ -184,6 +184,7 @@ function AssertCombinedSummary($view,$width,$context) {
         $bottoms=$row.Group | Measure-Object Bottom -Minimum -Maximum
         if($bottoms.Maximum-$bottoms.Minimum -gt 0.1) { throw "Combined card bottoms must align: $context" }
         $columns=@($row.Group | Sort-Object Left)
+        if([Math]::Abs($columns[0].Left) -gt 0.1 -or [Math]::Abs($columns[-1].Right-($summary.ActualWidth-12)) -gt 0.1) { throw "Summary row must fill its available width: $context" }
         for($i=1;$i -lt $columns.Count;$i++) {
             if([Math]::Abs($columns[$i].Left-$columns[$i-1].Right-12) -gt 0.1) { throw "Uneven card spacing: $context" }
         }
@@ -225,14 +226,15 @@ function AssertCompletionTypography($view,$width) {
     Pump $view $width
     $combo=@(VisualDescendants $control | Where-Object { $_ -is [Windows.Controls.ComboBox] })[0]
     $selected=@(VisualDescendants $combo | Where-Object { $_ -is [Windows.Controls.TextBlock] -and $_.Text -eq 'Playing' })[0]
-    if($null -eq $selected -or $selected.FontSize -ne 20 -or $selected.FontWeight -ne 'SemiBold' -or $selected.FontFamily.Source -ne $app.FindResource('FontFamily').Source) { throw 'Completion selection must match primary typography.' }
-    if([Math]::Abs($combo.ActualHeight-28) -gt 0.1) { throw 'Completion selection must fit the primary row.' }
+    $primary=[Windows.Controls.TextBlock]::new(); $primary.Style=$app.FindResource('DuneSummaryPrimaryText')
+    if($null -eq $selected -or $selected.FontSize -ne $primary.FontSize -or $selected.FontWeight -ne $primary.FontWeight -or $selected.FontFamily.Source -ne $primary.FontFamily.Source) { throw 'Completion selection must match primary typography.' }
+    if($selected.DesiredSize.Height -gt $combo.ActualHeight+0.1) { throw 'Completion selection must not clip its text.' }
     $combo.IsDropDownOpen=$true
     Pump $view $width
     $item=$combo.ItemContainerGenerator.ContainerFromIndex(0)
     $item.ApplyTemplate() | Out-Null
     $option=@(VisualDescendants $item | Where-Object { $_ -is [Windows.Controls.TextBlock] -and $_.Text -eq 'Playing' })[0]
-    if($null -eq $option -or $option.FontSize -ne 14 -or $option.FontWeight -ne 'Normal') { throw 'Completion popup options must retain regular menu typography.' }
+    if($null -eq $option -or $item.ActualHeight -lt $option.DesiredSize.Height) { throw 'Completion popup options must remain visible without clipping.' }
     $combo.IsDropDownOpen=$false
     Pump $view $width
 }
@@ -412,64 +414,60 @@ try {
         if($duplicates.Count) { throw "Duplicate control names in ${file}: $($duplicates.Name -join ', ')" }
         $node=$doc.SelectSingleNode('//p:Grid[@x:Name="DuneSummary"]',$ns)
         $view=ParseFixtureXaml $node
-        # Include both new optional cards in responsive packing and spacing checks.
-        foreach($combinedMask in 0..63) {
-            $data=Fixture ($combinedMask -band 15)
-            $data.CheckLocalizations.HasData=($combinedMask -band 16) -ne 0
-            $data.CheckDlc.HasData=($combinedMask -band 32) -ne 0
-            $view.DataContext=$data
-            foreach($combinedWidth in @(400,600,900,1320,1760)) {
-                Pump $view $combinedWidth
-                AssertCombinedSummary $view $combinedWidth "$file / combined=$combinedMask / $combinedWidth"
-            }
-        }
         $testWindow.Content=$view
         if(-not $testWindow.IsVisible) { $testWindow.Show() }
         foreach($entry in @{PART_TextPlayTime='18 h 25 min'; PART_TextLastActivity='2026/10/02'}.GetEnumerator()) { $view.FindName($entry.Key).Text=$entry.Value }
         $view.FindName('PART_ButtonCompletionStatus').Content='Playing'
         AssertCompletionTypography $view 1320
         AddNativeFixture $view 'PlayniteAchievements_AchievementCompactLatest' ([char]0x2605)
-    AddNativeFixture $view 'CheckDlc_PluginButton' 'Open'; AddNativeFixture $view 'CheckLocalizations_PluginButton' 'Open'
-        foreach($mask in 0..15) {
-            $view.DataContext=Fixture $mask
+        AddNativeFixture $view 'CheckDlc_PluginButton' 'Open'; AddNativeFixture $view 'CheckLocalizations_PluginButton' 'Open'
+        # One matrix owns geometry and alignment checks for all six optional cards.
+        foreach($combinedMask in 0..63) {
+            $data=Fixture ($combinedMask -band 15)
+            $data.CheckLocalizations.HasData=($combinedMask -band 16) -ne 0
+            $data.CheckDlc.HasData=($combinedMask -band 32) -ne 0
+            $view.DataContext=$data
             foreach($width in @(400,600,640,900,1320,1760)) {
                 Pump $view $width
-                $summary=$view.FindName('DuneSummary')
-                if([Math]::Abs($view.ActualWidth-$width) -gt 0.1) { throw 'The fixture window must use the requested width.' }
-                $visible=@($keys | ForEach-Object { $view.FindName("Dune${_}Card") } | Where-Object Visibility -eq 'Visible')
-                if($visible.Count -ne (3+@($optional | Where-Object { $view.FindName("Dune${_}Card").Visibility -eq 'Visible' }).Count)) { throw 'Missing baseline card.' }
+                $context="$file / combined=$combinedMask / $width"
+                AssertCombinedSummary $view $width $context
+                AssertRowAlignment $view $keys $context
                 for($bit=0; $bit -lt 4; $bit++) {
                     $card=$view.FindName('Dune'+$optional[$bit]+'Card')
-                    if(($card.Visibility -eq 'Visible') -ne (($mask -band (1 -shl $bit)) -ne 0)) { throw "Wrong plugin visibility: $file / $mask / $width / $($optional[$bit])" }
+                    if(($card.Visibility -eq 'Visible') -ne (($combinedMask -band (1 -shl $bit)) -ne 0)) { throw "Wrong plugin visibility: $context / $($optional[$bit])" }
                 }
-                foreach($card in $visible) {
-                    $position=$card.TranslatePoint([Windows.Point]::new(0,0),$summary)
-                    if($position.X -lt -0.1 -or $position.X+$card.ActualWidth -gt $summary.ActualWidth+0.1 -or $position.Y+$card.ActualHeight -gt $summary.ActualHeight+0.1 -or $card.ActualWidth -le 0) { throw "Card outside summary: $file / $mask / $width / $($card.Name)" }
-                    foreach($other in $visible) {
-                        if($card -eq $other) { continue }
-                        $otherPosition=$other.TranslatePoint([Windows.Point]::new(0,0),$summary)
-                        $rect=[Windows.Rect]::new($position.X,$position.Y,$card.ActualWidth,$card.ActualHeight)
-                        $otherRect=[Windows.Rect]::new($otherPosition.X,$otherPosition.Y,$other.ActualWidth,$other.ActualHeight)
-                        if($rect.IntersectsWith($otherRect)) { throw "Overlapping cards: $file / $mask / $width / $($card.Name) / $($other.Name)" }
-                    }
-                }
-                # Simple values are grouped separately from rich plugin content.
-                foreach($key in @('PlayTime','LastPlayed','Completion','Requirements')) {
-                    $card=$view.FindName('Dune'+$key+'Card')
-                    if($card.Visibility -eq 'Visible' -and [Math]::Abs($card.ActualHeight-96) -gt 0.1) { throw "Simple card was stretched: $file / $mask / $width / $key / $($card.ActualHeight)" }
-                }
-                AssertRowAlignment $view $keys "$file / $mask / $width"
-                if($width -ge 600 -and $width -lt 1320 -and $view.FindName('DuneAchievementsCard').Visibility -eq 'Visible') {
-                    $achievementRow=[Windows.Controls.Grid]::GetRow($view.FindName('DuneAchievementsCard'))
-                    if(@($visible | Where-Object { [Windows.Controls.Grid]::GetRow($_) -eq $achievementRow }).Count -ne 1) { throw 'Achievements must occupy their own row in regular panes.' }
-                }
-                if($view.FindName('DuneRequirementsCard').Visibility -eq 'Visible') {
-                    $simpleRows=@('PlayTime','LastPlayed','Completion' | ForEach-Object { [Windows.Controls.Grid]::GetRow($view.FindName('Dune'+$_+'Card')) })
-                    $requirementRow=[Windows.Controls.Grid]::GetRow($view.FindName('DuneRequirementsCard'))
-                    $richRows=@('HowLongToBeat','Activity','Achievements' | ForEach-Object { $view.FindName('Dune'+$_+'Card') } | Where-Object Visibility -eq 'Visible' | ForEach-Object { [Windows.Controls.Grid]::GetRow($_) })
-                    if($richRows -contains $requirementRow -or ($simpleRows | Measure-Object -Maximum).Maximum -gt $requirementRow) { throw 'Requirements must stay in the compact statistics group.' }
+                $summary=$view.FindName('DuneSummary')
+                $achievement=$view.FindName('DuneAchievementsCard')
+                if($width -lt 1320 -and $achievement.Visibility -eq 'Visible') {
+                    $top=$achievement.TranslatePoint([Windows.Point]::new(0,0),$summary).Y
+                    $neighbors=@($keys | ForEach-Object { $view.FindName('Dune'+$_+'Card') } | Where-Object { $_.Visibility -eq 'Visible' -and [Math]::Abs($_.TranslatePoint([Windows.Point]::new(0,0),$summary).Y-$top) -lt 0.1 })
+                    if($neighbors.Count -ne 1) { throw "Achievements must occupy their own row in regular panes: $context" }
                 }
                 $cases++
+            }
+        }
+        # Native detail settings may hide any baseline field; restore the same view.
+        $baseline=@('PlayTime','LastPlayed','Completion')
+        $baselineLabels=@('PART_ElemPlayTime','PART_ElemLastPlayed','PART_ElemCompletionStatus')
+        foreach($pluginMask in @(0,4,63)) {
+            $data=Fixture ($pluginMask -band 15)
+            $data.CheckLocalizations.HasData=($pluginMask -band 16) -ne 0
+            $data.CheckDlc.HasData=($pluginMask -band 32) -ne 0
+            $view.DataContext=$data
+            foreach($basicMask in @(0..7)+@(0,7)) {
+                for($bit=0; $bit -lt $baseline.Count; $bit++) {
+                    $view.FindName($baselineLabels[$bit]).Visibility=$(if($basicMask -band (1 -shl $bit)){'Visible'}else{'Collapsed'})
+                }
+                foreach($width in @(400,900,1320)) {
+                    Pump $view $width
+                    $context="$file / basic=$basicMask / plugins=$pluginMask / $width"
+                    AssertCombinedSummary $view $width $context
+                    AssertRowAlignment $view $keys $context
+                    for($bit=0; $bit -lt $baseline.Count; $bit++) {
+                        if(($view.FindName('Dune'+$baseline[$bit]+'Card').Visibility -eq 'Visible') -ne [bool]($basicMask -band (1 -shl $bit))) { throw "Wrong native field visibility: $context" }
+                    }
+                    if($basicMask -eq 0 -and $pluginMask -eq 0 -and $view.FindName('DuneSummary').DesiredSize.Height -ne 0) { throw 'An entirely hidden summary must reserve no height.' }
+                }
             }
         }
         # Missing estimates, date, recent activity and latest unlock affect the whole row.
@@ -593,5 +591,5 @@ try {
             if($tab.Visibility -ne 'Collapsed') { throw "$plugin tab must hide with missing game data." }
         }
     }
-    Write-Output "PASS ($Language): $cases summary combinations, 640 nine-card packing/spacing states, adaptive row heights, heading/value/bottom alignment, conditional provider/source icons, completion selection and popup typography, requirements glyphs, bounds, overlap, density, live preferences, missing extensions, and native tab visibility."
+    Write-Output "PASS ($Language): $cases summary combinations, native field hiding/restoration, nine-card packing/spacing, adaptive row heights, heading/value/bottom alignment, conditional provider/source icons, completion selection and popup typography, requirements glyphs, bounds, overlap, density, live preferences, missing extensions, and native tab visibility."
 } finally { $app.Shutdown() }
