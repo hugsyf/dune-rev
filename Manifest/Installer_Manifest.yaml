@@ -1,5 +1,15 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.2.0
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-05
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.2.0/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_2_0.pthm
+    Changelog:
+      - Click plugin cards to expand achievement, completion-time, activity, language and DLC details; keep Overview, Reviews and News as separate tabs below them.
+      - Add available HowLongToBeat estimate categories and GameActivity performance charts, with adaptive heights for long lists and compact short content.
+      - Fix intermittently empty content when switching cards and preserve theme transparency in the expanded achievement table.
+      - Use Fluent expand, close and open-window actions and fix overlapping titles in plugin windows.
+      - Honor logo and video preferences and refresh the README with actual expanded plugin screenshots. Requires Playnite 10.57 or newer.
   - Version: 2.1.3
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-03
