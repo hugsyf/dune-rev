@@ -24,7 +24,7 @@
                     <Grid>
                         <Border x:Name="HoverBg" SnapsToDevicePixels="True" BorderBrush="{DynamicResource ControlOverlayBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" Opacity="0.08" />
-                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false" Background="{DynamicResource PopupBackgroundBrush}">
+                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false" Background="Transparent">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid>

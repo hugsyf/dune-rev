@@ -30,16 +30,16 @@ Constants:
     - DuneShowRequirementsCard: 'Show requirements summary / 显示配置需求摘要'
     - DuneShowAchievementsCard: 'Show achievements summary / 显示成就摘要'
     - DuneSummaryDetailed: 'Detailed summaries (extra estimates and recent activity on wide panes) / 详细摘要（宽栏显示额外估时与近期活动）'
-    - DuneShowLatestAchievement: 'Show latest achievement / 显示最近解锁成就'
+    - DuneShowLatestAchievement: 'Show latest achievement in expanded details / 在展开详情中显示最近解锁成就'
     - DuneShowLanguagesSummary: 'Show language support summary / 显示语言支持摘要'
-    - DuneShowLanguagesTab: 'Show languages tab / 显示语言页签'
-    - DuneShowDlcTab: 'Show DLC tab / 显示 DLC 页签'
+    - DuneShowLanguagesTab: 'Enable expandable language details / 启用语言展开详情'
+    - DuneShowDlcTab: 'Enable expandable DLC details / 启用 DLC 展开详情'
     - DuneShowDlcSummary: 'Show DLC summary / 显示 DLC 摘要'
-    - DuneDlcPanelHeight(200,720): 'DLC list viewport height / DLC 列表可视区域高度'
+    - DuneDlcPanelHeight(200,720): 'Default height for short DLC lists / 短 DLC 列表默认高度'
 
     - "Extension panels / 扩展面板"
     - FeatureIconsHeight(16,40): 'Library Management feature icon height / Library Management 功能图标高度'
-    - DuneAchievementsPanelMaxHeight(300,900): 'Achievements panel maximum height / 成就面板最大高度'
+    - DuneAchievementsPanelMaxHeight(300,900): 'Expansion height limit without a sidebar / 无并列详情栏时的展开高度上限'
     - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
 
     - "Grid cover display / 网格封面显示"

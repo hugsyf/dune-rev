@@ -1,5 +1,41 @@
 # Changelog
 
+## v2.2.0 - 2026-10-05
+
+### Added
+
+- Expand achievement, completion-time, activity, language and DLC details directly
+  below the plugin cards, with a separate entry point for each plugin's window.
+- Show available HowLongToBeat estimates for main story, extras, completionist,
+  single-player, co-op and competitive modes alongside the native progress bar.
+- Add recent activity and the native performance chart when GameActivity has
+  recorded performance data.
+
+### Changed
+
+- Keep Overview, Reviews and News as separate tabs below the expandable area;
+  place notes and screenshots inside Overview.
+- Use compact card summaries by default and show the latest achievement in its
+  expanded detail. Add downward chevrons and Fluent close/open window actions.
+- Let long plugin lists grow to the adjacent metadata card's height while short
+  content remains compact. Preserve existing height settings for stacked layouts.
+- Add actual achievement and HowLongToBeat expansion screenshots to the README.
+
+### Fixed
+
+- Preserve loaded plugin controls when switching cards to avoid intermittently
+  empty HowLongToBeat, GameActivity and DLC content.
+- Let the expansion backdrop and embedded achievement table reveal the theme's
+  background while keeping text fully visible.
+- Give plugin windows a separate title-bar row and trim long titles before the
+  window actions, preventing overlap with their content.
+- Honor logo and video display preferences and hide unavailable media sections.
+
+### Maintenance
+
+- Share overview content between Details and Grid views and remove obsolete
+  styles, redundant fallbacks and synthetic UI test scripts.
+
 ## v2.1.3 - 2026-10-03
 
 ### Fixed

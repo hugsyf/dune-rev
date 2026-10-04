@@ -7,11 +7,8 @@ $keys = @('PlayTime','LastPlayed','Completion','Requirements','HowLongToBeat','A
 $basic = @('PlayTime','LastPlayed','Completion','Requirements')
 $optional = @('HowLongToBeat','Activity','Achievements','Languages','Dlc')
 $clickable = @('Requirements','HowLongToBeat','Activity','Achievements')
-$sourceKeys = @('HowLongToBeat','Activity')
 $states = @{}
 foreach ($key in $keys) { $states[$key] = [Collections.Generic.List[string]]::new() }
-$sourceStates = @{}
-foreach ($key in $sourceKeys) { $sourceStates[$key] = [Collections.Generic.List[string]]::new() }
 function Placement($row, $column, $span) {
     return @{ 'Grid.Row'=$row; 'Grid.Column'=$column; 'Grid.ColumnSpan'=$span }
 }
@@ -89,20 +86,7 @@ for ($mask = 0; $mask -lt 32; $mask++) {
             if (-not $positions.ContainsKey($key)) { continue }
             AddLayoutState $key 'DuneSummary' $state $positions[$key] 60
         }
-        foreach ($key in $sourceKeys) {
-            # Derive source visibility from placement, not a separate width assumption.
-            if (-not $positions.ContainsKey($key) -or -not $positions.ContainsKey('Achievements')) { continue }
-            if ($positions[$key]['Grid.Row'] -ne $positions.Achievements['Grid.Row']) { continue }
-            $sourceStates[$key].Add(@"
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Tag, ElementName=DuneSummary}" Value="$state" />
-                    <Condition Binding="{Binding Visibility, ElementName=DuneLatestAchievementRow}" Value="Visible" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="Visibility" Value="Visible" />
-            </MultiDataTrigger>
-"@)
-        }
+
     }
 }
 $styles = foreach ($key in $keys) {
@@ -121,15 +105,6 @@ $styles = foreach ($key in $keys) {
         <Setter Property="Grid.RowSpan" Value="1" />
         <Style.Triggers>
 $($states[$key] -join "`n")
-        </Style.Triggers>
-    </Style>
-"@
-}
-$styles += foreach ($key in $sourceKeys) {
-    @"
-    <Style x:Key="Dune${key}SourceLayout" TargetType="Grid" BasedOn="{StaticResource DuneSummarySourceFooter}">
-        <Style.Triggers>
-$($sourceStates[$key] -join "`n")
         </Style.Triggers>
     </Style>
 "@

@@ -4,11 +4,12 @@ InstallerManifestUrl: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Man
 Name: Dune Rev
 Author: hugsyf
 SourceUrl: https://github.com/hugsyf/dune-rev
-ShortDescription: A dark, Fluent-inspired Desktop theme with adaptive layouts and native achievement support.
+ShortDescription: A dark, Fluent-inspired Desktop theme with adaptive layouts and expandable plugin cards.
 Description: >-
     Dune Rev brings a low-glare Fluent-inspired design to Playnite Desktop, with
-    responsive Details and Grid views, adaptive summary cards, and native Playnite
-    Achievements integration. Optional extensions add activity statistics,
+    responsive Details and Grid views, expandable plugin cards, and native Playnite
+    Achievements integration. Card details expand above separate Overview, Reviews
+    and News tabs. Optional extensions add activity statistics,
     HowLongToBeat estimates, system requirements, language support, DLC,
     screenshots, Steam reviews and news. ThemeModifier provides layout and
     display options.
@@ -23,3 +24,7 @@ Screenshots:
       Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Details%20View.png
     - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png
       Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/PA.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/PA.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/HLTB.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/HLTB.png

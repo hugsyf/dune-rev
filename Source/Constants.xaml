@@ -31,12 +31,13 @@
         <sys:Boolean x:Key="DuneShowActivityCard">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowRequirementsCard">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowAchievementsCard">True</sys:Boolean>
-        <sys:Boolean x:Key="DuneSummaryDetailed">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneSummaryDetailed">False</sys:Boolean>
         <sys:Boolean x:Key="DuneShowLatestAchievement">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowLanguagesSummary">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowLanguagesTab">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowDlcTab">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowDlcSummary">True</sys:Boolean>
+        <!-- Short DLC lists keep this height; longer lists grow within the expansion budget. -->
         <sys:Double x:Key="DuneDlcPanelHeight">360</sys:Double>
         <!-- Legacy card-size keys retained for saved overrides; modular summaries use fixed proportions. -->
         <sys:Double x:Key="DetailsSummaryCardWidth">240</sys:Double>
@@ -44,6 +45,7 @@
         <sys:Double x:Key="GridSummaryCardWidth">260</sys:Double>
         <sys:Double x:Key="GridSummaryCardHeight">136</sys:Double>
         <sys:Double x:Key="FeatureIconsHeight">24</sys:Double>
+        <!-- Retained setting key: expansion limit when metadata is stacked or unavailable. -->
         <sys:Double x:Key="DuneAchievementsPanelMaxHeight">600</sys:Double>
         <sys:Double x:Key="ScreenshotsPanelHeight">500</sys:Double>
 
@@ -244,7 +246,9 @@
 
     <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
-    <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
+    <!-- Embedded extension tables share their containing surface. Playnite Achievements
+         resolves this host key into its own grid, header and row brushes. -->
+    <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="Transparent" />
 
     <SolidColorBrush x:Key="WindowPanelSeparatorBrush" Color="Transparent" />
 

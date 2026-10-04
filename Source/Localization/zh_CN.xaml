@@ -9,7 +9,7 @@
     <sys:String x:Key="LOCDuneMainStoryLabel">主线估时</sys:String>
     <sys:String x:Key="LOCDuneMainExtra">主线＋支线</sys:String>
     <sys:String x:Key="LOCDuneCompletionist">全收集</sys:String>
-    <sys:String x:Key="LOCDuneLastSession">上次游玩</sys:String>
+    <sys:String x:Key="LOCDuneLastSession">上次记录的会话</sys:String>
     <sys:String x:Key="LOCDuneMinimumMet">满足最低配置</sys:String>
     <sys:String x:Key="LOCDuneRecommendedMet">满足推荐配置</sys:String>
     <sys:String x:Key="LOCDuneLanguages">语言支持</sys:String>
@@ -28,4 +28,14 @@
     <sys:String x:Key="LOCDuneLanguageListHint">界面、语音与字幕支持分别列出；窄栏可横向滚动查看全部列。</sys:String>
     <sys:String x:Key="LOCDuneEmptyDlcCategory">此分类暂无 DLC。</sys:String>
     <sys:String x:Key="LOCDuneSource">来源：</sys:String>
+    <sys:String x:Key="LOCDuneOpenPlugin">在插件中打开</sys:String>
+    <sys:String x:Key="LOCDuneCollapseDetails">收起</sys:String>
+    <sys:String x:Key="LOCDuneEmbeddedUnavailable">此插件当前没有可展开的详情。</sys:String>
+    <sys:String x:Key="LOCDuneSolo">单人</sys:String>
+    <sys:String x:Key="LOCDuneCoOp">合作</sys:String>
+    <sys:String x:Key="LOCDuneVs">对战</sys:String>
+    <sys:String x:Key="LOCDuneSessionHistory">游玩时间记录</sys:String>
+    <sys:String x:Key="LOCDunePerformanceHistory">性能记录</sys:String>
+    <sys:String x:Key="LOCDuneAverageFps">平均帧率</sys:String>
+    <sys:String x:Key="LOCDuneTimeEstimates">通关时间估算</sys:String>
 </ResourceDictionary>

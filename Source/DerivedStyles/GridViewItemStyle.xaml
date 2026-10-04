@@ -10,7 +10,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <StackPanel Margin="{Settings ItemSpacingMargin}">
-                        <Grid x:Name="ItemGrid" Background="{DynamicResource GridItemBackgroundBrush}">
+                        <Grid x:Name="ItemGrid" Background="{DynamicResource CardSurfaceBrush}">
 
                             <ContentPresenter />
                             <Border x:Name="SelectedGlossHighlightBorder" BorderThickness="2" Margin="-4" Visibility="Collapsed" Style="{DynamicResource GlossHighlightBorder}"

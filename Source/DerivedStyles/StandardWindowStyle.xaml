@@ -15,7 +15,7 @@
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="24" CornerRadius="0" ResizeBorderThickness="4"
+                <WindowChrome CaptionHeight="32" CornerRadius="0" ResizeBorderThickness="4"
                               NonClientFrameEdges ="None" UseAeroCaptionButtons="False" GlassFrameThickness="1"/>
             </Setter.Value>
         </Setter>
@@ -28,23 +28,35 @@
                     <AdornerDecorator>
                         <Grid>
                             <Border x:Name="WindowBorder" Style="{DynamicResource PopupBorder}" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource PopupBorderBrush}"/>
-                            <ContentPresenter Margin="0,24,0,0" />
-                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-                                <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-                                    <TextBlock Text="{TemplateBinding Title}" DockPanel.Dock="Left" Margin="16,4,16,0" VerticalAlignment="Center"
-                                            FontSize="{DynamicResource FontSize}" FontWeight="Bold" Style="{DynamicResource BaseTextBlockStyle}" x:Name="PART_TextTitle" />
-                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,4,4,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid x:Name="DuneWindowTitleBar" MinHeight="32">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{TemplateBinding Title}" Margin="16,4,16,4" VerticalAlignment="Center"
+                                            FontSize="{DynamicResource FontSize}" FontWeight="SemiBold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
+                                            ToolTip="{TemplateBinding Title}" Style="{DynamicResource BaseTextBlockStyle}" x:Name="PART_TextTitle" />
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,4,0" VerticalAlignment="Top">
                                         <Button Style="{DynamicResource WinSysButton}" FontSize="12" Content="&#xe108;" x:Name="PART_ButtonMinimize"
+                                                Width="40" Height="32" Padding="0"
                                                 WindowChrome.IsHitTestVisibleInChrome="True" />
 
                                         <Button Style="{DynamicResource WinSysButton}" FontSize="12" Content="&#xe15b;" x:Name="PART_ButtonMaximize"
+                                                Width="40" Height="32" Padding="0"
                                                 WindowChrome.IsHitTestVisibleInChrome="True" />
 
                                         <Button Style="{DynamicResource WinSysCloseButton}" FontSize="12" Content="&#xe106;" x:Name="PART_ButtonClose"
+                                                Width="40" Height="32" Padding="0"
                                                 WindowChrome.IsHitTestVisibleInChrome="True" />
                                     </StackPanel>
-                                </DockPanel>
-                            </DockPanel>
+                                </Grid>
+                                <ContentPresenter x:Name="DuneWindowContent" Grid.Row="1" />
+                            </Grid>
                         </Grid>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>

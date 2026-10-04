@@ -4,8 +4,11 @@
 param([switch]$Check)
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $PSScriptRoot '..\Source\Views'
-$fragments = [Xml.XmlDocument]::new()
-$fragments.Load((Join-Path $PSScriptRoot 'SummaryCards.xml'))
+$fragments = @('SummaryCards.xml','OverviewDetails.xml') | ForEach-Object {
+    $document = [Xml.XmlDocument]::new()
+    $document.Load((Join-Path $PSScriptRoot $_))
+    $document
+}
 function GetGridBlock($text, $name) {
     $opening = [regex]::Match($text, '<Grid(?=[\s>])[^>]*\bx:Name="' + [regex]::Escape($name) + '"[^>]*>')
     if (-not $opening.Success) { throw "Missing shared block: $name" }

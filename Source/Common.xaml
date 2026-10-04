@@ -46,6 +46,142 @@
     <sys:String x:Key="LOCDuneLanguageListHint">Interface, audio and subtitle support are reported separately. Scroll horizontally for all columns.</sys:String>
     <sys:String x:Key="LOCDuneEmptyDlcCategory">No DLC in this category.</sys:String>
     <sys:String x:Key="LOCDuneSource">Source:</sys:String>
+    <sys:String x:Key="LOCDuneOpenPlugin">Open in plugin</sys:String>
+    <sys:String x:Key="LOCDuneCollapseDetails">Collapse</sys:String>
+    <sys:String x:Key="LOCDuneEmbeddedUnavailable">Expandable details are unavailable.</sys:String>
+    <sys:String x:Key="LOCDuneSolo">Single-player</sys:String>
+    <sys:String x:Key="LOCDuneCoOp">Co-op</sys:String>
+    <sys:String x:Key="LOCDuneVs">Competitive</sys:String>
+    <sys:String x:Key="LOCDuneSessionHistory">Session history</sys:String>
+    <sys:String x:Key="LOCDunePerformanceHistory">Performance history</sys:String>
+    <sys:String x:Key="LOCDuneAverageFps">Average FPS</sys:String>
+    <sys:String x:Key="LOCDuneTimeEstimates">Completion time estimates</sys:String>
+
+    <!-- IsSelected supplies one shared selection; a second toggle clears it. -->
+    <Style x:Key="DuneCardToggle" TargetType="ToggleButton">
+        <Setter Property="Panel.ZIndex" Value="20" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneKeyboardFocus}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border x:Name="Hover" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource ControlCornerRadiusLarge}" />
+                        <Border x:Name="Outline" Background="Transparent" BorderThickness="2"
+                                BorderBrush="Transparent" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Hover" Property="Opacity" Value="0.08" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Hover" Property="Opacity" Value="0.16" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="{x:Static Visibility.Collapsed}">
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="Cursor" Value="Arrow" />
+                <Setter Property="ToolTip" Value="{DynamicResource LOCDuneEmbeddedUnavailable}" />
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DuneDetailIconButton" TargetType="ToggleButton">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneKeyboardFocus}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Background="Transparent">
+                        <Border x:Name="Surface" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource ControlCornerRadius}" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Surface" Property="Opacity" Value="0.08" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Surface" Property="Opacity" Value="0.16" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- The native plugin button remains the hit target above these visuals. -->
+    <Style x:Key="DuneWindowIconSurface" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ControlOverlayBrush}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Opacity" Value="0" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
+                <Setter Property="Opacity" Value="0.08" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsMouseCaptureWithin, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
+                <Setter Property="Opacity" Value="0.16" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DuneWindowIconFocus" TargetType="Border">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DuneDetailLink" TargetType="ToggleButton">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneKeyboardFocus}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="Surface" Padding="{TemplateBinding Padding}" Background="Transparent"
+                            CornerRadius="{DynamicResource ControlCornerRadius}">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="DuneLatestAchievement" TargetType="Grid">
         <Setter Property="Visibility" Value="Collapsed" />
@@ -56,7 +192,6 @@
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
                     <Condition Binding="{Binding Tag, ElementName=DuneShowLatestAchievementPreference}" Value="True" />
-                    <Condition Binding="{Binding Tag, ElementName=DuneSummaryDetailedPreference}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
@@ -135,6 +270,47 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
         <Setter Property="Padding" Value="16,16,16,0" />
         <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <!-- Keep the native DLC control loaded for its data and action handlers. Its
+         self-sized ListBox cannot measure natural height; reuse its row template
+         in a bounded, automatically sized list instead. -->
+    <Style x:Key="DuneDlcContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Setter Property="Margin" Value="0,8,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ContentPresenter ContentSource="Content" Opacity="0" IsHitTestVisible="False" KeyboardNavigation.TabNavigation="None" />
+                        <!-- The native row template resolves description width through this name. -->
+                        <Grid x:Name="PART_GridContener" Grid.Row="1">
+                            <!-- A sizing spacer preserves the default short-list height without
+                                 imposing a minimum on the scroll viewport in a short sidebar. -->
+                            <Border x:Name="DuneDlcDefaultHeight" Height="{DynamicResource DuneDlcPanelHeight}" Visibility="Hidden" IsHitTestVisible="False" />
+                            <ListBox x:Name="DuneDlcList"
+                                 ItemsSource="{Binding Content.DataContext.ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                 ItemTemplate="{Binding Content.Content.Children[0].ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DuneOptionalDetailText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="DuneCatalogOpener" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">

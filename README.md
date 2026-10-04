@@ -16,6 +16,22 @@
 
 ![Dune Rev Grid Details View](Screenshots/Grid%20Details%20View.png)
 
+<details>
+<summary><strong>Plugin card details / 插件卡片展开详情</strong></summary>
+
+Click a plugin card to expand its details above the Overview, Reviews and News tabs.
+点击插件卡片，可在总览、评论和新闻页签上方展开详情。
+
+**Playnite Achievements / 成就卡片展开**
+
+![Playnite Achievements expanded card with latest unlock and achievement list](Screenshots/PA.png)
+
+**HowLongToBeat / 通关估时卡片展开**
+
+![HowLongToBeat expanded card with completion-time categories and progress](Screenshots/HLTB.png)
+
+</details>
+
 ## English
 
 Dune Rev is a dark, Fluent-inspired Desktop theme for Playnite, based on
@@ -27,6 +43,10 @@ Dune Rev is a dark, Fluent-inspired Desktop theme for Playnite, based on
 - Adaptive cards for play time, achievements, activity, completion estimates,
   system requirements, language support and DLC.
 - Clear plugin entry points and consistent dark controls.
+- Click a plugin card to expand its details below the cards; click it again to
+  collapse. Independent plugin windows have a separate entry point.
+- Overview, reviews and news remain separate tabs below the expandable area.
+- Long plugin lists grow up to the adjacent details card; short content stays compact.
 - Customizable layout and display options through ThemeModifier.
 
 ### Installation
@@ -47,8 +67,8 @@ You can also install through Playnite's add-on browser or the
 | Extension | Integration |
 | --- | --- |
 | Playnite Achievements | Achievement progress, latest unlock and achievement list |
-| HowLongToBeat | Completion estimates and progress |
-| GameActivity | Last session, recent activity and activity chart |
+| HowLongToBeat | Available completion-time categories and progress |
+| GameActivity | Last session, recent activity, session chart and recorded performance chart |
 | SystemChecker | System requirements status and details |
 | CheckLocalizations | Preferred-language summary and interface/audio/subtitle list |
 | CheckDlc | DLC counts, ownership and all/owned/not-owned lists |
@@ -66,7 +86,7 @@ You can also install through Playnite's add-on browser or the
 
 - Enable the desired theme integrations in each extension's settings.
 - Use **ThemeModifier → Summary and extension content** to choose which cards,
-  details and tabs to display. Cards automatically rearrange to fit the window.
+  summaries and expandable details to display. Cards automatically rearrange to fit the window.
 - Set preferred languages in **CheckLocalizations** for the language summary.
 - If icons are missing, install **Segoe Fluent Icons** from
   [Microsoft's font downloads](https://learn.microsoft.com/windows/apps/design/downloads/#fonts).
@@ -92,6 +112,9 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 - 响应式详情与网格视图，支持游戏 Logo、截图和视频。
 - 自适应卡片展示游玩时间、成就、活动、通关估时、系统需求、语言支持与 DLC。
 - 清晰的插件入口和统一的深色控件。
+- 点击插件卡片在下方展开详情，再次点击收起；插件独立窗口保留单独入口。
+- 总览、评论与新闻作为独立页签，位于卡片展开区下方。
+- 长插件列表可增长至并列详情卡片的高度，短内容保持紧凑。
 - 通过 ThemeModifier 自定义布局与显示内容。
 
 ### 安装
@@ -111,8 +134,8 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 | 扩展 | 集成内容 |
 | --- | --- |
 | Playnite Achievements | 成就进度、最近解锁与成就列表 |
-| HowLongToBeat | 通关估时与进度 |
-| GameActivity | 上次游玩、近期活动与活动图表 |
+| HowLongToBeat | 有数据的各类通关估时与进度 |
+| GameActivity | 上次游玩、近期活动、游玩时间图与已记录的性能图 |
 | SystemChecker | 系统配置状态与详情 |
 | CheckLocalizations | 首选语言摘要与界面／语音／字幕列表 |
 | CheckDlc | DLC 数量、拥有情况与全部／已拥有／未拥有列表 |
@@ -129,7 +152,7 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 ### 使用提示
 
 - 在各扩展设置中启用所需的主题集成。
-- 在 **ThemeModifier → 摘要与扩展内容** 中选择显示的卡片、详细信息与页签。
+- 在 **ThemeModifier → 摘要与扩展内容** 中选择显示的卡片、摘要信息与展开详情。
   卡片会随窗口宽度自动重排。
 - 语言摘要的首选语言在 **CheckLocalizations** 中设置。
 - 如果图标缺失，可从 [Microsoft 字体下载页面](https://learn.microsoft.com/windows/apps/design/downloads/#fonts)

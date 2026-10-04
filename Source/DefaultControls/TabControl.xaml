@@ -116,6 +116,25 @@
 
     </Style>
 
+    <!-- Selection only: persistent plugin bodies live beside this selector. -->
+    <Style x:Key="DunePluginDetailsControl" TargetType="TabControl" BasedOn="{StaticResource {x:Type TabControl}}">
+        <Setter Property="SelectedIndex" Value="-1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <TabPanel IsItemsHost="True" Visibility="Collapsed" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SelectedItem.Visibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                            <Setter Property="SelectedIndex" Value="-1" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DetailViewTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource {x:Type TabControl}}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="SelectedIndex" Value="0"/>
