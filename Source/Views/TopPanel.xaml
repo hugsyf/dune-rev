@@ -238,10 +238,16 @@
                                         CommandParameter="ec2f4013-17e6-428a-b8a9-5e34a3b80009">
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource DuneIconActionButton}">
-                                            <Setter Property="Visibility" Value="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" />
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
-                                                <Trigger Property="Tag" Value="False"><Setter Property="Visibility" Value="Collapsed" /></Trigger>
-                                                <DataTrigger Binding="{PluginStatus Plugin=playnite-thememodifier-plugin, FallbackValue=False}" Value="False"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                        <Condition Binding="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" Value="True" />
+                                                        <Condition Binding="{PluginStatus Plugin=playnite-thememodifier-plugin, Status=Installed, FallbackValue=False}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>

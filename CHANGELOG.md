@@ -37,6 +37,11 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Fixed
 
+- Fix theme startup failure caused by a Playnite `Settings` extension used directly
+  in a style Setter. Resolve the native indentation on a hidden dependency-property
+  proxy and bind the row height to it. Use visibility triggers instead of custom
+  extension values in the added screenshot/relations/settings-button Setters.
+
 - Keep plugin card hover and selected outlines within their measured bounds,
   avoiding edge clipping from the previous scale and shadow effects.
 - Place Hero media beside the action area at narrower widths. On small panes,

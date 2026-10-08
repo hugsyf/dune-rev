@@ -639,11 +639,15 @@
                         <Expander Header="{DynamicResource LOCDunePersonalScreenshots}" Margin="0,24,0,0" Tag="{DynamicResource DuneShowPersonalScreenshots}">
                             <Expander.Style>
                                 <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
-                                    <Setter Property="Visibility" Value="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                <Condition Binding="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=False}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Expander.Style>
@@ -744,11 +748,15 @@
                         <StackPanel Tag="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsEnabled, FallbackValue=False}">
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
-                                    <Setter Property="Visibility" Value="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, FallbackValue=False}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </StackPanel.Style>
@@ -760,11 +768,15 @@
                         <StackPanel Tag="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsEnabled, FallbackValue=False}">
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
-                                    <Setter Property="Visibility" Value="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, FallbackValue=False}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </StackPanel.Style>

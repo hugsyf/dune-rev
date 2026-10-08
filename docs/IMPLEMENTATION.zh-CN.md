@@ -88,3 +88,13 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 - 各批安装包位于 release/batch-a、batch-b、batch-c、iteration-1、iteration-2；
   iteration-2 是完整累计包，版本仍为 2.2.0。包文件不纳入 Git。
 - 无推送、合并、标签或正式发布；后续功能扩展以真实环境反馈为依据。
+
+## 载入失败修复（2026-10-08）
+
+- 本机 playnite.log 在 18:20:47.971 报告 DetailsViewGameOverview.xaml 载入失败：
+  `Settings` 对 `Setter.Value` 无效。异常中的 2462 行指向模板结束，实际触发点是原第 36 行的行高 Setter。
+- 将 CalculatedGameDetailsIndentation 先绑定到隐藏 Border.Tag，再通过普通 Binding 设置行高；
+  保留原生行高与紧凑布局开关。新增个人截图、关联游戏和设置入口的 Setter 也改为常量＋绑定触发器。
+- 同步两个 overview 及共享源片段，代码审阅后重新用 Toolbox 打包，不编写模拟测试。
+- 修复包：release/iteration-2-hotfix；原 iteration-2 路径也更新为修复后的累计包。
+  版本仍为 2.2.0，本地提交，不推送。载入成功需真实 Playnite 环境确认。
