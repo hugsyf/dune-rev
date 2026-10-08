@@ -98,3 +98,24 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 - 同步两个 overview 及共享源片段，代码审阅后重新用 Toolbox 打包，不编写模拟测试。
 - 修复包：release/iteration-2-hotfix；原 iteration-2 路径也更新为修复后的累计包。
   版本仍为 2.2.0，本地提交，不推送。载入成功需真实 Playnite 环境确认。
+
+## 实机反馈：副本入口、Fluent 控件与 Playnite 横幅（2026-10-08）
+
+- 单副本游戏不再出现额外的商店图标。多副本入口移到封面下方，悬停或键盘聚焦时显示，
+  保留现有总开关；只有多副本卡片预留 28px，避免悬停造成跳动。当前来源用图标亮度标识。
+  封面的选中边框约束在封面行，不包含下面的入口。
+- 利用 DuplicateHider_ContentControl1 的公开 MoreThanOneCopy 属性判断副本数量。
+  状态控件保持可见、零尺寸、零透明度且不可交互；插件在 IsVisible=False 时停止订阅游戏变化，
+  因此不能使用 Collapsed/Hidden。实际来源选择仍由插件原生控件处理。
+- Playnite／手动添加游戏优先显示第一个平台，避免用 Playnite 标记替代平台信息。
+  判断手动库 PluginId 为空 GUID，或来源名称为 Playnite；新增默认开启的独立开关用于对照。
+  缺少平台及图片时沿用文字／隐藏回退，不制造空横幅。
+- 输入框统一 4px 圆角、半透明表面、细边框与聚焦底线；弹出列表统一 8px 圆角、细边框和行间距。
+  复选框改用 20px 方框与矢量勾选，保留三态、键盘和禁用状态。
+- 主题设置齿轮与筛选清除按钮默认透明；悬停／聚焦时轻微反馈。清除图标为普通叉号。
+  主 Hero 的操作按钮保留原有表面，筛选器原生 PART 名称与处理流程保留。
+- 代码审阅后打包至 release/visual-polish，版本 2.2.0，仅本地提交；实机显示仍待确认。
+
+参考：[DuplicateHider 主题接口](https://github.com/felixkmh/DuplicateHider#theme-integration)、
+[状态控件可见性处理](https://github.com/felixkmh/DuplicateHider/blob/master/source/Controls/DHContentControl.xaml.cs)、
+[微软控件状态说明](https://learn.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/control-templates)。

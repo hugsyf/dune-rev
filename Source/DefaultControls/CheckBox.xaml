@@ -7,28 +7,28 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="Background" Value="{DynamicResource ControlIdleBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneCheckBoxStrokeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="MinHeight" Value="28" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Border x:Name="CheckboxBorder" Background="Transparent" Padding="{TemplateBinding Padding}">
+                    <Border x:Name="CheckboxBorder" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource DuneInputCornerRadius}" Padding="{TemplateBinding Padding}">
                         <DockPanel>
-                            <Grid DockPanel.Dock="Left" VerticalAlignment="Center">
-                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="0" Background="{DynamicResource ControlIdleBackgroundBrush}"/>
-                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource ControlCornerRadiusSmall}" BorderThickness="1" Background="Transparent" BorderBrush="{DynamicResource TextBrushDarker}"/>
+                            <Grid DockPanel.Dock="Left" VerticalAlignment="Center" Width="20" Height="20">
+                                <Border x:Name="BulletBorder" CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderThickness="0" Background="{DynamicResource DuneInputFillBrush}"/>
+                                <Border x:Name="BulletHoverBorder" CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}"/>
                                 <Grid Width="20" Height="20">
-                                    <Viewbox x:Name="CheckIcon" Visibility="Collapsed">
-                                        <TextBlock Text="&#xf13e;" Margin="1,0,0,1" Foreground="{DynamicResource ControlShadeBrush}" Style="{DynamicResource IconFontStyle}" />
-                                    </Viewbox>
+                                    <Path x:Name="CheckIcon" Visibility="Collapsed" Width="12" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                          Data="M 0,5 L 4,9 L 11,1" Stroke="{DynamicResource ControlShadeBrush}" StrokeThickness="1.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
                                     <Border x:Name="IndeterminateIcon" Visibility="Collapsed" Width="10" Height="2" CornerRadius="1" Background="{DynamicResource ControlShadeBrush}" />
                                 </Grid>
                             </Grid>
-                            <ContentPresenter DockPanel.Dock="Left" RecognizesAccessKey="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <ContentPresenter DockPanel.Dock="Left" RecognizesAccessKey="True" Margin="12,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -51,7 +51,7 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ControlHoverBackgroundBrush}" TargetName="BulletBorder" />
+                            <Setter Property="Background" Value="{DynamicResource DuneInputHoverBrush}" TargetName="BulletBorder" />
                             <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" TargetName="BulletHoverBorder" />
                         </MultiTrigger>
                         <Trigger Property="IsPressed" Value="True">

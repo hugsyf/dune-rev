@@ -117,7 +117,7 @@ You can also install through Playnite's add-on browser or the
   and the native screenshot grid (disabled by default). Enable the matching gallery
   integration in ScreenshotsVisualizer to use its grid. Native fields/notes remain available.
 - Missing-logo title fallback is enabled by default. Grid personal score badges are
-  optional; copy selectors and cover actions are also available on keyboard focus.
+  optional; multi-copy selectors appear below covers on hover/keyboard focus; cover actions also support focus.
 
 ### Credits and support
 
@@ -209,7 +209,8 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
   自定义字段页与优先使用原生截图网格默认关闭；前缀和对应图库集成需在各插件中配置。
   原生字段与笔记继续保留，未评分游戏也可以通过 ThemeExtras 直接打分。
 - 缺 Logo 时的标题回退默认开启；网格个人评分默认关闭，副本选择默认开启。
-  副本选择和封面操作支持悬停与键盘聚焦。
+  多副本来源入口位于封面下方，仅悬停或键盘聚焦时显示；单副本游戏隐藏入口。
+  Playnite／手动添加游戏优先使用第一个平台横幅，可在网格封面设置中单独关闭此偏好。
 
 ### 致谢与反馈
 

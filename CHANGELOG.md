@@ -20,6 +20,15 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Improved
 
+- Move duplicate-copy selection below covers and show it only for multiple copies
+  on hover/keyboard focus. Use icon opacity for the current copy and transparent
+  idle backgrounds; keep the selection outline around the cover area.
+- Add a default-enabled preference for platform banners on Playnite/manual games.
+- Unify filter, combo and search surfaces with 4px corners, subtle borders and
+  focus strokes. Refresh checkbox states, popup rows and plain clear icons.
+- Use transparent idle toolbar/settings and filter-clear buttons with subtle
+  hover/pressed feedback.
+
 - Stop selection gloss when hidden and use static selection feedback when cover
   motion is reduced. Reveal cover action buttons on keyboard focus.
 - Hide unavailable custom metadata and disabled related-game sections. Remove

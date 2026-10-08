@@ -75,6 +75,7 @@
         <sys:Boolean x:Key="GridViewGameCoverUseRoundedCorners">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowPlatformBanner">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverPreferSourceBanner">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneManualGamesPreferPlatformBanner">True</sys:Boolean>
         <sys:Double x:Key="GridViewPlatformBannerHeight">32</sys:Double>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
@@ -224,6 +225,14 @@
     <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="Transparent" />
 
     <!--InputStyle-->
+    <CornerRadius x:Key="DuneInputCornerRadius">4</CornerRadius>
+    <CornerRadius x:Key="DuneFlyoutCornerRadius">8</CornerRadius>
+    <SolidColorBrush x:Key="DuneInputFillBrush" Color="#0FFFFFFF" />
+    <SolidColorBrush x:Key="DuneInputHoverBrush" Color="#18FFFFFF" />
+    <SolidColorBrush x:Key="DuneInputPressedBrush" Color="#0AFFFFFF" />
+    <SolidColorBrush x:Key="DuneInputBorderBrush" Color="#22FFFFFF" />
+    <SolidColorBrush x:Key="DuneInputBottomBrush" Color="#66FFFFFF" />
+    <SolidColorBrush x:Key="DuneCheckBoxStrokeBrush" Color="{DynamicResource PrimaryTextColor}" Opacity="0.65" />
     <SolidColorBrush x:Key="ControlIdleBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
     <SolidColorBrush x:Key="ControlIdleBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
 

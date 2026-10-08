@@ -59,9 +59,10 @@ Constants:
 
     - "Grid cover display / 网格封面显示"
     - DuneGridShowUserScore: 'Grid covers: show personal score / 网格封面：显示个人评分'
-    - DuneGridShowCopySelector: 'Grid covers: show copy selector on hover or focus / 网格封面：悬停或聚焦时显示副本选择'
+    - DuneGridShowCopySelector: 'Grid cards: show copy selector for multiple copies / 网格卡片：为多副本游戏显示来源选择'
     - GridViewGameCoverShowPlatformBanner: 'Grid covers: show platform/source labels / 网格封面：显示平台／来源标签'
     - GridViewGameCoverPreferSourceBanner: 'Grid covers: prefer store/source labels for PC games / 网格封面：PC 游戏优先显示商店／来源标签'
+    - DuneManualGamesPreferPlatformBanner: 'Playnite/manual games: prefer platform labels / Playnite／手动添加游戏：优先显示平台标签'
     - GridViewPlatformBannerHeight(20,64): 'Grid covers: platform banner height / 网格封面：平台标签高度'
     - GridViewGameCoverShowFavorite: 'Grid covers: show favorite icon / 网格封面：显示收藏图标'
     - GridViewGameCoverUseRoundedCorners: 'Grid covers: use rounded corners / 网格封面：使用圆角'

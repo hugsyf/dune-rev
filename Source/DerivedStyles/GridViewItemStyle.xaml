@@ -11,8 +11,12 @@
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <StackPanel Margin="{Settings ItemSpacingMargin}">
                         <Grid x:Name="ItemGrid" Background="{DynamicResource CardSurfaceBrush}">
-
-                            <ContentPresenter />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Settings GridItemHeight}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- The copy strip occupies the second row; selection still outlines the cover. -->
+                            <ContentPresenter Grid.RowSpan="2" />
                             <Border x:Name="SelectedGlossHighlightBorder" BorderThickness="2" Margin="-4" Visibility="Collapsed" Style="{DynamicResource GlossHighlightBorder}"
                                     Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
                             </Border>

@@ -237,7 +237,7 @@
                                         Command="{PluginSettings Plugin=ThemeExtras, Path=Commands.OpenPluginSettingsCommand, FallbackValue={x:Null}}"
                                         CommandParameter="ec2f4013-17e6-428a-b8a9-5e34a3b80009">
                                     <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource DuneIconActionButton}">
+                                        <Style TargetType="Button" BasedOn="{StaticResource DuneToolbarIconButton}">
                                             <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
