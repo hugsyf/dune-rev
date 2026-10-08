@@ -1,0 +1,82 @@
+<WrapPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <Button Name="PART_ButtonReleaseDate" Margin="0,0,4,0" Padding="0" BorderThickness="0" Background="{x:Null}"
+                                                        VerticalAlignment="Center"
+                                                        Style="{DynamicResource PropertyItemSmallButton}" />
+
+                                                <StackPanel Name="PART_ElemPlatform" Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <StackPanel.Style>
+                                                        <Style TargetType="StackPanel">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Settings DetailsVisibility.Platforms}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Game.Platforms}" Value="{x:Null}">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </StackPanel.Style>
+                                                    <TextBlock Text="·" Margin="4,0" Foreground="#99FFFFFF" FontWeight="Bold" VerticalAlignment="Center" />
+                                                    <ItemsControl ItemsSource="{Binding Game.Platforms}" Margin="0" VerticalAlignment="Center">
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel Orientation="Horizontal" />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Button Content="{Binding Name}" Margin="4,0" Padding="0" BorderThickness="0" Background="{x:Null}"
+                                                                        VerticalAlignment="Center"
+                                                                        Style="{DynamicResource PropertyItemSmallButton}"
+                                                                        Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}"
+                                                                        CommandParameter="{Binding}" />
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+
+                                                <Button Name="PART_ButtonSource" Margin="4,0" Padding="0" VerticalAlignment="Center"
+                                                        Style="{DynamicResource PropertyItemOutlinedButton}" />
+
+                                                <ContentControl x:Name="DuplicateHider_SourceSelector"
+                                                                Height="24" Margin="8,0,0,0"
+                                                                VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                                RenderOptions.BitmapScalingMode="Fant" />
+
+                                                <ContentControl x:Name="NewsViewer_PlayersInGameViewerControl"
+                                                                Margin="8,0,0,0"
+                                                                VerticalAlignment="Center" VerticalContentAlignment="Center" />
+
+                                                <StackPanel Name="PART_ElemGenres" Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <StackPanel.Style>
+                                                        <Style TargetType="StackPanel">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Settings DetailsVisibility.Genres}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Game.Genres}" Value="{x:Null}">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </StackPanel.Style>
+                                                    <ItemsControl ItemsSource="{Binding Game.Genres}" Margin="0" VerticalAlignment="Center">
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel Orientation="Horizontal" />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Button Content="{Binding Name}" Margin="4,0" Padding="0" VerticalAlignment="Center"
+                                                                        Style="{DynamicResource PropertyItemOutlinedButton}"
+                                                                        Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}"
+                                                                        CommandParameter="{Binding}" />
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+
+                                            </WrapPanel>

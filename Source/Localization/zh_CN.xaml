@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="LOCDuneAchievements">成就</sys:String>
     <sys:String x:Key="LOCDuneCloseDetails">关闭游戏详情</sys:String>
+    <sys:String x:Key="LOCDuneThemeSettings">主题设置</sys:String>
     <sys:String x:Key="LOCDuneLatestAchievement">最近解锁</sys:String>
     <sys:String x:Key="LOCDuneSystemRequirements">&#x7CFB;&#x7EDF;&#x9700;&#x6C42;</sys:String>
     <sys:String x:Key="LOCDuneRequirementsReady">&#x67E5;&#x770B;&#x914D;&#x7F6E;&#x8981;&#x6C42;</sys:String>

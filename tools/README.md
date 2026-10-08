@@ -7,6 +7,9 @@ than the generated copies.
 `Update-OverviewSharedBlocks.ps1` copies the blocks into the existing templates,
 preserving the native and plugin control names in their original namescope.
 Neither the fragments nor the scripts ship with the theme.
+`HeroMetadata.xml` supplies the shared release/platform/source/player-count/genre
+line. `Update-HeroMetadata.ps1` preserves each outer WrapPanel's layout triggers
+and native/plugin names; overview regeneration also updates this fragment.
 
 `Update-SummaryLayoutStyles.ps1` generates the layout styles and synchronizes the
 shared cards. Basic statistics use a separate 12-track grid, while plugin content

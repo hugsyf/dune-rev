@@ -52,3 +52,4 @@ foreach ($file in @('DetailsViewGameOverview.xaml','GridViewGameOverview.xaml'))
     }
 }
 Write-Output 'Shared summary cards are up to date.'
+if (-not $Check) { & (Join-Path $PSScriptRoot 'Update-HeroMetadata.ps1') }

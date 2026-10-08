@@ -89,10 +89,19 @@
                                                                 </VisualBrush>
                                                             </Grid.OpacityMask>
 <Grid x:Name="HeroBanner">
+                                                            <Border x:Name="DuneCompactPreference" Tag="{DynamicResource DuneCompactLayout}" Visibility="Collapsed" />
 
                                                             <!-- Size media from the pane width, independently of the full details page. -->
                                                             <Viewbox x:Name="DuneGridHeroAspect" Stretch="Uniform">
-                                                                <Grid Width="1600" Height="900">
+                                                                <Grid Width="1600">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid">
+                                                                            <Setter Property="Height" Value="{DynamicResource DuneGridHeroDesignHeight}" />
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding Tag, ElementName=DuneCompactPreference}" Value="True"><Setter Property="Height" Value="600" /></DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
                                                                     <!--Game background image-->
                                                                     <Grid x:Name="NativeBackgroundLayer" ClipToBounds="True">
                                                                         <Grid.Style>
@@ -112,7 +121,7 @@
                                                                         <!--Blurred Layer-->
                                                                         <Rectangle Fill="{DynamicResource ClonedVisualBrush}">
                                                                             <Rectangle.Effect>
-                                                                                <BlurEffect Radius="120" />
+                                                                                <BlurEffect Radius="{DynamicResource DuneHeroBlurRadius}" />
                                                                             </Rectangle.Effect>
                                                                         </Rectangle>
                                                                         <!--Gradient Layer-->
@@ -172,7 +181,7 @@
                                                                     </Grid>
                                                                     <!--Game video Ends-->
                                                                     <!--Daken Layer-->
-                                                                    <Border Background="#99000000">
+                                                                    <Border Background="Black" Opacity="{DynamicResource DuneHeroShadeOpacity}">
                                                                         <Border.OpacityMask>
                                                                             <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
                                                                                 <GradientStop Color="White" Offset="0" />
@@ -225,7 +234,7 @@
                                                             </Border>
                                                         </Grid>
                                                         <!--Extra Logo Ends-->
-                                                        <Grid Grid.Row="0" Margin="24,0,24,24" x:Name="DuneGridHeroFooter" VerticalAlignment="Bottom">
+                                                        <Grid Grid.Row="0" x:Name="DuneGridHeroFooter" Style="{StaticResource DuneGridHeroFooter}">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
@@ -379,7 +388,7 @@
             <Setter Property="Grid.ColumnSpan" Value="1" />
         </DataTrigger></Style.Triggers>
     </Style></WrapPanel.Style>
-                                                                <Button Name="PART_ButtonReleaseDate" Margin="0,0,4,0" Padding="0,0,0,0" BorderThickness="0" Background="{x:Null}" Style="{DynamicResource PropertyItemSmallButton}" />
+                                                                <Button Name="PART_ButtonReleaseDate" Margin="0,0,4,0" Padding="0" BorderThickness="0" Background="{x:Null}" VerticalAlignment="Center" Style="{DynamicResource PropertyItemSmallButton}" />
                                                                 <StackPanel Name="PART_ElemPlatform" Orientation="Horizontal" VerticalAlignment="Center">
                                                                     <StackPanel.Style>
                                                                         <Style TargetType="StackPanel">
@@ -394,7 +403,7 @@
                                                                             </Style.Triggers>
                                                                         </Style>
                                                                     </StackPanel.Style>
-                                                                    <TextBlock Text="&#xB7;" Margin="4,0,4,0" Foreground="#99FFFFFF" FontWeight="Bold" VerticalAlignment="Center" />
+                                                                    <TextBlock Text="·" Margin="4,0" Foreground="#99FFFFFF" FontWeight="Bold" VerticalAlignment="Center" />
                                                                     <ItemsControl ItemsSource="{Binding Game.Platforms}" Margin="0" VerticalAlignment="Center">
                                                                         <ItemsControl.ItemsPanel>
                                                                             <ItemsPanelTemplate>
@@ -403,12 +412,12 @@
                                                                         </ItemsControl.ItemsPanel>
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
-                                                                                <Button Content="{Binding Name}" Margin="4,0,4,0" Padding="0,0,0,0" BorderThickness="0" Background="{x:Null}" Style="{DynamicResource PropertyItemSmallButton}" Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}" CommandParameter="{Binding}" />
+                                                                                <Button Content="{Binding Name}" Margin="4,0" Padding="0" BorderThickness="0" Background="{x:Null}" VerticalAlignment="Center" Style="{DynamicResource PropertyItemSmallButton}" Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}" CommandParameter="{Binding}" />
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>
                                                                     </ItemsControl>
                                                                 </StackPanel>
-                                                                <Button Name="PART_ButtonSource" Margin="4,0" Padding="0" Style="{DynamicResource PropertyItemOutlinedButton}" />
+                                                                <Button Name="PART_ButtonSource" Margin="4,0" Padding="0" VerticalAlignment="Center" Style="{DynamicResource PropertyItemOutlinedButton}" />
                                                                 <ContentControl x:Name="DuplicateHider_SourceSelector" Height="24" Margin="8,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" RenderOptions.BitmapScalingMode="Fant" />
                                                                 <ContentControl x:Name="NewsViewer_PlayersInGameViewerControl" Margin="8,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                                                 <StackPanel Name="PART_ElemGenres" Orientation="Horizontal" VerticalAlignment="Center">
@@ -433,7 +442,7 @@
                                                                         </ItemsControl.ItemsPanel>
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
-                                                                                <Button Content="{Binding Name}" Margin="4,0,4,0" Padding="0,0,0,0" Style="{DynamicResource PropertyItemOutlinedButton}" Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}" CommandParameter="{Binding}" />
+                                                                                <Button Content="{Binding Name}" Margin="4,0" Padding="0" VerticalAlignment="Center" Style="{DynamicResource PropertyItemOutlinedButton}" Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetPlatformFilterCommand}" CommandParameter="{Binding}" />
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>
                                                                     </ItemsControl>

@@ -87,6 +87,10 @@ You can also install through Playnite's add-on browser or the
 ### Setup tips
 
 - Enable the desired theme integrations in each extension's settings.
+- Use the top bar's theme-settings shortcut (ThemeExtras + ThemeModifier) for
+  compact Hero layout, background blur/shading and reduced cover effects.
+  Defaults preserve the standard layout. Compact Grid Hero uses a 600/1600 ratio;
+  standard layout uses the configurable reference height.
 - Use **ThemeModifier → Summary and extension content** to choose which cards,
   summaries and expandable details to display. Cards automatically rearrange to fit the window.
 - Set preferred languages in **CheckLocalizations** for the language summary.
@@ -168,6 +172,9 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 ### 使用提示
 
 - 在各扩展设置中启用所需的主题集成。
+- 顶栏主题设置入口需要 ThemeExtras 与 ThemeModifier，可设置紧凑 Hero 布局、
+  背景模糊／暗化和减少封面动效；默认保留标准布局。
+  紧凑网格 Hero 使用 600/1600 比例，标准模式使用可调参考高度。
 - 在 **ThemeModifier → 摘要与扩展内容** 中选择显示的卡片、摘要信息与展开详情。
   卡片会随窗口宽度自动重排。
 - 语言摘要的首选语言在 **CheckLocalizations** 中设置。

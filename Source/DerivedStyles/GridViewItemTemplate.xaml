@@ -71,6 +71,7 @@
                                     d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
 
                             <Grid Width="{Settings GridItemWidth}"  Height="{Settings GridItemHeight}">
+                                <Border x:Name="DuneReduceCoverMotionPreference" Tag="{DynamicResource DuneReduceCoverMotion}" Visibility="Collapsed" />
 
                                 <Border Style="{StaticResource VisualBrushBorderMask}" Name="Mask" Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
 
@@ -124,7 +125,35 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </Grid.Style>
-                                        <!-- Native lookups also retain platform art without ThemeExtras.
+                                        <Border x:Name="DuneSourceBannerPreference" Tag="{DynamicResource GridViewGameCoverPreferSourceBanner}" Visibility="Collapsed" />
+<Border x:Name="DuneUseSourceBanner" Visibility="Collapsed"><Border.Style><Style TargetType="Border">
+<Setter Property="Tag" Value="{StaticResource False}" /><Style.Triggers>
+<MultiDataTrigger><MultiDataTrigger.Conditions>
+<Condition Binding="{Binding Tag, ElementName=DuneSourceBannerPreference}" Value="True" />
+<Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="pc_windows" />
+</MultiDataTrigger.Conditions><Setter Property="Tag" Value="{StaticResource True}" /></MultiDataTrigger>
+<MultiDataTrigger><MultiDataTrigger.Conditions>
+<Condition Binding="{Binding Tag, ElementName=DuneSourceBannerPreference}" Value="True" />
+<Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="macintosh" />
+</MultiDataTrigger.Conditions><Setter Property="Tag" Value="{StaticResource True}" /></MultiDataTrigger>
+<MultiDataTrigger><MultiDataTrigger.Conditions>
+<Condition Binding="{Binding Tag, ElementName=DuneSourceBannerPreference}" Value="True" />
+<Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="linux" />
+</MultiDataTrigger.Conditions><Setter Property="Tag" Value="{StaticResource True}" /></MultiDataTrigger>
+<MultiDataTrigger><MultiDataTrigger.Conditions>
+<Condition Binding="{Binding Tag, ElementName=DuneSourceBannerPreference}" Value="True" />
+<Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="pc_linux" />
+</MultiDataTrigger.Conditions><Setter Property="Tag" Value="{StaticResource True}" /></MultiDataTrigger>
+<MultiDataTrigger><MultiDataTrigger.Conditions>
+<Condition Binding="{Binding Tag, ElementName=DuneSourceBannerPreference}" Value="True" />
+<Condition Binding="{Binding Game.Platforms.Count, FallbackValue=0}" Value="0" />
+</MultiDataTrigger.Conditions><Setter Property="Tag" Value="{StaticResource True}" /></MultiDataTrigger>
+</Style.Triggers></Style></Border.Style></Border>
+<Image x:Name="DuneSourceNamePng" Visibility="Collapsed" Source="{ThemeFileBinding Game.Source.Name, PathFormat='Images/Banners/SourceName/{0}.png', Converter={StaticResource ImageStringToImageConverterCached}}" />
+<Image x:Name="DuneSourceNameJpg" Visibility="Collapsed" Source="{ThemeFileBinding Game.Source.Name, PathFormat='Images/Banners/SourceName/{0}.jpg', Converter={StaticResource ImageStringToImageConverterCached}}" />
+<TextBlock x:Name="DuneCoverPluginId" Visibility="Collapsed" Text="{Binding Game.PluginId}" />
+<Image x:Name="DunePluginBanner" Visibility="Collapsed" DataContext="{Binding ElementName=DuneCoverPluginId}" Source="{ThemeFileBinding Text, PathFormat='Images/Banners/PluginId/{0}.png', Converter={StaticResource ImageStringToImageConverterCached}}" />
+<!-- Native lookups also retain platform art without ThemeExtras.
                                              Missing files return UnsetValue; the next candidate can win. -->
                                         <Image x:Name="DunePlatformSpecPng" Visibility="Collapsed"
                                                Source="{ThemeFileBinding Game.Platforms[0].SpecificationId, PathFormat='Images/Banners/PlatformSpecId/{0}.png', Converter={StaticResource ImageStringToImageConverterCached}}" />
@@ -156,20 +185,11 @@
                                                     <Setter Property="Text" Value="{Binding Game.Platforms[0].Name, FallbackValue='', TargetNullValue=''}" />
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                     <Style.Triggers>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
-                                                                <Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="pc_windows" />
-                                                            </MultiDataTrigger.Conditions>
+                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneUseSourceBanner}" Value="True">
                                                             <Setter Property="Text" Value="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" />
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
-                                                                <Condition Binding="{Binding Game.Platforms.Count, FallbackValue=0}" Value="0" />
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="Text" Value="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" />
-                                                        </MultiDataTrigger>
+                                                        </DataTrigger>
+                                                        
+                                                        
                                                         <DataTrigger Binding="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" Value="">
                                                             <Setter Property="Text" Value="{Binding Game.Platforms[0].Name, FallbackValue='', TargetNullValue=''}" />
                                                         </DataTrigger>
@@ -188,10 +208,13 @@
                                                 <Style TargetType="Image">
                                                     <Setter Property="Source" Value="{Binding Source, ElementName=DunePlatformBannerImage}" />
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                                                        <DataTrigger Binding="{Binding Tag, ElementName=DuneUseSourceBanner}" Value="True">
                                                             <Setter Property="Source">
                                                                 <Setter.Value>
                                                                     <PriorityBinding>
+<Binding ElementName="DuneSourceNamePng" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+<Binding ElementName="DuneSourceNameJpg" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+<Binding ElementName="DunePluginBanner" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
                                                                         <Binding ElementName="ThemeExtras_Banner" Path="Content.Content.Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
                                                                         <Binding ElementName="DunePlatformBannerImage" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
                                                                     </PriorityBinding>
@@ -312,6 +335,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=EnableHighlightAnimation, Path=Tag}" Value="True" />
+                                <Condition Binding="{Binding Tag, ElementName=DuneReduceCoverMotionPreference}" Value="False" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Tag" Value="True" TargetName="ShineBackground" />
@@ -321,6 +345,7 @@
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsVisible}" Value="True" />
                                 <Condition Binding="{Binding Source={x:Static p:PlayniteApplication.Current}, Path=IsActive}" Value="True" />
                                 <Condition Binding="{Binding ElementName=EnablePlayingGlowBorder, Path=Tag}" Value="True" />
+                                <Condition Binding="{Binding Tag, ElementName=DuneReduceCoverMotionPreference}" Value="False" />
                                 <Condition Binding="{Binding IsRunning}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Tag" Value="True" TargetName="GlowPlayingBorder" />

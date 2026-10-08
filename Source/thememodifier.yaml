@@ -12,6 +12,12 @@ Constants:
     - GameLogoMaxHeight(64,240): 'Details logo maximum height / 详情页 Logo 最大高度'
     - GameActionButtonWidth(240,480): 'Game action row width / 游玩、编辑与收藏操作区宽度'
     - ShowIconTextOnLink: 'Game links: show names / 游戏链接：显示名称'
+    - DuneCompactLayout: 'Use compact Hero layout / 使用紧凑 Hero 布局'
+    - DuneHeroBlurRadius(0,120): 'Hero background blur / Hero 背景模糊'
+    - DuneHeroShadeOpacity(0,1): 'Hero bottom shade opacity / Hero 底部暗化程度'
+    - DuneGridHeroDesignHeight(600,1200): 'Grid Hero height at reference width / 网格 Hero 参考高度'
+    - DuneReduceCoverMotion: 'Reduce animated cover effects / 减少封面动效'
+    - DuneShowThemeSettingsButton: 'Show theme settings shortcut / 显示主题设置快捷入口'
 
     - "Details View layout / 详情视图布局"
     - GameOverviewWidth(960,2560): 'Details View content maximum width / 详情视图内容最大宽度'

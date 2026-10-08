@@ -230,6 +230,22 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button Content="&#xE713;" Width="32" Height="32" Margin="8,0,0,0"
+                                        VerticalAlignment="Center" ToolTip="{DynamicResource LOCDuneThemeSettings}"
+                                        Tag="{DynamicResource DuneShowThemeSettingsButton}"
+                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                        Command="{PluginSettings Plugin=ThemeExtras, Path=Commands.OpenPluginSettingsCommand, FallbackValue={x:Null}}"
+                                        CommandParameter="ec2f4013-17e6-428a-b8a9-5e34a3b80009">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource DuneIconActionButton}">
+                                            <Setter Property="Visibility" Value="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="Tag" Value="False"><Setter Property="Visibility" Value="Collapsed" /></Trigger>
+                                                <DataTrigger Binding="{PluginStatus Plugin=playnite-thememodifier-plugin, FallbackValue=False}" Value="False"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <StackPanel x:Name="PART_PanelMainItems" Orientation="Horizontal"
                                             VerticalAlignment="Stretch" Margin="12,6,0,6" />
                                 <Border Width="1" Height="20" Margin="8,0,0,0"
