@@ -2,11 +2,13 @@
 
 `SummaryCards.xml` is the shared source for the eight summary blocks in both
 overview templates; `OverviewDetails.xml` supplies their shared expandable area
-and the separate Overview/Reviews/News tabs below it. Edit these sources rather
+and the Overview/custom-fields/related-games/reviews/news tabs below it. Edit these sources rather
 than the generated copies.
 `Update-OverviewSharedBlocks.ps1` copies the blocks into the existing templates,
 preserving the native and plugin control names in their original namescope.
 Neither the fragments nor the scripts ship with the theme.
+`UserRating.xml` supplies the shared rating host and label, preserving native parts
+and allowing unrated games to use the optional ThemeExtras editor.
 `HeroMetadata.xml` supplies the shared release/platform/source/player-count/genre
 line. `Update-HeroMetadata.ps1` preserves each outer WrapPanel's layout triggers
 and native/plugin names; overview regeneration also updates this fragment.

@@ -9,8 +9,8 @@
 | A | 共用信息行、紧凑／媒体设置、设置入口、横幅规则 | 已审阅、打包并本地提交 3b8aeaf |
 | B | 可编辑评分、Play Notes、Game Relations | 已审阅、打包并本地提交 f7324b2 |
 | C | 商店截图、自定义字段、网格浏览信息 | 已审阅、打包并本地提交 f7cb07d |
-| 迭代 1 | 标题回退、减少动效完善、键盘与媒体可访问性 | 已审阅、已打包；本轮本地提交 |
-| 迭代 2 | 再次检查本地与在线调研，选择并实施改进 | 待调研 |
+| 迭代 1 | 标题回退、减少动效完善、键盘与媒体可访问性 | 已审阅、打包并本地提交 2abccc6 |
+| 迭代 2 | 原生截图网格、空页签与字段回退、评分入口完善 | 已审阅、打包并本地提交 |
 
 ## A 批
 
@@ -62,3 +62,29 @@
 参考：[Helium overview](https://github.com/darklinkpower/Helium/blob/master/source/Views/DetailsViewGameOverview.xaml)、
 [Extra Metadata Loader 接口](https://github.com/darklinkpower/PlayniteExtensionsCollection/wiki/Extra-Metadata-Loader-theme-controls)、
 [WPF 可控动画](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/storyboards-overview)。
+## 自主迭代 2
+
+再次检查本地插件布局与样式加载顺序，在线查阅 Neon overview、ScreenshotsVisualizer 图库布局及
+Game Relations 的控件设置。决定完善已有插件面板，不增加新的截图下载或库数据维护逻辑。
+
+- 个人截图总开关默认开启；原生网格图库偏好默认关闭。
+  开启主题偏好且插件启用 EnableIntegrationPicturesList 时使用 PluginScreenshots 原生图库；
+  控件缺失／不可用时回退现有预览与列表。图库高度沿用截图设置，纵向列表限制到 240px。
+- 评分入口遵循 Playnite UserScore 字段开关，允许直接给未评分游戏打分；无插件且无评分时收起空评分区域。
+- Metadata Utilities 保留 Tag 的图标字符约定，字段可见性独立绑定；所有控件隐藏时收起自定义字段页签。
+- Game Relations 同时遵循 IsVisible 与 IsEnabled。语言控制移除固定 600px 最小宽度。
+- Metadata Utilities 按钮样式移至原生 Button 样式之后，避免 Common 中的前向静态资源引用；
+  紧凑布局的布尔资源统一通过 DataTrigger 判断。
+- 每轮仅代码审阅与 Toolbox 打包；真实 Playnite 插件状态、窗口缩放和键盘操作仍需实际环境确认。
+
+参考：[Neon overview](https://github.com/XenorPLxx/Neon/blob/master/source/Views/DetailsViewGameOverview.xaml)、
+[ScreenshotsVisualizer 原生图库](https://github.com/Lacro59/playnite-screenshotsvisualizer-plugin/wiki/Gallery-layouts)、
+[Game Relations 设置](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/GameRelations/Models/GameRelationsControlSettings.cs)。
+
+## 开关与交付
+
+- 默认开启：评分编辑、Play Notes、关联游戏、个人／商店截图、标题回退、副本选择、主题设置入口。
+- 默认关闭：紧凑布局、减少封面动效、个人评分封面标记、自定义字段页、优先使用截图网格。
+- 各批安装包位于 release/batch-a、batch-b、batch-c、iteration-1、iteration-2；
+  iteration-2 是完整累计包，版本仍为 2.2.0。包文件不纳入 Git。
+- 无推送、合并、标签或正式发布；后续功能扩展以真实环境反馈为依据。

@@ -1,3 +1,6 @@
+实施状态：A／B／C 与额外两轮迭代已落实在本地分支 codex/theme-improvements；
+以下保留原始评估，具体取舍、开关和交付见 [实施记录](IMPLEMENTATION.zh-CN.md)。
+
 # Dune Rev 后续功能与改进评估
 
 调研日期：2026-10-08。基线提交：81818ed，主题版本：2.2.0。

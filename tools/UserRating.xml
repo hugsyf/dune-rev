@@ -1,5 +1,18 @@
 <Fragments xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid x:Name="DuneUserRatingHost" Margin="0,12,0,0">
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Visibility, ElementName=PART_TextUserScore}" Value="Collapsed" />
+                            <Condition Binding="{Binding Visibility, ElementName=ThemeExtras_UserRating}" Value="Collapsed" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <Grid>
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -22,7 +35,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
                                 <Condition Binding="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" Value="True" />
-                                <Condition Binding="{Binding UserScoreVisibility}" Value="Visible" />
+                                <Condition Binding="{Settings DetailsVisibility.UserScore}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
@@ -36,5 +49,24 @@
                 </Style>
             </ContentControl.Style>
         </ContentControl>
+    </Grid>
+    <Grid x:Name="DuneUserScoreLabel">
+        <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
+        <Label Content="{DynamicResource LOCUserScore}">
+            <Label.Style>
+                <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Visibility, ElementName=PART_ElemUserScore}" Value="Collapsed" />
+                                <Condition Binding="{Binding Visibility, ElementName=ThemeExtras_UserRating}" Value="Visible" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
     </Grid>
 </Fragments>

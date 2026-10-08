@@ -55,7 +55,7 @@
         <Setter Property="Margin" Value="40" />
         <Setter Property="Tag" Value="{DynamicResource DuneCompactLayout}" />
         <Style.Triggers>
-            <Trigger Property="Tag" Value="True"><Setter Property="Margin" Value="24" /></Trigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True"><Setter Property="Margin" Value="24" /></DataTrigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneGridHeroFooter" TargetType="Grid">
@@ -63,7 +63,7 @@
         <Setter Property="Margin" Value="24,0,24,24" />
         <Setter Property="Tag" Value="{DynamicResource DuneCompactLayout}" />
         <Style.Triggers>
-            <Trigger Property="Tag" Value="True"><Setter Property="Margin" Value="16,0,16,16" /></Trigger>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True"><Setter Property="Margin" Value="16,0,16,16" /></DataTrigger>
         </Style.Triggers>
     </Style>
     <sys:String x:Key="LOCDuneEmbeddedUnavailable">Expandable details are unavailable.</sys:String>
@@ -283,11 +283,25 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DuneMetadataContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+    <Style x:Key="DuneMetadataTags" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
         <Style.Triggers>
-            <Trigger Property="Tag" Value="False">
+            <DataTrigger Binding="{Settings DetailsVisibility.Tags}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
-            </Trigger>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneMetadataCategories" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Settings DetailsVisibility.Categories}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DuneMetadataGenres" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Settings DetailsVisibility.Genres}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
         </Style.Triggers>
     </Style>
     <!-- Public Metadata Utilities style keys; the addon owns field grouping and editing. -->
@@ -299,12 +313,6 @@
     </Style>
     <Style x:Key="MdStyleIcon" TargetType="TextBlock">
         <Setter Property="Visibility" Value="Collapsed" />
-    </Style>
-    <Style x:Key="MdStyleItemButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-        <Setter Property="Margin" Value="0,2,0,2" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
     <Style x:Key="DunePluginPanel" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />

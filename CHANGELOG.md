@@ -6,6 +6,29 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Added
 
+- Add compact Hero layout, blur/shade/height controls, reduced cover motion and a
+  persistent ThemeModifier settings shortcut via ThemeExtras.
+- Share Hero metadata and personal-rating fragments between both overview views.
+  Extend native platform/source artwork fallback to PC platforms and plugin IDs.
+- Add optional ThemeExtras rating editing (including unrated games), Play Notes,
+  Game Relations series/similar library games and Steam store screenshots.
+- Add an opt-in Metadata Utilities custom fields tab, keeping native fields.
+- Add complete cover/title tooltips, optional per-game score badges and
+  hover/keyboard copy selection; add missing-logo title fallback and media labels.
+- Add optional native ScreenshotsVisualizer grid gallery with existing-gallery
+  fallback, and an independent personal-screenshot visibility preference.
+
+### Improved
+
+- Stop selection gloss when hidden and use static selection feedback when cover
+  motion is reduced. Reveal cover action buttons on keyboard focus.
+- Hide unavailable custom metadata and disabled related-game sections. Remove
+  the language control's forced 600px minimum and bound vertical galleries.
+- Keep all development batches on a local branch at version 2.2.0. Review code
+  and package each batch; no synthetic Playnite/plugin test scripts are used.
+
+### Added previously
+
 - Add platform/source strips on Grid and Grid Details covers, with 118 bundled
   banners from KNARZnite. Add independent, default-enabled visibility and PC
   store/source preferences plus adjustable height. Source preference uses

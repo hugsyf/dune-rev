@@ -195,7 +195,7 @@
                                                         <!--Extra Logo-->
                                                         <Grid Margin="24,24,72,24" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                                                             <Border x:Name="GameIcon" HorizontalAlignment="Stretch" CornerRadius="{StaticResource ControlCornerRadius}" Tag="{DynamicResource GridViewAllowUseOfLogos}">
-                                                                <DockPanel LastChildFill="True"><Image DockPanel.Dock="Left" Margin="0,0,16,0" Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" MaxHeight="64" MaxWidth="64" /><Grid Tag="{DynamicResource DuneShowHeroFallbackTitle}" Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Name="PART_TextDisplayName" Text="{Binding Game.Name}" TextWrapping="Wrap" FontSize="{DynamicResource FontSizeLarge}" FontWeight="Bold" VerticalAlignment="Center" ToolTip="{Binding Game.Name}" /></Grid></DockPanel>
+                                                                <DockPanel LastChildFill="True"><Image DockPanel.Dock="Left" Margin="0,0,16,0" Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" MaxHeight="64" MaxWidth="64" /><Grid Tag="{DynamicResource DuneShowHeroFallbackTitle}" Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Name="PART_TextDisplayName" Text="{Binding Game.Name}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="96" FontSize="{DynamicResource FontSizeLarge}" FontWeight="Bold" VerticalAlignment="Center" ToolTip="{Binding Game.Name}" /></Grid></DockPanel>
                                                                 <Border.Style>
                                                                     <Style TargetType="Border">
                                                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -581,8 +581,39 @@
                                                                             <TextBlock Name="PART_TextCommunityScore" Margin="0,12,0,0" Style="{DynamicResource TextBlockGameScore}" />
                                                                             <Label Name="PART_ElemCriticScore" Content="{DynamicResource LOCCriticScore}" />
                                                                             <TextBlock Name="PART_TextCriticScore" Margin="0,12,0,0" Style="{DynamicResource TextBlockGameScore}" />
-                                                                            <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
+                                                                            <Grid x:Name="DuneUserScoreLabel">
+                                                                                <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
+                                                                                <Label Content="{DynamicResource LOCUserScore}">
+                                                                                    <Label.Style>
+                                                                                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            <Style.Triggers>
+                                                                                                <MultiDataTrigger>
+                                                                                                    <MultiDataTrigger.Conditions>
+                                                                                                        <Condition Binding="{Binding Visibility, ElementName=PART_ElemUserScore}" Value="Collapsed" />
+                                                                                                        <Condition Binding="{Binding Visibility, ElementName=ThemeExtras_UserRating}" Value="Visible" />
+                                                                                                    </MultiDataTrigger.Conditions>
+                                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                                </MultiDataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </Label.Style>
+                                                                                </Label>
+                                                                            </Grid>
                                                                             <Grid x:Name="DuneUserRatingHost" Margin="0,12,0,0">
+                                                                                <Grid.Style>
+                                                                                    <Style TargetType="Grid">
+                                                                                        <Style.Triggers>
+                                                                                            <MultiDataTrigger>
+                                                                                                <MultiDataTrigger.Conditions>
+                                                                                                    <Condition Binding="{Binding Visibility, ElementName=PART_TextUserScore}" Value="Collapsed" />
+                                                                                                    <Condition Binding="{Binding Visibility, ElementName=ThemeExtras_UserRating}" Value="Collapsed" />
+                                                                                                </MultiDataTrigger.Conditions>
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </MultiDataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </Grid.Style>
                                                                                 <Grid>
                                                                                     <Grid.Style>
                                                                                         <Style TargetType="Grid">
@@ -605,7 +636,7 @@
                                                                                                     <MultiDataTrigger.Conditions>
                                                                                                         <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
                                                                                                         <Condition Binding="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" Value="True" />
-                                                                                                        <Condition Binding="{Binding UserScoreVisibility}" Value="Visible" />
+                                                                                                        <Condition Binding="{Settings DetailsVisibility.UserScore}" Value="True" />
                                                                                                     </MultiDataTrigger.Conditions>
                                                                                                     <Setter Property="Visibility" Value="Visible" />
                                                                                                 </MultiDataTrigger>
@@ -1978,7 +2009,7 @@
                                                                                     </Grid.RowDefinitions>
                                                                                     <TextBlock Text="{DynamicResource LOCDuneLanguageListHint}" Style="{StaticResource DuneSummarySecondaryText}" Margin="0,0,0,12" />
                                                                                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                                                                        <ContentControl x:Name="CheckLocalizations_PluginListLanguages" Style="{DynamicResource DunePluginContent}" MinWidth="600" MinHeight="160" Margin="0" />
+                                                                                        <ContentControl x:Name="CheckLocalizations_PluginListLanguages" Style="{DynamicResource DunePluginContent}" MinHeight="160" Margin="0" />
                                                                                     </ScrollViewer>
                                                                                 </Grid>
                                                                             </Grid>
@@ -2231,14 +2262,57 @@
                                                                                     <ContentControl x:Name="SteamScreenshots_SteamScreenshotsViewControl" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{StaticResource DunePluginContent}" />
                                                                                 </Border>
                                                                             </Expander>
-                                                                            <Expander Header="{DynamicResource LOCDunePersonalScreenshots}" Margin="0,24,0,0" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                                            <Expander Header="{DynamicResource LOCDunePersonalScreenshots}" Margin="0,24,0,0" Tag="{DynamicResource DuneShowPersonalScreenshots}">
+                                                                                <Expander.Style>
+                                                                                    <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
+                                                                                        <Setter Property="Visibility" Value="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </Expander.Style>
                                                                                 <StackPanel>
                                                                                     <Border Style="{DynamicResource DunePluginPanel}">
-                                                                                        <StackPanel Orientation="Vertical">
-                                                                                            <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshotsVertical" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{DynamicResource DunePluginContent}" />
-                                                                                            <ContentControl x:Name="ScreenshotsVisualizer_PluginSinglePicture" Style="{DynamicResource DunePluginContent}" />
-                                                                                            <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshots" Style="{DynamicResource DunePluginContent}" />
-                                                                                        </StackPanel>
+                                                                                        <Grid>
+                                                                                            <ContentControl x:Name="ScreenshotsVisualizer_PluginScreenshots" Height="{DynamicResource ScreenshotsPanelHeight}" Tag="{DynamicResource DuneUseScreenshotGrid}">
+                                                                                                <ContentControl.Style>
+                                                                                                    <Style TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+                                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                        <Style.Triggers>
+                                                                                                            <MultiDataTrigger>
+                                                                                                                <MultiDataTrigger.Conditions>
+                                                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                                                    <Condition Binding="{PluginSettings Plugin=ScreenshotsVisualizer, Path=EnableIntegrationPicturesList, FallbackValue=False}" Value="True" />
+                                                                                                                </MultiDataTrigger.Conditions>
+                                                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                                            </MultiDataTrigger>
+                                                                                                            <Trigger Property="Content" Value="{x:Null}">
+                                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                            </Trigger>
+                                                                                                            <DataTrigger Binding="{Binding Content.Visibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                            </DataTrigger>
+                                                                                                        </Style.Triggers>
+                                                                                                    </Style>
+                                                                                                </ContentControl.Style>
+                                                                                            </ContentControl>
+                                                                                            <StackPanel Orientation="Vertical">
+                                                                                                <StackPanel.Style>
+                                                                                                    <Style TargetType="StackPanel">
+                                                                                                        <Style.Triggers>
+                                                                                                            <DataTrigger Binding="{Binding Visibility, ElementName=ScreenshotsVisualizer_PluginScreenshots}" Value="Visible">
+                                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                            </DataTrigger>
+                                                                                                        </Style.Triggers>
+                                                                                                    </Style>
+                                                                                                </StackPanel.Style>
+                                                                                                <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshotsVertical" Height="{DynamicResource ScreenshotsPanelHeight}" MaxWidth="240" HorizontalAlignment="Left" Style="{DynamicResource DunePluginContent}" />
+                                                                                                <ContentControl x:Name="ScreenshotsVisualizer_PluginSinglePicture" Style="{DynamicResource DunePluginContent}" />
+                                                                                                <ContentControl x:Name="ScreenshotsVisualizer_PluginListScreenshots" Style="{DynamicResource DunePluginContent}" />
+                                                                                            </StackPanel>
+                                                                                        </Grid>
                                                                                     </Border>
                                                                                 </StackPanel>
                                                                             </Expander>
@@ -2251,9 +2325,9 @@
                                                                                 <Style.Triggers>
                                                                                     <MultiDataTrigger>
                                                                                         <MultiDataTrigger.Conditions>
-                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_TagPrefixItemControl}" Value="{x:Null}" />
-                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_CategoryPrefixItemControl}" Value="{x:Null}" />
-                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_GenrePrefixItemControl}" Value="{x:Null}" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_TagPrefixItemControl}" Value="Collapsed" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_CategoryPrefixItemControl}" Value="Collapsed" />
+                                                                                            <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_GenrePrefixItemControl}" Value="Collapsed" />
                                                                                         </MultiDataTrigger.Conditions>
                                                                                         <Setter Property="Visibility" Value="Collapsed" />
                                                                                     </MultiDataTrigger>
@@ -2262,9 +2336,9 @@
                                                                         </TabItem.Style>
                                                                         <Border Style="{StaticResource DunePluginPanel}">
                                                                             <StackPanel>
-                                                                                <ContentControl x:Name="MetadataUtilities_TagPrefixItemControl" Tag="{Settings DetailsVisibility.Tags}" Style="{StaticResource DuneMetadataContent}" />
-                                                                                <ContentControl x:Name="MetadataUtilities_CategoryPrefixItemControl" Tag="{Settings DetailsVisibility.Categories}" Style="{StaticResource DuneMetadataContent}" />
-                                                                                <ContentControl x:Name="MetadataUtilities_GenrePrefixItemControl" Tag="{Settings DetailsVisibility.Genres}" Style="{StaticResource DuneMetadataContent}" />
+                                                                                <ContentControl x:Name="MetadataUtilities_TagPrefixItemControl" Tag="" Style="{StaticResource DuneMetadataTags}" />
+                                                                                <ContentControl x:Name="MetadataUtilities_CategoryPrefixItemControl" Tag="" Style="{StaticResource DuneMetadataCategories}" />
+                                                                                <ContentControl x:Name="MetadataUtilities_GenrePrefixItemControl" Tag="" Style="{StaticResource DuneMetadataGenres}" />
                                                                             </StackPanel>
                                                                         </Border>
                                                                     </TabItem>
@@ -2277,6 +2351,7 @@
                                                                                         <MultiDataTrigger.Conditions>
                                                                                             <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
                                                                                             <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, FallbackValue=False}" Value="True" />
+                                                                                            <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsEnabled, FallbackValue=False}" Value="True" />
                                                                                         </MultiDataTrigger.Conditions>
                                                                                         <Setter Property="Visibility" Value="Visible" />
                                                                                     </MultiDataTrigger>
@@ -2284,6 +2359,7 @@
                                                                                         <MultiDataTrigger.Conditions>
                                                                                             <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
                                                                                             <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, FallbackValue=False}" Value="True" />
+                                                                                            <Condition Binding="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsEnabled, FallbackValue=False}" Value="True" />
                                                                                         </MultiDataTrigger.Conditions>
                                                                                         <Setter Property="Visibility" Value="Visible" />
                                                                                     </MultiDataTrigger>
@@ -2291,13 +2367,33 @@
                                                                             </Style>
                                                                         </TabItem.Style>
                                                                         <StackPanel Margin="0,24,0,0">
-                                                                            <StackPanel Visibility="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                                            <StackPanel Tag="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsEnabled, FallbackValue=False}">
+                                                                                <StackPanel.Style>
+                                                                                    <Style TargetType="StackPanel">
+                                                                                        <Setter Property="Visibility" Value="{PluginSettings Plugin=GameRelations, Path=SameSeriesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </StackPanel.Style>
                                                                                 <TextBlock Text="{DynamicResource LOCDuneSameSeries}" FontWeight="SemiBold" />
                                                                                 <Border Style="{StaticResource DunePluginPanel}">
                                                                                     <ContentControl x:Name="GameRelations_SameSeriesControl" Height="{DynamicResource DuneRelationsPanelHeight}" Style="{StaticResource DunePluginContent}" />
                                                                                 </Border>
                                                                             </StackPanel>
-                                                                            <StackPanel Visibility="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                                            <StackPanel Tag="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsEnabled, FallbackValue=False}">
+                                                                                <StackPanel.Style>
+                                                                                    <Style TargetType="StackPanel">
+                                                                                        <Setter Property="Visibility" Value="{PluginSettings Plugin=GameRelations, Path=SimilarGamesControlSettings.IsVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </StackPanel.Style>
                                                                                 <TextBlock Text="{DynamicResource LOCDuneSimilarGames}" FontWeight="SemiBold" />
                                                                                 <Border Style="{StaticResource DunePluginPanel}">
                                                                                     <ContentControl x:Name="GameRelations_SimilarGamesControl" Height="{DynamicResource DuneRelationsPanelHeight}" Style="{StaticResource DunePluginContent}" />

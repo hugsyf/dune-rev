@@ -78,8 +78,12 @@ You can also install through Playnite's add-on browser or the
 | BackgroundChanger | Alternative backgrounds |
 | DuplicateHider | Duplicate-copy selector |
 | Library Management | Feature icons |
-| ThemeExtras | Platform banners, favorites and editable completion status |
-| ScreenshotsVisualizer | Screenshots |
+| ThemeExtras | Banners, favorites, editable completion status and personal rating |
+| Play Notes | Separate notes and native plugin editing |
+| Game Relations | Same-series and similar games in your library |
+| ScreenshotsVisualizer | Personal screenshots; optional native grid gallery |
+| Steam Store Screenshots Viewer | Store screenshots |
+| Metadata Utilities | Opt-in prefix fields and native editing |
 | Steam News and Players Viewer | News and players online |
 | Review Viewer | Steam reviews |
 | ThemeModifier | Layout and display customization |
@@ -101,11 +105,19 @@ You can also install through Playnite's add-on browser or the
   **Show platform/source labels** and **Prefer store/source labels for PC games**.
   Both default to enabled. Disable the first to restore full covers, or disable
   only the second to show Windows/platform labels instead of Steam, Epic or Xbox.
-  Install **ThemeExtras** for store/source artwork and banner-folder preservation.
+  Native theme artwork supports store/source fallback; **ThemeExtras** adds overrides
+  and banner-folder preservation.
   Consoles retain their platform banners. Banner height is also adjustable.
 - Custom images go in the theme's `Images/Banners/PlatformSpecId` (for example
   `pc_windows.png`), `PlatformName` (exact platform name), `PluginId` (library plugin
   GUID) or `SourceName` (exact source name). Restart Playnite after changing images.
+
+- **ThemeModifier → Extension panels** controls ratings, Play Notes, relations and
+  personal/store screenshots (enabled by default), plus Metadata Utilities fields
+  and the native screenshot grid (disabled by default). Enable the matching gallery
+  integration in ScreenshotsVisualizer to use its grid. Native fields/notes remain available.
+- Missing-logo title fallback is enabled by default. Grid personal score badges are
+  optional; copy selectors and cover actions are also available on keyboard focus.
 
 ### Credits and support
 
@@ -193,6 +205,12 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
   `PlatformName`（平台名称）、`PluginId`（库插件 GUID）或 `SourceName`（来源名称）。
   修改后重启 Playnite。ThemeExtras 会在主题更新时保留此文件夹。
 
+- **ThemeModifier → 扩展面板** 调整个人评分、Play Notes、关联游戏与个人／商店截图，均默认开启。
+  自定义字段页与优先使用原生截图网格默认关闭；前缀和对应图库集成需在各插件中配置。
+  原生字段与笔记继续保留，未评分游戏也可以通过 ThemeExtras 直接打分。
+- 缺 Logo 时的标题回退默认开启；网格个人评分默认关闭，副本选择默认开启。
+  副本选择和封面操作支持悬停与键盘聚焦。
+
 ### 致谢与反馈
 
 基于 [Dune](https://github.com/sakasakiking/Dune)，部分设计参考 Mythic。
@@ -202,7 +220,3 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 
 版本更新见 [changelog](CHANGELOG.md)，主题问题可通过
 [GitHub Issues](https://github.com/hugsyf/dune-rev/issues) 反馈。
-
-新增集成可在 **ThemeModifier → 扩展面板** 调整。评分编辑、Play Notes、关联游戏与商店截图默认开启；
-Metadata Utilities 自定义字段页默认关闭，前缀规则需在插件中配置。原生字段和笔记继续保留。
-网格个人评分默认关闭，副本选择默认开启，并在悬停／键盘聚焦时显示。
