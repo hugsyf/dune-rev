@@ -8,8 +8,8 @@
 | --- | --- | --- |
 | A | 共用信息行、紧凑／媒体设置、设置入口、横幅规则 | 已审阅、打包并本地提交 3b8aeaf |
 | B | 可编辑评分、Play Notes、Game Relations | 已审阅、打包并本地提交 f7324b2 |
-| C | 商店截图、自定义字段、网格浏览信息 | 已审阅、已打包；本批本地提交 |
-| 迭代 1 | 重新检查本地与在线调研，选择并实施改进 | 待调研 |
+| C | 商店截图、自定义字段、网格浏览信息 | 已审阅、打包并本地提交 f7cb07d |
+| 迭代 1 | 标题回退、减少动效完善、键盘与媒体可访问性 | 已审阅、已打包；本轮本地提交 |
 | 迭代 2 | 再次检查本地与在线调研，选择并实施改进 | 待调研 |
 
 ## A 批
@@ -47,3 +47,18 @@
 参考：[Steam Screenshots 控件与设置](https://github.com/darklinkpower/PlayniteExtensionsCollection/wiki/Steam-Screenshots)、
 [Metadata Utilities 主题集成](https://knarzwerk.de/en/playnite-extensions/metadata-utilities/theme-integration/)、
 [DuplicateHider 网格与控件缓存](https://github.com/felixkmh/DuplicateHider#theme-integration)。
+## 自主迭代 1
+
+重新检查本地 Hero 与网格样式，在线对比 Helium 的 Logo／标题切换和 Extra Metadata Loader 的公开媒体接口。
+选择缺媒体时的识别能力与操作可访问性，暂不增加另一套视频引擎。
+
+- Logo 不可用或关闭时显示原生 PART_TextDisplayName，长标题可换行，图标统一限制在 64px。
+  标题回退默认开启并可关闭，原生名称控件继续负责显示名称。
+- 开启减少封面动效后，选中边框使用静态样式；循环光泽只在实际可见时运行，隐藏后停止。
+- 网格游玩／详情操作也可通过键盘聚焦显示；副本选择沿用上一批的键盘入口。
+- Hero 背景、视频播放／暂停、静音控件增加中英提示与辅助功能名称。
+- 已代码审阅和 Toolbox 打包；未运行模拟界面测试，也未宣称真实环境性能提升。
+
+参考：[Helium overview](https://github.com/darklinkpower/Helium/blob/master/source/Views/DetailsViewGameOverview.xaml)、
+[Extra Metadata Loader 接口](https://github.com/darklinkpower/PlayniteExtensionsCollection/wiki/Extra-Metadata-Loader-theme-controls)、
+[WPF 可控动画](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/storyboards-overview)。

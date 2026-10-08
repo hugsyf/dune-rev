@@ -47,4 +47,8 @@
     <sys:String x:Key="LOCDuneStoreScreenshots">商店截图</sys:String>
     <sys:String x:Key="LOCDuneCustomFields">自定义字段</sys:String>
     <sys:String x:Key="LOCDunePersonalScreenshots">个人截图</sys:String>
+    <sys:String x:Key="LOCDunePlayVideo">播放视频</sys:String>
+    <sys:String x:Key="LOCDunePauseVideo">暂停视频</sys:String>
+    <sys:String x:Key="LOCDuneShowBackground">显示背景图</sys:String>
+    <sys:String x:Key="LOCDuneMuteVideo">静音视频</sys:String>
 </ResourceDictionary>

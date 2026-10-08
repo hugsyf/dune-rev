@@ -553,4 +553,8 @@
     <sys:String x:Key="LOCDuneStoreScreenshots">Store screenshots</sys:String>
     <sys:String x:Key="LOCDuneCustomFields">Custom fields</sys:String>
     <sys:String x:Key="LOCDunePersonalScreenshots">Personal screenshots</sys:String>
+    <sys:String x:Key="LOCDunePlayVideo">Play video</sys:String>
+    <sys:String x:Key="LOCDunePauseVideo">Pause video</sys:String>
+    <sys:String x:Key="LOCDuneShowBackground">Show background image</sys:String>
+    <sys:String x:Key="LOCDuneMuteVideo">Mute video</sys:String>
 </ResourceDictionary>

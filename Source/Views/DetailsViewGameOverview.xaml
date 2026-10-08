@@ -158,10 +158,10 @@
                                         </Grid>
 
                                         <!--Extra Logo-->
-                                        <Grid Margin="40,40,0,40" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Grid Margin="40" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                                             <Border x:Name="GameIcon" CornerRadius="{StaticResource ControlCornerRadius}" Tag="{DynamicResource DetailsViewAllowUseOfLogos}">
-                                                <Image Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant"
-                                                        MaxHeight="120" MaxWidth="120" />
+                                                <DockPanel LastChildFill="True"><Image DockPanel.Dock="Left" Margin="0,0,16,0" Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant"
+                                                        MaxHeight="64" MaxWidth="64" /><Grid Tag="{DynamicResource DuneShowHeroFallbackTitle}" Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Name="PART_TextDisplayName" Text="{Binding Game.Name}" TextWrapping="Wrap" FontSize="{DynamicResource FontSizeLarge}" FontWeight="Bold" VerticalAlignment="Center" ToolTip="{Binding Game.Name}" /></Grid></DockPanel>
                                                 <Border.Style>
                                                     <Style TargetType="Border">
                                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -246,7 +246,7 @@
                                                     </Grid>
                                                     <Border Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}"
                                                             Visibility="{Binding ElementName=ImageThumbnail, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                                    <RadioButton Name="ImageThumbnail" GroupName="DetailsHeroMedia"
+                                                    <RadioButton Name="ImageThumbnail" ToolTip="{DynamicResource LOCDuneShowBackground}" AutomationProperties.Name="{DynamicResource LOCDuneShowBackground}" GroupName="DetailsHeroMedia"
                                                             Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}"
                                                             Style="{DynamicResource TransparentRadioButton}"/>
                                                 </Grid>
@@ -284,7 +284,7 @@
                                                     </Border>
                                                     <Border Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}"
                                                             Visibility="{Binding ElementName=VideoThumbnail, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                                    <RadioButton Name="VideoThumbnail" GroupName="DetailsHeroMedia"
+                                                    <RadioButton Name="VideoThumbnail" ToolTip="{DynamicResource LOCDunePlayVideo}" AutomationProperties.Name="{DynamicResource LOCDunePlayVideo}" GroupName="DetailsHeroMedia"
                                                                  IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, Mode=OneWay, FallbackValue={StaticResource False}}"
                                                                  Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}" Style="{DynamicResource TransparentRadioButton}"/>
                                                 </Grid>
@@ -395,12 +395,12 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPauseButton" Tag="&#xe103;"
+                                            <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPauseButton" ToolTip="{DynamicResource LOCDunePauseVideo}" AutomationProperties.Name="{DynamicResource LOCDunePauseVideo}" Tag="&#xe103;"
                                                     Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand, FallbackValue={x:Null}}"
                                                     Visibility="{Binding ElementName=TrailerPlayButton, Path=IsEnabled, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" Style="{DynamicResource IconRoundedToggleButton}">
 
                                             </ToggleButton>
-                                            <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPlayButton" Tag="&#xe102;"
+                                            <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPlayButton" ToolTip="{DynamicResource LOCDunePlayVideo}" AutomationProperties.Name="{DynamicResource LOCDunePlayVideo}" Tag="&#xe102;"
                                                     Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand, FallbackValue={x:Null}}"
                                                     Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                     Style="{DynamicResource IconRoundedToggleButton}">

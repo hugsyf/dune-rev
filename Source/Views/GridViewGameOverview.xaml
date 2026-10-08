@@ -194,8 +194,8 @@
                                                         </Grid>
                                                         <!--Extra Logo-->
                                                         <Grid Margin="24,24,72,24" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                                                            <Border x:Name="GameIcon" HorizontalAlignment="Left" CornerRadius="{StaticResource ControlCornerRadius}" Tag="{DynamicResource GridViewAllowUseOfLogos}">
-                                                                <Image Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" MaxHeight="72" MaxWidth="72" />
+                                                            <Border x:Name="GameIcon" HorizontalAlignment="Stretch" CornerRadius="{StaticResource ControlCornerRadius}" Tag="{DynamicResource GridViewAllowUseOfLogos}">
+                                                                <DockPanel LastChildFill="True"><Image DockPanel.Dock="Left" Margin="0,0,16,0" Name="PART_ImageIcon" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" MaxHeight="64" MaxWidth="64" /><Grid Tag="{DynamicResource DuneShowHeroFallbackTitle}" Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Name="PART_TextDisplayName" Text="{Binding Game.Name}" TextWrapping="Wrap" FontSize="{DynamicResource FontSizeLarge}" FontWeight="Bold" VerticalAlignment="Center" ToolTip="{Binding Game.Name}" /></Grid></DockPanel>
                                                                 <Border.Style>
                                                                     <Style TargetType="Border">
                                                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -296,9 +296,9 @@
         </Style.Triggers>
       </Style>
     </StackPanel.Style>
-    <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPauseButton" Tag="&#xE103;" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPauseCommand, FallbackValue={x:Null}}" Visibility="{Binding ElementName=TrailerPlayButton, Path=IsEnabled, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" Style="{DynamicResource IconRoundedToggleButton}"></ToggleButton>
-    <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPlayButton" Tag="&#xE102;" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPlayCommand, FallbackValue={x:Null}}" Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{DynamicResource IconRoundedToggleButton}"></ToggleButton>
-    <CheckBox Margin="8,0,0,0" IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.IsPlayerMuted, Mode=TwoWay, FallbackValue={StaticResource True}}">
+    <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPauseButton" ToolTip="{DynamicResource LOCDunePauseVideo}" AutomationProperties.Name="{DynamicResource LOCDunePauseVideo}" Tag="&#xE103;" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPauseCommand, FallbackValue={x:Null}}" Visibility="{Binding ElementName=TrailerPlayButton, Path=IsEnabled, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" Style="{DynamicResource IconRoundedToggleButton}"></ToggleButton>
+    <ToggleButton HorizontalAlignment="Left" x:Name="TrailerPlayButton" ToolTip="{DynamicResource LOCDunePlayVideo}" AutomationProperties.Name="{DynamicResource LOCDunePlayVideo}" Tag="&#xE102;" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPlayCommand, FallbackValue={x:Null}}" Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{DynamicResource IconRoundedToggleButton}"></ToggleButton>
+    <CheckBox ToolTip="{DynamicResource LOCDuneMuteVideo}" AutomationProperties.Name="{DynamicResource LOCDuneMuteVideo}" Margin="8,0,0,0" IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.IsPlayerMuted, Mode=TwoWay, FallbackValue={StaticResource True}}">
       <CheckBox.Template>
         <ControlTemplate TargetType="CheckBox">
           <Border Name="Border" BorderThickness="1" BorderBrush="#33FFFFFF" Background="#33000000" Width="36" Height="36" CornerRadius="18">
@@ -334,7 +334,7 @@
       </Rectangle>
     </Grid>
     <Border Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}" Visibility="{Binding ElementName=ImageThumbnail, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
-    <RadioButton Name="ImageThumbnail" GroupName="GridHeroMedia" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPauseCommand}" Style="{DynamicResource TransparentRadioButton}" />
+    <RadioButton Name="ImageThumbnail" ToolTip="{DynamicResource LOCDuneShowBackground}" AutomationProperties.Name="{DynamicResource LOCDuneShowBackground}" GroupName="GridHeroMedia" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPauseCommand}" Style="{DynamicResource TransparentRadioButton}" />
   </Grid>
   <!--Video Thumbnail-->
   <Grid Margin="8,0,0,0" Width="80" Height="45">
@@ -376,7 +376,7 @@
       </Viewbox>
     </Border>
     <Border Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}" Visibility="{Binding ElementName=VideoThumbnail, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
-    <RadioButton Name="VideoThumbnail" GroupName="GridHeroMedia" IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.SettingsModel.Settings.IsVideoPlaying, Mode=OneWay, FallbackValue={StaticResource False}}" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPlayCommand}" Style="{DynamicResource TransparentRadioButton}" />
+    <RadioButton Name="VideoThumbnail" ToolTip="{DynamicResource LOCDunePlayVideo}" AutomationProperties.Name="{DynamicResource LOCDunePlayVideo}" GroupName="GridHeroMedia" IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.SettingsModel.Settings.IsVideoPlaying, Mode=OneWay, FallbackValue={StaticResource False}}" Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=Content.VideoPlayCommand}" Style="{DynamicResource TransparentRadioButton}" />
   </Grid>
 </StackPanel>
                                                             <!--GameInfo-->

@@ -32,6 +32,7 @@
         <sys:Double x:Key="DuneHeroShadeOpacity">0.6</sys:Double>
         <sys:Double x:Key="DuneGridHeroDesignHeight">900</sys:Double>
         <sys:Boolean x:Key="DuneReduceCoverMotion">False</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowHeroFallbackTitle">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowThemeSettingsButton">True</sys:Boolean>
         <sys:Boolean x:Key="DuneEnableRatingEditing">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowPlayNotes">True</sys:Boolean>
