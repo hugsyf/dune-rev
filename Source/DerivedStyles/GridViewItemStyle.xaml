@@ -40,7 +40,7 @@
                             </StackPanel.Style>
                             <TextBlock x:Name="GameName" Text="{Binding DisplayName}" FontSize="{DynamicResource FontSizeSmall}" Style="{DynamicResource BaseTextBlockStyle}"
                                     TextAlignment="Left" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom" Width="{Settings GridItemWidth}"
-                                    Visibility="{Settings ShowNamesUnderCovers}" Margin="0,0,0,4" />
+                                    Visibility="{Settings ShowNamesUnderCovers}" Margin="0,0,0,4" ToolTip="{Binding DisplayName}" />
                             <!--Time Played-->
                             <DockPanel x:Name="PlayedTime" Width="{Settings GridItemWidth}" Visibility="{DynamicResource GridViewGameCoverShowPlayedTime}" Margin="0,0,0,4">
                                 <TextBlock Text="&#xe121;" FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0"

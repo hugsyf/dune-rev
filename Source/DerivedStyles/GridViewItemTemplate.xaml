@@ -65,7 +65,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GameListItem}">
-                    <Border BorderThickness="{Settings GridItemMargin}" BorderBrush="{DynamicResource CardSurfaceBrush}">
+                    <Border BorderThickness="{Settings GridItemMargin}" BorderBrush="{DynamicResource CardSurfaceBrush}" ToolTip="{Binding Game.Name}">
 
                         <StackPanel Name="PART_PanelHost"
                                     d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
@@ -310,6 +310,61 @@
 
                                 <TextBlock Name="EnableHighlightAnimation" Visibility="Collapsed" Tag="{DynamicResource GridViewGameCoverShowShineAnimation}" />
 
+                                <Border Tag="{DynamicResource DuneGridShowUserScore}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                        Margin="8" Padding="8,4" CornerRadius="{DynamicResource ControlCornerRadius}"
+                                        Background="{DynamicResource PopupBackgroundBrush}" IsHitTestVisible="False">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Game.UserScore}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE734;" Style="{StaticResource IconFontStyle}" Margin="0,0,4,0" />
+                                        <TextBlock Text="{Binding Game.UserScore}" />
+                                    </StackPanel>
+                                </Border>
+                                <Grid VerticalAlignment="Top">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Border Height="{Binding ActualHeight, ElementName=DuneCoverPlatformHeader}" IsHitTestVisible="False" />
+                                <ContentControl x:Name="DuplicateHider_SourceSelector1" Grid.Row="1" Height="28" Margin="8"
+                                                HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{DynamicResource DuneGridShowCopySelector}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=GameListItem}}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                        <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </MultiDataTrigger>
+                                                <Trigger Property="Content" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                </Grid>
                                 <Grid Name="GameControls" Visibility="Collapsed">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />

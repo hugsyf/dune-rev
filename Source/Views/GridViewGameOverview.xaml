@@ -2212,7 +2212,26 @@
                                                                                     <ContentControl x:Name="PlayNotes_NotesViewerControl" Style="{StaticResource DunePluginContent}" />
                                                                                 </Border>
                                                                             </Expander>
-                                                                            <Expander Header="{DynamicResource LOCSsvTitle}" Margin="0,24,0,0" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                                            <Expander Header="{DynamicResource LOCDuneStoreScreenshots}" Margin="0,24,0,0" Tag="{DynamicResource DuneShowStoreScreenshots}">
+                                                                                <Expander.Style>
+                                                                                    <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                        <Style.Triggers>
+                                                                                            <MultiDataTrigger>
+                                                                                                <MultiDataTrigger.Conditions>
+                                                                                                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                                                    <Condition Binding="{PluginSettings Plugin=SteamScreenshots, Path=IsControlVisible, FallbackValue=False}" Value="True" />
+                                                                                                </MultiDataTrigger.Conditions>
+                                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                            </MultiDataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </Expander.Style>
+                                                                                <Border Style="{StaticResource DunePluginPanel}">
+                                                                                    <ContentControl x:Name="SteamScreenshots_SteamScreenshotsViewControl" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{StaticResource DunePluginContent}" />
+                                                                                </Border>
+                                                                            </Expander>
+                                                                            <Expander Header="{DynamicResource LOCDunePersonalScreenshots}" Margin="0,24,0,0" Visibility="{PluginSettings Plugin=ScreenshotsVisualizer, Path=HasData, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                                                 <StackPanel>
                                                                                     <Border Style="{DynamicResource DunePluginPanel}">
                                                                                         <StackPanel Orientation="Vertical">
@@ -2224,6 +2243,30 @@
                                                                                 </StackPanel>
                                                                             </Expander>
                                                                         </StackPanel>
+                                                                    </TabItem>
+                                                                    <TabItem Header="{DynamicResource LOCDuneCustomFields}" Tag="{DynamicResource DuneShowCustomMetadata}">
+                                                                        <TabItem.Style>
+                                                                            <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                                                                                <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                                <Style.Triggers>
+                                                                                    <MultiDataTrigger>
+                                                                                        <MultiDataTrigger.Conditions>
+                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_TagPrefixItemControl}" Value="{x:Null}" />
+                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_CategoryPrefixItemControl}" Value="{x:Null}" />
+                                                                                            <Condition Binding="{Binding Content, ElementName=MetadataUtilities_GenrePrefixItemControl}" Value="{x:Null}" />
+                                                                                        </MultiDataTrigger.Conditions>
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </MultiDataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TabItem.Style>
+                                                                        <Border Style="{StaticResource DunePluginPanel}">
+                                                                            <StackPanel>
+                                                                                <ContentControl x:Name="MetadataUtilities_TagPrefixItemControl" Tag="{Settings DetailsVisibility.Tags}" Style="{StaticResource DuneMetadataContent}" />
+                                                                                <ContentControl x:Name="MetadataUtilities_CategoryPrefixItemControl" Tag="{Settings DetailsVisibility.Categories}" Style="{StaticResource DuneMetadataContent}" />
+                                                                                <ContentControl x:Name="MetadataUtilities_GenrePrefixItemControl" Tag="{Settings DetailsVisibility.Genres}" Style="{StaticResource DuneMetadataContent}" />
+                                                                            </StackPanel>
+                                                                        </Border>
                                                                     </TabItem>
                                                                     <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}">
                                                                         <TabItem.Style>

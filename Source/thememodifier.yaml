@@ -44,6 +44,8 @@ Constants:
     - DuneDlcPanelHeight(200,720): 'Default height for short DLC lists / 短 DLC 列表默认高度'
 
     - "Extension panels / 扩展面板"
+    - DuneShowStoreScreenshots: 'Show Steam store screenshots / 显示 Steam 商店截图'
+    - DuneShowCustomMetadata: 'Show Metadata Utilities custom fields tab / 显示 Metadata Utilities 自定义字段页'
     - DuneEnableRatingEditing: 'Edit personal rating with ThemeExtras / 使用 ThemeExtras 编辑个人评分'
     - DuneShowPlayNotes: 'Show Play Notes / 显示 Play Notes 笔记'
     - DuneShowRelations: 'Show related games from your library / 显示库内关联游戏'
@@ -53,6 +55,8 @@ Constants:
     - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
 
     - "Grid cover display / 网格封面显示"
+    - DuneGridShowUserScore: 'Grid covers: show personal score / 网格封面：显示个人评分'
+    - DuneGridShowCopySelector: 'Grid covers: show copy selector on hover or focus / 网格封面：悬停或聚焦时显示副本选择'
     - GridViewGameCoverShowPlatformBanner: 'Grid covers: show platform/source labels / 网格封面：显示平台／来源标签'
     - GridViewGameCoverPreferSourceBanner: 'Grid covers: prefer store/source labels for PC games / 网格封面：PC 游戏优先显示商店／来源标签'
     - GridViewPlatformBannerHeight(20,64): 'Grid covers: platform banner height / 网格封面：平台标签高度'

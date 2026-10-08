@@ -44,4 +44,7 @@
     <sys:String x:Key="LOCDuneRelatedGames">库内关联游戏</sys:String>
     <sys:String x:Key="LOCDuneSameSeries">同系列</sys:String>
     <sys:String x:Key="LOCDuneSimilarGames">相似游戏</sys:String>
+    <sys:String x:Key="LOCDuneStoreScreenshots">商店截图</sys:String>
+    <sys:String x:Key="LOCDuneCustomFields">自定义字段</sys:String>
+    <sys:String x:Key="LOCDunePersonalScreenshots">个人截图</sys:String>
 </ResourceDictionary>

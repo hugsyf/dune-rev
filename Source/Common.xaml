@@ -283,6 +283,29 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="DuneMetadataContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Public Metadata Utilities style keys; the addon owns field grouping and editing. -->
+    <Style x:Key="MdStyleTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,6,8,6" />
+    </Style>
+    <Style x:Key="MdStyleIcon" TargetType="TextBlock">
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+    <Style x:Key="MdStyleItemButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
     <Style x:Key="DunePluginPanel" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
@@ -527,4 +550,7 @@
     <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
     <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
     <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
+    <sys:String x:Key="LOCDuneStoreScreenshots">Store screenshots</sys:String>
+    <sys:String x:Key="LOCDuneCustomFields">Custom fields</sys:String>
+    <sys:String x:Key="LOCDunePersonalScreenshots">Personal screenshots</sys:String>
 </ResourceDictionary>

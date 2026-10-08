@@ -166,7 +166,9 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 | ThemeExtras | 平台横幅、收藏、可编辑的完成状态与个人评分 |
 | Play Notes | 独立笔记与插件原生编辑入口 |
 | Game Relations | 库内同系列与相似游戏 |
-| ScreenshotsVisualizer | 截图 |
+| ScreenshotsVisualizer | 个人截图 |
+| Steam Store Screenshots Viewer | 商店截图 |
+| Metadata Utilities | 可选前缀自定义字段与原生编辑 |
 | Steam News and Players Viewer | 新闻与在线人数 |
 | Review Viewer | Steam 评论 |
 | ThemeModifier | 布局与显示设置 |
@@ -200,3 +202,7 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 
 版本更新见 [changelog](CHANGELOG.md)，主题问题可通过
 [GitHub Issues](https://github.com/hugsyf/dune-rev/issues) 反馈。
+
+新增集成可在 **ThemeModifier → 扩展面板** 调整。评分编辑、Play Notes、关联游戏与商店截图默认开启；
+Metadata Utilities 自定义字段页默认关闭，前缀规则需在插件中配置。原生字段和笔记继续保留。
+网格个人评分默认关闭，副本选择默认开启，并在悬停／键盘聚焦时显示。
