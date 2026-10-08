@@ -1,5 +1,6 @@
-实施状态：A／B／C 与额外两轮迭代已落实在本地分支 codex/theme-improvements；
-以下保留原始评估，具体取舍、开关和交付见 [实施记录](IMPLEMENTATION.zh-CN.md)。
+实施状态：A／B／C 与额外两轮迭代已落实，实机反馈修订后纳入 2.3.0 发布；
+重复的 Custom Fields 页签已撤回。以下保留原始评估，具体取舍、开关和交付见
+[实施记录](IMPLEMENTATION.zh-CN.md)。
 
 # Dune Rev 后续功能与改进评估
 

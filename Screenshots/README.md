@@ -19,9 +19,9 @@ on 2026-10-08. Files were renamed only; the original PNG pixels and dimensions
 
 The main README presents 1, 5 and 6 as the three library layouts, with 2, 3, 4
 and 7 in an expandable feature gallery. The add-on manifest lists all seven.
-They illustrate the development branch and optional extensions, rather than
-guaranteeing the same content in the currently published 2.2.0 package.
+They illustrate version 2.3.0 with optional extensions. Available content depends
+on installed extensions, their integration settings and each game's data.
 
 主 README 使用 1、5、6 展示三种游戏库布局，将 2、3、4、7 放入可展开的功能图库；
-附加组件清单包含全部七张。截图展示开发分支与可选扩展，当前已发布的 2.2.0 安装包
-不一定包含相同内容。附加组件清单的远程图片地址会在相关改动合入 main 并推送后生效。
+附加组件清单包含全部七张。截图展示 2.3.0 与可选扩展，实际可用内容取决于
+已安装的扩展、集成设置和游戏数据。

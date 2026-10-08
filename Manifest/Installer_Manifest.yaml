@@ -1,5 +1,17 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.3.0
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-08
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.3.0/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_3_0.pthm
+    Changelog:
+      - Add rounded platform and store cover banners with independent visibility, PC source and manual-game platform preferences.
+      - Add compact Hero layout, blur and shading controls, title fallback, reduced cover motion and a top-bar theme settings shortcut.
+      - Give Play Notes, related library games and store/personal screenshots separate tabs; add optional personal rating editing through ThemeExtras.
+      - Improve screenshot previews and thumbnails, notes empty states, related-game sizing and recorded performance chart heights.
+      - Unify toolbar feedback, tab fonts, plugin action buttons, checkboxes and translucent dropdowns; move multi-copy selection below covers.
+      - Fix theme loading, clipped plugin card edges, Hero logo/close-button placement and metadata alignment.
+      - Rewrite the bilingual README and replace the gallery with seven current screenshots. Requires Playnite 10.57 or newer.
   - Version: 2.2.0
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-05

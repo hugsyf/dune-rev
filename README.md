@@ -10,12 +10,7 @@ A dark, Fluent-inspired theme for Playnite Desktop.
 
 [English](#english) · [简体中文](#简体中文) · [Screenshots / 截图](#screenshots--截图) · [Changelog](CHANGELOG.md)
 
-> **Development preview:** This README and its screenshots describe the current development branch.
-> Some features are not included in the published 2.2.0 package. The development package still
-> carries version 2.2.0 until a formal release.
->
-> **开发预览：** 本文与截图展示当前开发分支，部分功能尚未包含在已发布的 2.2.0 安装包中。
-> 正式发布前，开发安装包的版本号仍保持 2.2.0。
+**Current release / 当前版本：[2.3.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.0)**
 
 ## Screenshots / 截图
 
@@ -127,7 +122,6 @@ Requires **Playnite 10.57 or newer**. Extensions are optional.
 
 The theme is also available through the
 [Playnite add-on page](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40).
-For this development preview, use the development package supplied with the branch.
 
 Achievement integration uses **Playnite Achievements**. Latest-unlock display requires
 **4.0 or newer**. Users keeping SuccessStory can use Dune Rev 1.1.1.
@@ -264,7 +258,7 @@ Dune Rev 基于 sakasakiking 的 [Dune](https://github.com/sakasakiking/Dune)，
 3. 在 Playnite 附加组件浏览器中安装所需扩展，并在扩展设置中启用主题集成。
 
 也可通过 [Playnite 附加组件页面](https://playnite.link/addons.html#DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40)
-安装主题。体验本文中的开发预览，请使用随开发分支提供的安装包。
+安装主题。
 
 成就集成使用 **Playnite Achievements**，最近解锁展示需要 **4.0 或更新版本**。
 继续使用 SuccessStory 的用户可选择 Dune Rev 1.1.1。

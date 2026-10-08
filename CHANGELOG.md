@@ -1,85 +1,59 @@
 # Changelog
 
-## Unreleased
-
-Theme and installer versions remain at 2.2.0 until a formal release.
+## v2.3.0 - 2026-10-08
 
 ### Added
 
-- Add compact Hero layout, blur/shade/height controls, reduced cover motion and a
-  persistent ThemeModifier settings shortcut via ThemeExtras.
-- Share Hero metadata and personal-rating fragments between both overview views.
-  Extend native platform/source artwork fallback to PC platforms and plugin IDs.
-- Add optional ThemeExtras rating editing (including unrated games), Play Notes,
-  Game Relations series/similar library games and Steam store screenshots.
-- Add complete cover/title tooltips, optional per-game score badges and
-  hover/keyboard copy selection; add missing-logo title fallback and media labels.
-- Add optional native ScreenshotsVisualizer grid gallery with existing-gallery
-  fallback, and an independent personal-screenshot visibility preference.
+- Add platform/store banners to Grid and Grid Details covers with 118 bundled
+  banners from KNARZnite. Separate switches control banner visibility, PC
+  store/source preference and platform preference for Playnite/manual games.
+  Banner height is adjustable; custom images can be preserved by ThemeExtras.
+- Add compact Hero layout, background blur/shading and height controls,
+  reduced cover motion and a top-bar ThemeModifier shortcut through ThemeExtras.
+- Add Play Notes, Game Relations and Steam store screenshots as dedicated content
+  tabs alongside Overview, personal screenshots, reviews and news.
+- Add optional personal-rating editing through ThemeExtras, including unrated games.
+- Add missing-logo title fallback, complete cover/title tooltips and optional Grid
+  personal-score badges.
+- Add an optional ScreenshotsVisualizer native grid gallery with existing-gallery
+  fallback and a separate personal-screenshot visibility preference.
 
 ### Improved
 
-- Rewrite the bilingual README for current layouts, content tabs, optional
-  extensions and setting defaults. Replace the old gallery with seven user-supplied
-  captures and refresh add-on descriptions and screenshot references.
-- Remove the redundant Custom Fields tab and its preference, retaining native
-  metadata fields in the details panel.
-- Share native top-panel button visuals with the theme settings shortcut,
-  including icon size, spacing and hover animation. Align all overview tab fonts.
-- Share scoped addon action/icon button styles across notes, screenshots, reviews
-  and news, preserving native commands and glyph fonts. Use translucent dropdown
-  surfaces for filter and combo popups without fading their text or checkbox content.
-- Move Play Notes, Steam store screenshots and personal screenshots into peer
-  overview tabs with persistent addon hosts. Remove opaque plugin panel backplates.
-- Give store screenshots a bounded preview with selectable thumbnails and native
-  viewer/navigation commands. Enlarge personal previews and avoid duplicate
-  vertical/horizontal galleries; improve notes toolbar and empty-state guidance.
-- Let related games size to their contents and hide empty sections. Set a
-  configurable 360px minimum for performance charts and a 220px minimum for history.
-- Move duplicate-copy selection below covers and show it only for multiple copies
-  on hover/keyboard focus. Use icon opacity for the current copy and transparent
-  idle backgrounds; keep the selection outline around the cover area.
-- Add a default-enabled preference for platform banners on Playnite/manual games.
-- Unify filter, combo and search surfaces with 4px corners, subtle borders and
-  focus strokes. Refresh checkbox states, popup rows and plain clear icons.
-- Use transparent idle toolbar/settings and filter-clear buttons with subtle
-  hover/pressed feedback.
-
-- Stop selection gloss when hidden and use static selection feedback when cover
-  motion is reduced. Reveal cover action buttons on keyboard focus.
-- Hide disabled related-game sections. Remove
-  the language control's forced 600px minimum and bound vertical galleries.
-- Keep all development batches on a local branch at version 2.2.0. Review code
-  and package each batch; no synthetic Playnite/plugin test scripts are used.
-
-### Added previously
-
-- Add platform/source strips on Grid and Grid Details covers, with 118 bundled
-  banners from KNARZnite. Add independent, default-enabled visibility and PC
-  store/source preferences plus adjustable height. Source preference uses
-  ThemeExtras; platform artwork/text can be displayed natively.
-- Preserve custom banner images across theme updates through ThemeExtras.
+- Move multi-copy selection below covers and show it only for multiple copies on
+  hover or keyboard focus. Support keyboard focus for cover actions and use static
+  selection feedback when cover motion is reduced.
+- Give store screenshots a bounded preview, selectable thumbnails and native viewer
+  commands. Enlarge personal previews, avoid duplicate galleries and improve the
+  notes toolbar and empty-state guidance.
+- Remove opaque plugin panel backplates; let related games fit their contents and
+  hide empty sections.
+- Give recorded GameActivity performance charts a configurable 360px minimum height
+  and session-history charts a 220px minimum.
+- Match the theme settings shortcut to other toolbar buttons; align tab typography
+  and share scoped plugin action/icon button styles while preserving native commands.
+- Refresh filters, combo/search controls and checkboxes with subtle borders, focus
+  strokes and translucent dropdown surfaces.
+- Remove the language control's forced minimum width and bound vertical galleries.
 
 ### Fixed
 
-- Keep the Details Hero logo left-aligned inside the full-width title fallback
-  container, preventing it from moving to the center of the Hero.
-- Fix theme startup failure caused by a Playnite `Settings` extension used directly
-  in a style Setter. Resolve the native indentation on a hidden dependency-property
-  proxy and bind the row height to it. Use visibility triggers instead of custom
-  extension values in the added screenshot/relations/settings-button Setters.
+- Fix theme startup failure caused by Playnite settings extensions in style Setters.
+- Keep the Details Hero logo left-aligned inside its full-width title container.
+- Keep plugin card hover/selection outlines within their bounds to avoid clipped edges.
+- Place Hero media beside actions or above them in narrow panes, reducing excess
+  space below the play controls.
+- Position the close-details button inside the Hero and reserve room beside the logo.
+- Fill cover banner strips edge to edge with the same rounded mask as the cover.
+  Keep platform preference independent from cached source artwork.
+- Align release dates, platforms, source labels/icons, player counts and genres
+  vertically in both overview footers.
 
-- Keep plugin card hover and selected outlines within their measured bounds,
-  avoiding edge clipping from the previous scale and shadow effects.
-- Place Hero media beside the action area at narrower widths. On small panes,
-  show media above the actions so game information stays at the bottom.
-- Anchor the close-details button inside the Hero with consistent insets and
-  reserve room for it beside the logo. Constrain game actions to their column.
-- Fill banner strips edge to edge and share the cover's rounded mask. Disabling
-  source preference selects platform artwork independently of the source cache.
-- Vertically center release dates, platforms, source tags/icons, player counts
-  and genres in both overview footers. Remove top offsets and fixed-height tags
-  with negative text margins, sizing labels naturally for the configured font.
+### Maintenance
+
+- Share Hero metadata, rating and overview fragments between Details and Grid Details.
+- Rewrite the bilingual README with extension requirements and setting defaults;
+  replace the gallery with seven current captures and update add-on references.
 
 ## v2.2.0 - 2026-10-05
 
