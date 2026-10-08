@@ -1,0 +1,40 @@
+<Fragments xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid x:Name="DuneUserRatingHost" Margin="0,12,0,0">
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=ThemeExtras_UserRating}" Value="Visible">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <TextBlock Name="PART_TextUserScore" Style="{StaticResource TextBlockGameScore}" />
+        </Grid>
+        <ContentControl x:Name="ThemeExtras_UserRating" Tag="{DynamicResource DuneEnableRatingEditing}" HorizontalAlignment="Left">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Setter Property="Margin" Value="0" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{PluginStatus Plugin=felixkmh_Extras_Plugin, Status=Installed}" Value="True" />
+                                <Condition Binding="{Binding UserScoreVisibility}" Value="Visible" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Content.Visibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
+</Fragments>

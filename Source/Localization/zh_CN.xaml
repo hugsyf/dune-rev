@@ -40,4 +40,8 @@
     <sys:String x:Key="LOCDunePerformanceHistory">性能记录</sys:String>
     <sys:String x:Key="LOCDuneAverageFps">平均帧率</sys:String>
     <sys:String x:Key="LOCDuneTimeEstimates">通关时间估算</sys:String>
+    <sys:String x:Key="LOCDunePlayNotes">Play Notes 笔记</sys:String>
+    <sys:String x:Key="LOCDuneRelatedGames">库内关联游戏</sys:String>
+    <sys:String x:Key="LOCDuneSameSeries">同系列</sys:String>
+    <sys:String x:Key="LOCDuneSimilarGames">相似游戏</sys:String>
 </ResourceDictionary>

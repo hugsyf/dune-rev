@@ -523,4 +523,8 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+    <sys:String x:Key="LOCDunePlayNotes">Play Notes</sys:String>
+    <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
+    <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
+    <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
 </ResourceDictionary>

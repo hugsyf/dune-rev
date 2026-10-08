@@ -6,8 +6,8 @@
 
 | 批次 | 目标 | 状态 |
 | --- | --- | --- |
-| A | 共用信息行、紧凑／媒体设置、设置入口、横幅规则 | 完成代码，待打包提交 |
-| B | 可编辑评分、Play Notes、Game Relations | 待实施 |
+| A | 共用信息行、紧凑／媒体设置、设置入口、横幅规则 | 已审阅、打包并本地提交 3b8aeaf |
+| B | 可编辑评分、Play Notes、Game Relations | 已审阅、已打包；本批本地提交 |
 | C | 商店截图、自定义字段、网格浏览信息 | 待实施 |
 | 迭代 1 | 重新检查本地与在线调研，选择并实施改进 | 待调研 |
 | 迭代 2 | 再次检查本地与在线调研，选择并实施改进 | 待调研 |
@@ -24,3 +24,14 @@
 
 参考：[ThemeExtras 公开命令](https://github.com/felixkmh/ThemeExtras-for-Playnite/blob/master/source/ExtrasSettings.cs)、
 [Helium 布局设置](https://github.com/darklinkpower/Helium/blob/master/source/thememodifier.yaml)。
+
+## B 批
+
+- 两种详情视图的个人评分区域使用 ThemeExtras 交互星级，关闭开关或缺少控件时回退原生评分。遵循 Playnite 评分字段可见性。
+- Play Notes 独立折叠区域保留 Markdown／编辑能力，不混写原生笔记。
+- 关联页签显示库内同系列与相似游戏，沿用插件的 IsVisible 状态；每个列表高度可调。
+- 三个功能开关默认开启，插件缺失时自动隐藏。未在运行中的 Playnite 验证。
+
+参考：[ThemeExtras 控件](https://github.com/felixkmh/ThemeExtras-for-Playnite/wiki/Custom-UI-Elements)、
+[Play Notes](https://github.com/darklinkpower/PlayniteExtensionsCollection/wiki/Play-Notes)、
+[Game Relations](https://github.com/darklinkpower/PlayniteExtensionsCollection/wiki/Game-Relations)。

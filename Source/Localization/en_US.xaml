@@ -30,4 +30,8 @@
     <sys:String x:Key="LOCDuneLanguageListHint">Interface, audio and subtitle support are reported separately. Scroll horizontally for all columns.</sys:String>
     <sys:String x:Key="LOCDuneEmptyDlcCategory">No DLC in this category.</sys:String>
     <sys:String x:Key="LOCDuneSource">Source:</sys:String>
+    <sys:String x:Key="LOCDunePlayNotes">Play Notes</sys:String>
+    <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
+    <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
+    <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
 </ResourceDictionary>

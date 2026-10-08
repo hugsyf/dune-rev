@@ -163,7 +163,9 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 | BackgroundChanger | 替代背景 |
 | DuplicateHider | 重复副本选择 |
 | Library Management | 功能图标 |
-| ThemeExtras | 平台横幅、收藏与可编辑的完成状态 |
+| ThemeExtras | 平台横幅、收藏、可编辑的完成状态与个人评分 |
+| Play Notes | 独立笔记与插件原生编辑入口 |
+| Game Relations | 库内同系列与相似游戏 |
 | ScreenshotsVisualizer | 截图 |
 | Steam News and Players Viewer | 新闻与在线人数 |
 | Review Viewer | Steam 评论 |
@@ -184,7 +186,7 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 - 在 **ThemeModifier → 网格封面显示** 中提供两个独立开关，均默认开启：
   **显示平台／来源标签**、**PC 游戏优先显示商店／来源标签**。
   关闭前者恢复完整封面；只关闭后者则显示 Windows 等平台标签，而非 Steam、Epic、Xbox。
-  商店／来源图片需要 **ThemeExtras**，主机游戏保留对应平台横幅，标签高度也可调整。
+  原生主题图片支持平台与来源回退，ThemeExtras 可提供额外横幅；主机游戏保留平台横幅。
 - 自定义图片放入主题的 `Images/Banners/PlatformSpecId`（例如 `pc_windows.png`）、
   `PlatformName`（平台名称）、`PluginId`（库插件 GUID）或 `SourceName`（来源名称）。
   修改后重启 Playnite。ThemeExtras 会在主题更新时保留此文件夹。

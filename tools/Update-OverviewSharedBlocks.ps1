@@ -4,7 +4,7 @@
 param([switch]$Check)
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $PSScriptRoot '..\Source\Views'
-$fragments = @('SummaryCards.xml','OverviewDetails.xml') | ForEach-Object {
+$fragments = @('SummaryCards.xml','OverviewDetails.xml','UserRating.xml') | ForEach-Object {
     $document = [Xml.XmlDocument]::new()
     $document.Load((Join-Path $PSScriptRoot $_))
     $document

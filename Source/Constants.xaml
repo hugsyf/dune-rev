@@ -33,6 +33,10 @@
         <sys:Double x:Key="DuneGridHeroDesignHeight">900</sys:Double>
         <sys:Boolean x:Key="DuneReduceCoverMotion">False</sys:Boolean>
         <sys:Boolean x:Key="DuneShowThemeSettingsButton">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneEnableRatingEditing">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowPlayNotes">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneShowRelations">True</sys:Boolean>
+        <sys:Double x:Key="DuneRelationsPanelHeight">360</sys:Double>
         <sys:Boolean x:Key="DuneShowHowLongToBeatCard">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowActivityCard">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowRequirementsCard">True</sys:Boolean>
