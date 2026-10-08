@@ -567,23 +567,6 @@
             </Grid>
             <TabControl x:Name="DuneOverviewTabs" Style="{DynamicResource DuneOverviewTabControl}">
                 <TabItem x:Name="DescriptionTab" Header="{DynamicResource LOCOverviewLabel}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}"></TabItem>
-                <TabItem Header="{DynamicResource LOCDuneCustomFields}" Tag="{DynamicResource DuneShowCustomMetadata}" x:Name="DuneCustomFieldsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
-                    <TabItem.Style>
-                        <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
-                            <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_TagPrefixItemControl}" Value="Collapsed" />
-                                        <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_CategoryPrefixItemControl}" Value="Collapsed" />
-                                        <Condition Binding="{Binding Visibility, ElementName=MetadataUtilities_GenrePrefixItemControl}" Value="Collapsed" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TabItem.Style>
-                </TabItem>
                 <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}" x:Name="DuneRelationsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                     <TabItem.Style>
                         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
@@ -696,25 +679,6 @@
                         </StackPanel>
                     </Expander>
                 </StackPanel>
-            </Grid>
-            <Grid>
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSelected, ElementName=DuneCustomFieldsTab}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <Border Style="{StaticResource DunePluginPanel}">
-                    <StackPanel>
-                        <ContentControl x:Name="MetadataUtilities_TagPrefixItemControl" Tag="" Style="{StaticResource DuneMetadataTags}" />
-                        <ContentControl x:Name="MetadataUtilities_CategoryPrefixItemControl" Tag="" Style="{StaticResource DuneMetadataCategories}" />
-                        <ContentControl x:Name="MetadataUtilities_GenrePrefixItemControl" Tag="" Style="{StaticResource DuneMetadataGenres}" />
-                    </StackPanel>
-                </Border>
             </Grid>
             <Grid>
                 <Grid.Style>

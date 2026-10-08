@@ -12,7 +12,6 @@ Theme and installer versions remain at 2.2.0 until a formal release.
   Extend native platform/source artwork fallback to PC platforms and plugin IDs.
 - Add optional ThemeExtras rating editing (including unrated games), Play Notes,
   Game Relations series/similar library games and Steam store screenshots.
-- Add an opt-in Metadata Utilities custom fields tab, keeping native fields.
 - Add complete cover/title tooltips, optional per-game score badges and
   hover/keyboard copy selection; add missing-logo title fallback and media labels.
 - Add optional native ScreenshotsVisualizer grid gallery with existing-gallery
@@ -20,6 +19,8 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Improved
 
+- Remove the redundant Custom Fields tab and its preference, retaining native
+  metadata fields in the details panel.
 - Share native top-panel button visuals with the theme settings shortcut,
   including icon size, spacing and hover animation. Align all overview tab fonts.
 - Share scoped addon action/icon button styles across notes, screenshots, reviews
@@ -43,7 +44,7 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 - Stop selection gloss when hidden and use static selection feedback when cover
   motion is reduced. Reveal cover action buttons on keyboard focus.
-- Hide unavailable custom metadata and disabled related-game sections. Remove
+- Hide disabled related-game sections. Remove
   the language control's forced 600px minimum and bound vertical galleries.
 - Keep all development batches on a local branch at version 2.2.0. Review code
   and package each batch; no synthetic Playnite/plugin test scripts are used.

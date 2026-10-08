@@ -142,11 +142,4 @@
             <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource DuneInputPressedBrush}" /></Trigger>
         </Style.Triggers>
     </Style>
-    <!-- Declared after the native Button style to avoid a forward resource reference in Common. -->
-    <Style x:Key="MdStyleItemButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-        <Setter Property="Margin" Value="0,2,0,2" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-    </Style>
 </ResourceDictionary>

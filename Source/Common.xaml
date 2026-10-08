@@ -283,44 +283,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DuneMetadataTags" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Settings DetailsVisibility.Tags}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="DuneMetadataCategories" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Settings DetailsVisibility.Categories}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="DuneMetadataGenres" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Settings DetailsVisibility.Genres}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-    <!-- Public Metadata Utilities style keys; the addon owns field grouping and editing. -->
-    <Style x:Key="MdStyleTitle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Margin" Value="0,6,8,6" />
-    </Style>
-    <Style x:Key="MdStyleIcon" TargetType="TextBlock">
-        <Setter Property="Visibility" Value="Collapsed" />
-    </Style>
-    <Style x:Key="DunePluginPanel" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
-        <Setter Property="Padding" Value="16,16,16,0" />
-        <Setter Property="Margin" Value="0,16,0,0" />
-    </Style>
-
     <!-- Overview addons share the page surface rather than an opaque empty card. -->
     <Style x:Key="DuneOverviewPluginPanel" TargetType="Border">
         <Setter Property="Background" Value="Transparent" />
@@ -651,7 +613,6 @@
     <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
     <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
     <sys:String x:Key="LOCDuneStoreScreenshots">Store screenshots</sys:String>
-    <sys:String x:Key="LOCDuneCustomFields">Custom fields</sys:String>
     <sys:String x:Key="LOCDunePersonalScreenshots">Personal screenshots</sys:String>
     <sys:String x:Key="LOCDunePlayVideo">Play video</sys:String>
     <sys:String x:Key="LOCDunePauseVideo">Pause video</sys:String>

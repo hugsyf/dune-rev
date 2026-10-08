@@ -42,7 +42,6 @@
         <sys:Boolean x:Key="DuneShowStoreScreenshots">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowPersonalScreenshots">True</sys:Boolean>
         <sys:Boolean x:Key="DuneUseScreenshotGrid">False</sys:Boolean>
-        <sys:Boolean x:Key="DuneShowCustomMetadata">False</sys:Boolean>
         <sys:Boolean x:Key="DuneGridShowUserScore">False</sys:Boolean>
         <sys:Boolean x:Key="DuneGridShowCopySelector">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowHowLongToBeatCard">True</sys:Boolean>

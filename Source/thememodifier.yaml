@@ -48,7 +48,6 @@ Constants:
     - DuneShowStoreScreenshots: 'Show Steam store screenshots / 显示 Steam 商店截图'
     - DuneShowPersonalScreenshots: 'Show personal screenshots / 显示个人截图'
     - DuneUseScreenshotGrid: 'Prefer native screenshot grid when enabled in plugin / 插件启用网格图库时优先使用'
-    - DuneShowCustomMetadata: 'Show Metadata Utilities custom fields tab / 显示 Metadata Utilities 自定义字段页'
     - DuneEnableRatingEditing: 'Edit personal rating with ThemeExtras / 使用 ThemeExtras 编辑个人评分'
     - DuneShowPlayNotes: 'Show Play Notes / 显示 Play Notes 笔记'
     - DuneShowRelations: 'Show related games from your library / 显示库内关联游戏'

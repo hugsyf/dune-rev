@@ -84,7 +84,7 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 ## 开关与交付
 
 - 默认开启：评分编辑、Play Notes、关联游戏、个人／商店截图、标题回退、副本选择、主题设置入口。
-- 默认关闭：紧凑布局、减少封面动效、个人评分封面标记、自定义字段页、优先使用截图网格。
+- 默认关闭：紧凑布局、减少封面动效、个人评分封面标记、优先使用截图网格。
 - 各批安装包位于 release/batch-a、batch-b、batch-c、iteration-1、iteration-2；
   iteration-2 是完整累计包，版本仍为 2.2.0。包文件不纳入 Git。
 - 无推送、合并、标签或正式发布；后续功能扩展以真实环境反馈为依据。
@@ -183,3 +183,19 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
   保留标题回退与原来的 Logo 尺寸设置。此次未修改共享片段，无需重新生成扩展布局。
 - 已审阅改动并打包至 release/details-logo-alignment；版本保持 2.2.0，仅本地提交，
   不推送或发布，不编写测试脚本。真实界面效果由用户确认。
+## 实机反馈：撤回重复的 Custom Fields 页签（2026-10-08）
+
+- 实机截图显示该页签仍展示原生 Tags、Categories、Genres，并与现有详情栏／Hero 字段重复。
+  Metadata Utilities 的这些控件处理的是已有字段的前缀分组、值隐藏和编辑；此前命名为
+  Custom Fields 容易让人误以为存在一组独立的新增属性。
+- 官方控件布局是左右等宽列。左侧字段名占据半页，右侧逐行显示值，叠加主题的
+  MdStyleItemButton.HorizontalAlignment=Stretch 与实色底板，形成大面积留白和长条按钮。
+- 移除独立页签及三个插件宿主，保留原生字段的展示与筛选。同步移除显示开关、默认值、
+  中英标题资源、专用 Metadata 样式和已无引用的 DunePluginPanel，清理 README 与待发布 changelog。
+  不修改插件文件、配置或游戏数据。此前实施记录保留为历史，本段说明该功能已撤回。
+- 如果今后确实需要前缀虚拟字段，应在详情栏内作为原生对应字段的替代，而不另建重复页签；
+  本轮不增加该集成，避免继续扩大未经用户需要确认的功能范围。
+- Details 与 Grid Details 同步生成；代码审阅后由 Toolbox 打包至 release/remove-custom-fields。
+  版本仍为 2.2.0，仅本地提交，不推送或发布，不编写测试脚本。
+
+参考：[Metadata Utilities 控件及固定布局说明](https://knarzwerk.de/en/playnite-extensions/metadata-utilities/theme-integration/)。

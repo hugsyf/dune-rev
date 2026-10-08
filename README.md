@@ -83,7 +83,6 @@ You can also install through Playnite's add-on browser or the
 | Game Relations | Same-series and similar games in your library |
 | ScreenshotsVisualizer | Personal screenshots; optional native grid gallery |
 | Steam Store Screenshots Viewer | Store screenshots |
-| Metadata Utilities | Opt-in prefix fields and native editing |
 | Steam News and Players Viewer | News and players online |
 | Review Viewer | Steam reviews |
 | ThemeModifier | Layout and display customization |
@@ -113,8 +112,8 @@ You can also install through Playnite's add-on browser or the
   GUID) or `SourceName` (exact source name). Restart Playnite after changing images.
 
 - **ThemeModifier → Extension panels** controls ratings, Play Notes, relations and
-  personal/store screenshots (enabled by default), plus Metadata Utilities fields
-  and the native screenshot grid (disabled by default). Enable the matching gallery
+  personal/store screenshots (enabled by default), plus the native screenshot grid
+  (disabled by default). Enable the matching gallery
   integration in ScreenshotsVisualizer to use its grid. Native fields/notes remain available.
 - Missing-logo title fallback is enabled by default. Grid personal score badges are
   optional; multi-copy selectors appear below covers on hover/keyboard focus; cover actions also support focus.
@@ -180,7 +179,6 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 | Game Relations | 库内同系列与相似游戏 |
 | ScreenshotsVisualizer | 个人截图 |
 | Steam Store Screenshots Viewer | 商店截图 |
-| Metadata Utilities | 可选前缀自定义字段与原生编辑 |
 | Steam News and Players Viewer | 新闻与在线人数 |
 | Review Viewer | Steam 评论 |
 | ThemeModifier | 布局与显示设置 |
@@ -206,7 +204,7 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
   修改后重启 Playnite。ThemeExtras 会在主题更新时保留此文件夹。
 
 - **ThemeModifier → 扩展面板** 调整个人评分、Play Notes、关联游戏与个人／商店截图，均默认开启。
-  自定义字段页与优先使用原生截图网格默认关闭；前缀和对应图库集成需在各插件中配置。
+  优先使用原生截图网格默认关闭；对应图库集成需在 ScreenshotsVisualizer 中配置。
   原生字段与笔记继续保留，未评分游戏也可以通过 ThemeExtras 直接打分。
 - 缺 Logo 时的标题回退默认开启；网格个人评分默认关闭，副本选择默认开启。
   多副本来源入口位于封面下方，仅悬停或键盘聚焦时显示；单副本游戏隐藏入口。
