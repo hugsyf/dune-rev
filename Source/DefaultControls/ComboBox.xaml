@@ -31,7 +31,7 @@
                         </TextBox>
                         <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" Focusable="False" AllowsTransparency="True" VerticalOffset="4">
                             <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                <Border Style="{DynamicResource PopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" />
+                                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" />
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Padding="4">
                                     <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </ScrollViewer>

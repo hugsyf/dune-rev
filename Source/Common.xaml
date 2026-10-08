@@ -362,7 +362,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Button Style="{DynamicResource DuneSubtleIconButton}" Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"
+                                <Button Style="{DynamicResource DunePluginIconButton}" Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"
                                         Command="{Binding SelectPreviousScreenshotCommand}" Margin="0,0,8,0" />
                                 <ListBox Grid.Column="1" Height="100" Background="Transparent" BorderThickness="0"
                                          ItemsSource="{Binding Screenshots}"
@@ -402,7 +402,7 @@
                                         <DataTemplate><Image Source="{Binding ThumbnailImage}" Height="64" Width="114" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" /></DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <Button Grid.Column="2" Style="{DynamicResource DuneSubtleIconButton}" Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"
+                                <Button Grid.Column="2" Style="{DynamicResource DunePluginIconButton}" Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"
                                         Command="{Binding SelectNextScreenshotCommand}" Margin="8,0,0,0" />
                             </Grid>
                         </Grid>

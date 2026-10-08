@@ -2223,8 +2223,8 @@
                                                         </Grid>
                                                     </Grid>
                                                     <TabControl x:Name="DuneOverviewTabs" Style="{DynamicResource DuneOverviewTabControl}">
-                                                        <TabItem x:Name="DescriptionTab" Header="{DynamicResource LOCOverviewLabel}"></TabItem>
-                                                        <TabItem Header="{DynamicResource LOCDuneCustomFields}" Tag="{DynamicResource DuneShowCustomMetadata}" x:Name="DuneCustomFieldsTab">
+                                                        <TabItem x:Name="DescriptionTab" Header="{DynamicResource LOCOverviewLabel}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}"></TabItem>
+                                                        <TabItem Header="{DynamicResource LOCDuneCustomFields}" Tag="{DynamicResource DuneShowCustomMetadata}" x:Name="DuneCustomFieldsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                                                             <TabItem.Style>
                                                                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                                                                     <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -2241,7 +2241,7 @@
                                                                 </Style>
                                                             </TabItem.Style>
                                                         </TabItem>
-                                                        <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}" x:Name="DuneRelationsTab">
+                                                        <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}" x:Name="DuneRelationsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                                                             <TabItem.Style>
                                                                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                                                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -2264,7 +2264,7 @@
                                                                 </Style>
                                                             </TabItem.Style>
                                                         </TabItem>
-                                                        <TabItem x:Name="DunePlayNotesTab" Header="{DynamicResource LOCDunePlayNotes}" Tag="{DynamicResource DuneShowPlayNotes}">
+                                                        <TabItem x:Name="DunePlayNotesTab" Header="{DynamicResource LOCDunePlayNotes}" Tag="{DynamicResource DuneShowPlayNotes}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                                                             <TabItem.Style>
                                                                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                                                                     <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -2276,7 +2276,7 @@
                                                                 </Style>
                                                             </TabItem.Style>
                                                         </TabItem>
-                                                        <TabItem x:Name="DuneStoreScreenshotsTab" Header="{DynamicResource LOCDuneStoreScreenshots}" Tag="{DynamicResource DuneShowStoreScreenshots}">
+                                                        <TabItem x:Name="DuneStoreScreenshotsTab" Header="{DynamicResource LOCDuneStoreScreenshots}" Tag="{DynamicResource DuneShowStoreScreenshots}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                                                             <TabItem.Style>
                                                                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                                                                     <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -2291,7 +2291,7 @@
                                                                 </Style>
                                                             </TabItem.Style>
                                                         </TabItem>
-                                                        <TabItem x:Name="DunePersonalScreenshotsTab" Header="{DynamicResource LOCDunePersonalScreenshots}" Tag="{DynamicResource DuneShowPersonalScreenshots}">
+                                                        <TabItem x:Name="DunePersonalScreenshotsTab" Header="{DynamicResource LOCDunePersonalScreenshots}" Tag="{DynamicResource DuneShowPersonalScreenshots}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
                                                             <TabItem.Style>
                                                                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                                                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -2307,8 +2307,8 @@
                                                                 </Style>
                                                             </TabItem.Style>
                                                         </TabItem>
-                                                        <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}" Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16" x:Name="DuneReviewsDetails"></TabItem>
-                                                        <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}" Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="16" x:Name="DuneNewsDetails"></TabItem>
+                                                        <TabItem Header="{DynamicResource LOCReview_Viewer_ReviewsLabel}" Visibility="{PluginSettings Plugin=ReviewViewer, Path=IsControlVisible, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="{DynamicResource FontSize}" x:Name="DuneReviewsDetails" FontFamily="{DynamicResource FontFamily}"></TabItem>
+                                                        <TabItem Header="{DynamicResource LOC_NewsViewer_NewsViewerControl_NewsLabel}" Visibility="{PluginSettings Plugin=NewsViewer, Path=ReviewsAvailable, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="{DynamicResource FontSize}" x:Name="DuneNewsDetails" FontFamily="{DynamicResource FontFamily}"></TabItem>
                                                     </TabControl>
                                                     <Grid>
                                                         <Grid.Style>
@@ -2422,7 +2422,11 @@
                                                         </Grid.Style>
                                                         <StackPanel>
                                                             <Border Style="{StaticResource DuneOverviewPluginPanel}" Visibility="{Binding Visibility, ElementName=ReviewViewer_ReviewsControl}">
-                                                                <ContentControl x:Name="ReviewViewer_ReviewsControl" Foreground="{DynamicResource TextBrush}" TextElement.Foreground="{DynamicResource TextBrush}" Style="{DynamicResource DunePluginContent}" />
+                                                                <ContentControl x:Name="ReviewViewer_ReviewsControl" Foreground="{DynamicResource TextBrush}" TextElement.Foreground="{DynamicResource TextBrush}" Style="{DynamicResource DunePluginContent}">
+                                                                    <ContentControl.Resources>
+                                                                        <Style TargetType="Button" BasedOn="{StaticResource DunePluginActionButton}" />
+                                                                    </ContentControl.Resources>
+                                                                </ContentControl>
                                                             </Border>
                                                         </StackPanel>
                                                     </Grid>
@@ -2439,7 +2443,11 @@
                                                         </Grid.Style>
                                                         <StackPanel>
                                                             <Border Style="{StaticResource DuneOverviewPluginPanel}" Visibility="{Binding Visibility, ElementName=NewsViewer_NewsViewerControl}">
-                                                                <ContentControl x:Name="NewsViewer_NewsViewerControl" Style="{DynamicResource DunePluginContent}" />
+                                                                <ContentControl x:Name="NewsViewer_NewsViewerControl" Style="{DynamicResource DunePluginContent}">
+                                                                    <ContentControl.Resources>
+                                                                        <Style TargetType="Button" BasedOn="{StaticResource DunePluginActionButton}" />
+                                                                    </ContentControl.Resources>
+                                                                </ContentControl>
                                                             </Border>
                                                         </StackPanel>
                                                     </Grid>
@@ -2473,37 +2481,7 @@
                                                                         <Style TargetType="Separator">
                                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                                         </Style>
-                                                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                                                            <Style.Triggers>
-                                                                                <Trigger Property="FontFamily" Value="Segoe MDL2 Assets">
-                                                                                    <Setter Property="MinWidth" Value="36" />
-                                                                                    <Setter Property="MinHeight" Value="36" />
-                                                                                    <Setter Property="FontSize" Value="20" />
-                                                                                    <Setter Property="Padding" Value="8" />
-                                                                                    <Setter Property="Background" Value="Transparent" />
-                                                                                    <Setter Property="Template">
-                                                                                        <Setter.Value>
-                                                                                            <ControlTemplate TargetType="Button">
-                                                                                                <Border x:Name="NotesButtonSurface" Background="{TemplateBinding Background}" CornerRadius="4" Padding="{TemplateBinding Padding}">
-                                                                                                    <ContentPresenter ContentSource="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                                                                </Border>
-                                                                                                <ControlTemplate.Triggers>
-                                                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                                                        <Setter TargetName="NotesButtonSurface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" />
-                                                                                                    </Trigger>
-                                                                                                    <Trigger Property="IsKeyboardFocused" Value="True">
-                                                                                                        <Setter TargetName="NotesButtonSurface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" />
-                                                                                                    </Trigger>
-                                                                                                    <Trigger Property="IsPressed" Value="True">
-                                                                                                        <Setter TargetName="NotesButtonSurface" Property="Background" Value="{DynamicResource DuneInputPressedBrush}" />
-                                                                                                    </Trigger>
-                                                                                                </ControlTemplate.Triggers>
-                                                                                            </ControlTemplate>
-                                                                                        </Setter.Value>
-                                                                                    </Setter>
-                                                                                </Trigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
+                                                                        <Style TargetType="Button" BasedOn="{StaticResource DunePluginActionButton}" />
                                                                     </ContentControl.Resources>
                                                                 </ContentControl>
                                                             </StackPanel>
@@ -2537,6 +2515,9 @@
                                                         </Grid.Style>
                                                         <Border Style="{StaticResource DuneOverviewPluginPanel}">
                                                             <Grid>
+                                                                <Grid.Resources>
+                                                                    <Style TargetType="Button" BasedOn="{StaticResource DunePluginActionButton}" />
+                                                                </Grid.Resources>
                                                                 <ContentControl x:Name="ScreenshotsVisualizer_PluginScreenshots" Height="{DynamicResource ScreenshotsPanelHeight}" Tag="{DynamicResource DuneUseScreenshotGrid}">
                                                                     <ContentControl.Style>
                                                                         <Style TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">

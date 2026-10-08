@@ -67,6 +67,55 @@
         </Style.Triggers>
     </Style>
 
+    <ControlTemplate x:Key="DunePluginActionButtonTemplate" TargetType="Button">
+        <Border x:Name="Surface" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
+            <ContentPresenter ContentSource="Content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" RecognizesAccessKey="True" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputPressedBrush}" /></Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="DunePluginIconButtonTemplate" TargetType="Button">
+        <Border x:Name="Surface" Background="Transparent" CornerRadius="4" Padding="8">
+            <!-- Native plugins often set FontSize locally (24 or 40). Scale the
+                 visual, preserving their glyph font, content and click handlers. -->
+            <Viewbox Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentPresenter ContentSource="Content" RecognizesAccessKey="True" />
+            </Viewbox>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputPressedBrush}" /></Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="DunePluginActionButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template" Value="{StaticResource DunePluginActionButtonTemplate}" />
+        <Style.Triggers>
+            <!-- Scoped to addon hosts: their single-character labels are glyphs
+                 or + actions. Text actions retain their natural width. -->
+            <DataTrigger Binding="{Binding Content.Length, RelativeSource={RelativeSource Self}, FallbackValue=0}" Value="1">
+                <Setter Property="Width" Value="36" />
+                <Setter Property="Height" Value="36" />
+                <Setter Property="Template" Value="{StaticResource DunePluginIconButtonTemplate}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DunePluginIconButton" TargetType="Button" BasedOn="{StaticResource DunePluginActionButton}">
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Template" Value="{StaticResource DunePluginIconButtonTemplate}" />
+    </Style>
+
     <Style x:Key="LoadMoreButton" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
         <Setter Property="Margin" Value="0,5,0,5" />
     </Style>
@@ -92,14 +141,6 @@
             <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
             <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource DuneInputPressedBrush}" /></Trigger>
         </Style.Triggers>
-    </Style>
-    <Style x:Key="DuneToolbarIconButton" TargetType="Button" BasedOn="{StaticResource DuneSubtleIconButton}">
-        <Setter Property="Width" Value="32" />
-        <Setter Property="Height" Value="32" />
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
-        <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
     </Style>
     <!-- Declared after the native Button style to avoid a forward resource reference in Common. -->
     <Style x:Key="MdStyleItemButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">

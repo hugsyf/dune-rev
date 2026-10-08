@@ -147,3 +147,30 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 [Steam 商店截图控件](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/SteamScreenshots/ScreenshotsControl/SteamScreenshotsControl.xaml.cs)、
 [个人截图高度约束](https://github.com/Lacro59/playnite-screenshotsvisualizer-plugin/blob/master/source/Controls/PluginSinglePicture.xaml)、
 [性能图表高度约束](https://github.com/Lacro59/playnite-gameactivity-plugin/blob/master/source/Controls/PluginChartLog.xaml)。
+## 实机反馈：按钮与弹层一致性（2026-10-08）
+
+- 设置齿轮与原生 TopPanelItem 共用 DuneTopPanelButtonTemplate 和基础样式：32px 命中区域、
+  20px 图标容器、相同圆角、0.16 悬停叠加与 0.4 秒动画。使用同一 TopPanelIconFontStyle，
+  移除独立工具栏样式及额外间距。原生切换状态映射到 Selector.IsSelected，保留底部指示线。
+  设置按钮保留自己的命令；原生 TopPanelItem.OnApplyTemplate 会重绑 Command、Content 等属性，
+  因此共享视觉模板，而不直接用该控件替代设置按钮。
+- 评论、新闻原来的 FontSize=16 与其他页签的动态字号确实不同。所有总览页签改为显式引用
+  同一个 FontSize 与 FontFamily 资源；选中加粗和指示线仍保留。
+- Play Notes、ScreenshotsVisualizer、ReviewViewer、NewsViewer 的操作由插件负责，主要控件是
+  普通 WPF Button；商店截图导航是主题上轮新增的按钮，调用插件公开命令。此前笔记与商店截图
+  的局部模板也是外观不一致的来源，本次合并为 DunePluginActionButton / DunePluginIconButton。
+- 只在这些扩展宿主中应用共享样式：透明常态、相同 4px 圆角、36px 图标按钮、20px 图标容器，
+  相同悬停／按下反馈。Viewbox 约束插件写死的 24/40 字号；保留图标字体、命令、事件、内容模板
+  与禁用状态，文本操作按钮保持自然宽度。笔记不再保留上一轮独立按钮模板。
+- ReviewViewer 顶部 Review Type / Purchase Type / Language / Playtime / Display 五个筛选块
+  是插件自己绘制的 Grid/Border，使用控件内的 StaticResource 专用样式，不能通过普通 Button
+  样式统一。本次保留这些区域，未替换原生筛选交互或修改插件文件。
+- 普通 ComboBox、FilterSelectionBox、ComboBoxList 弹层统一使用 DuneDropdownPopupBorder，
+  背景为 #B320242B（约 70% 不透明度）。Popup 继续允许透明，只对背景画刷设置 alpha，
+  不对整个弹层设置 Opacity；文字、复选框、滚动条不会被淡化。并非 Acrylic 模糊材质。
+- 已代码审阅、同步共享片段并用 Toolbox 打包；不编写测试脚本。版本仍为 2.2.0，
+  包在 release/control-consistency，仅本地提交，不推送或发布，实际效果待用户确认。
+
+参考：[TopPanelItem 行为](https://github.com/JosefNemec/Playnite/blob/master/source/Playnite.DesktopApp/Controls/TopPanelItem.cs)、
+[ReviewViewer 控件与局部筛选样式](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/ReviewViewer/Presentation/ReviewsControl.xaml)、
+[NewsViewer 原生按钮](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/NewsViewer/Presentation/NewsViewerControl.xaml)。

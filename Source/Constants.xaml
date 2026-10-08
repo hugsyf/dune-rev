@@ -228,6 +228,7 @@
     <!--InputStyle-->
     <CornerRadius x:Key="DuneInputCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="DuneFlyoutCornerRadius">8</CornerRadius>
+    <SolidColorBrush x:Key="DuneDropdownSurfaceBrush" Color="#B320242B" />
     <SolidColorBrush x:Key="DuneInputFillBrush" Color="#0FFFFFFF" />
     <SolidColorBrush x:Key="DuneInputHoverBrush" Color="#18FFFFFF" />
     <SolidColorBrush x:Key="DuneInputPressedBrush" Color="#0AFFFFFF" />

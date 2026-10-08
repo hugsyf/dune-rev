@@ -230,14 +230,15 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                <Button Content="&#xE713;" Width="32" Height="32" Margin="8,0,0,0"
+                                <Button
                                         VerticalAlignment="Center" ToolTip="{DynamicResource LOCDuneThemeSettings}"
+                                        AutomationProperties.Name="{DynamicResource LOCDuneThemeSettings}"
                                         Tag="{DynamicResource DuneShowThemeSettingsButton}"
                                         WindowChrome.IsHitTestVisibleInChrome="True"
                                         Command="{PluginSettings Plugin=ThemeExtras, Path=Commands.OpenPluginSettingsCommand, FallbackValue={x:Null}}"
                                         CommandParameter="ec2f4013-17e6-428a-b8a9-5e34a3b80009">
                                     <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource DuneToolbarIconButton}">
+                                        <Style TargetType="Button" BasedOn="{StaticResource DuneTopPanelActionButton}">
                                             <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
@@ -251,9 +252,10 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
+                                    <TextBlock Text="&#xE713;" Style="{StaticResource TopPanelIconFontStyle}" />
                                 </Button>
                                 <StackPanel x:Name="PART_PanelMainItems" Orientation="Horizontal"
-                                            VerticalAlignment="Stretch" Margin="12,6,0,6" />
+                                            VerticalAlignment="Stretch" Margin="0,6,0,6" />
                                 <Border Width="1" Height="20" Margin="8,0,0,0"
                                         Background="{DynamicResource PanelSeparatorBrush}" VerticalAlignment="Center" />
                                 <CheckBox x:Name="PART_ToggleFilter" ToolTip="{DynamicResource LOCFilters}"

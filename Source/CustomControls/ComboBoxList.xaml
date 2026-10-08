@@ -30,7 +30,7 @@
                 </Button.Style>
             </Button>
             <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
-                <Border Style="{DynamicResource PopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
+                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
                     <ItemsControl x:Name="PART_ItemsPanel" />
                 </Border>
             </Popup>
@@ -75,7 +75,7 @@
                 </Button.Style>
             </Button>
             <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
-                <Border Style="{DynamicResource PopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
+                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />

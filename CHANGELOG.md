@@ -20,6 +20,11 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Improved
 
+- Share native top-panel button visuals with the theme settings shortcut,
+  including icon size, spacing and hover animation. Align all overview tab fonts.
+- Share scoped addon action/icon button styles across notes, screenshots, reviews
+  and news, preserving native commands and glyph fonts. Use translucent dropdown
+  surfaces for filter and combo popups without fading their text or checkbox content.
 - Move Play Notes, Steam store screenshots and personal screenshots into peer
   overview tabs with persistent addon hosts. Remove opaque plugin panel backplates.
 - Give store screenshots a bounded preview with selectable thumbnails and native

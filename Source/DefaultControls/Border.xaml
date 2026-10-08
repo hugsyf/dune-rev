@@ -18,6 +18,12 @@
 
     </Style>
 
+    <Style x:Key="DuneDropdownPopupBorder" TargetType="Border" BasedOn="{StaticResource PopupBorder}">
+        <Setter Property="Background" Value="{DynamicResource DuneDropdownSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DuneFlyoutCornerRadius}" />
+    </Style>
+
     <Style x:Key="DetailViewCardBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlOverlayBrush}" />
         <Setter Property="Opacity" Value="0.06" />
