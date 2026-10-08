@@ -52,8 +52,7 @@
 ### Maintenance
 
 - Share Hero metadata, rating and overview fragments between Details and Grid Details.
-- Rewrite the bilingual README with extension requirements and setting defaults;
-  replace the gallery with seven current captures and update add-on references.
+- Refresh the bilingual setup documentation, screenshot gallery and add-on references.
 
 ## v2.2.0 - 2026-10-05
 

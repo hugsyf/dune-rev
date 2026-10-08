@@ -106,9 +106,8 @@ a low-glare library view with quick access to game information and extension con
 - **Adjustable presentation.** ThemeModifier controls Hero size, blur and shading,
   content widths, summary visibility, panel heights, cover labels and colors.
   The optional top-bar shortcut opens theme settings.
-- **Consistent theme surfaces.** Matching toolbar feedback, tab typography, checkboxes
-  and translucent dropdowns; scoped button styles for supported plugin panels.
-  Extensions still provide their own data, commands and some internal controls.
+- **Consistent controls.** Matching toolbar feedback, tab fonts, checkboxes,
+  translucent dropdown menus and buttons in supported plugin panels.
 
 ### Installation
 
@@ -246,8 +245,7 @@ Dune Rev 基于 sakasakiking 的 [Dune](https://github.com/sakasakiking/Dune)，
   游玩／详情按钮也支持键盘聚焦，可选择显示个人评分或减少封面动效。
 - **可调布局与外观。** 通过 ThemeModifier 调整 Hero 尺寸、模糊与暗化、内容宽度、
   摘要显示、面板高度、封面标签与配色；可选的顶栏快捷入口直接打开主题设置。
-- **统一主题控件。** 顶栏反馈、页签文字、复选框与半透明下拉菜单保持一致，
-  支持的插件面板采用局部按钮样式。数据、操作逻辑与部分内部控件仍由扩展提供。
+- **统一主题控件。** 顶栏反馈、页签字体、复选框、半透明下拉菜单与支持的插件面板按钮保持一致。
 
 ### 安装
 
