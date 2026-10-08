@@ -19,6 +19,9 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Improved
 
+- Rewrite the bilingual README for current layouts, content tabs, optional
+  extensions and setting defaults. Replace the old gallery with seven user-supplied
+  captures and refresh add-on descriptions and screenshot references.
 - Remove the redundant Custom Fields tab and its preference, retaining native
   metadata fields in the details panel.
 - Share native top-panel button visuals with the theme settings shortcut,

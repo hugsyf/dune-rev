@@ -7,12 +7,12 @@ SourceUrl: https://github.com/hugsyf/dune-rev
 ShortDescription: A dark, Fluent-inspired Desktop theme with adaptive layouts and expandable plugin cards.
 Description: >-
     Dune Rev brings a low-glare Fluent-inspired design to Playnite Desktop, with
-    responsive Details and Grid views, expandable plugin cards, and native Playnite
-    Achievements integration. Card details expand above separate Overview, Reviews
-    and News tabs. Optional extensions add activity statistics,
-    HowLongToBeat estimates, system requirements, language support, DLC,
-    screenshots, Steam reviews and news. ThemeModifier provides layout and
-    display options.
+    Details, Grid and Grid Details views, rounded platform/store cover banners,
+    expandable plugin cards, and native Playnite Achievements integration.
+    Optional extensions add completion estimates, session and performance charts,
+    requirements, language support and DLC. Overview, related games, notes,
+    store/personal screenshots, reviews and news have separate content tabs.
+    ThemeModifier provides Hero, layout, visibility and appearance options.
 Tags: ["Theme", "Fluent", "Dark", "Desktop"]
 IconUrl: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Source/Images/applogo.png
 Links:
@@ -20,11 +20,17 @@ Links:
     Issues Tracker: https://github.com/hugsyf/dune-rev/issues
     Original Dune: https://github.com/sakasakiking/Dune
 Screenshots:
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Details%20View.png
-      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Details%20View.png
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png
-      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/Grid%20Details%20View.png
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/PA.png
-      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/PA.png
-    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/HLTB.png
-      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/HLTB.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/details-view.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/details-view.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-view.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-view.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-details-view.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-details-view.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/completion-estimates-and-reviews.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/completion-estimates-and-reviews.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/activity-and-performance.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/activity-and-performance.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/achievements.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/achievements.png
+    - Thumbnail: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-details-store-screenshots.png
+      Image: https://raw.githubusercontent.com/hugsyf/dune-rev/main/Screenshots/grid-details-store-screenshots.png
