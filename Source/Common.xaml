@@ -48,6 +48,7 @@
     <sys:String x:Key="LOCDuneSource">Source:</sys:String>
     <sys:String x:Key="LOCDuneOpenPlugin">Open in plugin</sys:String>
     <sys:String x:Key="LOCDuneCollapseDetails">Collapse</sys:String>
+    <sys:String x:Key="LOCDuneCloseDetails">Close game details</sys:String>
     <sys:String x:Key="LOCDuneEmbeddedUnavailable">Expandable details are unavailable.</sys:String>
     <sys:String x:Key="LOCDuneSolo">Single-player</sys:String>
     <sys:String x:Key="LOCDuneCoOp">Co-op</sys:String>

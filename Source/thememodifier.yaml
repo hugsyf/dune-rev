@@ -43,6 +43,9 @@ Constants:
     - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
 
     - "Grid cover display / 网格封面显示"
+    - GridViewGameCoverShowPlatformBanner: 'Grid covers: show platform/source labels / 网格封面：显示平台／来源标签'
+    - GridViewGameCoverPreferSourceBanner: 'Grid covers: prefer store/source labels for PC games / 网格封面：PC 游戏优先显示商店／来源标签'
+    - GridViewPlatformBannerHeight(20,64): 'Grid covers: platform banner height / 网格封面：平台标签高度'
     - GridViewGameCoverShowFavorite: 'Grid covers: show favorite icon / 网格封面：显示收藏图标'
     - GridViewGameCoverUseRoundedCorners: 'Grid covers: use rounded corners / 网格封面：使用圆角'
     - GridViewGameCoverShowShineAnimation: 'Grid covers: show hover shine / 网格封面：显示悬停光泽动画'

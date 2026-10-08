@@ -323,12 +323,12 @@
 
                                                 <ContentControl x:Name="DuplicateHider_SourceSelector"
                                                                 Height="24" Margin="8,0,0,0"
-                                                                VerticalAlignment="Center"
+                                                                VerticalAlignment="Center" VerticalContentAlignment="Center"
                                                                 RenderOptions.BitmapScalingMode="Fant" />
 
                                                 <ContentControl x:Name="NewsViewer_PlayersInGameViewerControl"
                                                                 Margin="8,0,0,0"
-                                                                VerticalAlignment="Center" />
+                                                                VerticalAlignment="Center" VerticalContentAlignment="Center" />
 
                                                 <StackPanel Name="PART_ElemGenres" Orientation="Horizontal" VerticalAlignment="Center">
                                                     <StackPanel.Style>

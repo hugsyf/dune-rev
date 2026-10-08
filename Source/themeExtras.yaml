@@ -1,1 +1,9 @@
 ThemeId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
+PersistentPaths:
+- Images/Banners
+BannersBySpecIdPath: Images/Banners/PlatformSpecId
+BannersByPlatformNamePath: Images/Banners/PlatformName
+BannersByPluginIdPath: Images/Banners/PluginId
+BannersBySourceNamePath: Images/Banners/SourceName
+DefaultBannerPath: Images/Banners/UnknownLibrary.png
+BannerDecodeHeight: 100

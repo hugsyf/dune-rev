@@ -30,13 +30,14 @@
         <Setter Property="Foreground" Value="#99FFFFFF" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
         <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <TextBlock FontSize="{TemplateBinding FontSize}"
+                    <TextBlock FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}"
                            Foreground="{TemplateBinding Foreground}"
                            Text="{TemplateBinding Content, Converter={StaticResource ObjectToStringConverter}}"
-                           TextWrapping="Wrap"/>
+                           VerticalAlignment="Center" TextWrapping="NoWrap"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -57,12 +58,17 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="#29FFFFFF" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Height="16">
-                        <TextBlock FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" Margin="4,-4,4,0"
-                                Text="{TemplateBinding Content, Converter={StaticResource ObjectToStringConverter}}" TextWrapping="Wrap">
+                    <!-- Let the font measure the tag. Fixed 16-DIP borders and
+                         negative text margins put labels on a different baseline. -->
+                    <Border CornerRadius="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="4,0" VerticalAlignment="Center">
+                        <TextBlock FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}"
+                                Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"
+                                Text="{TemplateBinding Content, Converter={StaticResource ObjectToStringConverter}}" TextWrapping="NoWrap">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Typography.Capitals" Value="AllSmallCaps" />

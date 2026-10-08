@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased
+
+Theme and installer versions remain at 2.2.0 until a formal release.
+
+### Added
+
+- Add platform/source strips on Grid and Grid Details covers, with 118 bundled
+  banners from KNARZnite. Add independent, default-enabled visibility and PC
+  store/source preferences plus adjustable height. Source preference uses
+  ThemeExtras; platform artwork/text can be displayed natively.
+- Preserve custom banner images across theme updates through ThemeExtras.
+
+### Fixed
+
+- Keep plugin card hover and selected outlines within their measured bounds,
+  avoiding edge clipping from the previous scale and shadow effects.
+- Place Hero media beside the action area at narrower widths. On small panes,
+  show media above the actions so game information stays at the bottom.
+- Anchor the close-details button inside the Hero with consistent insets and
+  reserve room for it beside the logo. Constrain game actions to their column.
+- Fill banner strips edge to edge and share the cover's rounded mask. Disabling
+  source preference selects platform artwork independently of the source cache.
+- Vertically center release dates, platforms, source tags/icons, player counts
+  and genres in both overview footers. Remove top offsets and fixed-height tags
+  with negative text margins, sizing labels naturally for the configured font.
+
 ## v2.2.0 - 2026-10-05
 
 ### Added

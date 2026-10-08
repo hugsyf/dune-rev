@@ -76,9 +76,13 @@
 
                                 </Border>
 
-                                <StackPanel>
-                                    <StackPanel.Style>
-                                        <Style TargetType="StackPanel">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=Mask, Path=Tag}" Value="True">
                                                     <Setter Property="OpacityMask">
@@ -97,14 +101,110 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </StackPanel.Style>
-                                    <!--
-                                    ThemeExtras_Banner is intentionally not injected here. ThemeExtras requires
-                                    banner paths in themeExtras.yaml; creating the control without those assets
-                                    causes its BannerCache to throw while Grid View items are being realized.
-                                    -->
-                                    <Grid>
-                                        <Image Name="PART_ImageCover" Height="{Settings GridItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Center"
+                                    </Grid.Style>
+                                    <!-- Keep the strip inside the cover's shared rounded mask. Platform
+                                         lookups are independent of ThemeExtras' source-first cache, so
+                                         disabling source labels cannot leave a store banner selected. -->
+                                    <Grid x:Name="DuneCoverPlatformHeader" Height="{DynamicResource GridViewPlatformBannerHeight}"
+                                          Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}" IsHitTestVisible="False"
+                                          Background="{DynamicResource CardSurfaceBrush}" ClipToBounds="True">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </DataTrigger>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Source, ElementName=DuneCoverBannerImage}" Value="{x:Null}" />
+                                                            <Condition Binding="{Binding Text, ElementName=DuneCoverBannerText}" Value="" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <!-- Native lookups also retain platform art without ThemeExtras.
+                                             Missing files return UnsetValue; the next candidate can win. -->
+                                        <Image x:Name="DunePlatformSpecPng" Visibility="Collapsed"
+                                               Source="{ThemeFileBinding Game.Platforms[0].SpecificationId, PathFormat='Images/Banners/PlatformSpecId/{0}.png', Converter={StaticResource ImageStringToImageConverterCached}}" />
+                                        <Image x:Name="DunePlatformSpecJpg" Visibility="Collapsed"
+                                               Source="{ThemeFileBinding Game.Platforms[0].SpecificationId, PathFormat='Images/Banners/PlatformSpecId/{0}.jpg', Converter={StaticResource ImageStringToImageConverterCached}}" />
+                                        <Image x:Name="DunePlatformNamePng" Visibility="Collapsed"
+                                               Source="{ThemeFileBinding Game.Platforms[0].Name, PathFormat='Images/Banners/PlatformName/{0}.png', Converter={StaticResource ImageStringToImageConverterCached}}" />
+                                        <Image x:Name="DunePlatformNameJpg" Visibility="Collapsed"
+                                               Source="{ThemeFileBinding Game.Platforms[0].Name, PathFormat='Images/Banners/PlatformName/{0}.jpg', Converter={StaticResource ImageStringToImageConverterCached}}" />
+                                        <Image x:Name="DunePlatformBannerImage" Visibility="Collapsed">
+                                            <Image.Source>
+                                                <PriorityBinding>
+                                                    <Binding ElementName="DunePlatformSpecPng" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                    <Binding ElementName="DunePlatformSpecJpg" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                    <Binding ElementName="DunePlatformNamePng" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                    <Binding ElementName="DunePlatformNameJpg" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                </PriorityBinding>
+                                            </Image.Source>
+                                        </Image>
+                                        <!-- ThemeExtras selects source/plugin banners for PC games, while
+                                             retaining platform artwork for consoles. It only supplies data. -->
+                                        <ContentControl x:Name="ThemeExtras_Banner" Visibility="Collapsed" IsHitTestVisible="False" />
+                                        <TextBlock x:Name="DuneCoverBannerText" Tag="{DynamicResource GridViewGameCoverPreferSourceBanner}"
+                                                   Foreground="{DynamicResource TextBrush}" FontSize="12" FontWeight="SemiBold"
+                                                   HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="8,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+                                                    <Setter Property="Text" Value="{Binding Game.Platforms[0].Name, FallbackValue='', TargetNullValue=''}" />
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                <Condition Binding="{Binding Game.Platforms[0].SpecificationId, FallbackValue=''}" Value="pc_windows" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Text" Value="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" />
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                <Condition Binding="{Binding Game.Platforms.Count, FallbackValue=0}" Value="0" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Text" Value="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" />
+                                                        </MultiDataTrigger>
+                                                        <DataTrigger Binding="{Binding Game.Source.Name, FallbackValue='', TargetNullValue=''}" Value="">
+                                                            <Setter Property="Text" Value="{Binding Game.Platforms[0].Name, FallbackValue='', TargetNullValue=''}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Source, ElementName=DuneCoverBannerImage}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <!-- Fill removes letterboxing; the outer cover mask rounds the
+                                             strip's top corners at exactly the cover's own dimensions. -->
+                                        <Image x:Name="DuneCoverBannerImage" Stretch="Fill" RenderOptions.BitmapScalingMode="Fant"
+                                               Tag="{DynamicResource GridViewGameCoverPreferSourceBanner}">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="{Binding Source, ElementName=DunePlatformBannerImage}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                                                            <Setter Property="Source">
+                                                                <Setter.Value>
+                                                                    <PriorityBinding>
+                                                                        <Binding ElementName="ThemeExtras_Banner" Path="Content.Content.Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                                        <Binding ElementName="DunePlatformBannerImage" Path="Source" Converter="{StaticResource NullToDependencyPropertyUnsetConverter}" />
+                                                                    </PriorityBinding>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Grid>
+                                    <Grid Grid.Row="1" ClipToBounds="True">
+                                        <Image Name="PART_ImageCover" SnapsToDevicePixels="True" HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" StretchDirection="Both" Stretch="{Settings CoverArtStretch}" />
                                         <Grid Tag="{DynamicResource GridViewGameCoverShowFavorite}"
                                                 Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -135,7 +235,7 @@
                                             </Viewbox>
                                         </Grid>
                                     </Grid>
-                                </StackPanel>
+                                </Grid>
 
                                 <!--Game Not Installed-->
                                 <Border x:Name="TextGameName" CornerRadius="{Binding ElementName=Mask, Path=CornerRadius}" Visibility="Collapsed">

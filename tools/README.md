@@ -20,6 +20,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/Update-SummaryLayo
 ```
 
 Cards bind their toggle state to the corresponding hidden `TabItem.IsSelected`.
+`ClickableDetailCard` keeps its geometry unchanged on hover; card surfaces and
+toggle outlines provide feedback without scale/shadow effects that crop edges.
 The native selector keeps selection exclusive and allows a second click to clear
 it. It contains no plugin bodies: named body grids stay in the same visual parent,
 and selection changes only their visibility. This avoids unloading/reloading

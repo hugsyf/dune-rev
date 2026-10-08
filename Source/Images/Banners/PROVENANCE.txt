@@ -1,0 +1,18 @@
+Platform, library/source banners and UnknownLibrary.png copied from:
+https://github.com/HerrKnarz/Playnite-Theme-KNARZnite
+Source directory: source/Images/Banners
+Revision: ceb3c1aa8ca0653e416726acc7563ba926b218b4
+License: MIT; see LICENSE-KNARZnite.txt in this directory.
+
+Banner integration references:
+https://github.com/HerrKnarz/Playnite-Theme-KNARZnite/blob/ceb3c1aa8ca0653e416726acc7563ba926b218b4/source/DerivedStyles/GridViewItemTemplate.xaml
+https://github.com/raohmaru/playnite-theme-rwl-desktop/blob/main/DerivedStyles/GridViewItemTemplate.xaml
+https://github.com/felixkmh/ThemeExtras-for-Playnite/wiki/Configuration
+
+Custom banners:
+PlatformSpecId/<specification ID>.png (for example pc_windows.png)
+PlatformName/<exact platform name>.png
+PluginId/<library plugin GUID>.png
+SourceName/<exact source name>.png
+The upstream BySourceName directory is packaged here as SourceName.
+Restart Playnite after replacing images.

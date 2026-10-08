@@ -40,6 +40,8 @@ Dune Rev is a dark, Fluent-inspired Desktop theme for Playnite, based on
 ### Features
 
 - Responsive Details and Grid views with game logos, screenshots and videos.
+- Platform strips on Grid and Grid Details covers, with optional store/source
+  banners through ThemeExtras and native platform artwork/text as a fallback.
 - Adaptive cards for play time, achievements, activity, completion estimates,
   system requirements, language support and DLC.
 - Clear plugin entry points and consistent dark controls.
@@ -76,7 +78,7 @@ You can also install through Playnite's add-on browser or the
 | BackgroundChanger | Alternative backgrounds |
 | DuplicateHider | Duplicate-copy selector |
 | Library Management | Feature icons |
-| ThemeExtras | Favorites and editable completion status |
+| ThemeExtras | Platform banners, favorites and editable completion status |
 | ScreenshotsVisualizer | Screenshots |
 | Steam News and Players Viewer | News and players online |
 | Review Viewer | Steam reviews |
@@ -91,10 +93,22 @@ You can also install through Playnite's add-on browser or the
 - If icons are missing, install **Segoe Fluent Icons** from
   [Microsoft's font downloads](https://learn.microsoft.com/windows/apps/design/downloads/#fonts).
 - Restart Playnite after installing or updating extensions.
+- Use **ThemeModifier → Grid cover display** for two independent switches:
+  **Show platform/source labels** and **Prefer store/source labels for PC games**.
+  Both default to enabled. Disable the first to restore full covers, or disable
+  only the second to show Windows/platform labels instead of Steam, Epic or Xbox.
+  Install **ThemeExtras** for store/source artwork and banner-folder preservation.
+  Consoles retain their platform banners. Banner height is also adjustable.
+- Custom images go in the theme's `Images/Banners/PlatformSpecId` (for example
+  `pc_windows.png`), `PlatformName` (exact platform name), `PluginId` (library plugin
+  GUID) or `SourceName` (exact source name). Restart Playnite after changing images.
 
 ### Credits and support
 
 Based on [Dune](https://github.com/sakasakiking/Dune), with inspiration from Mythic.
+Platform and store/source banner artwork comes from
+[KNARZnite](https://github.com/HerrKnarz/Playnite-Theme-KNARZnite);
+its MIT license and source revision are included with the banners.
 Distributed under the [MIT License](LICENSE).
 
 See the [changelog](CHANGELOG.md) for release notes, and report theme issues through
@@ -110,6 +124,8 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 ### 主要特性
 
 - 响应式详情与网格视图，支持游戏 Logo、截图和视频。
+- Grid 与 Grid Details 封面支持平台标签，可通过 ThemeExtras 优先显示商店／来源横幅；
+  平台图片与文字支持原生回退。
 - 自适应卡片展示游玩时间、成就、活动、通关估时、系统需求、语言支持与 DLC。
 - 清晰的插件入口和统一的深色控件。
 - 点击插件卡片在下方展开详情，再次点击收起；插件独立窗口保留单独入口。
@@ -143,7 +159,7 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 | BackgroundChanger | 替代背景 |
 | DuplicateHider | 重复副本选择 |
 | Library Management | 功能图标 |
-| ThemeExtras | 收藏与可编辑的完成状态 |
+| ThemeExtras | 平台横幅、收藏与可编辑的完成状态 |
 | ScreenshotsVisualizer | 截图 |
 | Steam News and Players Viewer | 新闻与在线人数 |
 | Review Viewer | Steam 评论 |
@@ -158,10 +174,19 @@ Dune Rev 是面向 Playnite 桌面模式的深色 Fluent 风格主题，基于 s
 - 如果图标缺失，可从 [Microsoft 字体下载页面](https://learn.microsoft.com/windows/apps/design/downloads/#fonts)
   安装 **Segoe Fluent Icons**。
 - 安装或更新扩展后，建议重启 Playnite。
+- 在 **ThemeModifier → 网格封面显示** 中提供两个独立开关，均默认开启：
+  **显示平台／来源标签**、**PC 游戏优先显示商店／来源标签**。
+  关闭前者恢复完整封面；只关闭后者则显示 Windows 等平台标签，而非 Steam、Epic、Xbox。
+  商店／来源图片需要 **ThemeExtras**，主机游戏保留对应平台横幅，标签高度也可调整。
+- 自定义图片放入主题的 `Images/Banners/PlatformSpecId`（例如 `pc_windows.png`）、
+  `PlatformName`（平台名称）、`PluginId`（库插件 GUID）或 `SourceName`（来源名称）。
+  修改后重启 Playnite。ThemeExtras 会在主题更新时保留此文件夹。
 
 ### 致谢与反馈
 
 基于 [Dune](https://github.com/sakasakiking/Dune)，部分设计参考 Mythic。
+平台与商店／来源横幅图片来自 [KNARZnite](https://github.com/HerrKnarz/Playnite-Theme-KNARZnite)，
+其 MIT 许可证及来源版本随横幅一并附带。
 项目采用 [MIT 许可](LICENSE)。
 
 版本更新见 [changelog](CHANGELOG.md)，主题问题可通过

@@ -56,6 +56,9 @@
 
         <!--ThemeModifier Grid View Settings-->
         <sys:Boolean x:Key="GridViewGameCoverUseRoundedCorners">True</sys:Boolean>
+        <sys:Boolean x:Key="GridViewGameCoverShowPlatformBanner">True</sys:Boolean>
+        <sys:Boolean x:Key="GridViewGameCoverPreferSourceBanner">True</sys:Boolean>
+        <sys:Double x:Key="GridViewPlatformBannerHeight">32</sys:Double>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
