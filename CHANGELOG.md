@@ -58,6 +58,8 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Fixed
 
+- Keep the Details Hero logo left-aligned inside the full-width title fallback
+  container, preventing it from moving to the center of the Hero.
 - Fix theme startup failure caused by a Playnite `Settings` extension used directly
   in a style Setter. Resolve the native indentation on a hidden dependency-property
   proxy and bind the row height to it. Use visibility triggers instead of custom

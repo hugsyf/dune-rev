@@ -174,3 +174,12 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 参考：[TopPanelItem 行为](https://github.com/JosefNemec/Playnite/blob/master/source/Playnite.DesktopApp/Controls/TopPanelItem.cs)、
 [ReviewViewer 控件与局部筛选样式](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/ReviewViewer/Presentation/ReviewsControl.xaml)、
 [NewsViewer 原生按钮](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/NewsViewer/Presentation/NewsViewerControl.xaml)。
+## 实机反馈：Details Hero Logo 对齐（2026-10-08）
+
+- 标题回退改动 2abccc6 将 Logo／标题父 Grid 从 Left 改为 Stretch，给长标题提供换行宽度，
+  但 Details 的 ExtraMetadataLoader_LogoLoaderControlGrid 仍为 HorizontalAlignment=Center。
+  因此 Logo 从原来的自然宽度容器内居中，变为相对整个 Hero 居中。
+- 将 Details Logo 容器显式改为 Left，与 Grid Details 的对齐一致；父 Grid 继续 Stretch，
+  保留标题回退与原来的 Logo 尺寸设置。此次未修改共享片段，无需重新生成扩展布局。
+- 已审阅改动并打包至 release/details-logo-alignment；版本保持 2.2.0，仅本地提交，
+  不推送或发布，不编写测试脚本。真实界面效果由用户确认。

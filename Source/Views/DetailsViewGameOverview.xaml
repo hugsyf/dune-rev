@@ -182,7 +182,7 @@
                                                     </Style>
                                                 </Border.Style>
                                             </Border>
-                                            <Border x:Name="ExtraMetadataLoader_LogoLoaderControlGrid" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            <Border x:Name="ExtraMetadataLoader_LogoLoaderControlGrid" VerticalAlignment="Center" HorizontalAlignment="Left"
                                                     Tag="{DynamicResource DetailsViewAllowUseOfLogos}">
                                                 <Border.Style>
                                                     <Style TargetType="Border">
