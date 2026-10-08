@@ -38,6 +38,7 @@
         <sys:Boolean x:Key="DuneShowPlayNotes">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowRelations">True</sys:Boolean>
         <sys:Double x:Key="DuneRelationsPanelHeight">360</sys:Double>
+        <sys:Double x:Key="DuneActivityPerformanceMinHeight">360</sys:Double>
         <sys:Boolean x:Key="DuneShowStoreScreenshots">True</sys:Boolean>
         <sys:Boolean x:Key="DuneShowPersonalScreenshots">True</sys:Boolean>
         <sys:Boolean x:Key="DuneUseScreenshotGrid">False</sys:Boolean>

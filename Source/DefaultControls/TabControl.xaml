@@ -116,6 +116,24 @@
 
     </Style>
 
+    <!-- Overview bodies stay in the overview template namescope. Only the headers
+         belong to TabControl, so changing tabs cannot recreate addon controls. -->
+    <Style x:Key="DuneOverviewTabControl" TargetType="TabControl" BasedOn="{StaticResource {x:Type TabControl}}">
+        <Setter Property="SelectedIndex" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <TabPanel IsItemsHost="True" Background="Transparent" Margin="0,12,0,0" KeyboardNavigation.TabNavigation="Local" />
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SelectedItem.Visibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                            <Setter Property="SelectedIndex" Value="0" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Selection only: persistent plugin bodies live beside this selector. -->
     <Style x:Key="DunePluginDetailsControl" TargetType="TabControl" BasedOn="{StaticResource {x:Type TabControl}}">
         <Setter Property="SelectedIndex" Value="-1" />

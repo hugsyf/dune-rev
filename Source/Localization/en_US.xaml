@@ -31,6 +31,7 @@
     <sys:String x:Key="LOCDuneEmptyDlcCategory">No DLC in this category.</sys:String>
     <sys:String x:Key="LOCDuneSource">Source:</sys:String>
     <sys:String x:Key="LOCDunePlayNotes">Play Notes</sys:String>
+    <sys:String x:Key="LOCDuneNoPlayNotes">No notes yet. Use + to add a note, or the tools button to import a guide.</sys:String>
     <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
     <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
     <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>

@@ -20,6 +20,13 @@ Theme and installer versions remain at 2.2.0 until a formal release.
 
 ### Improved
 
+- Move Play Notes, Steam store screenshots and personal screenshots into peer
+  overview tabs with persistent addon hosts. Remove opaque plugin panel backplates.
+- Give store screenshots a bounded preview with selectable thumbnails and native
+  viewer/navigation commands. Enlarge personal previews and avoid duplicate
+  vertical/horizontal galleries; improve notes toolbar and empty-state guidance.
+- Let related games size to their contents and hide empty sections. Set a
+  configurable 360px minimum for performance charts and a 220px minimum for history.
 - Move duplicate-copy selection below covers and show it only for multiple copies
   on hover/keyboard focus. Use icon opacity for the current copy and transparent
   idle backgrounds; keep the selection outline around the cover area.

@@ -119,3 +119,31 @@ Game Relations 的控件设置。决定完善已有插件面板，不增加新�
 参考：[DuplicateHider 主题接口](https://github.com/felixkmh/DuplicateHider#theme-integration)、
 [状态控件可见性处理](https://github.com/felixkmh/DuplicateHider/blob/master/source/Controls/DHContentControl.xaml.cs)、
 [微软控件状态说明](https://learn.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/control-templates)。
+
+## 实机反馈：扩展页签与图表布局（2026-10-08）
+
+- 用户后续截图确认 Play Notes 和商店截图能加载，原问题是它们藏在总览内的展开项中，
+  不能继续将“无入口”解释为插件下载或加载失败。日志也已有商店图片缓存成功记录。
+- 将 Play Notes、商店截图、个人截图改为与总览、库内关联游戏、评论、新闻并列的页签，
+  保留原有显示开关。页签仅负责选择，内容常驻 overview 模板命名域，避免切页重建插件控件。
+  隐藏当前页签时回到总览。笔记与商店截图使用当前控件状态，不依赖跨视图共享的 IsControlVisible。
+- 扩展内容统一透明容器；关联游戏取消固定高度，保留最大高度设置，并让标题随实际内容隐藏，
+  消除空内容条和单个游戏下方的巨大空白。评论和新闻同步移除主题额外添加的实色背景。
+- Play Notes 保留原生笔记编辑、保存、切换、删除与攻略导入功能；工具按钮使用透明常态表面，
+  移除撑满整行的分隔线。无笔记时提示新建或导入，不显示空实色底板。
+- 商店截图通过已核对的原生控件公开 Screenshots、SelectedScreenshot、CurrentImageBitmap
+  及查看器／前后切换命令构建预览与缩略图。插件继续负责下载和游戏上下文，主题明确分配预览高度；
+  保留点击打开原生查看器、前后按钮与方向键。缩略图提供选中和键盘焦点边框。
+- 本机 ScreenshotsVisualizer 的单图高度为 150，主题原来又在上方堆叠一个高 500 的竖向列表。
+  改为大图与横向缩略图，横向图库可用时不再重复显示竖向图库；关闭横向图库时保留左侧竖向回退。
+  单图的最小／最大高度同步约束为主题截图高度，原生网格图库偏好仍保留。
+- 本机 GameActivity 的 ChartLogHeight 与 ChartTimeHeight 均为 120。
+  该插件原生控件读取外层 ContentControl.MinHeight，因此性能图表设置最小高度 360，
+  新增可调范围 260～600；历史图表最小高度 220。没有修改插件自身配置。
+- 同步 Details 与 Grid Details 两套视图，保持版本 2.2.0。仅代码审阅、生成共享片段和 Toolbox 打包，
+  不编写或运行模拟界面测试。包在 release/plugin-layout-polish，仅本地提交，不推送或发布。
+
+参考：[Play Notes 原生控件](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/PlayNotes/PlayniteControls/NotesViewerControl.xaml)、
+[Steam 商店截图控件](https://github.com/darklinkpower/PlayniteExtensionsCollection/blob/master/source/Generic/SteamScreenshots/ScreenshotsControl/SteamScreenshotsControl.xaml.cs)、
+[个人截图高度约束](https://github.com/Lacro59/playnite-screenshotsvisualizer-plugin/blob/master/source/Controls/PluginSinglePicture.xaml)、
+[性能图表高度约束](https://github.com/Lacro59/playnite-gameactivity-plugin/blob/master/source/Controls/PluginChartLog.xaml)。
