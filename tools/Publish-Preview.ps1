@@ -15,11 +15,8 @@ $output = Join-Path $project ('dist/releases/' + $config.Tag)
 $names = @(('DuneRev-' + $config.Tag.TrimStart('v') + '.pthm'), ('DuneMaterials-' + $config.ExtensionVersion + '.pext'))
 $buildInfo = [IO.File]::ReadAllText((Join-Path $output 'build-info.json')) | ConvertFrom-Json
 if ($buildInfo.Commit -ne $commit -or $buildInfo.Tag -ne $config.Tag -or $buildInfo.ThemeVersion -ne $config.ThemeVersion -or $buildInfo.ExtensionVersion -ne $config.ExtensionVersion) { throw 'Build packages from the committed release source before publishing.' }
-$sumsPath = Join-Path $output 'SHA256SUMS.txt'
-$sums = [IO.File]::ReadAllLines($sumsPath)
 foreach ($name in $names) {
-    $hash = (Get-FileHash -LiteralPath (Join-Path $output $name) -Algorithm SHA256).Hash.ToLowerInvariant()
-    if (($hash + '  ' + $name) -notin $sums) { throw "Checksum mismatch: $name" }
+    if (-not (Test-Path -LiteralPath (Join-Path $output $name) -PathType Leaf)) { throw "Missing package: $name" }
 }
 $notes = [IO.File]::ReadAllText((Join-Path $project $config.Notes))
 $oldPrompt = $env:GIT_TERMINAL_PROMPT
@@ -55,7 +52,7 @@ try {
         $payload = @{ tag_name = $config.Tag; target_commitish = $commit; name = ('Dune Rev ' + $config.ThemeVersion + ' Preview ' + $previewNumber + ' + Dune Materials ' + $config.ExtensionVersion); body = $notes; draft = $true; prerelease = $true; make_latest = 'false' } | ConvertTo-Json
         $release = Invoke-RestMethod -Method Post -Uri ($api + '/releases') -Headers $headers -ContentType 'application/json' -Body ([Text.Encoding]::UTF8.GetBytes($payload))
     }
-    foreach ($name in @($names + 'SHA256SUMS.txt')) {
+    foreach ($name in $names) {
         $file = Join-Path $output $name
         $hash = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant()
         $existing = $release.assets | Where-Object { $_.name -eq $name } | Select-Object -First 1

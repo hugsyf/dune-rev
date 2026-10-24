@@ -216,9 +216,8 @@ Run in Windows PowerShell 5.1:
 ```
 
 This checks generated sources, compiles the extension, runs windowless checks,
-packs the theme with Playnite Toolbox, compares packaged files to sources and
-writes `SHA256SUMS.txt` under `dist/releases/<tag>/`. It does not render WPF or
-install anything. `-SkipChecks` is for repackaging already verified unchanged
+packs the theme with Playnite Toolbox and compares packaged files to sources.
+The two installable packages are written under `dist/releases/<tag>/`. `-SkipChecks` is for repackaging already verified unchanged
 sources, not the normal release path. The SDK defaults to the existing local
 `.local-archive/material-sdk/Playnite.SDK.dll`; it is not redistributed.
 
@@ -229,8 +228,8 @@ After reviewing and committing the changes on the configured branch, publish:
 ```
 
 Publishing requires existing GitHub credentials in Git's credential helper. It
-checks the clean source branch and package checksums, pushes the branch and tag
-without force, creates a draft, uploads both packages and checksums, then publishes
+checks the clean source branch and package files, pushes the branch and tag
+without force, creates a draft, uploads both packages, then publishes
 it as a prerelease without replacing Latest. It does not merge the stable branch
 or update the Playnite add-on feed. Interrupted draft uploads can be resumed by
 running the same command; existing published releases are never overwritten.

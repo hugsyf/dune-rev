@@ -49,10 +49,6 @@ try {
     Assert-ZipFile $extension 'extension.yaml' (Join-Path $project 'MaterialExtension/extension.yaml')
     Assert-ZipFile $extension 'DuneMaterials.dll' (Join-Path $project 'dist/DuneMaterials/DuneMaterials.dll')
 } finally { $extension.Dispose() }
-$checksums = foreach ($name in @($themeName, $extensionName)) {
-    (Get-FileHash -LiteralPath (Join-Path $output $name) -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + $name
-}
-[IO.File]::WriteAllLines((Join-Path $output 'SHA256SUMS.txt'), [string[]]$checksums, [Text.UTF8Encoding]::new($false))
 $buildInfo = @{ Tag = $config.Tag; Commit = (& git -C $project rev-parse HEAD).Trim(); ThemeVersion = $config.ThemeVersion; ExtensionVersion = $config.ExtensionVersion; ChecksSkipped = [bool]$SkipChecks } | ConvertTo-Json
 [IO.File]::WriteAllText((Join-Path $output 'build-info.json'), $buildInfo, [Text.UTF8Encoding]::new($false))
 Write-Output "Verified preview packages: $output"
