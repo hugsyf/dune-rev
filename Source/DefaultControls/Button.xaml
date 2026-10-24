@@ -7,33 +7,43 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
-        <!-- Plugin templates can bind Background even when Dune's template uses its own overlay. -->
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DuneInputFillBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="12,4,12,4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border x:Name="HoverBg" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource ControlOverlayBrush}"
-                                CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08"/>
+                        <Border Uid="{TemplateBinding Uid}" Tag="{TemplateBinding Tag}" BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{DynamicResource DuneInputCornerRadius}">
+                            <Border.Background>
+                                <PriorityBinding>
+                                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="TemplateBackground" />
+                                    <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </PriorityBinding>
+                            </Border.Background>
+                        </Border>
+                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource DuneInputCornerRadius}" />
+                        <Border x:Name="PressedBg" Background="{DynamicResource ControlShadeBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource DuneInputCornerRadius}" />
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.12" TargetName="PressedBg" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="HoverBg" Storyboard.TargetProperty="Opacity" To="0.16" Duration="0:0:0.4">
+                                        <DoubleAnimation Storyboard.TargetName="HoverBg" Storyboard.TargetProperty="Opacity" To="0.04" Duration="0:0:0.083">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
@@ -44,7 +54,7 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="HoverBg" Storyboard.TargetProperty="Opacity" To="0.08" Duration="0:0:0.4">
+                                        <DoubleAnimation Storyboard.TargetName="HoverBg" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.083">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
@@ -58,9 +68,6 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ButtonHoverBackgroundBrush}" />
-            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6" />
             </Trigger>
@@ -68,7 +75,7 @@
     </Style>
 
     <ControlTemplate x:Key="DunePluginActionButtonTemplate" TargetType="Button">
-        <Border x:Name="Surface" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
+        <Border x:Name="Surface" Background="Transparent" CornerRadius="{DynamicResource DuneInputCornerRadius}" Padding="{TemplateBinding Padding}">
             <ContentPresenter ContentSource="Content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" RecognizesAccessKey="True" />
         </Border>
         <ControlTemplate.Triggers>
@@ -78,7 +85,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="DunePluginIconButtonTemplate" TargetType="Button">
-        <Border x:Name="Surface" Background="Transparent" CornerRadius="4" Padding="8">
+        <Border x:Name="Surface" Background="Transparent" CornerRadius="{DynamicResource DuneInputCornerRadius}" Padding="8">
             <!-- Native plugins often set FontSize locally (24 or 40). Scale the
                  visual, preserving their glyph font, content and click handlers. -->
             <Viewbox Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">

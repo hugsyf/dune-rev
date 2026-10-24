@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -8,9 +8,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Sidebar}">
-                    <Border BorderThickness="0,0,1,0" BorderBrush="{DynamicResource PanelSeparatorBrush}"
-                            Background="{DynamicResource DuneSidebarBackgroundBrush}"
+                    <Border Uid="Dune.Material.Panel" Tag="{DynamicResource DuneMaterialsEnabled}" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource PanelSeparatorBrush}"
                             x:Name="BorderContentHolder" Margin="{TemplateBinding Padding}">
+                        <Border.Background>
+                            <PriorityBinding>
+                                <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneSidebarBackgroundBrush" />
+                                <Binding Path="Resources[DuneSidebarBackgroundBrush]" Source="{x:Static Application.Current}" />
+                            </PriorityBinding>
+                        </Border.Background>
                         <DockPanel x:Name="DockContentHolder">
                             <Border x:Name="PART_ElemMainMenu" Background="Transparent"
                                     Width="60" Height="60" Margin="0,0,0,8"

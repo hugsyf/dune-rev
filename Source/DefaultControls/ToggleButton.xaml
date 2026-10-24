@@ -16,7 +16,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border x:Name="HoverBg" Style="{DynamicResource HoverBg}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="HoverBg" CornerRadius="{DynamicResource DuneInputCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
                     </Grid>
@@ -24,6 +24,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg"/>
+                            <Setter Property="Background" Value="{DynamicResource AccentBrush}" TargetName="HoverBg"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.2" TargetName="HoverBg"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.12" TargetName="HoverBg"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -47,7 +54,7 @@
                     <Border x:Name="HoverBg" Background="{TemplateBinding Background}"
                             Height="{TemplateBinding Height}" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource ControlCornerRadius}">
+                            CornerRadius="{DynamicResource DuneInputCornerRadius}">
                         <StackPanel Orientation="Horizontal" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center">
                             <TextBlock x:Name="FavoriteIcon" Text="&#xe1ce;" Margin="0,0,8,0" VerticalAlignment="Center"
                                        FontSize="{DynamicResource FontSize}" Style="{DynamicResource IconFontStyle}"
@@ -79,7 +86,14 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DuneFavoriteIconToggle" TargetType="ToggleButton" BasedOn="{StaticResource FavoriteRoundedToggleButton}">
+    <Style x:Key="DuneFavoriteIconToggle" TargetType="ToggleButton" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Uid" Value="Dune.Material.Hero" />
+        <Setter Property="Tag" Value="{DynamicResource DuneMaterialsEnabled}" />
+        <Setter Property="Background" Value="{DynamicResource DuneActionSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneSurfaceEdgeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Padding" Value="0" />
@@ -88,9 +102,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
-                    <Border x:Name="HoverBg" Background="{TemplateBinding Background}"
-                            CornerRadius="{DynamicResource ControlCornerRadius}"
+                    <Border Uid="{TemplateBinding Uid}" Tag="{TemplateBinding Tag}" x:Name="HoverBg"
+                            CornerRadius="{DynamicResource DuneInputCornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Background>
+                            <PriorityBinding>
+                                <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="TemplateBackground" />
+                                <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </PriorityBinding>
+                        </Border.Background>
                         <TextBlock x:Name="FavoriteIcon" Text="&#xe734;" FontSize="18" FontWeight="Normal"
                                    Style="{DynamicResource IconFontStyle}" Foreground="{TemplateBinding Foreground}" />
                     </Border>
@@ -98,8 +118,6 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="FavoriteIcon" Property="Text" Value="&#xe735;" />
                             <Setter TargetName="FavoriteIcon" Property="Foreground" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="HoverBg" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="HoverBg" Property="BorderThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -109,6 +127,12 @@
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="ToolTip" Value="{DynamicResource LOCRemoveFavoriteGame}" />
             </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource DuneActionHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource DuneActionPressedBrush}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -117,7 +141,7 @@
         <Setter Property="Foreground" Value="Yellow" />
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="Height" Value="48"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0"/>

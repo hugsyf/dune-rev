@@ -27,7 +27,14 @@
                     </ControlTemplate.Resources>
                     <AdornerDecorator>
                         <Grid>
-                            <Border x:Name="WindowBorder" Style="{DynamicResource PopupBorder}" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource PopupBorderBrush}"/>
+                            <Border x:Name="WindowBorder" Style="{DynamicResource PopupBorder}" BorderBrush="{DynamicResource PopupBorderBrush}">
+                                <Border.Background>
+                                    <PriorityBinding>
+                                        <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="TemplateBackground" />
+                                        <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </PriorityBinding>
+                                </Border.Background>
+                            </Border>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />

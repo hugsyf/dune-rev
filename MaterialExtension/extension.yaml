@@ -1,0 +1,7 @@
+Id: 821c6070-ef6e-4dd6-a597-ab9aad905a0a
+Name: Dune Materials
+Author: Dune Rev contributors
+Version: 0.5.0
+Module: DuneMaterials.dll
+Type: GenericPlugin
+Description: Realtime translucent materials and Hero media controls for Dune Rev; includes a cached compatibility mode and optional automatic slideshow/video playback.

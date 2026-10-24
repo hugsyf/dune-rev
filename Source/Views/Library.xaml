@@ -42,13 +42,29 @@
                                 <FadeImage.ImageOpacityMask>
                                     <RadialGradientBrush GradientOrigin="0.5,0" Center="0.5,0" RadiusX="1" RadiusY="0.7">
                                         <RadialGradientBrush.GradientStops>
-                                            <GradientStop Color="#99000000" Offset="0.4" />
-                                            <GradientStop Color="Transparent" Offset="1" />
+                                            <GradientStop Color="#CC000000" Offset="0.4" />
+                                            <GradientStop Color="#99000000" Offset="1" />
                                         </RadialGradientBrush.GradientStops>
                                     </RadialGradientBrush>
                                 </FadeImage.ImageOpacityMask>
                             </FadeImage>
+                            <!-- Keep native background available until the new surface is ready. -->
+                            <ContentControl x:Name="DuneMaterialBackground" IsHitTestVisible="False"
+                                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                            Width="{Binding ActualWidth, ElementName=PART_ImageBackground}"
+                                            Height="{Binding ActualHeight, ElementName=PART_ImageBackground}"
+                                            Canvas.Left="{Binding Path=(Canvas.Left), ElementName=PART_ImageBackground}"
+                                            Canvas.Right="{Binding Path=(Canvas.Right), ElementName=PART_ImageBackground}"
+                                            Canvas.Top="{Binding Path=(Canvas.Top), ElementName=PART_ImageBackground}"
+                                            Canvas.Bottom="{Binding Path=(Canvas.Bottom), ElementName=PART_ImageBackground}"
+                                            Tag="{DynamicResource DuneMaterialsEnabled}"
+                                            Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Background, FallbackValue={x:Null}}" />
                         </Canvas>
+
+                        <ContentControl Width="0" Height="0" IsHitTestVisible="False"
+                                        DataContext="{Binding RelativeSource={RelativeSource AncestorType=MainWindow}}"
+                                        Tag="{Binding ElementName=PART_ImageBackground}"
+                                        Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Source, FallbackValue={x:Null}}" />
 
                         <DockPanel Grid.Row="1">
                             <FilterPanel x:Name="PART_FilterPanel"

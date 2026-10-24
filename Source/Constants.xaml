@@ -29,6 +29,10 @@
         <sys:Double x:Key="GameActionButtonWidth">320</sys:Double>
         <sys:Boolean x:Key="DuneCompactLayout">False</sys:Boolean>
         <sys:Double x:Key="DuneHeroBlurRadius">120</sys:Double>
+        <sys:Boolean x:Key="DuneAdvancedMaterialsEnabled">False</sys:Boolean>
+        <sys:Boolean x:Key="DuneMaterialsEnabled">True</sys:Boolean>
+        <sys:Boolean x:Key="DuneMaterialPilotEnabled">False</sys:Boolean>
+        <sys:Double x:Key="DuneMaterialBlurRadius">32</sys:Double>
         <sys:Double x:Key="DuneHeroShadeOpacity">0.6</sys:Double>
         <sys:Double x:Key="DuneGridHeroDesignHeight">900</sys:Double>
         <sys:Boolean x:Key="DuneReduceCoverMotion">False</sys:Boolean>
@@ -62,9 +66,16 @@
         <sys:Double x:Key="GridSummaryCardWidth">260</sys:Double>
         <sys:Double x:Key="GridSummaryCardHeight">136</sys:Double>
         <sys:Double x:Key="FeatureIconsHeight">24</sys:Double>
-        <!-- Retained setting key: expansion limit when metadata is stacked or unavailable. -->
+        <!-- Retained setting key: expansion limit independent of metadata height. -->
         <sys:Double x:Key="DuneAchievementsPanelMaxHeight">600</sys:Double>
         <sys:Double x:Key="ScreenshotsPanelHeight">500</sys:Double>
+
+        <!-- Shared 12-DIP gutters. Only one side owns each section/column gap.
+             Summary grids cancel the trailing card gutter at the page edge. -->
+        <Thickness x:Key="DuneSectionBottomMargin">0,0,0,12</Thickness>
+        <Thickness x:Key="DuneSectionRightMargin">0,0,12,0</Thickness>
+        <Thickness x:Key="DuneSummaryCardMargin">0,0,12,12</Thickness>
+        <Thickness x:Key="DuneSummaryGridMargin">0,0,-12,0</Thickness>
 
         <sys:Boolean x:Key="ShowIconTextOnLink">True</sys:Boolean>
         <CornerRadius x:Key="GridViewCoverCornerRadius">6</CornerRadius>
@@ -78,7 +89,7 @@
         <sys:Boolean x:Key="DuneManualGamesPreferPlatformBanner">True</sys:Boolean>
         <sys:Double x:Key="GridViewPlatformBannerHeight">32</sys:Double>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
-        <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
+        <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">False</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewEnablePlayingGlowBorder">False</sys:Boolean>
         <Visibility x:Key="GridViewGameCoverShowCompletionStatus">Visible</Visibility>
@@ -94,6 +105,33 @@
         <Color x:Key="SecondaryTextColor">#B5BDC9</Color>
         <Color x:Key="MutedTextColor">#9EA8B7</Color>
         <SolidColorBrush x:Key="CardSurfaceBrush" Color="{DynamicResource CardSurfaceColor}" />
+        <!-- Neutral tint restrains bright artwork; the faint sheen preserves depth. -->
+        <LinearGradientBrush x:Key="DuneCardSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#403D4148" Offset="0" />
+            <GradientStop Color="#40272A30" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DuneCardHoverBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#484A4E55" Offset="0" />
+            <GradientStop Color="#4834383E" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DuneSurfaceEdgeBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#20FFFFFF" Offset="0" />
+            <GradientStop Color="#08FFFFFF" Offset="1" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="DuneActionUnderlayBrush" Color="#8020242B" />
+        <LinearGradientBrush x:Key="DunePlayTintBrush" StartPoint="0,0" EndPoint="0,1" Opacity="0.32">
+            <GradientStop Color="{DynamicResource AccentSelectedColor}" Offset="0" />
+            <GradientStop Color="{DynamicResource AccentIdleColor}" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DuneActionSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#99444950" Offset="0" />
+            <GradientStop Color="#992B3037" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DuneActionHoverBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#A6525860" Offset="0" />
+            <GradientStop Color="#A6383E46" Offset="1" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="DuneActionPressedBrush" Color="#A6242830" />
         <SolidColorBrush x:Key="DuneSidebarBackgroundBrush" Color="{DynamicResource WindowSurfaceColor}" Opacity="0.55" />
         <SolidColorBrush x:Key="ControlOverlayBrush" Color="#FFFFFF" />
         <SolidColorBrush x:Key="ControlShadeBrush" Color="#000000" />
@@ -114,8 +152,8 @@
 
         <SolidColorBrush x:Key="PopupSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
 
-        <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
-        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+        <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" Opacity="0.98" />
+        <SolidColorBrush x:Key="DarkPopupBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" Opacity="0.98" />
 
         <SolidColorBrush x:Key="PopupBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
         <SolidColorBrush x:Key="DarkPopupBorderBrush" Color="{DynamicResource SurfaceBorderColor}" />
@@ -147,7 +185,7 @@
         -->
         <SolidColorBrush x:Key="WindowBackgourndBrush" Color="{DynamicResource WindowSurfaceColor}" />
         <SolidColorBrush x:Key="ControlForegroundBrush" Color="{DynamicResource PrimaryTextColor}" />
-        <SolidColorBrush x:Key="CommonToolTipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+        <SolidColorBrush x:Key="CommonToolTipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" Opacity="0.98" />
         <SolidColorBrush x:Key="CommonToolTipBorderBrush" Color="{DynamicResource PanelSeparatorColor}" />
         <SolidColorBrush x:Key="CaretBrush" Color="{DynamicResource PrimaryTextColor}" />
         <SolidColorBrush x:Key="SelectionBrush" Color="{DynamicResource AccentSelectedColor}" />
@@ -160,7 +198,7 @@
         <SolidColorBrush x:Key="PrimaryButtonForegroundBrush" Color="#212121" />
         <SolidColorBrush x:Key="SuccessBrush" Color="#2ecc71" />
         <SolidColorBrush x:Key="OverlayBrush" Color="#99000000" />
-        <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+        <SolidColorBrush x:Key="OverlayMenuBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" Opacity="0.98" />
         <SolidColorBrush x:Key="SectionHeaderBackgroundBrush" Color="#14FFFFFF" />
 
     <!--ThemeModifier Options Ends-->
@@ -227,7 +265,8 @@
     <!--InputStyle-->
     <CornerRadius x:Key="DuneInputCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="DuneFlyoutCornerRadius">8</CornerRadius>
-    <SolidColorBrush x:Key="DuneDropdownSurfaceBrush" Color="#B320242B" />
+    <!-- Expanded lists obscure underlying text; the closed input remains translucent. -->
+    <SolidColorBrush x:Key="DuneDropdownSurfaceBrush" Color="#FF20242B" />
     <SolidColorBrush x:Key="DuneInputFillBrush" Color="#0FFFFFFF" />
     <SolidColorBrush x:Key="DuneInputHoverBrush" Color="#18FFFFFF" />
     <SolidColorBrush x:Key="DuneInputPressedBrush" Color="#0AFFFFFF" />
@@ -274,7 +313,7 @@
     <SolidColorBrush x:Key="AccentHoverBrush" Color="{DynamicResource AccentSelectedColor}" />
     <SolidColorBrush x:Key="AccentDisabledBrush" Color="#024DA3" />
 
-    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" />
+    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource PopupSurfaceColor}" Opacity="0.98" />
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource CardSurfaceColor}" />
     <!-- Embedded extension tables share their containing surface. Playnite Achievements
          resolves this host key into its own grid, header and row brushes. -->

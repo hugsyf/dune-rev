@@ -6,6 +6,8 @@ Constants:
     - PopupSurfaceColor: 'Popup and notification surface / 浮层与通知表面'
     - SurfaceBorderColor: 'Surface border / 表面边框'
 
+    - "Materials (Dune Materials extension) / 材质（配套 Dune Materials 扩展）"
+    - DuneMaterialsEnabled: 'Enable translucent materials / 启用半透明材质'
     - "Global layout / 全局布局"
     - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'
     - GameLogoMaxWidth(160,720): 'Details logo maximum width / 详情页 Logo 最大宽度'
@@ -54,7 +56,7 @@ Constants:
     - DuneRelationsPanelHeight(200,600): 'Related games maximum panel height / 关联游戏面板最大高度'
     - DuneActivityPerformanceMinHeight(260,600): 'Performance chart minimum height / 性能图表最小高度'
     - FeatureIconsHeight(16,40): 'Library Management feature icon height / Library Management 功能图标高度'
-    - DuneAchievementsPanelMaxHeight(300,900): 'Expansion height limit without a sidebar / 无并列详情栏时的展开高度上限'
+    - DuneAchievementsPanelMaxHeight(300,900): 'Expanded plugin panel maximum height / 插件展开区最大高度'
     - ScreenshotsPanelHeight(300,1000): 'Screenshots panel height / 截图面板高度'
 
     - "Grid cover display / 网格封面显示"

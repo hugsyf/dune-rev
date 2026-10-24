@@ -18,14 +18,10 @@
                         <BulletDecorator.Bullet>
                             <Border x:Name="RadioButtonBorder" Background="Transparent">
                                 <Grid Width="20" Height="20">
-                                    <Border x:Name="BulletBorder" Width="20" Height="20" CornerRadius="10"
-                                            BorderThickness="0" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
-                                    <Border x:Name="BulletHoverBorder" Width="20" Height="20" CornerRadius="10"
-                                            BorderThickness="{TemplateBinding BorderThickness}" Opacity="0.2" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
-                                    <Viewbox x:Name="CheckIcon" Visibility="Collapsed" >
-                                        <TextBlock Text="h" FontFamily="Marlett" Style="{DynamicResource BaseTextBlockStyle}"
-                                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Viewbox>
+                                    <Ellipse x:Name="BulletBorder" Fill="{DynamicResource DuneInputFillBrush}"
+                                             Stroke="{DynamicResource DuneCheckBoxStrokeBrush}" StrokeThickness="1" />
+                                    <Ellipse x:Name="CheckIcon" Width="8" Height="8" Visibility="Collapsed"
+                                             Fill="{DynamicResource PrimaryButtonForegroundBrush}" />
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>
@@ -39,14 +35,17 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Opacity" Value="0.16" TargetName="BulletBorder" />
-                            <Setter Property="Opacity" Value="0.24" TargetName="BulletHoverBorder" />
+                            <Setter Property="Fill" Value="{DynamicResource DuneInputHoverBrush}" TargetName="BulletBorder" />
+                            <Setter Property="Stroke" Value="{DynamicResource TextBrush}" TargetName="BulletBorder" />
                         </MultiTrigger>
 
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="CheckIcon" />
+                            <Setter Property="Fill" Value="{DynamicResource AccentBrush}" TargetName="BulletBorder" />
+                            <Setter Property="Stroke" Value="{DynamicResource AccentBrush}" TargetName="BulletBorder" />
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.7" TargetName="RadioButtonBorder" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -61,7 +60,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Border x:Name="ButtonBorder" BorderBrush="#29FFFFFF" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}" Background="Transparent">
+                    <Border x:Name="ButtonBorder" BorderBrush="#29FFFFFF" BorderThickness="2" CornerRadius="{DynamicResource DuneInputCornerRadius}" Background="Transparent">
                         <ContentPresenter RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>

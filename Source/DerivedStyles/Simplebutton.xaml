@@ -42,7 +42,7 @@
 
     <Style x:Key="DetailViewActionButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{DynamicResource IdleBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -80,7 +80,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08" />
+                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" CornerRadius="{DynamicResource DuneInputCornerRadius}" Opacity="0.08" />
                         <TextBlock FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"
                                    Text="{TemplateBinding Content}" TextWrapping="Wrap" />
@@ -203,7 +203,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="{DynamicResource ControlCornerRadius}" Background="{TemplateBinding Background}">
+                    <Border CornerRadius="{DynamicResource DuneInputCornerRadius}" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
                                           Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
                                           TextElement.Foreground="{TemplateBinding Foreground}" />
@@ -237,7 +237,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="HoverBg" CornerRadius="{DynamicResource ControlCornerRadius}"
+                    <Border x:Name="HoverBg" CornerRadius="{DynamicResource DuneInputCornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -261,7 +261,15 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DuneIconActionButton" TargetType="Button" BasedOn="{StaticResource DuneSecondaryButton}">
+    <Style x:Key="DuneIconActionButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Uid" Value="Dune.Material.Hero" />
+        <Setter Property="Tag" Value="{DynamicResource DuneMaterialsEnabled}" />
+        <Setter Property="Background" Value="{DynamicResource DuneActionSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneSurfaceEdgeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
@@ -269,6 +277,14 @@
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
         <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource DuneActionHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource DuneActionPressedBrush}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Retain the legacy key for consumers outside the theme. -->
@@ -284,7 +300,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
+                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" CornerRadius="{DynamicResource DuneInputCornerRadius}" Opacity="0"/>
                         <TextBlock FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"
                                Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}"/>
@@ -335,7 +351,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="HoverBg" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"/>
+                        <Border x:Name="HoverBg" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource DuneInputCornerRadius}" Opacity="0"/>
                         <TextBlock FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"
                                Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}"/>

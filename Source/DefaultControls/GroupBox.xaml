@@ -14,7 +14,7 @@
                     <Grid>
                         <Border x:Name="HoverBg" Margin="2" BorderThickness="0" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.04" Background="{DynamicResource ControlOverlayBrush}"/>
                         <DockPanel>
-                            <TextBlock DockPanel.Dock="Top" Margin="16,12,16,12" FontSize="{DynamicResource FontSizeSmall}" FontWeight="Bold"
+                            <TextBlock DockPanel.Dock="Top" Margin="16,12,16,12" FontSize="{DynamicResource FontSizeSmall}" FontWeight="SemiBold"
                                     Style="{DynamicResource BaseTextBlockStyle}">
                                 <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" ContentSource="Header" RecognizesAccessKey="True" />
                             </TextBlock>

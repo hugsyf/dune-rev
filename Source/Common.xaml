@@ -10,7 +10,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Control">
-                    <Border Margin="2" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadius}"
+                    <Border Margin="2" BorderThickness="2" CornerRadius="{DynamicResource DuneInputCornerRadius}"
+                            BorderBrush="{DynamicResource TextBrush}" IsHitTestVisible="False" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DuneCardKeyboardFocus" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Border Margin="2" BorderThickness="2" CornerRadius="{DynamicResource ControlCornerRadiusLarge}"
                             BorderBrush="{DynamicResource TextBrush}" IsHitTestVisible="False" />
                 </ControlTemplate>
             </Setter.Value>
@@ -23,7 +34,6 @@
     <sys:String x:Key="LOCDuneSystemRequirements">System requirements</sys:String>
     <sys:String x:Key="LOCDuneRequirementsReady">View requirements</sys:String>
     <sys:String x:Key="LOCDuneMainStory">Main story estimate &#x00B7; HowLongToBeat</sys:String>
-
     <sys:String x:Key="LOCDuneMainStoryLabel">Main story estimate</sys:String>
     <sys:String x:Key="LOCDuneMainExtra">Main + extras</sys:String>
     <sys:String x:Key="LOCDuneCompletionist">Completionist</sys:String>
@@ -50,6 +60,28 @@
     <sys:String x:Key="LOCDuneCollapseDetails">Collapse</sys:String>
     <sys:String x:Key="LOCDuneCloseDetails">Close game details</sys:String>
     <sys:String x:Key="LOCDuneThemeSettings">Theme settings</sys:String>
+    <sys:String x:Key="LOCDuneEmbeddedUnavailable">Expandable details are unavailable.</sys:String>
+    <sys:String x:Key="LOCDuneSolo">Single-player</sys:String>
+    <sys:String x:Key="LOCDuneCoOp">Co-op</sys:String>
+    <sys:String x:Key="LOCDuneVs">Competitive</sys:String>
+    <sys:String x:Key="LOCDuneSessionHistory">Session history</sys:String>
+    <sys:String x:Key="LOCDunePerformanceHistory">Performance history</sys:String>
+    <sys:String x:Key="LOCDuneAverageFps">Average FPS</sys:String>
+    <sys:String x:Key="LOCDuneTimeEstimates">Completion time estimates</sys:String>
+    <sys:String x:Key="LOCDunePlayNotes">Play Notes</sys:String>
+    <sys:String x:Key="LOCDuneNoPlayNotes">No notes yet. Use + to add a note, or the tools button to import a guide.</sys:String>
+    <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
+    <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
+    <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
+    <sys:String x:Key="LOCDuneStoreScreenshots">Store screenshots</sys:String>
+    <sys:String x:Key="LOCDuneHeroPreviousScreenshot">Previous store screenshot</sys:String>
+    <sys:String x:Key="LOCDuneHeroNextScreenshot">Next store screenshot</sys:String>
+    <sys:String x:Key="LOCDunePersonalScreenshots">Personal screenshots</sys:String>
+    <sys:String x:Key="LOCDunePlayVideo">Play video</sys:String>
+    <sys:String x:Key="LOCDunePauseVideo">Pause video</sys:String>
+    <sys:String x:Key="LOCDuneShowBackground">Show background image</sys:String>
+    <sys:String x:Key="LOCDuneMuteVideo">Mute video</sys:String>
+
     <Style x:Key="DuneDetailsHeroFooter" TargetType="Grid">
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="40" />
@@ -66,38 +98,31 @@
             <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True"><Setter Property="Margin" Value="16,0,16,16" /></DataTrigger>
         </Style.Triggers>
     </Style>
-    <sys:String x:Key="LOCDuneEmbeddedUnavailable">Expandable details are unavailable.</sys:String>
-    <sys:String x:Key="LOCDuneSolo">Single-player</sys:String>
-    <sys:String x:Key="LOCDuneCoOp">Co-op</sys:String>
-    <sys:String x:Key="LOCDuneVs">Competitive</sys:String>
-    <sys:String x:Key="LOCDuneSessionHistory">Session history</sys:String>
-    <sys:String x:Key="LOCDunePerformanceHistory">Performance history</sys:String>
-    <sys:String x:Key="LOCDuneAverageFps">Average FPS</sys:String>
-    <sys:String x:Key="LOCDuneTimeEstimates">Completion time estimates</sys:String>
 
     <!-- IsSelected supplies one shared selection; a second toggle clears it. -->
     <Style x:Key="DuneCardToggle" TargetType="ToggleButton">
         <Setter Property="Panel.ZIndex" Value="20" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneKeyboardFocus}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DuneCardKeyboardFocus}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
                         <Border x:Name="Hover" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
                                 CornerRadius="{DynamicResource ControlCornerRadiusLarge}" />
-                        <Border x:Name="Outline" Background="Transparent" BorderThickness="2"
-                                BorderBrush="Transparent" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" />
+                        <Border x:Name="Selection" Background="{DynamicResource AccentBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource ControlCornerRadiusLarge}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="Selection" Property="Opacity" Value="0.08" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Hover" Property="Opacity" Value="0.08" />
+                            <Setter TargetName="Hover" Property="Opacity" Value="0.03" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Hover" Property="Opacity" Value="0.16" />
+                            <Setter TargetName="Hover" Property="Background" Value="{DynamicResource ControlShadeBrush}" />
+                            <Setter TargetName="Hover" Property="Opacity" Value="0.08" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -127,7 +152,7 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="Transparent">
                         <Border x:Name="Surface" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
-                                CornerRadius="{DynamicResource ControlCornerRadius}" />
+                                CornerRadius="{DynamicResource DuneInputCornerRadius}" />
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -149,7 +174,7 @@
     <!-- The native plugin button remains the hit target above these visuals. -->
     <Style x:Key="DuneWindowIconSurface" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlOverlayBrush}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DuneInputCornerRadius}" />
         <Setter Property="Opacity" Value="0" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
@@ -164,7 +189,7 @@
     <Style x:Key="DuneWindowIconFocus" TargetType="Border">
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="2" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DuneInputCornerRadius}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" />
@@ -184,16 +209,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="Surface" Padding="{TemplateBinding Padding}" Background="Transparent"
-                            CornerRadius="{DynamicResource ControlCornerRadius}">
+                            CornerRadius="{DynamicResource DuneInputCornerRadius}">
                         <ContentPresenter VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputFillBrush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -241,7 +266,7 @@
 
     <Style x:Key="PanelTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
     <Style x:Key="IconFontStyle" TargetType="TextBlock">
@@ -290,122 +315,6 @@
         <Setter Property="Margin" Value="0,16,0,0" />
     </Style>
 
-    <Style x:Key="DuneStoreScreenshotsContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ContentControl">
-                    <Grid DataContext="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}">
-                        <Grid.InputBindings>
-                            <KeyBinding Key="Left" Command="{Binding SelectPreviousScreenshotCommand}" />
-                            <KeyBinding Key="Right" Command="{Binding SelectNextScreenshotCommand}" />
-                        </Grid.InputBindings>
-                        <!-- The addon still owns game context, downloads and commands. -->
-                        <ContentPresenter Content="{TemplateBinding Content}" Width="0" Height="0" Opacity="0" IsHitTestVisible="False" Focusable="False" />
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button Command="{Binding OpenScreenshotsViewCommand}"
-                                    Background="Transparent" BorderThickness="0" Padding="0"
-                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                    ToolTip="{DynamicResource LOCDuneStoreScreenshots}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <ContentPresenter ContentSource="Content" />
-                                    </ControlTemplate>
-                                </Button.Template>
-                                <Image Source="{Binding CurrentImageBitmap}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
-                            </Button>
-                            <Grid Grid.Row="1" Margin="0,12,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Button Style="{DynamicResource DunePluginIconButton}" Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"
-                                        Command="{Binding SelectPreviousScreenshotCommand}" Margin="0,0,8,0" />
-                                <ListBox Grid.Column="1" Height="100" Background="Transparent" BorderThickness="0"
-                                         ItemsSource="{Binding Screenshots}"
-                                         SelectedItem="{Binding SelectedScreenshot, Mode=TwoWay}"
-                                         ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                                    <ListBox.Template>
-                                        <ControlTemplate TargetType="ListBox">
-                                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" Focusable="False">
-                                                <ItemsPresenter />
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </ListBox.Template>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="ListBoxItem">
-                                            <Setter Property="Padding" Value="3" />
-                                            <Setter Property="Margin" Value="0,0,6,0" />
-                                            <Setter Property="VerticalContentAlignment" Value="Top" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="ListBoxItem">
-                                                        <Border x:Name="ThumbnailBorder" BorderThickness="2" BorderBrush="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="4">
-                                                            <ContentPresenter />
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
-                                                            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{DynamicResource TextBrush}" /></Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate><Image Source="{Binding ThumbnailImage}" Height="64" Width="114" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" /></DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <Button Grid.Column="2" Style="{DynamicResource DunePluginIconButton}" Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"
-                                        Command="{Binding SelectNextScreenshotCommand}" Margin="8,0,0,0" />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Keep the native DLC control loaded for its data and action handlers. Its
-         self-sized ListBox cannot measure natural height; reuse its row template
-         in a bounded, automatically sized list instead. -->
-    <Style x:Key="DuneDlcContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
-        <Setter Property="Margin" Value="0,8,0,0" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ContentControl">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <ContentPresenter ContentSource="Content" Opacity="0" IsHitTestVisible="False" KeyboardNavigation.TabNavigation="None" />
-                        <!-- The native row template resolves description width through this name. -->
-                        <Grid x:Name="PART_GridContener" Grid.Row="1">
-                            <!-- A sizing spacer preserves the default short-list height without
-                                 imposing a minimum on the scroll viewport in a short sidebar. -->
-                            <Border x:Name="DuneDlcDefaultHeight" Height="{DynamicResource DuneDlcPanelHeight}" Visibility="Hidden" IsHitTestVisible="False" />
-                            <ListBox x:Name="DuneDlcList"
-                                 ItemsSource="{Binding Content.DataContext.ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
-                                 ItemTemplate="{Binding Content.Content.Children[0].ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                 VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" />
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="DuneOptionalDetailText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
         <Style.Triggers>
@@ -451,6 +360,31 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="DuneSummaryHeadingIcon" TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="DuneSummaryChevron" TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
+        <Setter Property="Text" Value="&#xE70D;" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter Property="Text" Value="&#xE70E;" />
+                <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DuneSummaryText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="DuneSummaryProviderGlyph" TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
@@ -607,15 +541,167 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    <sys:String x:Key="LOCDunePlayNotes">Play Notes</sys:String>
-    <sys:String x:Key="LOCDuneNoPlayNotes">No notes yet. Use + to add a note, or the tools button to import a guide.</sys:String>
-    <sys:String x:Key="LOCDuneRelatedGames">Related games</sys:String>
-    <sys:String x:Key="LOCDuneSameSeries">Same series</sys:String>
-    <sys:String x:Key="LOCDuneSimilarGames">Similar games</sys:String>
-    <sys:String x:Key="LOCDuneStoreScreenshots">Store screenshots</sys:String>
-    <sys:String x:Key="LOCDunePersonalScreenshots">Personal screenshots</sys:String>
-    <sys:String x:Key="LOCDunePlayVideo">Play video</sys:String>
-    <sys:String x:Key="LOCDunePauseVideo">Pause video</sys:String>
-    <sys:String x:Key="LOCDuneShowBackground">Show background image</sys:String>
-    <sys:String x:Key="LOCDuneMuteVideo">Mute video</sys:String>
+    <!-- Plugin adapters: preserve native content, data paths and command ownership. -->
+    <!-- Steam Store Screenshots Viewer -->
+    <Style x:Key="DuneHeroStoreScreenshotLayer" TargetType="Grid">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, ElementName=DuneHeroMediaSelection}" Value="Screenshots" />
+                    <Condition Binding="{Binding Content.Visibility, ElementName=SteamScreenshots_SteamScreenshotsViewControl}" Value="Visible" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+            <DataTrigger Binding="{Binding Content.CurrentImageBitmap, ElementName=SteamScreenshots_SteamScreenshotsViewControl}" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Content.Screenshots.Count, ElementName=SteamScreenshots_SteamScreenshotsViewControl}" Value="0">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <!-- This provider returns a transparent 160x90 bitmap on failed downloads. -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Content.CurrentImageBitmap.PixelWidth, ElementName=SteamScreenshots_SteamScreenshotsViewControl}" Value="160" />
+                    <Condition Binding="{Binding Content.CurrentImageBitmap.PixelHeight, ElementName=SteamScreenshots_SteamScreenshotsViewControl}" Value="90" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility" Value="Collapsed" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Visibility, RelativeSource={RelativeSource Self}}" Value="Visible" />
+                    <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                    <Condition Binding="{PluginSettings Plugin=DuneMaterials, Path=Options.ReduceMotion, FallbackValue=False}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard x:Name="DuneHeroScreenshotFade">
+                        <Storyboard><DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.18" FillBehavior="Stop" /></Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions><RemoveStoryboard BeginStoryboardName="DuneHeroScreenshotFade" /></MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!-- A data-only presentation of the Hero's native provider; never reparent its UserControl. -->
+    <Style x:Key="DuneStoreScreenshotsContent" TargetType="ContentControl">
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid DataContext="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid.InputBindings>
+                            <KeyBinding Key="Left" Command="{Binding SelectPreviousScreenshotCommand}" />
+                            <KeyBinding Key="Right" Command="{Binding SelectNextScreenshotCommand}" />
+                        </Grid.InputBindings>
+                        <!-- The native provider stays loaded in Hero and owns context, downloads and commands. -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button Command="{Binding OpenScreenshotsViewCommand}"
+                                    Background="Transparent" BorderThickness="0" Padding="0"
+                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                    ToolTip="{DynamicResource LOCDuneStoreScreenshots}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <ContentPresenter ContentSource="Content" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Image Source="{Binding CurrentImageBitmap}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
+                            </Button>
+                            <Grid Grid.Row="1" Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{DynamicResource DunePluginIconButton}" Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"
+                                        Command="{Binding SelectPreviousScreenshotCommand}" Margin="0,0,8,0" />
+                                <ListBox Grid.Column="1" Height="100" Background="Transparent" BorderThickness="0"
+                                         ItemsSource="{Binding Screenshots}"
+                                         SelectedItem="{Binding SelectedScreenshot, Mode=TwoWay}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                    <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" Focusable="False">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="3" />
+                                            <Setter Property="Margin" Value="0,0,6,0" />
+                                            <Setter Property="VerticalContentAlignment" Value="Top" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border x:Name="ThumbnailBorder" BorderThickness="2" BorderBrush="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="4">
+                                                            <ContentPresenter />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
+                                                            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{DynamicResource TextBrush}" /></Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate><Image Source="{Binding ThumbnailImage}" Height="64" Width="114" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" /></DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Grid.Column="2" Style="{DynamicResource DunePluginIconButton}" Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"
+                                        Command="{Binding SelectNextScreenshotCommand}" Margin="8,0,0,0" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- CheckDlc -->
+    <!-- Keep the native DLC control loaded for its data and action handlers. Its
+         self-sized ListBox cannot measure natural height; reuse its row template
+         in a bounded, automatically sized list instead. -->
+    <Style x:Key="DuneDlcContent" TargetType="ContentControl" BasedOn="{StaticResource DunePluginContent}">
+        <Setter Property="Margin" Value="0,8,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ContentPresenter ContentSource="Content" Opacity="0" IsHitTestVisible="False" KeyboardNavigation.TabNavigation="None" />
+                        <!-- The native row template resolves description width through this name. -->
+                        <Grid x:Name="PART_GridContener" Grid.Row="1">
+                            <!-- A sizing spacer preserves the default short-list height without
+                                 imposing a minimum on the scroll viewport in a short sidebar. -->
+                            <Border x:Name="DuneDlcDefaultHeight" Height="{DynamicResource DuneDlcPanelHeight}" Visibility="Hidden" IsHitTestVisible="False" />
+                            <ListBox x:Name="DuneDlcList"
+                                 ItemsSource="{Binding Content.DataContext.ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                 ItemTemplate="{Binding Content.Content.Children[0].ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.4.0-preview.1 - 2026-10-24
+
+- Add Dune Materials 0.5.0 with shared realtime window/card materials, a cached compatibility mode, and ordinary theme fallbacks when the extension is absent.
+- Add Hero background, store screenshot and video selection, independent video previews and default-off automatic media playback.
+- Align Hero media near the footer, place playback/mute/repeat controls above thumbnails and retain thumbnail positions when switching media.
+- Refine card spacing, expandable plugin content, top-bar/background continuity, rounded Hero clipping and filter panel styling.
+- Simplify bilingual material settings, preserve existing preferences and add recommended defaults with collapsed diagnostics.
+- Consolidate shared theme generation and verify release versions, package contents and SHA-256 checksums.
+
+See [preview installation, limitations and rollback](docs/releases/v2.4.0-preview.1.md).
+
 ## v2.3.0 - 2026-10-08
 
 ### Added

@@ -94,7 +94,7 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="SelectionIndicator" />
                             <Setter Property="Opacity" Value="1" TargetName="TextContent"/>
                             <Setter Property="Opacity" Value="0.08" TargetName="HoverBg"/>
-                            <Setter Property="FontWeight" Value="Bold" TargetName="TextContent"/>
+                            <Setter Property="FontWeight" Value="SemiBold" TargetName="TextContent"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
@@ -123,7 +123,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
-                    <TabPanel IsItemsHost="True" Background="Transparent" Margin="0,12,0,0" KeyboardNavigation.TabNavigation="Local" />
+                    <!-- The preceding section already supplies the vertical gutter. -->
+                    <TabPanel IsItemsHost="True" Background="Transparent" KeyboardNavigation.TabNavigation="Local" />
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding SelectedItem.Visibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
                             <Setter Property="SelectedIndex" Value="0" />

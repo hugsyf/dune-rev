@@ -8,7 +8,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type SearchBox}">
                     <Grid Height="32">
-                        <Border x:Name="HoverBg" BorderThickness="1" CornerRadius="{DynamicResource DuneInputCornerRadius}" Background="{DynamicResource DuneInputFillBrush}" BorderBrush="{DynamicResource DuneInputBorderBrush}" />
+                        <Border Uid="Dune.Material.Input" Tag="{DynamicResource DuneMaterialsEnabled}" x:Name="HoverBg" BorderThickness="1" CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}">
+                            <Border.Background>
+                                <PriorityBinding>
+                                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneInputFillBrush" />
+                                    <Binding Path="Resources[DuneInputFillBrush]" Source="{x:Static Application.Current}" />
+                                </PriorityBinding>
+                            </Border.Background>
+                        </Border>
                         <Border x:Name="DuneBottomStroke" Height="1" Margin="4,0,4,0" VerticalAlignment="Bottom" Background="{DynamicResource DuneInputBottomBrush}" />
                         <TextBox x:Name="PART_TextInpuText" Style="{DynamicResource SearchSmallTextBox}"
                                  VerticalContentAlignment="Center" Margin="8,0,32,0" Background="Transparent" Padding="0"/>
@@ -21,10 +28,24 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DuneInputHoverBrush}" TargetName="HoverBg"/>
+                            <Setter Property="Background" TargetName="HoverBg">
+                                <Setter.Value>
+                                    <PriorityBinding>
+                                        <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneInputHoverBrush" />
+                                        <Binding Path="Resources[DuneInputHoverBrush]" Source="{x:Static Application.Current}" />
+                                    </PriorityBinding>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter TargetName="HoverBg" Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                            <Setter TargetName="HoverBg" Property="Background">
+                                <Setter.Value>
+                                    <PriorityBinding>
+                                        <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneInputPressedBrush" />
+                                        <Binding Path="Resources[DuneInputPressedBrush]" Source="{x:Static Application.Current}" />
+                                    </PriorityBinding>
+                                </Setter.Value>
+                            </Setter>
                             <Setter TargetName="DuneBottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="DuneBottomStroke" Property="Height" Value="2" />
                         </Trigger>
@@ -44,6 +65,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type SearchBox}">
                     <Grid x:Name="BoxGrid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="False">
+                        <Border Uid="Dune.Material.Input" Tag="{DynamicResource DuneMaterialsEnabled}" IsHitTestVisible="False"
+                                Width="{Binding ActualWidth, ElementName=PART_TextInpuText}" HorizontalAlignment="Left"
+                                CornerRadius="{DynamicResource DuneInputCornerRadius}">
+                            <Border.Background>
+                                <PriorityBinding>
+                                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Transparent" />
+                                    <Binding Source="Transparent" />
+                                </PriorityBinding>
+                            </Border.Background>
+                        </Border>
 
                         <TextBox x:Name="PART_TextInpuText" Style="{DynamicResource SearchTextBox}" Width="120" HorizontalAlignment="Left"
                                  VerticalContentAlignment="Center" Padding="12,0,32,0"/>

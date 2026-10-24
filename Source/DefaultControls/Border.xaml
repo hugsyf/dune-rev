@@ -11,43 +11,82 @@
     </Style>
 
     <Style x:Key="PopupBorder" TargetType="Border">
+        <Setter Property="Uid" Value="Dune.Material.Popup" />
+        <Setter Property="Tag" Value="{DynamicResource DuneMaterialsEnabled}" />
         <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" />
-        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <PriorityBinding>
+                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:PopupBackgroundBrush" />
+                    <Binding Path="Resources[PopupBackgroundBrush]" Source="{x:Static Application.Current}" />
+                </PriorityBinding>
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderThickness" Value="{DynamicResource PopupBorderThickness}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DuneFlyoutCornerRadius}" />
 
     </Style>
 
     <Style x:Key="DuneDropdownPopupBorder" TargetType="Border" BasedOn="{StaticResource PopupBorder}">
-        <Setter Property="Background" Value="{DynamicResource DuneDropdownSurfaceBrush}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <PriorityBinding>
+                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneDropdownSurfaceBrush" />
+                    <Binding Path="Resources[DuneDropdownSurfaceBrush]" Source="{x:Static Application.Current}" />
+                </PriorityBinding>
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}" />
         <Setter Property="CornerRadius" Value="{DynamicResource DuneFlyoutCornerRadius}" />
     </Style>
 
     <Style x:Key="DetailViewCardBorder" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource ControlOverlayBrush}" />
-        <Setter Property="Opacity" Value="0.06" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Uid" Value="Dune.Material.Card" />
+        <Setter Property="Tag" Value="{DynamicResource DuneMaterialsEnabled}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <PriorityBinding>
+                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneCardSurfaceBrush" />
+                    <Binding Path="Resources[DuneCardSurfaceBrush]" Source="{x:Static Application.Current}" />
+                </PriorityBinding>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneSurfaceEdgeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- Dense expanded content uses a shared stronger blur, keeping small cards airy. -->
+    <Style x:Key="DuneContentCardBorder" TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+        <Setter Property="Uid" Value="Dune.Material.Content" />
+    </Style>
+
+    <!-- Summary cards use individual surfaces unless the combined surface is visible. -->
+    <Style x:Key="DuneSummaryCardBorder" TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadiusLarge}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
-                <Setter Property="Opacity" Value="0.1" />
+            <DataTrigger Binding="{Binding Visibility, ElementName=DuneBasicSurface}" Value="Visible">
+                <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6" />
-            </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DuneSummaryPluginCardBorder" TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
+    <Style x:Key="DuneSummaryPluginCardBorder" TargetType="Border" BasedOn="{StaticResource DuneSummaryCardBorder}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True">
-                <Setter Property="Opacity" Value="0.1" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <PriorityBinding>
+                            <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneCardHoverBrush" />
+                            <Binding Path="Resources[DuneCardHoverBrush]" Source="{x:Static Application.Current}" />
+                        </PriorityBinding>
+                    </Setter.Value>
+                </Setter>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <!-- Keep interactive cards inside their measured bounds. Scaling a card with
-         an effect also scales/rasterizes its selected outline and can crop the
+         an effect also scales/rasterizes its focus indicator and can crop the
          left edge. The card surface and toggle supply hover/selection feedback. -->
     <Style x:Key="ClickableDetailCard" TargetType="Grid">
         <Setter Property="Background" Value="Transparent" />
@@ -61,9 +100,9 @@
 
 
     <!-- BEGIN GENERATED SUMMARY LAYOUTS -->
-    <!-- Regenerate with tools/Update-SummaryLayoutStyles.ps1. Basic cards use 12 tracks; plugin cards use 60. Each Auto row fits its content. -->
+    <!-- Regenerate with tools/Update-Theme.ps1. Basic cards use 12 tracks; plugin cards use 60. Each Auto row fits its content. -->
     <Style x:Key="DunePlayTimeLayout" TargetType="Grid">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -116,7 +155,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneLastPlayedLayout" TargetType="Grid">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -189,7 +228,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneCompletionLayout" TargetType="Grid">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -272,7 +311,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneRequirementsLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -361,7 +400,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneHowLongToBeatLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -539,7 +578,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneActivityLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />
@@ -733,7 +772,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="DuneAchievementsLayout" TargetType="Grid" BasedOn="{StaticResource ClickableDetailCard}">
-        <Setter Property="Margin" Value="0,0,12,12" />
+        <Setter Property="Margin" Value="{DynamicResource DuneSummaryCardMargin}" />
         <Setter Property="MinHeight" Value="96" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Grid.Row" Value="0" />

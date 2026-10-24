@@ -1,0 +1,24 @@
+<Fragments xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- One native provider per overview: both Hero and the gallery bind to it. -->
+    <ContentControl x:Name="SteamScreenshots_SteamScreenshotsViewControl" Width="0" Height="0"
+                    Opacity="0" IsHitTestVisible="False" Focusable="False" />
+    <Border x:Name="DuneHeroMediaSelection" Tag="{Binding Content.Selected, ElementName=DuneHeroMedia, FallbackValue=Screenshots}" Visibility="Collapsed" />
+    <ContentControl x:Name="DuneHeroMaterialSourceRegistration" Width="0" Height="0" IsHitTestVisible="False"
+                    DataContext="{Binding Parent, ElementName=HeroBanner}"
+                    Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Source, FallbackValue={x:Null}}">
+        <ContentControl.Style>
+            <Style TargetType="ContentControl">
+                <Setter Property="Tag" Value="{Binding ElementName=PART_ImageBackground}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Visibility, ElementName=DuneHeroScreenshotLayer}" Value="Visible">
+                        <Setter Property="Tag" Value="{Binding ElementName=DuneHeroScreenshotImage}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ContentControl.Style>
+    </ContentControl>
+    <Grid x:Name="DuneHeroScreenshotLayer" Style="{StaticResource DuneHeroStoreScreenshotLayer}" ClipToBounds="True" IsHitTestVisible="False">
+        <Image x:Name="DuneHeroScreenshotImage" Source="{Binding Content.CurrentImageBitmap, ElementName=SteamScreenshots_SteamScreenshotsViewControl}"
+               Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" />
+    </Grid>
+</Fragments>

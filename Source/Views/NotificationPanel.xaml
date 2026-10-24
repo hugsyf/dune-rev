@@ -12,9 +12,16 @@
                         <Grid.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="80" ShadowDepth="12" Opacity="0.24" Direction="270" />
                         </Grid.Effect>
-                        <Border x:Name="PopBg" BorderThickness="1" BorderBrush="{DynamicResource PopupBorderBrush}"
+                        <Border Uid="Dune.Material.Popup" Tag="{DynamicResource DuneMaterialsEnabled}" x:Name="PopBg" BorderThickness="1" BorderBrush="{DynamicResource PopupBorderBrush}"
                                 CornerRadius="{DynamicResource ControlCornerRadiusLarge}" d:DesignWidth="260" d:DesignHeight="400"
-                                d:DataContext="{x:Static DesignMainViewModel.DesignIntance}"  Background="{DynamicResource PopupBackgroundBrush}"/>
+                                d:DataContext="{x:Static DesignMainViewModel.DesignIntance}">
+                            <Border.Background>
+                                <PriorityBinding>
+                                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:PopupBackgroundBrush" />
+                                    <Binding Path="Resources[PopupBackgroundBrush]" Source="{x:Static Application.Current}" />
+                                </PriorityBinding>
+                            </Border.Background>
+                        </Border>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />

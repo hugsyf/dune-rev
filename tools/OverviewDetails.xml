@@ -63,26 +63,10 @@
                     </ToggleButton.Style>
                 </ToggleButton>
             </WrapPanel>
-            <Grid x:Name="DuneExpansionSurface" Margin="0,0,0,24" Visibility="{Binding Visibility, ElementName=DuneDetailHeader}">
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Setter Property="MaxHeight" Value="{DynamicResource DuneAchievementsPanelMaxHeight}" />
-                        <Setter Property="VerticalAlignment" Value="Top" />
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Tag, ElementName=DuneMetadataPanel}" Value="1" />
-                                    <Condition Binding="{Binding IsVisible, ElementName=DuneMetadataPanel}" Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="MaxHeight" Value="{Binding ActualHeight, ElementName=DuneMetadataPanel}" />
-                            </MultiDataTrigger>
-                            <DataTrigger Binding="{Binding ActualHeight, ElementName=DuneMetadataPanel}" Value="0">
-                                <Setter Property="MaxHeight" Value="{DynamicResource DuneAchievementsPanelMaxHeight}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <Border x:Name="DuneExpansionBackdrop" Style="{StaticResource DetailViewCardBorder}" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
+            <!-- A short metadata sidebar must not shrink the plugin's scroll viewport. -->
+            <Grid x:Name="DuneExpansionSurface" Margin="{DynamicResource DuneSectionBottomMargin}" Visibility="{Binding Visibility, ElementName=DuneDetailHeader}"
+                  MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}" VerticalAlignment="Top">
+                <Border x:Name="DuneExpansionBackdrop" Style="{StaticResource DuneContentCardBorder}" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Border BorderBrush="{DynamicResource AccentBrush}" BorderThickness="0,2,0,0" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Grid Margin="16">
                     <Grid.RowDefinitions>
@@ -806,7 +790,8 @@
                     </Style>
                 </Grid.Style>
                 <Border Style="{StaticResource DuneOverviewPluginPanel}">
-                    <ContentControl x:Name="SteamScreenshots_SteamScreenshotsViewControl" Height="{DynamicResource ScreenshotsPanelHeight}" Style="{StaticResource DuneStoreScreenshotsContent}" />
+                    <ContentControl x:Name="DuneStoreScreenshotGallery" Tag="{Binding Content, ElementName=SteamScreenshots_SteamScreenshotsViewControl}"
+                                    Height="{DynamicResource ScreenshotsPanelHeight}" Style="{StaticResource DuneStoreScreenshotsContent}" />
                 </Border>
             </Grid>
             <Grid>

@@ -2,7 +2,6 @@
 /dist/
 /release/
 /scripts/
-/package.ps1
 *.pthm
 
 # MSBuild / Visual Studio
@@ -41,3 +40,6 @@ Desktop.ini
 /packages/
 TestResults/
 _ReSharper*/
+
+# Local conversation attachments
+/.codex-remote-attachments/

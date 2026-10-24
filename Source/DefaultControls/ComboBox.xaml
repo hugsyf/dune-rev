@@ -9,7 +9,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid x:Name="Root">
-                        <Border x:Name="HoverBg" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                        <Border Uid="Dune.Material.Input" Tag="{DynamicResource DuneMaterialsEnabled}" x:Name="HoverBg" CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border.Background>
+                                <PriorityBinding>
+                                    <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="TemplateBackground" />
+                                    <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </PriorityBinding>
+                            </Border.Background>
+                        </Border>
                         <Border Name="DuneBottomStroke" Height="1" Margin="4,0,4,0" VerticalAlignment="Bottom" Background="{DynamicResource DuneInputBottomBrush}" />
                         <ToggleButton x:Name="ToggleButton" Focusable="False" ClickMode="Press" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                             <ToggleButton.Template>
@@ -45,10 +52,24 @@
                             <Setter Property="Visibility" Value="Hidden" TargetName="ContentSite" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="HoverBg" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" />
+                            <Setter TargetName="HoverBg" Property="Background">
+                                <Setter.Value>
+                                    <PriorityBinding>
+                                        <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneInputHoverBrush" />
+                                        <Binding Path="Resources[DuneInputHoverBrush]" Source="{x:Static Application.Current}" />
+                                    </PriorityBinding>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
 <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="DuneBottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" /><Setter TargetName="DuneBottomStroke" Property="Height" Value="2" /><Setter TargetName="DuneBottomStroke" Property="Opacity" Value="1" /></Trigger>
-<Trigger Property="IsDropDownOpen" Value="True"><Setter TargetName="HoverBg" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /><Setter TargetName="DuneBottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" /><Setter TargetName="DuneBottomStroke" Property="Height" Value="2" /><Setter TargetName="DuneBottomStroke" Property="Opacity" Value="1" /></Trigger></ControlTemplate.Triggers>
+<Trigger Property="IsDropDownOpen" Value="True"><Setter TargetName="HoverBg" Property="Background">
+                                                    <Setter.Value>
+                                                        <PriorityBinding>
+                                                            <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:DuneInputHoverBrush" />
+                                                            <Binding Path="Resources[DuneInputHoverBrush]" Source="{x:Static Application.Current}" />
+                                                        </PriorityBinding>
+                                                    </Setter.Value>
+                                                </Setter><Setter TargetName="DuneBottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" /><Setter TargetName="DuneBottomStroke" Property="Height" Value="2" /><Setter TargetName="DuneBottomStroke" Property="Opacity" Value="1" /></Trigger></ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

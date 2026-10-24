@@ -15,9 +15,9 @@
                         <Border Style="{DynamicResource PopupBorder}"/>
                         <DockPanel Name="PART_Root" LastChildFill="True" Margin="8">
                             <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
-                                <Button x:Name="PART_NextButton" DockPanel.Dock="Right" FontWeight="Bold" FontFamily="Marlett" Padding="8,2,8,2" Content="4" BorderThickness="0"
+                                <Button x:Name="PART_NextButton" DockPanel.Dock="Right" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="12" Padding="8,2,8,2" Content="&#xE76C;" BorderThickness="0"
                                         Focusable="False" />
-                                <Button x:Name="PART_PreviousButton" DockPanel.Dock="Right" FontWeight="Bold" FontFamily="Marlett" Padding="8,2,8,2" Content="3" Focusable="False"
+                                <Button x:Name="PART_PreviousButton" DockPanel.Dock="Right" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="12" Padding="8,2,8,2" Content="&#xE76B;" Focusable="False"
                                         BorderThickness="0" Margin="4,0,4,0" />
                                 <Button x:Name="PART_HeaderButton" DockPanel.Dock="Left" Padding="2" Height="30" Focusable="False" BorderThickness="0" Background="Transparent" />
                             </DockPanel>
@@ -147,7 +147,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsToday" Value="True">
-                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
                             <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
                         </Trigger>
                         <Trigger Property="IsInactive" Value="True">

@@ -7,8 +7,8 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DuneInputFillBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource SelectionBrush}" />
         <Setter Property="SelectionTextBrush" Value="{DynamicResource TextBrush}" />
@@ -24,18 +24,23 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border x:Name="HoverBg" BorderThickness="0" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
-                        <Border x:Name="SelectedBg" BorderThickness="{DynamicResource ControlBorderThickness}" Background="Transparent" CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0"  BorderBrush="{DynamicResource ControlOverlayBrush}"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource DuneInputCornerRadius}" />
+                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
+                                CornerRadius="{DynamicResource DuneInputCornerRadius}" />
+                        <Border x:Name="BottomStroke" Height="1" Margin="4,0" VerticalAlignment="Bottom"
+                                Background="{DynamicResource DuneInputBottomBrush}" />
                         <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                 HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
+                            <Setter Property="Opacity" Value="0.04" TargetName="HoverBg" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="true">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
-                            <Setter Property="Opacity" Value="0.16" TargetName="SelectedBg" />
+                            <Setter Property="Opacity" Value="0" TargetName="HoverBg" />
+                            <Setter Property="Height" Value="2" TargetName="BottomStroke" />
+                            <Setter Property="Background" Value="{DynamicResource AccentBrush}" TargetName="BottomStroke" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -48,58 +53,10 @@
         </Style.Triggers>
     </Style>
 
-    <!--@TopPanel-->
+    <!-- The top search box shares the input surface and focus feedback. -->
     <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="AllowDrop" Value="True" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Grid>
-                        <Border x:Name="HoverBg" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource ControlOverlayBrush}" CornerRadius="18"
-                                BorderBrush="{DynamicResource ControlOverlayBrush}" Opacity="0.16"/>
-                        <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
-                                HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="HoverBg"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0.2" Duration="0:0:0.2">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="HoverBg"
-                                                        Storyboard.TargetProperty="Opacity"
-                                                        To="0.16" Duration="0:0:0.2">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="Background" Value="#29000000"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
-
     <!--@FilterPanel-->
     <Style x:Key="SearchSmallTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
@@ -109,7 +66,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border x:Name="HoverBg" BorderThickness="0" Background="Transparent" CornerRadius="{DynamicResource ControlCornerRadius}"
+                        <Border x:Name="HoverBg" BorderThickness="0" Background="Transparent" CornerRadius="{DynamicResource DuneInputCornerRadius}"
                                 BorderBrush="{TemplateBinding BorderBrush}" />
                         <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                 HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}" />

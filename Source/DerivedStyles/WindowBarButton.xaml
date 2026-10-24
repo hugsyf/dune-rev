@@ -13,11 +13,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <TextBlock FontFamily="Marlett"
+                    <TextBlock x:Name="Glyph" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
                                Foreground="{TemplateBinding Foreground}"
-                               FontSize="16"
+                               FontSize="12"
                                Padding="{TemplateBinding Padding}"
                                Text="{TemplateBinding Content}" />
+                    <!-- Preserve legacy host Content values while drawing modern glyphs. -->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="0"><Setter TargetName="Glyph" Property="Text" Value="&#xE921;" /></Trigger>
+                        <Trigger Property="Content" Value="1"><Setter TargetName="Glyph" Property="Text" Value="&#xE922;" /></Trigger>
+                        <Trigger Property="Content" Value="2"><Setter TargetName="Glyph" Property="Text" Value="&#xE923;" /></Trigger>
+                        <Trigger Property="Content" Value="r"><Setter TargetName="Glyph" Property="Text" Value="&#xE8BB;" /></Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

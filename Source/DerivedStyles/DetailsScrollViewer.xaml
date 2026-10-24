@@ -13,7 +13,16 @@
                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Column="0" Grid.Row="0"
                                                 Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}"
                                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                                CanContentScroll="{TemplateBinding CanContentScroll}">
+                            <!-- Reveal the shared page backdrop at the viewport edge, not a solid header strip. -->
+                            <ScrollContentPresenter.OpacityMask>
+                                <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0"
+                                    EndPoint="{Binding TemplatedParent.VerticalOffset, ElementName=PART_ScrollContentPresenter, Converter={PluginConverter Plugin=DuneMaterials, Converter=ScrollFadeConverter}, FallbackValue='0,28'}">
+                                    <GradientStop Color="Transparent" Offset="0" />
+                                    <GradientStop Color="White" Offset="1" />
+                                </LinearGradientBrush>
+                            </ScrollContentPresenter.OpacityMask>
+                        </ScrollContentPresenter>
 
                         <Rectangle Grid.Column="1" Grid.Row="0" Fill="{TemplateBinding Background}"/>
             
@@ -25,6 +34,9 @@
                                    AutomationProperties.AutomationId="VerticalScrollBar" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="VerticalOffset" Value="0">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="OpacityMask" Value="{x:Null}" />
+                        </Trigger>
                         <Trigger SourceName="PART_VerticalScrollBar" Property="Visibility" Value="Visible">
                             <Setter Property="IsTabStop" Value="True"/>
                         </Trigger>
