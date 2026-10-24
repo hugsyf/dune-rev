@@ -43,3 +43,7 @@ _ReSharper*/
 
 # Local conversation attachments
 /.codex-remote-attachments/
+
+# Published release notes are source, not build output.
+!/docs/releases/
+!/docs/releases/*.md
