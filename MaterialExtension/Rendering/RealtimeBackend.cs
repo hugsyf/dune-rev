@@ -9,14 +9,13 @@ using System.Windows.Media.Effects;
 
 namespace DuneMaterials.Rendering
 {
-    internal sealed class RealtimeBackend : IMaterialBackend
+    internal sealed class RealtimeBackend : IDisposable
     {
         sealed class Node { public FrameworkElement Source; public Size Size; public double Strength; public FrameworkElement Blur; public Brush Brush; }
-        readonly Dictionary<MaterialScope, Dictionary<BlurLevel, Node>> scopes = new Dictionary<MaterialScope, Dictionary<BlurLevel, Node>>();
-        public string Name { get { return "Realtime"; } }
+        readonly Dictionary<MaterialScope, Node> scopes = new Dictionary<MaterialScope, Node>();
         public long BuildCount { get; private set; }
         public int NodeCount
-        { get { int count = 0; foreach (var levels in scopes.Values) count += levels.Count; return count; } }
+        { get { return scopes.Count; } }
         public static string IneligibleReason(FrameworkElement source, bool owned)
         {
             if ((RenderCapability.Tier >> 16) < 2 || RenderOptions.ProcessRenderMode == RenderMode.SoftwareOnly) return "WPF hardware tier 2 is required";
@@ -44,34 +43,37 @@ namespace DuneMaterials.Rendering
         }
         static void AddVisual(Brush brush, Queue<DependencyObject> queue)
         { var reference = brush as VisualBrush; if (reference != null && reference.Visual != null) queue.Enqueue(reference.Visual); }
-        public Brush Acquire(MaterialScope scope, BlurLevel level)
+        public Brush Acquire(MaterialScope scope)
         {
             var source = scope.LiveSource;
             if (IneligibleReason(source, scope.Source != null && ReferenceEquals(source, scope.Source.RawScene)) != null) return null;
-            Dictionary<BlurLevel, Node> levels;
-            if (!scopes.TryGetValue(scope, out levels)) { levels = new Dictionary<BlurLevel, Node>(); scopes.Add(scope, levels); }
             Node node;
             var size = source.RenderSize;
-            double strength = MaterialProfiles.BlurFraction(level, scope.Source.PageBlurScale);
-            if (levels.TryGetValue(level, out node) && node.Source == source && node.Size == size && node.Strength == strength) return node.Brush;
+            double strength = scope.Source.BlurRadius;
+            if (!scope.Source.BackgroundBlurEnabled) strength = 0;
+            if (scopes.TryGetValue(scope, out node) && node.Source == source && node.Size == size && node.Strength == strength) return node.Brush;
             // Mirror the edge before blur instead of blending with transparent
             // pixels outside the scene (which otherwise produces dark window bands).
             // Leave room for at most 66 DIPs of padding on each edge.
             double scale = Math.Min(1, 892 / Math.Max(size.Width, size.Height));
-            double radius = Math.Min(64, Math.Min(size.Width, size.Height) * scale * strength);
+            double radius = Math.Min(64, strength * scale);
             double padding = Math.Ceiling(radius) + 2;
             var content = new Rect(padding, padding, size.Width * scale, size.Height * scale);
-            var blurred = new Border {
+            var graded = new Border {
                 Width = content.Width + padding * 2, Height = content.Height + padding * 2,
                 Background = new VisualBrush(source) { ViewboxUnits = BrushMappingMode.Absolute, Viewbox = new Rect(size),
                     ViewportUnits = BrushMappingMode.Absolute, Viewport = content, TileMode = TileMode.FlipXY, Stretch = Stretch.Fill },
-                Effect = new BlurEffect { Radius = radius, RenderingBias = RenderingBias.Performance },
+                Effect = new MaterialColorEffect()
+            };
+            var blurred = new Border {
+                Width = graded.Width, Height = graded.Height, Child = graded,
+                Effect = new BlurEffect { Radius = radius, RenderingBias = RenderingBias.Quality },
                 CacheMode = new BitmapCache(1) { EnableClearType = false, SnapsToDevicePixels = true }
             };
             blurred.Measure(new Size(blurred.Width, blurred.Height)); blurred.Arrange(new Rect(0, 0, blurred.Width, blurred.Height));
             var brush = new VisualBrush(blurred) { ViewboxUnits = BrushMappingMode.Absolute, Viewbox = content, Stretch = Stretch.Fill };
             // A live VisualBrush cannot be frozen or sent to workers. WPF owns updates.
-            levels[level] = new Node { Source = source, Size = size, Strength = strength, Blur = blurred, Brush = brush };
+            scopes[scope] = new Node { Source = source, Size = size, Strength = strength, Blur = blurred, Brush = brush };
             BuildCount++;
             return brush;
         }

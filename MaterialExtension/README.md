@@ -1,20 +1,25 @@
-# Dune Materials 0.5.0
+# Dune Materials 0.6.3
 
-Companion extension for Dune Rev 2.4.0 Preview 1. Install the `.pext` and `.pthm`
-from the same [preview release](https://github.com/hugsyf/dune-rev/releases/tag/v2.4.0-preview.1).
-The theme works with ordinary fallback surfaces if this extension is absent.
+Companion extension for the next Dune Rev 2.4.0 preview. Install the matching
+`.pext` and `.pthm` packages together, then restart Playnite.
+The theme works with ordinary surfaces if this extension is absent.
 
 ## Settings
 
-Open Add-ons → Extension settings → Generic → Dune Materials. New installations
-use enhanced materials with Realtime selected; existing saved preferences are
-retained. Select Compatibility (cached) for static backgrounds or if realtime
-causes display/performance problems. Unsupported realtime sources/hardware fall
-back automatically. Turn off enhanced materials to retain the classic path.
-The theme's ThemeModifier switch controls whether materials are used at all.
+Open Add-ons → Extension settings → Generic → Dune Materials and enable realtime
+materials. Background, content and flyouts share one blur; tint strength separates
+the three layers. Cards, expanded panels, details, filters and the top bar use the
+same content material. Subtle color restraint, soft light and optional fine grain
+keep artwork visible without overwhelming text.
+
+Adjust the shared material blur radius in ThemeModifier (default 48). Existing
+compatibility-mode preferences migrate to realtime; saved enable, grain and motion
+preferences are retained. Turning materials off, unsupported rendering or a missing
+background uses ordinary theme surfaces. The ThemeModifier material switch also
+disables materials.
 
 Settings follow the Playnite UI language (Chinese or English). Diagnostics are
-collapsed by default and report UI update batches, not frame rate or GPU timing.
+collapsed by default and can be expanded when reporting an issue.
 Restore recommended settings resets material preferences without changing the
 Hero automatic playback preference. Cancel restores the previous settings.
 
@@ -23,13 +28,5 @@ is off by default and toggled with the repeat button. Video, screenshot and
 background priority and optional extension requirements are described in the
 [release notes](../docs/releases/v2.4.0-preview.1.md).
 
-## Implementation and verification
-
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the shared backdrop, bounded blur
-backends, source lifecycle, Hero media and fallback contracts. The earlier 0.4.x
-sections record implementation history; 0.5.0 uses the same material API 1.
-
-Build with `tools/Build-Materials.ps1`. Windowless checks are available through
-`tools/Test-Materials.ps1` and `tools/Test-MaterialSettings.ps1`. The release build
-runs these checks and verifies packaged files; it does not render WPF, launch
-Playnite or substitute for testing in the real application.
+Contributor notes are in [ARCHITECTURE.md](ARCHITECTURE.md) and
+[the maintenance guide](../tools/README.md).

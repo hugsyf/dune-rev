@@ -55,7 +55,7 @@
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 
-    <!-- Dense expanded content uses a shared stronger blur, keeping small cards airy. -->
+    <!-- Expanded content shares the same material as cards and navigation. -->
     <Style x:Key="DuneContentCardBorder" TargetType="Border" BasedOn="{StaticResource DetailViewCardBorder}">
         <Setter Property="Uid" Value="Dune.Material.Content" />
     </Style>

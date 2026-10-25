@@ -64,7 +64,7 @@
                         <ContentControl Width="0" Height="0" IsHitTestVisible="False"
                                         DataContext="{Binding RelativeSource={RelativeSource AncestorType=MainWindow}}"
                                         Tag="{Binding ElementName=PART_ImageBackground}"
-                                        Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Source, FallbackValue={x:Null}}" />
+                                        Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=WindowSource, FallbackValue={x:Null}}" />
 
                         <DockPanel Grid.Row="1">
                             <FilterPanel x:Name="PART_FilterPanel"

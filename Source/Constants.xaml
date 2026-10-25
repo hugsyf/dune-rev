@@ -29,10 +29,8 @@
         <sys:Double x:Key="GameActionButtonWidth">320</sys:Double>
         <sys:Boolean x:Key="DuneCompactLayout">False</sys:Boolean>
         <sys:Double x:Key="DuneHeroBlurRadius">120</sys:Double>
-        <sys:Boolean x:Key="DuneAdvancedMaterialsEnabled">False</sys:Boolean>
         <sys:Boolean x:Key="DuneMaterialsEnabled">True</sys:Boolean>
-        <sys:Boolean x:Key="DuneMaterialPilotEnabled">False</sys:Boolean>
-        <sys:Double x:Key="DuneMaterialBlurRadius">32</sys:Double>
+        <sys:Double x:Key="DuneMaterialBlurRadius">48</sys:Double>
         <sys:Double x:Key="DuneHeroShadeOpacity">0.6</sys:Double>
         <sys:Double x:Key="DuneGridHeroDesignHeight">900</sys:Double>
         <sys:Boolean x:Key="DuneReduceCoverMotion">False</sys:Boolean>
@@ -105,15 +103,9 @@
         <Color x:Key="SecondaryTextColor">#B5BDC9</Color>
         <Color x:Key="MutedTextColor">#9EA8B7</Color>
         <SolidColorBrush x:Key="CardSurfaceBrush" Color="{DynamicResource CardSurfaceColor}" />
-        <!-- Neutral tint restrains bright artwork; the faint sheen preserves depth. -->
-        <LinearGradientBrush x:Key="DuneCardSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#403D4148" Offset="0" />
-            <GradientStop Color="#40272A30" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="DuneCardHoverBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#484A4E55" Offset="0" />
-            <GradientStop Color="#4834383E" Offset="1" />
-        </LinearGradientBrush>
+        <!-- Uniform fills avoid full-height gradient bands; edges provide depth. -->
+        <SolidColorBrush x:Key="DuneCardSurfaceBrush" Color="#8C1E2229" />
+        <SolidColorBrush x:Key="DuneCardHoverBrush" Color="#9224282F" />
         <LinearGradientBrush x:Key="DuneSurfaceEdgeBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#20FFFFFF" Offset="0" />
             <GradientStop Color="#08FFFFFF" Offset="1" />

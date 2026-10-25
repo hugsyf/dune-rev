@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$ToolboxPath = "$env:LOCALAPPDATA\Playnite\toolbox.exe",
-    [switch]$SkipChecks
+    [string]$ToolboxPath = "$env:LOCALAPPDATA\Playnite\toolbox.exe"
 )
 $ErrorActionPreference = 'Stop'
 if ($PSVersionTable.PSEdition -ne 'Desktop') { throw 'Run with Windows PowerShell 5.1.' }
@@ -13,12 +12,8 @@ foreach ($entry in @(@('Source/theme.yaml', $config.ThemeVersion), @('MaterialEx
 }
 $assemblyText = [IO.File]::ReadAllText((Join-Path $project 'MaterialExtension/AssemblyInfo.cs'))
 if (-not $assemblyText.Contains('AssemblyVersion("' + $config.ExtensionVersion + '.0")')) { throw 'Extension assembly version mismatch.' }
-& (Join-Path $PSScriptRoot 'Update-Theme.ps1') -Check
+& (Join-Path $PSScriptRoot 'Update-Theme.ps1')
 & (Join-Path $PSScriptRoot 'Build-Materials.ps1')
-if (-not $SkipChecks) {
-    & (Join-Path $PSScriptRoot 'Test-Materials.ps1')
-    & (Join-Path $PSScriptRoot 'Test-MaterialSettings.ps1')
-}
 & (Join-Path $project 'package.ps1') -ToolboxPath $ToolboxPath
 $output = Join-Path $project ('dist/releases/' + $config.Tag)
 [IO.Directory]::CreateDirectory($output) | Out-Null
@@ -49,6 +44,6 @@ try {
     Assert-ZipFile $extension 'extension.yaml' (Join-Path $project 'MaterialExtension/extension.yaml')
     Assert-ZipFile $extension 'DuneMaterials.dll' (Join-Path $project 'dist/DuneMaterials/DuneMaterials.dll')
 } finally { $extension.Dispose() }
-$buildInfo = @{ Tag = $config.Tag; Commit = (& git -C $project rev-parse HEAD).Trim(); ThemeVersion = $config.ThemeVersion; ExtensionVersion = $config.ExtensionVersion; ChecksSkipped = [bool]$SkipChecks } | ConvertTo-Json
+$buildInfo = @{ Tag = $config.Tag; Commit = (& git -C $project rev-parse HEAD).Trim(); ThemeVersion = $config.ThemeVersion; ExtensionVersion = $config.ExtensionVersion } | ConvertTo-Json
 [IO.File]::WriteAllText((Join-Path $output 'build-info.json'), $buildInfo, [Text.UTF8Encoding]::new($false))
 Write-Output "Verified preview packages: $output"

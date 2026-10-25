@@ -47,12 +47,14 @@ namespace DuneMaterials.Rendering
         readonly MaterialRuntime runtime;
         readonly FrameworkElement host;
         readonly bool live;
+        readonly bool windowBackdrop;
         MaterialScope scope;
         FrameworkElement source;
         Window window;
-        public SourceRegistration(MaterialRuntime service, FrameworkElement owner, bool dynamicScene)
+        public SourceRegistration(MaterialRuntime service, FrameworkElement owner, bool dynamicScene, bool windowSource = false)
         {
-            runtime = service; host = owner; live = dynamicScene; Width = Height = 0; IsHitTestVisible = false;
+            runtime = service; host = owner; live = dynamicScene; windowBackdrop = windowSource;
+            Width = Height = 0; IsHitTestVisible = false;
             Loaded += OnLoaded; Unloaded += OnUnloaded;
         }
         void OnLoaded(object sender, RoutedEventArgs args)
@@ -66,6 +68,9 @@ namespace DuneMaterials.Rendering
         {
             Detach(); source = host.Tag as FrameworkElement;
             var anchor = host.DataContext as FrameworkElement;
+            // Playnite's themed MainWindow view is a Control inside the actual WPF Window.
+            // Window-scoped registrations must use the owning Window as their anchor.
+            if (windowBackdrop && anchor != null) anchor = Window.GetWindow(anchor);
             scope = runtime.RegisterSource(anchor, source, live);
             if (live && source != null) { source.IsVisibleChanged += LiveChanged; source.SizeChanged += LiveSizeChanged;
                 DependencyPropertyDescriptor.FromProperty(UIElement.OpacityProperty, typeof(FrameworkElement)).AddValueChanged(source, LiveOpacityChanged); }
@@ -98,6 +103,7 @@ namespace DuneMaterials.Rendering
             var host = value as FrameworkElement; if (host == null) return null;
             string role = parameter as string;
             if (role == "RoundedClip") return new RoundedClipRegistration(host);
+            if (role == "WindowSource") return new SourceRegistration(runtime, host, false, true);
             if (role == "Source" || role == "LiveSource") return new SourceRegistration(runtime, host, role == "LiveSource");
             if (role == "Background") return new BackgroundPresenter(runtime, host);
             MaterialRole profile;

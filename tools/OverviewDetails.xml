@@ -119,7 +119,7 @@
                                 </Grid.Style>
                                 <Border Style="{StaticResource DuneWindowIconSurface}" />
                                 <ContentControl x:Name="PlayniteAchievements_AchievementButton" Style="{StaticResource DuneCatalogOpener}" ToolTip="{DynamicResource LOCDuneOpenPlugin}" AutomationProperties.Name="{DynamicResource LOCDuneOpenPlugin}" />
-                                <TextBlock Text="" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
+                                <TextBlock Text="&#xE8A7;" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
                                 <Border Style="{StaticResource DuneWindowIconFocus}" IsHitTestVisible="False" />
                             </Grid>
                             <Grid DockPanel.Dock="Right" Margin="0,0,4,0" x:Name="DuneLanguagesWindowLink" Width="32" Height="32">
@@ -147,7 +147,7 @@
                                 </Grid.Style>
                                 <Border Style="{StaticResource DuneWindowIconSurface}" />
                                 <ContentControl x:Name="CheckLocalizations_PluginButton" Style="{StaticResource DuneCatalogOpener}" ToolTip="{DynamicResource LOCDuneOpenPlugin}" AutomationProperties.Name="{DynamicResource LOCDuneOpenPlugin}" />
-                                <TextBlock Text="" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
+                                <TextBlock Text="&#xE8A7;" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
                                 <Border Style="{StaticResource DuneWindowIconFocus}" IsHitTestVisible="False" />
                             </Grid>
                             <Grid DockPanel.Dock="Right" Margin="0,0,4,0" x:Name="DuneDlcWindowLink" Width="32" Height="32">
@@ -175,7 +175,7 @@
                                 </Grid.Style>
                                 <Border Style="{StaticResource DuneWindowIconSurface}" />
                                 <ContentControl x:Name="CheckDlc_PluginButton" Style="{StaticResource DuneCatalogOpener}" ToolTip="{DynamicResource LOCDuneOpenPlugin}" AutomationProperties.Name="{DynamicResource LOCDuneOpenPlugin}" />
-                                <TextBlock Text="" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
+                                <TextBlock Text="&#xE8A7;" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
                                 <Border Style="{StaticResource DuneWindowIconFocus}" IsHitTestVisible="False" />
                             </Grid>
                             <Grid DockPanel.Dock="Right" Margin="0,0,4,0" x:Name="DuneHowLongToBeatWindowLink" Width="32" Height="32">
@@ -203,7 +203,7 @@
                                 </Grid.Style>
                                 <Border Style="{StaticResource DuneWindowIconSurface}" />
                                 <ContentControl x:Name="HowLongToBeat_PluginButton" Style="{StaticResource DuneCatalogOpener}" ToolTip="{DynamicResource LOCDuneOpenPlugin}" AutomationProperties.Name="{DynamicResource LOCDuneOpenPlugin}" />
-                                <TextBlock Text="" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
+                                <TextBlock Text="&#xE8A7;" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
                                 <Border Style="{StaticResource DuneWindowIconFocus}" IsHitTestVisible="False" />
                             </Grid>
                             <Grid DockPanel.Dock="Right" Margin="0,0,4,0" x:Name="DuneActivityWindowLink" Width="32" Height="32">
@@ -231,7 +231,7 @@
                                 </Grid.Style>
                                 <Border Style="{StaticResource DuneWindowIconSurface}" />
                                 <ContentControl x:Name="GameActivity_PluginButton" Style="{StaticResource DuneCatalogOpener}" ToolTip="{DynamicResource LOCDuneOpenPlugin}" AutomationProperties.Name="{DynamicResource LOCDuneOpenPlugin}" />
-                                <TextBlock Text="" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
+                                <TextBlock Text="&#xE8A7;" Style="{StaticResource IconFontStyle}" FontSize="12" IsHitTestVisible="False" />
                                 <Border Style="{StaticResource DuneWindowIconFocus}" IsHitTestVisible="False" />
                             </Grid>
                         </WrapPanel>

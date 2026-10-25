@@ -24,10 +24,10 @@ Realtime by default. Automatic media playback is off by default.
 自动轮播／播放默认关闭。
 
 See [preview installation, optional plugins, feedback and rollback / 预览版安装、可选插件、反馈与回退](docs/releases/v2.4.0-preview.1.md).
-ThemeModifier controls appearance and layout; Dune Materials selects the material
-mode. The theme remains usable without optional plugins.
+ThemeModifier controls appearance and layout; Dune Materials controls translucent
+materials. The theme remains usable without optional plugins.
 
-ThemeModifier 调整主题外观与布局，Dune Materials 选择材质模式；可选插件缺失时主题仍可使用。
+ThemeModifier 调整主题外观与布局，Dune Materials 控制半透明材质；可选插件缺失时主题仍可使用。
 
 
 ## Screenshots / 截图
@@ -390,11 +390,11 @@ Hero 滚出可视区域或窗口失焦时暂停，鼠标悬停媒体选择区时
 按钮与控件」为总开关。菜单与通知采用更深的遮罩以保证可读性，关闭开关或未安装扩展时
 使用主题原有背景。构建与支持范围见 [扩展说明](MaterialExtension/README.md)。
 
-Dune Materials 0.4.8 在新架构下让全局背景、普通卡片与导航共享背景合成，统一底色、原生压暗和渐隐；正文与菜单保留不同的可读性遮罩。页面底部继续保留游戏背景氛围，Hero 媒体与局部材质仍然独立。请同时更新配套主题与扩展。Hero 材质可跟随当前商店截图。滚动采样随布局同步更新；顶栏与主体共用
-背景，详情页滚动顶边采用短渐隐。展开插件面板和详情栏保留更柔和的共享模糊。
-在 Playnite 的扩展设置中打开 Dune Materials，启用「新材质架构」、选择 Realtime 并
-启用 Realtime 后端即可使用；更新保留已有选择。Cached 保留为兼容回退，新安装仍默认
-保留旧路径。关闭新架构即可回到旧路径，总开关仍由 ThemeModifier 控制。
+开发中的 Dune Materials 0.6.3 将材质统一为背景、内容、浮层三级。卡片、展开区、详情栏、
+筛选器与顶栏共用内容材质，菜单和通知采用更浓的遮罩；各层共享背景采样与模糊，
+搭配柔和高光和可选细颗粒。Hero 图片与视频保持清晰。
+扩展设置保留实时材质开关、颗粒与减少交互过渡；ThemeModifier 可调整统一模糊半径，
+默认 48。旧兼容模式设置自动迁移至实时渲染，材质关闭或无法渲染时使用普通主题背景。
 
 如果缺少卡片或页签，请检查对应扩展是否安装、插件主题集成与主题开关是否开启，
 以及当前游戏是否有相应数据。Play Notes 没有笔记时也会显示新建提示。

@@ -17,19 +17,18 @@ namespace DuneMaterials.Rendering
             internal Size Size;
             internal DrawingBrush Result;
         }
-        readonly Dictionary<BlurLevel, Entry> entries = new Dictionary<BlurLevel, Entry>();
+        Entry entry;
         static readonly Brush neutral = Neutral();
         static Brush Neutral() { var brush = new SolidColorBrush(Color.FromRgb(40, 45, 53)); brush.Freeze(); return brush; }
-        internal int Count { get { return entries.Count; } }
-        internal Brush Compose(MaterialScope scope, BlurLevel level, Brush paint, Size size)
+        internal Brush Compose(MaterialScope scope, Brush paint, Size size)
         {
             if (!scope.IsWindowBackdrop) return paint;
             var background = scope.Anchor.TryFindResource("WindowBackgroundBrush") as Brush ?? neutral;
             object identity = paint;
             var image = paint as ImageBrush; if (image != null) identity = image.ImageSource;
             var visual = paint as VisualBrush; if (visual != null) identity = visual.Visual;
-            Entry old;
-            if (entries.TryGetValue(level, out old) && ReferenceEquals(old.Paint, identity) &&
+            Entry old = entry;
+            if (old != null && ReferenceEquals(old.Paint, identity) &&
                 ReferenceEquals(old.Base, background) && old.Version == scope.Frame.Version && old.Size == size) return old.Result;
             var artwork = new DrawingGroup();
             using (var dc = artwork.Open()) {
@@ -44,9 +43,9 @@ namespace DuneMaterials.Rendering
                 dc.DrawRectangle(background, null, new Rect(size)); dc.DrawDrawing(artwork);
             }
             var result = new DrawingBrush(composite) { Stretch = Stretch.Fill };
-            entries[level] = new Entry { Paint = identity, Base = background, Version = scope.Frame.Version, Size = size, Result = result };
+            entry = new Entry { Paint = identity, Base = background, Version = scope.Frame.Version, Size = size, Result = result };
             return result;
         }
-        internal void Clear() { entries.Clear(); }
+        internal void Clear() { entry = null; }
     }
 }

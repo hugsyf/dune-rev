@@ -15,10 +15,12 @@ $references = @(
     $sdk
 )
 $compiler = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) 'csc.exe'
-# The withdrawn visual-capture engine is deliberately excluded.
-$sources = @('Plugin.cs', 'MaterialSettings.cs', 'AssemblyInfo.cs', 'MaterialCoordinator.cs', 'MaterialSurface.cs', 'MaterialTextureCache.cs', 'PilotTexture.cs') | ForEach-Object { Join-Path $PSScriptRoot "../MaterialExtension/$_" }
+$shaderPath = Join-Path (Split-Path $output) 'MaterialColor.ps'
+& (Join-Path $PSScriptRoot 'Build-MaterialShader.ps1') -OutputPath $shaderPath
+$sources = @('Plugin.cs', 'MaterialSettings.cs', 'AssemblyInfo.cs') | ForEach-Object { Join-Path $PSScriptRoot "../MaterialExtension/$_" }
 $sources += Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot '../MaterialExtension/Rendering') -Filter '*.cs' | ForEach-Object { $_.FullName }
 $arguments = @('/nologo', '/target:library', '/optimize+', '/warnaserror+', "/out:$output/DuneMaterials.dll")
+$arguments += '/resource:' + $shaderPath + ',DuneMaterials.MaterialColor.ps'
 $arguments += $references | ForEach-Object { '/reference:' + $_ }
 & $compiler @arguments @sources
 if ($LASTEXITCODE -ne 0) { throw 'Material extension compilation failed.' }

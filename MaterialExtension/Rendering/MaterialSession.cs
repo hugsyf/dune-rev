@@ -113,7 +113,8 @@ namespace DuneMaterials.Rendering
             { if (showingMaterial || Dirty) Fallback(); Dirty = false; return; }
             var scope = !Dirty && lastScope != null ? lastScope : runtime.FindScope(Target);
             attemptedScope = scope;
-            if (scope == null || scope.Frame == null) { if (showingMaterial || Dirty) Fallback(); Dirty = false; return; }
+            if (scope == null || scope.Frame == null)
+            { runtime.SourceMissing(); if (showingMaterial || Dirty) Fallback(); Dirty = false; return; }
             var frame = scope.Frame;
             if (failed && failedScope == scope && failedVersion == frame.Version) { Dirty = false; return; }
             failed = false;
@@ -145,12 +146,15 @@ namespace DuneMaterials.Rendering
                 dc.DrawRectangle(cropped, null, bounds);
                 if (role != MaterialRole.Background)
                 {
-                    dc.DrawRectangle(MaterialProfiles.Tint(role, scope.IsWindowBackdrop), null, bounds);
-                    if (Target.IsMouseOver && role != MaterialRole.Content) dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(12, 255, 255, 255)), null, bounds);
+                    dc.DrawRectangle(MaterialProfiles.Tint(role), null, bounds);
+                    dc.DrawRectangle(MaterialProfiles.Sheen, null, new Rect(0, 0, size.Width, Math.Min(12, size.Height)));
+                    if (Target.IsMouseOver && (Target.Uid.EndsWith(".Card", StringComparison.Ordinal) || Target.Uid.EndsWith(".Input", StringComparison.Ordinal)))
+                        dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(6, 255, 255, 255)), null, bounds);
                     if (runtime.Options.Noise) dc.DrawRectangle(MaterialProfiles.Grain, null, bounds);
                 }
             }
-            bool transition = showingMaterial && lastScope == scope && lastVersion != frame.Version && !live &&
+            bool transition = showingMaterial && lastScope == scope && lastVersion == frame.Version &&
+                size == lastSize && frameCrop == lastCrop &&
                 !runtime.Options.ReduceMotion && SystemParameters.ClientAreaAnimation;
             int current = ++revision;
             // Keep only the last completed layer, never chains of animated drawings.
@@ -159,7 +163,7 @@ namespace DuneMaterials.Rendering
             if (transition && previous != null)
             {
                 output.Children.Add(previous); output.Children.Add(layer);
-                var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(180)) { FillBehavior = FillBehavior.Stop };
+                var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(83)) { FillBehavior = FillBehavior.Stop };
                 fade.Completed += delegate {
                     if (revision != current) return;
                     layer.BeginAnimation(DrawingGroup.OpacityProperty, null);

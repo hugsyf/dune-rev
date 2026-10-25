@@ -118,7 +118,7 @@
                 <Label Grid.Column="2" Content="{DynamicResource LOCDuneSystemRequirements}" Margin="0" />
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
                     <TextBlock x:Name="DuneRequirementsProviderIcon" Text="" Style="{StaticResource DuneSummaryProviderGlyph}" />
-                    <TextBlock x:Name="DuneRequirementsOpenChevron" Text="" Style="{StaticResource DuneSummaryChevron}" />
+                    <TextBlock x:Name="DuneRequirementsOpenChevron" Text="&#xE8A7;" Style="{StaticResource DuneSummaryChevron}" />
                 </StackPanel>
             </Grid>
             <Grid x:Name="DuneRequirementsValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">

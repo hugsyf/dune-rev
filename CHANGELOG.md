@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Use uniform material tints and edge-local highlights to reduce horizontal shading bands on cards.
+- Fix window background registration so realtime materials can render on cards, side panels and notifications.
+- Fix a Dune Materials startup crash when initializing shared blur settings.
+- Unify realtime materials into background, content and flyout layers with shared blur, softer highlights, restrained artwork colors and fine grain.
+- Give cards, expanded panels, details, filters and the top bar a matching content surface; use a stronger tint for notifications and menus.
+- Add a shared material blur setting and simplify Dune Materials settings. Compatibility mode is replaced by realtime rendering, with ordinary theme surfaces when materials are unavailable or disabled.
+
 ## v2.4.0-preview.1 - 2026-10-24
 
 - Fix tag filtering when clicking a tag in Details and Grid Details views.

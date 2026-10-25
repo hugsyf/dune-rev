@@ -5,19 +5,17 @@ using System.Windows.Media.Imaging;
 
 namespace DuneMaterials.Rendering
 {
-    public enum MaterialMode { Cached, Realtime }
-    public enum MaterialRole { Background, Card, Control, Navigation, Flyout, Content }
-    public enum BlurLevel { Ambient, Surface, Content }
+    public enum MaterialRole { Background, Content, Flyout }
 
     public sealed class MaterialOptions
     {
         public bool UseNewRenderer { get; set; }
-        public MaterialMode Mode { get; set; }
-        public bool AllowExperimentalRealtime { get; set; }
         public bool ReduceMotion { get; set; }
         public bool Noise { get; set; }
         public bool HeroAutoPlay { get; set; }
-        public MaterialOptions() { Noise = true; UseNewRenderer = true; Mode = MaterialMode.Realtime; AllowExperimentalRealtime = true; }
+        // Keep the serialized enable key so existing on/off preferences survive upgrades.
+        // Removed Mode/AllowExperimentalRealtime values are ignored when old settings load.
+        public MaterialOptions() { Noise = true; UseNewRenderer = true; }
         public MaterialOptions Copy() { return (MaterialOptions)MemberwiseClone(); }
     }
 
@@ -29,12 +27,6 @@ namespace DuneMaterials.Rendering
         public readonly Stretch Stretch;
         public MaterialFrame(long version, BitmapSource bitmap, FrameworkElement coordinates, Stretch stretch)
         { Version = version; Bitmap = bitmap; Coordinates = coordinates; Stretch = stretch; }
-    }
-
-    public interface IMaterialBackend : IDisposable
-    {
-        string Name { get; }
-        Brush Acquire(MaterialScope scope, BlurLevel level);
     }
 
     public sealed class MaterialScope
@@ -56,47 +48,28 @@ namespace DuneMaterials.Rendering
     {
         public static MaterialRole RoleFor(string uid)
         {
-            if (uid.EndsWith("Popup", StringComparison.Ordinal)) return MaterialRole.Flyout;
-            if (uid.EndsWith("Content", StringComparison.Ordinal)) return MaterialRole.Content;
-            if (uid.EndsWith("Panel", StringComparison.Ordinal)) return MaterialRole.Navigation;
-            if (uid.EndsWith("Hero", StringComparison.Ordinal) || uid.EndsWith("Input", StringComparison.Ordinal)) return MaterialRole.Control;
-            return MaterialRole.Card;
+            return uid.EndsWith("Popup", StringComparison.Ordinal) ? MaterialRole.Flyout : MaterialRole.Content;
         }
-        public static BlurLevel LevelFor(MaterialRole role)
-        { return role == MaterialRole.Background ? BlurLevel.Ambient : role == MaterialRole.Content ? BlurLevel.Content : BlurLevel.Surface; }
-        public static BlurLevel LevelFor(MaterialRole role, bool windowBackdrop)
-        { return !windowBackdrop ? LevelFor(role) : role == MaterialRole.Content || role == MaterialRole.Flyout ? BlurLevel.Content : BlurLevel.Ambient; }
-        public static double BlurFraction(BlurLevel level, double pageScale)
-        { return level == BlurLevel.Ambient ? .045 * pageScale : level == BlurLevel.Content ? Math.Max(.06, .045 * pageScale) : .018; }
-        static readonly Brush[] tints = CreateTints();
-        static readonly Brush[] backdropTints = CreateBackdropTints();
+        static Brush NeutralTint(byte opacity)
+        {
+            var brush = new SolidColorBrush(Color.FromArgb(opacity, 30, 34, 41));
+            brush.Freeze(); return brush;
+        }
+        static readonly Brush contentTint = NeutralTint(140);
+        static readonly Brush flyoutTint = NeutralTint(202);
         public static Brush Tint(MaterialRole role)
-        { return tints[(int)role]; }
-        public static Brush Tint(MaterialRole role, bool windowBackdrop)
-        { return windowBackdrop ? backdropTints[(int)role] : Tint(role); }
-        static Brush[] CreateBackdropTints()
+        { return role == MaterialRole.Flyout ? flyoutTint : contentTint; }
+        public static readonly Brush Sheen = CreateSheen();
+        static Brush CreateSheen()
         {
-            var brushes = new Brush[Enum.GetValues(typeof(MaterialRole)).Length];
-            foreach (MaterialRole role in Enum.GetValues(typeof(MaterialRole))) {
-                byte a = role == MaterialRole.Flyout ? (byte)190 : role == MaterialRole.Content ? (byte)88 : role == MaterialRole.Navigation ? (byte)84 : role == MaterialRole.Control ? (byte)56 : (byte)36;
-                byte b = role == MaterialRole.Flyout ? (byte)210 : role == MaterialRole.Content ? (byte)108 : role == MaterialRole.Navigation ? (byte)104 : role == MaterialRole.Control ? (byte)72 : (byte)52;
-                var brush = new LinearGradientBrush(Color.FromArgb(a, 40, 46, 54), Color.FromArgb(b, 25, 29, 35), 90);
-                brush.Freeze(); brushes[(int)role] = brush;
-            }
-            return brushes;
-        }
-        static Brush[] CreateTints()
-        {
-            var brushes = new Brush[Enum.GetValues(typeof(MaterialRole)).Length];
-            foreach (MaterialRole role in Enum.GetValues(typeof(MaterialRole))) brushes[(int)role] = CreateTint(role);
-            return brushes;
-        }
-        static Brush CreateTint(MaterialRole role)
-        {
-            byte a = role == MaterialRole.Flyout ? (byte)205 : role == MaterialRole.Navigation ? (byte)180 : role == MaterialRole.Content ? (byte)156 : (byte)140;
-            byte b = role == MaterialRole.Flyout ? (byte)220 : role == MaterialRole.Navigation ? (byte)195 : role == MaterialRole.Content ? (byte)172 : (byte)155;
-            var result = new LinearGradientBrush(Color.FromArgb(a, 40, 46, 54), Color.FromArgb(b, 25, 29, 35), 90);
-            result.Freeze(); return result;
+            var brush = new LinearGradientBrush();
+            // Keep the sheen at the edge, independent of the card's height.
+            // A full-height low-alpha ramp quantizes into horizontal bands.
+            brush.MappingMode = BrushMappingMode.Absolute;
+            brush.StartPoint = new Point(0, 0); brush.EndPoint = new Point(0, 12);
+            brush.GradientStops.Add(new GradientStop(Color.FromArgb(4, 255, 255, 255), 0));
+            brush.GradientStops.Add(new GradientStop(Color.FromArgb(0, 255, 255, 255), 1));
+            brush.Freeze(); return brush;
         }
         public static readonly Brush Grain = CreateGrain();
         static Brush CreateGrain()
@@ -106,8 +79,9 @@ namespace DuneMaterials.Rendering
             var random = new Random(4147);
             for (int i = 0; i < pixels.Length; i += 4)
             {
-                byte alpha = random.Next(4) == 0 ? (byte)2 : (byte)1;
-                pixels[i] = pixels[i + 1] = pixels[i + 2] = alpha; pixels[i + 3] = alpha;
+                byte alpha = (byte)random.Next(2, 5);
+                byte shade = random.Next(2) == 0 ? (byte)0 : alpha;
+                pixels[i] = pixels[i + 1] = pixels[i + 2] = shade; pixels[i + 3] = alpha;
             }
             var bitmap = BitmapSource.Create(side, side, 96, 96, PixelFormats.Pbgra32, null, pixels, side * 4); bitmap.Freeze();
             var brush = new ImageBrush(bitmap) { TileMode = TileMode.Tile, ViewportUnits = BrushMappingMode.Absolute, Viewport = new Rect(0, 0, side, side), Stretch = Stretch.None };

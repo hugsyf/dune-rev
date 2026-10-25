@@ -13,6 +13,14 @@ namespace DuneMaterials.Rendering
     // The sole compatibility boundary for native FadeImage internals. Never scans a window.
     internal sealed class NativeSourceAdapter : IDisposable
     {
+        static readonly DependencyProperty ObserverProperty = DependencyProperty.RegisterAttached(
+            "Observer", typeof(NativeSourceAdapter), typeof(NativeSourceAdapter));
+        static readonly DependencyProperty SharedBlurRadiusProperty = DependencyProperty.RegisterAttached(
+            "SharedBlurRadius", typeof(double), typeof(NativeSourceAdapter), new PropertyMetadata(48.0,
+                delegate(DependencyObject target, DependencyPropertyChangedEventArgs args) {
+                    var observer = target.GetValue(ObserverProperty) as NativeSourceAdapter;
+                    if (observer != null && !observer.disposed) observer.PreferenceChanged(target, EventArgs.Empty);
+                }));
         readonly FrameworkElement root;
         readonly Action changed;
         readonly List<Image> images = new List<Image>();
@@ -41,8 +49,12 @@ namespace DuneMaterials.Rendering
         public NativeSourceAdapter(FrameworkElement source, Action update)
         {
             root = source; changed = update;
+            try
+            {
             root.Loaded += Loaded; root.IsVisibleChanged += VisibilityChanged;
-            foreach (string name in new[] { "ImageOpacityMask", "ImageDarkeningBrush", "IsBlurEnabled", "BlurAmount" })
+            root.SetValue(ObserverProperty, this);
+            root.SetResourceReference(SharedBlurRadiusProperty, "DuneMaterialBlurRadius");
+            foreach (string name in new[] { "ImageOpacityMask", "ImageDarkeningBrush", "IsBlurEnabled" })
             {
                 var descriptor = DependencyPropertyDescriptor.FromName(name, root.GetType(), root.GetType());
                 if (descriptor != null) { preferences.Add(descriptor); descriptor.AddValueChanged(root, PreferenceChanged); }
@@ -54,6 +66,12 @@ namespace DuneMaterials.Rendering
                 SetFrame(direct); // Explicit screenshot Images need no delayed visual-tree discovery.
             }
             else Queue();
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
         }
         void PreferenceChanged(object sender, EventArgs args)
         {
@@ -64,15 +82,7 @@ namespace DuneMaterials.Rendering
         {
             get { var property = root.GetType().GetProperty("IsBlurEnabled"); return property == null || !object.Equals(property.GetValue(root, null), false); }
         }
-        public double PageBlurScale
-        {
-            get
-            {
-                var property = root.GetType().GetProperty("BlurAmount");
-                double amount = property == null ? 78 : Convert.ToDouble(property.GetValue(root, null));
-                return Math.Round(Math.Max(0, Math.Min(3, amount / 78)), 2);
-            }
-        }
+        public double BlurRadius { get { return Math.Max(0, Math.Min(120, (double)root.GetValue(SharedBlurRadiusProperty))); } }
         internal static IEnumerable<DependencyObject> Descendants(DependencyObject node)
         {
             if (node == null) yield break;
@@ -132,10 +142,16 @@ namespace DuneMaterials.Rendering
         }
         public void Dispose()
         {
+            if (disposed) return;
             Suppress(false); disposed = true;
             root.Loaded -= Loaded; root.IsVisibleChanged -= VisibilityChanged;
             foreach (var image in images) sourceProperty.RemoveValueChanged(image, SourceChanged);
             foreach (var descriptor in preferences) descriptor.RemoveValueChanged(root, PreferenceChanged); preferences.Clear();
+            if (ReferenceEquals(root.GetValue(ObserverProperty), this))
+            {
+                root.ClearValue(ObserverProperty);
+                root.ClearValue(SharedBlurRadiusProperty);
+            }
             images.Clear(); Frame = null; if (rawScene != null) rawScene.Source = null; rawScene = null;
         }
     }

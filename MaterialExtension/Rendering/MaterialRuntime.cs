@@ -21,16 +21,14 @@ namespace DuneMaterials.Rendering
         long remapCount;
         readonly Dispatcher dispatcher;
         readonly Action<string> info;
-        CachedBackend cached;
         RealtimeBackend realtime = new RealtimeBackend();
-        bool disposed, queued, blocked;
-        int slowBatches;
+        bool disposed, queued;
         string lastReason;
         public MaterialOptions Options { get; private set; }
         public MaterialRuntime(MaterialOptions options, Action<string> diagnostics)
         {
             dispatcher = Application.Current.Dispatcher; info = diagnostics;
-            Options = options.Copy(); cached = new CachedBackend(dispatcher, QueueAll, info);
+            Options = options.Copy();
             RenderCapability.TierChanged += TierChanged;
         }
         public void Configure(MaterialOptions options)
@@ -38,8 +36,7 @@ namespace DuneMaterials.Rendering
             foreach (var session in sessions.ToArray()) { session.ClearFailure(); session.Fallback(); }
             RestoreNative(); realtime.Dispose(); realtime = new RealtimeBackend();
             foreach (var scope in scopes.Values) scope.Backdrop.Clear();
-            Options = options.Copy(); blocked = false; slowBatches = 0; lastReason = null; samples.Clear(); remaps.Clear(); remapCount = 0;
-            if (!Options.UseNewRenderer) cached.Suspend();
+            Options = options.Copy(); lastReason = null; samples.Clear(); remaps.Clear(); remapCount = 0;
             QueueAll();
         }
         public void Register(MaterialSession session) { if (!disposed) { sessions.Add(session); Queue(session); } }
@@ -52,9 +49,20 @@ namespace DuneMaterials.Rendering
             if (live) scope.LiveVisual = source;
             else
             {
-                leases.Remove(scope); cached.Release(scope); realtime.Release(scope); scope.Backdrop.Clear();
+                leases.Remove(scope); realtime.Release(scope); scope.Backdrop.Clear();
                 if (scope.Source != null) scope.Source.Dispose();
-                scope.Source = new NativeSourceAdapter(source, delegate { scope.Notify(); QueueAll(); });
+                scope.Source = null;
+                try
+                {
+                    scope.Source = new NativeSourceAdapter(source, delegate { scope.Notify(); QueueAll(); });
+                }
+                catch (Exception exception)
+                {
+                    if (scope.LiveVisual == null) scopes.Remove(anchor);
+                    info("Dune material source initialization failed; using theme backgrounds: " + exception);
+                    QueueAll();
+                    return null;
+                }
             }
             scope.Notify(); QueueAll(); return scope;
         }
@@ -63,8 +71,8 @@ namespace DuneMaterials.Rendering
             if (scope == null) return;
             if (live) { if (scope.LiveVisual == source) scope.LiveVisual = null; }
             else if (scope.Source != null && scope.Source.Root == source)
-            { scope.Source.Dispose(); scope.Source = null; leases.Remove(scope); cached.Release(scope); realtime.Release(scope); scope.Backdrop.Clear(); }
-            if (scope.Source == null && scope.LiveVisual == null) { scopes.Remove(scope.Anchor); leases.Remove(scope); realtime.Release(scope); cached.Release(scope); }
+            { scope.Source.Dispose(); scope.Source = null; leases.Remove(scope); realtime.Release(scope); scope.Backdrop.Clear(); }
+            if (scope.Source == null && scope.LiveVisual == null) { scopes.Remove(scope.Anchor); leases.Remove(scope); realtime.Release(scope); }
             QueueAll();
         }
         static IEnumerable<DependencyObject> Parents(DependencyObject node)
@@ -86,7 +94,7 @@ namespace DuneMaterials.Rendering
                 var element = node as FrameworkElement; MaterialScope scope;
                 if (element != null && scopes.TryGetValue(element, out scope) && scope.Frame != null &&
                     (scope.Source.Root.IsVisible || (scope.LiveVisual != null && scope.LiveVisual.IsVisible)))
-                { if (element is Window) windowScope = scope; else return scope; }
+                { if (element is Window) windowScope = scope; }
                 foreach (var parent in Parents(node)) queue.Enqueue(parent);
             }
             return windowScope;
@@ -110,41 +118,29 @@ namespace DuneMaterials.Rendering
             }
             double elapsed = watch.Elapsed.TotalMilliseconds;
             samples.Enqueue(elapsed); while (samples.Count > 256) samples.Dequeue();
-            if (Options.Mode == MaterialMode.Realtime && elapsed > 8) slowBatches++; else slowBatches = 0;
-            if (slowBatches >= 3 && !blocked)
-            {
-                blocked = true; realtime.Dispose(); realtime = new RealtimeBackend();
-                foreach (var scope in scopes.Values) scope.Backdrop.Clear();
-                Reason("realtime UI batch guard exceeded; using cached backend"); QueueAll();
-            }
+
         }
         internal void SurfaceFailed(MaterialSession session, Exception exception)
         { session.Fail(); info("Dune v2 surface fallback until source/settings change: " + exception.Message); }
+        internal void SourceMissing()
+        { Reason("No ready registered window backdrop; using theme surfaces"); }
         internal void RecordRemap(double milliseconds)
         { remapCount++; remaps.Enqueue(milliseconds); while (remaps.Count > 256) remaps.Dequeue(); }
         public Brush Acquire(MaterialScope scope, MaterialRole role, out FrameworkElement coordinates, out bool live)
         {
             live = false; coordinates = scope.Frame == null ? null : scope.Frame.Coordinates;
             if (!Options.UseNewRenderer) return null;
-            if (role == MaterialRole.Background && (!scope.Source.BackgroundBlurEnabled || scope.Source.PageBlurScale == 0)) return null;
+            if (role == MaterialRole.Background && !scope.Source.BackgroundBlurEnabled) return null;
             var window = Window.GetWindow(scope.Anchor) ?? scope.Anchor as Window;
             if (window != null && window.WindowState == WindowState.Minimized) { realtime.Dispose(); return null; }
-            BlurLevel level = MaterialProfiles.LevelFor(role, scope.IsWindowBackdrop);
-            if (Options.Mode == MaterialMode.Realtime && Options.AllowExperimentalRealtime && !blocked)
-            {
-                var source = scope.LiveSource;
-                bool recursive = source != null && sessions.Any(s => s.Active && (ReferenceEquals(s.Target, source) || source.IsAncestorOf(s.Target)));
-                if (!recursive)
-                {
-                    var paint = realtime.Acquire(scope, level);
-                    if (paint != null) { live = true; coordinates = scope.Source != null && ReferenceEquals(source, scope.Source.RawScene) ? scope.Frame.Coordinates : source;
-                        return scope.Backdrop.Compose(scope, level, paint, coordinates.RenderSize); }
-                }
-                Reason(recursive ? "live scene contains a material target" : "live source unavailable/unsupported; using cached backend");
-            }
-            else if (Options.Mode == MaterialMode.Realtime) Reason("realtime preview requires explicit approval and hardware/source support; using cached backend");
-            var cachedPaint = cached.Acquire(scope, level);
-            return cachedPaint == null ? null : scope.Backdrop.Compose(scope, level, cachedPaint, coordinates.RenderSize);
+            var source = scope.LiveSource;
+            bool recursive = source != null && sessions.Any(s => s.Active && (ReferenceEquals(s.Target, source) || source.IsAncestorOf(s.Target)));
+            if (recursive) { Reason("live scene contains a material target; using theme surfaces"); return null; }
+            var paint = realtime.Acquire(scope);
+            if (paint == null) { Reason("live source unavailable/unsupported; using theme surfaces"); return null; }
+            live = true;
+            coordinates = ReferenceEquals(source, scope.Source.RawScene) ? scope.Frame.Coordinates : source;
+            return scope.Backdrop.Compose(scope, paint, coordinates.RenderSize);
         }
         public void BackgroundReady(MaterialSession session, MaterialScope scope)
         {
@@ -169,18 +165,18 @@ namespace DuneMaterials.Rendering
             var ordered = samples.OrderBy(v => v).ToArray();
             double p95 = ordered.Length == 0 ? 0 : ordered[(int)Math.Floor((ordered.Length - 1) * .95)];
             int live = sessions.Count(s => s.Active && s.Target.IsVisible && s.HasMaterial && s.IsLive);
-            int cachedSurfaces = sessions.Count(s => s.Active && s.Target.IsVisible && s.HasMaterial && !s.IsLive);
+            int fallback = sessions.Count(s => s.Active && s.Target.IsVisible && !s.HasMaterial);
             var mappings = remaps.OrderBy(v => v).ToArray();
             double mappingP95 = mappings.Length == 0 ? 0 : mappings[(int)Math.Floor((mappings.Length - 1) * .95)];
-            return string.Format("Material API 1\nNew renderer: {0}\nRequested mode: {1}\nScopes: {2}; sessions: {3}\nPainted visible surfaces: Realtime={4}; Cached={5}\nRealtime shared blur nodes: {6}; builds since reset: {7}\nCached output: {8:F2} MiB\nUI rebuild batch P95: {9:F2} ms ({10} samples)\nScroll/layout remap P95: {12:F3} ms per changed surface; changes: {13}\nLast fallback: {11}\nGPU/present frame performance is NOT measured by this report.",
-                Options.UseNewRenderer, Options.Mode, scopes.Count, sessions.Count, live, cachedSurfaces, realtime.NodeCount, realtime.BuildCount,
-                cached.Bytes / 1048576.0, p95, ordered.Length, lastReason ?? "none", mappingP95, remapCount);
+            return string.Format("Material API 1\nRealtime materials enabled: {0}\nLayers: Background / Content / Flyout\nScopes: {1}; sessions: {2}\nPainted visible surfaces: {3}\nShared blur nodes: {4}; builds since reset: {5}\nUI rebuild batch P95: {6:F2} ms ({7} samples)\nScroll/layout remap P95: {8:F3} ms; changes: {9}\nLast fallback: {10}\nVisible surfaces using ordinary brushes: {11}\nGPU/present frame performance is not measured by this report.",
+                Options.UseNewRenderer, scopes.Count, sessions.Count, live, realtime.NodeCount, realtime.BuildCount,
+                p95, ordered.Length, mappingP95, remapCount, lastReason ?? "none", fallback);
         }
         public void Dispose()
         {
             if (disposed) return; RestoreNative(); disposed = true; RenderCapability.TierChanged -= TierChanged;
             foreach (var scope in scopes.Values) { scope.Backdrop.Clear(); if (scope.Source != null) scope.Source.Dispose(); }
-            scopes.Clear(); pending.Clear(); cached.Dispose(); realtime.Dispose();
+            scopes.Clear(); pending.Clear(); realtime.Dispose();
         }
     }
 }

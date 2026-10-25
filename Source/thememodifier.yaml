@@ -8,6 +8,7 @@ Constants:
 
     - "Materials (Dune Materials extension) / 材质（配套 Dune Materials 扩展）"
     - DuneMaterialsEnabled: 'Enable translucent materials / 启用半透明材质'
+    - DuneMaterialBlurRadius(0,120): 'Shared material blur radius / 统一材质模糊半径'
     - "Global layout / 全局布局"
     - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'
     - GameLogoMaxWidth(160,720): 'Details logo maximum width / 详情页 Logo 最大宽度'

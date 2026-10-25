@@ -25,7 +25,7 @@ namespace DuneMaterials
             if (editing != null) Options = editing; editing = null;
             var changed = PropertyChanged; if (changed != null) changed(this, new PropertyChangedEventArgs("Options"));
         }
-        public void EndEdit() { if (Options.Mode == MaterialMode.Realtime) Options.AllowExperimentalRealtime = true; save(Options.Copy()); editing = null; }
+        public void EndEdit() { save(Options.Copy()); editing = null; }
         public bool VerifySettings(out List<string> errors) { errors = new List<string>(); return true; }
         string Text(string chinese, string english)
         { return System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "zh" ? chinese : english; }
@@ -34,20 +34,12 @@ namespace DuneMaterials
             var panel = new StackPanel { Margin = new Thickness(20), MaxWidth = 640, HorizontalAlignment = HorizontalAlignment.Left };
             panel.Children.Add(new TextBlock { Text = "Dune Materials", FontSize = 24, Margin = new Thickness(0, 0, 0, 8) });
             Hint(panel, Text("为 Dune Rev 提供统一的半透明材质与 Hero 媒体控制。", "Translucent materials and Hero media controls for Dune Rev."));
-            Check(panel, Text("使用增强材质（推荐）", "Use enhanced materials (recommended)"), "UseNewRenderer");
-            Hint(panel, Text("关闭后使用经典材质。若要完全关闭材质，请使用 ThemeModifier 中的主题材质开关。", "Turn off to use classic materials. To disable materials entirely, use the theme material switch in ThemeModifier."));
+            Check(panel, Text("启用实时材质", "Enable realtime materials"), "UseNewRenderer");
+            Hint(panel, Text("背景、内容、浮层采用统一模糊，通过遮罩浓度区分层级。关闭或无法渲染时使用普通主题背景；ThemeModifier 中的主题材质开关也可关闭材质。", "Background, content and flyouts share one blur with different tint strengths. Turning materials off or unavailable rendering uses ordinary theme surfaces. The theme material switch in ThemeModifier can also disable materials."));
             var rendering = new StackPanel { Margin = new Thickness(0, 12, 0, 0) };
             rendering.SetBinding(UIElement.IsEnabledProperty, new Binding("Options.UseNewRenderer") { Source = this });
-            rendering.Children.Add(new TextBlock { Text = Text("材质模式", "Material mode"), Margin = new Thickness(0, 0, 0, 6) });
-            var modes = new ComboBox { SelectedValuePath = "Tag", HorizontalContentAlignment = HorizontalAlignment.Left };
-            modes.Items.Add(new ComboBoxItem { Content = Text("实时（推荐）", "Realtime (recommended)"), Tag = MaterialMode.Realtime });
-            modes.Items.Add(new ComboBoxItem { Content = Text("兼容（静态缓存）", "Compatibility (cached)"), Tag = MaterialMode.Cached });
-            modes.SetBinding(ComboBox.SelectedValueProperty, new Binding("Options.Mode") { Source = this, Mode = BindingMode.TwoWay });
-            modes.SelectionChanged += delegate { if (Options.Mode == MaterialMode.Realtime) Options.AllowExperimentalRealtime = true; };
-            rendering.Children.Add(modes);
-            Hint(rendering, Text("实时模式跟随背景变化；不支持时自动使用兼容模式。如果遇到卡顿或显示异常，可手动选择兼容模式。", "Realtime follows background changes and falls back to compatibility mode when unsupported. Choose compatibility mode if you encounter stuttering or display issues."));
             Check(rendering, Text("轻微材质颗粒", "Subtle material grain"), "Noise");
-            Check(rendering, Text("减少材质过渡动画", "Reduce material transitions"), "ReduceMotion");
+            Check(rendering, Text("减少材质交互过渡", "Reduce material interaction fades"), "ReduceMotion");
             panel.Children.Add(rendering);
             panel.Children.Add(new TextBlock { Text = Text("Hero 媒体", "Hero media"), FontSize = 18, Margin = new Thickness(0, 20, 0, 4) });
             Hint(panel, Text("使用 Hero 缩略框上方的循环按钮切换自动轮播／播放，默认关闭；自动播放视频时先保持静音。", "Use the repeat button above the Hero thumbnails to toggle automatic slideshow / playback. Off by default; automatically started videos begin muted."));

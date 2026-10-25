@@ -13,10 +13,8 @@ namespace DuneMaterials
 {
     public sealed class MaterialPlugin : GenericPlugin
     {
-        MaterialCoordinator materials;
         readonly MaterialRuntime runtime;
         public MaterialSettings MaterialSettings { get; private set; }
-        bool started;
         public override Guid Id { get { return Guid.Parse("821c6070-ef6e-4dd6-a597-ab9aad905a0a"); } }
         public MaterialPlugin(IPlayniteAPI api) : base(api)
         {
@@ -40,32 +38,17 @@ namespace DuneMaterials
         public override UserControl GetSettingsView(bool firstRunSettings) { return MaterialSettings.View(); }
         void Apply(MaterialOptions options)
         {
-            if (options.UseNewRenderer && materials != null) materials.Suspend();
             runtime.Configure(options);
-            if (!options.UseNewRenderer && started)
-            {
-                if (materials == null)
-                {
-                    materials = new MaterialCoordinator(
-                        delegate(string message) { LogManager.GetLogger().Info(message); },
-                        delegate(Exception exception) { LogManager.GetLogger().Error(exception, "Dune legacy material fallback"); });
-                    materials.Start();
-                }
-                else materials.Resume();
-            }
         }
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
             Application.Current.Dispatcher.Invoke(new Action(delegate {
-                started = true; Apply(runtime.Options);
+                Apply(runtime.Options);
             }));
         }
 
-        public override void OnGameSelected(OnGameSelectedEventArgs args)
-        { if (materials != null) Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(materials.SelectionChanged)); }
-
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
-        { Application.Current.Dispatcher.Invoke(new Action(delegate { if (materials != null) materials.Dispose(); runtime.Dispose(); })); }
+        { Application.Current.Dispatcher.Invoke(new Action(delegate { runtime.Dispose(); })); }
     }
 }
