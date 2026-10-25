@@ -63,9 +63,10 @@
                     </ToggleButton.Style>
                 </ToggleButton>
             </WrapPanel>
-            <!-- A short metadata sidebar must not shrink the plugin's scroll viewport. -->
-            <Grid x:Name="DuneExpansionSurface" Margin="{DynamicResource DuneSectionBottomMargin}" Visibility="{Binding Visibility, ElementName=DuneDetailHeader}"
-                  MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}" VerticalAlignment="Top">
+            <ContentControl x:Name="DuneExpansionSizing" Style="{StaticResource DuneExpansionSizingHost}"
+                            Margin="{DynamicResource DuneSectionBottomMargin}" Visibility="{Binding Visibility, ElementName=DuneDetailHeader}"
+                            MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}">
+            <Grid x:Name="DuneExpansionSurface">
                 <Border x:Name="DuneExpansionBackdrop" Style="{StaticResource DuneContentCardBorder}" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Border BorderBrush="{DynamicResource AccentBrush}" BorderThickness="0,2,0,0" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Grid Margin="16">
@@ -549,6 +550,7 @@
                     </Grid>
                 </Grid>
             </Grid>
+            </ContentControl>
             <TabControl x:Name="DuneOverviewTabs" Style="{DynamicResource DuneOverviewTabControl}">
                 <TabItem x:Name="DescriptionTab" Header="{DynamicResource LOCOverviewLabel}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}"></TabItem>
                 <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}" x:Name="DuneRelationsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">

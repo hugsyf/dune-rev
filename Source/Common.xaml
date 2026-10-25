@@ -672,6 +672,25 @@
         </Setter>
     </Style>
 
+    <!-- Plain content presentation remains available without the companion extension. -->
+    <ControlTemplate x:Key="DunePlainSizingTemplate" TargetType="ContentControl">
+        <ContentPresenter Content="{TemplateBinding Content}" />
+    </ControlTemplate>
+    <Style x:Key="DuneSizingHost" TargetType="ContentControl">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Template" Value="{StaticResource DunePlainSizingTemplate}" />
+    </Style>
+    <Style x:Key="DuneExpansionSizingHost" TargetType="ContentControl" BasedOn="{StaticResource DuneSizingHost}">
+        <Setter Property="Template" Value="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=ExpansionLayoutTemplateConverter}, ConverterParameter=Expansion, FallbackValue={StaticResource DunePlainSizingTemplate}}" />
+    </Style>
+    <Style x:Key="DuneMetadataSizingHost" TargetType="ContentControl" BasedOn="{StaticResource DuneSizingHost}">
+        <Setter Property="Template" Value="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=ExpansionLayoutTemplateConverter}, ConverterParameter=Metadata, FallbackValue={StaticResource DunePlainSizingTemplate}}" />
+    </Style>
+
     <!-- CheckDlc -->
     <!-- Keep the native DLC control loaded for its data and action handlers. Its
          self-sized ListBox cannot measure natural height; reuse its row template
@@ -690,10 +709,8 @@
                         <ContentPresenter ContentSource="Content" Opacity="0" IsHitTestVisible="False" KeyboardNavigation.TabNavigation="None" />
                         <!-- The native row template resolves description width through this name. -->
                         <Grid x:Name="PART_GridContener" Grid.Row="1">
-                            <!-- A sizing spacer preserves the default short-list height without
-                                 imposing a minimum on the scroll viewport in a short sidebar. -->
-                            <Border x:Name="DuneDlcDefaultHeight" Height="{DynamicResource DuneDlcPanelHeight}" Visibility="Hidden" IsHitTestVisible="False" />
                             <ListBox x:Name="DuneDlcList"
+                                 MaxHeight="{DynamicResource DuneDlcPanelHeight}"
                                  ItemsSource="{Binding Content.DataContext.ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
                                  ItemTemplate="{Binding Content.Content.Children[0].ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"

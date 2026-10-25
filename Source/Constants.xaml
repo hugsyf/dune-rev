@@ -66,7 +66,7 @@
         <sys:Double x:Key="GridSummaryCardWidth">260</sys:Double>
         <sys:Double x:Key="GridSummaryCardHeight">136</sys:Double>
         <sys:Double x:Key="FeatureIconsHeight">24</sys:Double>
-        <!-- Retained setting key: expansion limit independent of metadata height. -->
+        <!-- User ceiling; companion layout also considers the overview viewport. -->
         <sys:Double x:Key="DuneAchievementsPanelMaxHeight">600</sys:Double>
         <sys:Double x:Key="ScreenshotsPanelHeight">500</sys:Double>
 

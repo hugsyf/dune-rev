@@ -44,7 +44,7 @@ Constants:
     - DuneShowLanguagesTab: 'Enable expandable language details / 启用语言展开详情'
     - DuneShowDlcTab: 'Enable expandable DLC details / 启用 DLC 展开详情'
     - DuneShowDlcSummary: 'Show DLC summary / 显示 DLC 摘要'
-    - DuneDlcPanelHeight(200,720): 'Default height for short DLC lists / 短 DLC 列表默认高度'
+    - DuneDlcPanelHeight(200,720): 'DLC list maximum height / DLC 列表最大高度'
 
     - "Extension panels / 扩展面板"
     - DuneShowStoreScreenshots: 'Show Steam store screenshots / 显示 Steam 商店截图'

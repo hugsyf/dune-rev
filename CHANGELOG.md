@@ -2,6 +2,8 @@
 
 ## v2.4.0-preview.1 - 2026-10-24
 
+- Adapt expanded plugin panels to the window height, align nearby column bottoms with Dune Materials, and keep short DLC lists compact.
+
 - Add Dune Materials 0.5.0 with shared realtime window/card materials, a cached compatibility mode, and ordinary theme fallbacks when the extension is absent.
 - Add Hero background, store screenshot and video selection, independent video previews and default-off automatic media playback.
 - Align Hero media near the footer, place playback/mute/repeat controls above thumbnails and retain thumbnail positions when switching media.

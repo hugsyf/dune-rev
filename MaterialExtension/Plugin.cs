@@ -29,6 +29,7 @@ namespace DuneMaterials
             }, runtime.Describe);
             AddConvertersSupport(new AddConvertersSupportArgs { SourceName = "DuneMaterials", Converters = new List<IValueConverter> {
                 new MaterialBrushConverter(runtime), new MaterialElementConverter(runtime), new ScrollFadeConverter(),
+                new ExpansionLayoutTemplateConverter(),
                 new HeroMediaConverter(delegate { return MaterialSettings.Options.HeroAutoPlay; }, delegate(bool enabled) {
                     MaterialSettings.Options.HeroAutoPlay = enabled;
                     SavePluginSettings(MaterialSettings.Options);

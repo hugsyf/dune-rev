@@ -3,6 +3,7 @@
 /release/
 /scripts/
 *.pthm
+*.pext
 
 # MSBuild / Visual Studio
 /Source/bin/
@@ -35,6 +36,10 @@ Desktop.ini
 *~
 
 # Local tooling
+AGENTS.md
+agents.md
+/.agents/
+/.codex/
 /.kilo/
 /.dotnet/
 /packages/

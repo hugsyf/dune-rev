@@ -153,16 +153,22 @@ missing-media and unload behavior without rendering.
   expanding shadows beyond their measured size can clip edges in Grid Details.
 - Scope plugin button overrides to the corresponding hosts and preserve native
   commands, event handlers and glyph fonts.
-- Expanded plugin content uses `DuneAchievementsPanelMaxHeight` in both side-by-side
-  and stacked layouts. Never cap it to the metadata sidebar height: games with
-  few metadata fields still need a usable plugin viewport. Keep scrolling inside
-  bounded plugin content.
+- Expanded plugin content uses `DuneAchievementsPanelMaxHeight` as the user ceiling.
+  With Dune Materials, `Rendering/ExpansionLayout.cs` also limits it to 65% of the
+  overview viewport height (with a 160-DIP floor before applying the user ceiling).
+  In separate columns, the shorter surface grows only when its bottom is within
+  48 DIP of the other surface's natural bottom. Relative positions account for
+  summary cards above the expansion; stacked layouts skip alignment. Measurements
+  retain natural heights independently of added alignment space. Scrolling does
+  not change the limit. Both hosts fall back to plain content presentation when
+  the companion converter is unavailable.
 - Playnite Achievements uses cached brushes for its embedded table.
   `GridItemBackgroundBrush` remains transparent so the expansion surface shows
   through without reducing text opacity. Restart Playnite after changing that key.
 - CheckDlc's native list binds its height back to its own grid. `DuneDlcContent`
   keeps the native control loaded and reuses its data and row template in an
-  automatically sized list. Preserve `PART_GridContener` and native row handlers.
+  automatically sized list. `DuneDlcPanelHeight` caps the list height; short lists
+  have no height spacer. Preserve `PART_GridContener` and native row handlers.
 - GameActivity performance content requires recorded log data; HLTB categories
   hide when unavailable. Preserve those conditions when changing layouts.
 
