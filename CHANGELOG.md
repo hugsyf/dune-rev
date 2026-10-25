@@ -2,6 +2,7 @@
 
 ## v2.4.0-preview.1 - 2026-10-24
 
+- Fix tag filtering when clicking a tag in Details and Grid Details views.
 - Adapt expanded plugin panels to the window height, align nearby column bottoms with Dune Materials, and keep short DLC lists compact.
 
 - Add Dune Materials 0.5.0 with shared realtime window/card materials, a cached compatibility mode, and ordinary theme fallbacks when the extension is absent.
