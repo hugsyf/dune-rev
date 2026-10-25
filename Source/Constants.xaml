@@ -28,6 +28,7 @@
         <sys:Double x:Key="DuneGridLogoMaxHeight">72</sys:Double>
         <sys:Double x:Key="GameActionButtonWidth">320</sys:Double>
         <sys:Boolean x:Key="DuneCompactLayout">False</sys:Boolean>
+        <sys:Boolean x:Key="DuneReduceMotion">False</sys:Boolean>
         <sys:Double x:Key="DuneHeroBlurRadius">120</sys:Double>
         <sys:Boolean x:Key="DuneMaterialsEnabled">True</sys:Boolean>
         <sys:Double x:Key="DuneMaterialBlurRadius">48</sys:Double>

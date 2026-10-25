@@ -685,7 +685,13 @@
         <Setter Property="Template" Value="{StaticResource DunePlainSizingTemplate}" />
     </Style>
     <Style x:Key="DuneExpansionSizingHost" TargetType="ContentControl" BasedOn="{StaticResource DuneSizingHost}">
+        <Setter Property="Visibility" Value="{Binding Visibility, ElementName=DuneDetailHeader}" />
         <Setter Property="Template" Value="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=ExpansionLayoutTemplateConverter}, ConverterParameter=Expansion, FallbackValue={StaticResource DunePlainSizingTemplate}}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Tag.KeepVisible, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="DuneMetadataSizingHost" TargetType="ContentControl" BasedOn="{StaticResource DuneSizingHost}">
         <Setter Property="Template" Value="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=ExpansionLayoutTemplateConverter}, ConverterParameter=Metadata, FallbackValue={StaticResource DunePlainSizingTemplate}}" />

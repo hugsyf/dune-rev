@@ -10,7 +10,7 @@ namespace DuneMaterials.Rendering
     {
         readonly FrameworkElement host;
         FrameworkElement target;
-        object previous;
+        object previous, previousMask;
         bool watching;
         public RoundedClipRegistration(FrameworkElement owner)
         {
@@ -37,6 +37,10 @@ namespace DuneMaterials.Rendering
             RestoreTarget();
             target = host.DataContext as FrameworkElement; if (target == null) return;
             previous = target.ReadLocalValue(UIElement.ClipProperty);
+            previousMask = target.ReadLocalValue(UIElement.OpacityMaskProperty);
+            // Geometry supplies the rounded clip. A second full-Hero opacity mask
+            // would add an unnecessary offscreen composition of artwork/video.
+            target.SetCurrentValue(UIElement.OpacityMaskProperty, null);
             target.SizeChanged += Resize;
             Changed(null, EventArgs.Empty);
         }
@@ -54,11 +58,16 @@ namespace DuneMaterials.Rendering
         {
             if (target == null) return;
             target.SizeChanged -= Resize;
-            var expression = previous as BindingExpressionBase;
-            if (expression != null) BindingOperations.SetBinding(target, ClipProperty, expression.ParentBindingBase);
-            else if (previous == DependencyProperty.UnsetValue) target.ClearValue(ClipProperty);
-            else target.SetValue(ClipProperty, previous);
-            target = null; previous = null;
+            RestoreValue(target, ClipProperty, previous);
+            RestoreValue(target, OpacityMaskProperty, previousMask);
+            target = null; previous = null; previousMask = null;
+        }
+        static void RestoreValue(DependencyObject owner, DependencyProperty property, object previousValue)
+        {
+            var expression = previousValue as BindingExpressionBase;
+            if (expression != null) BindingOperations.SetBinding(owner, property, expression.ParentBindingBase);
+            else if (previousValue == DependencyProperty.UnsetValue) owner.ClearValue(property);
+            else owner.SetValue(property, previousValue);
         }
     }
 }

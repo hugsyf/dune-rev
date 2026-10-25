@@ -1,7 +1,7 @@
 Id: 821c6070-ef6e-4dd6-a597-ab9aad905a0a
 Name: Dune Materials
 Author: Dune Rev contributors
-Version: 0.6.3
+Version: 0.6.7
 Module: DuneMaterials.dll
 Type: GenericPlugin
 Description: Three-layer realtime soft glass materials and Hero media controls for Dune Rev, with optional automatic slideshow/video playback.

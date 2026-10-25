@@ -168,9 +168,10 @@ namespace DuneMaterials.Rendering
             int fallback = sessions.Count(s => s.Active && s.Target.IsVisible && !s.HasMaterial);
             var mappings = remaps.OrderBy(v => v).ToArray();
             double mappingP95 = mappings.Length == 0 ? 0 : mappings[(int)Math.Floor((mappings.Length - 1) * .95)];
-            return string.Format("Material API 1\nRealtime materials enabled: {0}\nLayers: Background / Content / Flyout\nScopes: {1}; sessions: {2}\nPainted visible surfaces: {3}\nShared blur nodes: {4}; builds since reset: {5}\nUI rebuild batch P95: {6:F2} ms ({7} samples)\nScroll/layout remap P95: {8:F3} ms; changes: {9}\nLast fallback: {10}\nVisible surfaces using ordinary brushes: {11}\nGPU/present frame performance is not measured by this report.",
+            return string.Format("Material API 1\nRealtime materials enabled: {0}\nLayers: Background / Content / Flyout\nScopes: {1}; sessions: {2}\nPainted visible surfaces: {3}\nShared blur nodes: {4}; builds since reset: {5}\nUI rebuild batch P95: {6:F2} ms ({7} samples)\nScroll/layout remap P95: {8:F3} ms; changes: {9}\nLast fallback: {10}\nVisible surfaces using ordinary brushes: {11}\nMotion layout measures: {12}; transition starts: {13}; context resets: {14} (since app start)\nGPU/present frame performance is not measured by this report.",
                 Options.UseNewRenderer, scopes.Count, sessions.Count, live, realtime.NodeCount, realtime.BuildCount,
-                p95, ordered.Length, mappingP95, remapCount, lastReason ?? "none", fallback);
+                p95, ordered.Length, mappingP95, remapCount, lastReason ?? "none", fallback,
+                ExpansionLayout.MeasureCount, ExpansionLayout.TransitionCount, ExpansionPresentation.ContextResetCount);
         }
         public void Dispose()
         {

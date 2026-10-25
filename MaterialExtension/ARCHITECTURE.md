@@ -69,9 +69,48 @@ resource dictionaries can load before the theme brushes are registered.
 Source registration hosts remain loaded at zero size. Surface lookup follows
 visual, logical and template parents, including popup placement targets.
 
-`RoundedClipRegistration` follows the outer Hero frame size and radius and
-restores its original clip on unload. `ScrollFadeConverter` supplies the bounded
-scroll-edge fade used by the overview scroll viewer.
+`RoundedClipRegistration` follows the outer Hero frame size and radius. While
+geometry clipping is active it removes the redundant full-Hero opacity mask;
+both original properties/bindings are restored on unload. The overview scroll
+presenter uses normal viewport clipping with no full-page opacity mask. The
+legacy `ScrollFadeConverter` remains available for older installed themes.
+
+Material sessions cache ancestor scroll viewers and skip crop remapping and
+brush rebuilding for offscreen targets. Retained brushes refresh when entering
+the viewport again. Source work remains shared across visible surfaces.
+
+## Expansion motion
+
+`ExpansionLayout` measures the natural, bounded and aligned destination once.
+It reserves the larger start/end space, animates a RectangleGeometry clip and
+translates the dedicated following-content stack to keep its visible top aligned
+with the reveal edge. Final layout commits on completion. Animation clocks never
+invalidate measure. Content keeps a stable full-size arrange rectangle and plugin
+controls retain their visual parents. Expansion and switches use a 220-ms eased
+reveal with a delayed 140-ms fade. Collapse fades for 70 ms and shrinks after a
+60-ms delay over 120 ms. Interruptions start at the current clip height.
+Template-declared transforms may be frozen; motion clones them before assigning
+or animating offsets. A motion failure disables transitions for the affected
+view and restores immediate selection changes.
+
+`ExpansionPresentation`, stored in the sizing host's Tag, holds the displayed
+selection until collapse completes. Priority bindings retain direct TabItem
+selection behavior when the extension is unavailable. Game changes, viewport
+resizes and reduced motion settle immediately. The shell's bottom gap is inside
+its animated height; column alignment compares visible surface bottoms.
+
+`ChevronMotionRegistration` rotates the five expansion chevrons over 140 ms and
+restores local properties/bindings on unload. The separate plugin-window launch
+icons retain their fixed glyph. Interface motion follows `DuneReduceMotion` and
+the Windows client-area animation setting, independently of the material switch.
+
+Collapsed shells return to normal Collapsed visibility once outgoing content is
+released. Idle measurement uses a plain height field; the AffectsMeasure property
+is absent from the render-only animation path. Template lookups are cached,
+alignment invalidation pauses during reveal motion, and model notifications compare the
+selected game identity before scheduling a context reset. Background model checks
+are coalesced. Diagnostics expose cumulative layout, transition and reset counts
+without a polling timer.
 
 ## Hero media
 

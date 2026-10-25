@@ -1,4 +1,4 @@
-# Dune Materials 0.6.3
+# Dune Materials 0.6.7
 
 Companion extension for the next Dune Rev 2.4.0 preview. Install the matching
 `.pext` and `.pthm` packages together, then restart Playnite.
@@ -17,6 +17,12 @@ compatibility-mode preferences migrate to realtime; saved enable, grain and moti
 preferences are retained. Turning materials off, unsupported rendering or a missing
 background uses ordinary theme surfaces. The ThemeModifier material switch also
 disables materials.
+
+Plugin panels open, close and switch with eased height transitions and fades;
+their expansion indicators rotate. Enable **Reduce interface motion** in
+ThemeModifier for immediate changes. Windows animation preferences are also
+respected. These interface effects remain available when realtime materials are
+turned off in the extension settings.
 
 Settings follow the Playnite UI language (Chinese or English). Diagnostics are
 collapsed by default and can be expanded when reporting an issue.

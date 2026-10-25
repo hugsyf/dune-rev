@@ -5,7 +5,7 @@ Hero sections. Shared surface styles request companion-extension brushes and
 retain ordinary theme fallbacks. See the [material architecture](../MaterialExtension/ARCHITECTURE.md)
 when changing a source or surface. Build the extension with `Build-Materials.ps1`.
 
-Dune Materials 0.6.3 uses three layers: Background, Content and Flyout. All
+Dune Materials 0.6.7 uses three layers: Background, Content and Flyout. All
 material surfaces sample the window source with one shared blur radius; cards,
 expanded content, metadata, filters and navigation share the Content tint.
 `MaterialColor.hlsl` supplies shared color restraint before blur. The build
@@ -153,6 +153,17 @@ packaging the theme and extension.
   retain natural heights independently of added alignment space. Scrolling does
   not change the limit. Both hosts fall back to plain content presentation when
   the companion converter is unavailable.
+- Expansion motion uses `ExpansionPresentation` on the sizing host's Tag to
+  delay hiding outgoing plugin content until collapse completes. Body and window
+  link bindings use its displayed-selection flags with direct TabItem fallbacks.
+  Keep the selector inside the shell, the shell's bottom margin inside its content
+  and the five Chevron registration hosts loaded at zero size. Motion respects
+  `DuneReduceMotion` and Windows client-area animations; game and viewport changes
+  settle immediately. See `Rendering/ExpansionMotion.cs` and `ExpansionLayout.cs`.
+  The reveal animates a clip and the following stack's RenderTransform; layout
+  reserves space once and commits the final height on completion. Keep the
+  `DuneFollowingContent` transform intact. The scroll viewer avoids a full-page
+  opacity mask, and active Hero geometry clips replace their visual opacity masks.
 - Playnite Achievements uses cached brushes for its embedded table.
   `GridItemBackgroundBrush` remains transparent so the expansion surface shows
   through without reducing text opacity. Restart Playnite after changing that key.

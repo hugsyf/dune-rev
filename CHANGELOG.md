@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Fix a crash when plugin transitions encounter a read-only transform.
+- Reduce page layout and compositing work during plugin transitions and scrolling; skip material refreshes outside the visible scroll area.
+- Keep collapsed plugin panels out of layout and limit animation updates to active transitions.
+- Animate plugin panel expansion, collapse and switching with rotating indicators; add a reduced interface motion preference.
 - Use uniform material tints and edge-local highlights to reduce horizontal shading bands on cards.
 - Fix window background registration so realtime materials can render on cards, side panels and notifications.
 - Fix a Dune Materials startup crash when initializing shared blur settings.

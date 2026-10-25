@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -27,6 +29,8 @@ namespace DuneMaterials.Rendering
         Size fallbackSize;
         bool isFallback;
         bool failed;
+        readonly List<ScrollViewer> viewports = new List<ScrollViewer>();
+        bool viewportsKnown;
         MaterialScope attemptedScope, failedScope;
         long failedVersion;
         public readonly FrameworkElement Target;
@@ -52,18 +56,42 @@ namespace DuneMaterials.Rendering
         }
         void Activate() { Active = true; Dirty = true; runtime.Register(this); }
         void Loaded(object sender, RoutedEventArgs args) { if (!Active) Activate(); }
-        void Unloaded(object sender, RoutedEventArgs args) { Active = false; runtime.Unregister(this); Fallback(); lastScope = null; }
+        void Unloaded(object sender, RoutedEventArgs args)
+        {
+            Active = false; runtime.Unregister(this); Fallback(); lastScope = null;
+            viewports.Clear(); viewportsKnown = false;
+        }
         void VisibilityChanged(object sender, DependencyPropertyChangedEventArgs args) { Dirty = true; if (Active) runtime.Queue(this); }
         void Layout(object sender, EventArgs args)
         {
             if (!Active || !enabled || !runtime.Options.UseNewRenderer || !Target.IsVisible) return;
             try
             {
+                if (!InViewport()) return;
                 // LayoutUpdated runs before the layout is committed for presentation. Moving
                 // this crop to a Background-priority job leaves one frame with the old offset.
                 if (!TryRemap()) runtime.Queue(this);
             }
             catch (Exception exception) { runtime.SurfaceFailed(this, exception); }
+        }
+        bool InViewport()
+        {
+            if (!viewportsKnown)
+            {
+                for (DependencyObject node = VisualTreeHelper.GetParent(Target); node != null; node = VisualTreeHelper.GetParent(node))
+                {
+                    var scroll = node as ScrollViewer;
+                    if (scroll != null) viewports.Add(scroll);
+                }
+                viewportsKnown = true;
+            }
+            foreach (var scroll in viewports)
+            {
+                if (!scroll.IsVisible || scroll.ActualWidth <= 0 || scroll.ActualHeight <= 0) return false;
+                var bounds = Target.TransformToVisual(scroll).TransformBounds(new Rect(Target.RenderSize));
+                if (!bounds.IntersectsWith(new Rect(scroll.RenderSize))) return false;
+            }
+            return true;
         }
         bool TryRemap()
         {
@@ -111,6 +139,9 @@ namespace DuneMaterials.Rendering
         {
             if (!Active || !enabled || !runtime.Options.UseNewRenderer || !Target.IsVisible || Target.ActualWidth < 1 || Target.ActualHeight < 1)
             { if (showingMaterial || Dirty) Fallback(); Dirty = false; return; }
+            // Keep the retained brush while offscreen; refresh its crop when it
+            // enters the viewport again, before the next presentation.
+            if (!InViewport()) { Dirty = true; return; }
             var scope = !Dirty && lastScope != null ? lastScope : runtime.FindScope(Target);
             attemptedScope = scope;
             if (scope == null || scope.Frame == null)
@@ -155,7 +186,7 @@ namespace DuneMaterials.Rendering
             }
             bool transition = showingMaterial && lastScope == scope && lastVersion == frame.Version &&
                 size == lastSize && frameCrop == lastCrop &&
-                !runtime.Options.ReduceMotion && SystemParameters.ClientAreaAnimation;
+                !runtime.Options.ReduceMotion && !Equals(Target.TryFindResource("DuneReduceMotion"), true) && SystemParameters.ClientAreaAnimation;
             int current = ++revision;
             // Keep only the last completed layer, never chains of animated drawings.
             Drawing previous = output.Children.Count == 1 ? output.Children[0] : null;

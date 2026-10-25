@@ -64,9 +64,8 @@
                 </ToggleButton>
             </WrapPanel>
             <ContentControl x:Name="DuneExpansionSizing" Style="{StaticResource DuneExpansionSizingHost}"
-                            Margin="{DynamicResource DuneSectionBottomMargin}" Visibility="{Binding Visibility, ElementName=DuneDetailHeader}"
                             MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}">
-            <Grid x:Name="DuneExpansionSurface">
+            <Grid x:Name="DuneExpansionSurface" Margin="{DynamicResource DuneSectionBottomMargin}">
                 <Border x:Name="DuneExpansionBackdrop" Style="{StaticResource DuneContentCardBorder}" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Border BorderBrush="{DynamicResource AccentBrush}" BorderThickness="0,2,0,0" CornerRadius="{DynamicResource ControlCornerRadiusLarge}" IsHitTestVisible="False" />
                 <Grid Margin="16">
@@ -82,6 +81,7 @@
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding SelectedItem, ElementName=DunePluginDetails}" Value="{x:Null}" />
+                                            <Condition Binding="{Binding Tag.IsOpen, ElementName=DuneExpansionSizing, FallbackValue=False}" Value="False" />
                                             <Condition Binding="{Binding Visibility, ElementName=DuneAchievementsWindowLink}" Value="Collapsed" />
                                             <Condition Binding="{Binding Visibility, ElementName=DuneLanguagesWindowLink}" Value="Collapsed" />
                                             <Condition Binding="{Binding Visibility, ElementName=DuneDlcWindowLink}" Value="Collapsed" />
@@ -101,7 +101,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding IsSelected, ElementName=DuneAchievementsDetails}" Value="True" />
+                                                    <Condition Value="True"><Condition.Binding><PriorityBinding><Binding Path="Tag.Achievements" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneAchievementsDetails" /></PriorityBinding></Condition.Binding></Condition>
                                                     <Condition Binding="{Binding Visibility, ElementName=PlayniteAchievements_AchievementButton}" Value="Visible" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
@@ -129,7 +129,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding IsSelected, ElementName=DuneLanguagesDetails}" Value="True" />
+                                                    <Condition Value="True"><Condition.Binding><PriorityBinding><Binding Path="Tag.Languages" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneLanguagesDetails" /></PriorityBinding></Condition.Binding></Condition>
                                                     <Condition Binding="{Binding Visibility, ElementName=CheckLocalizations_PluginButton}" Value="Visible" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
@@ -157,7 +157,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding IsSelected, ElementName=DuneDlcDetails}" Value="True" />
+                                                    <Condition Value="True"><Condition.Binding><PriorityBinding><Binding Path="Tag.Dlc" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneDlcDetails" /></PriorityBinding></Condition.Binding></Condition>
                                                     <Condition Binding="{Binding Visibility, ElementName=CheckDlc_PluginButton}" Value="Visible" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
@@ -185,7 +185,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding IsSelected, ElementName=DuneHowLongToBeatDetails}" Value="True" />
+                                                    <Condition Value="True"><Condition.Binding><PriorityBinding><Binding Path="Tag.HowLongToBeat" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneHowLongToBeatDetails" /></PriorityBinding></Condition.Binding></Condition>
                                                     <Condition Binding="{Binding Visibility, ElementName=HowLongToBeat_PluginButton}" Value="Visible" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
@@ -213,7 +213,7 @@
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding IsSelected, ElementName=DuneActivityDetails}" Value="True" />
+                                                    <Condition Value="True"><Condition.Binding><PriorityBinding><Binding Path="Tag.Activity" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneActivityDetails" /></PriorityBinding></Condition.Binding></Condition>
                                                     <Condition Binding="{Binding Visibility, ElementName=GameActivity_PluginButton}" Value="Visible" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
@@ -246,7 +246,14 @@
                                 </Style>
                             </ToggleButton.Style>
                         </ToggleButton>
-                        <TextBlock Text="{Binding SelectedItem.Header, ElementName=DunePluginDetails}" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" />
+                        <TextBlock FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <PriorityBinding>
+                                    <Binding Path="Tag.Displayed.Header" ElementName="DuneExpansionSizing" />
+                                    <Binding Path="SelectedItem.Header" ElementName="DunePluginDetails" />
+                                </PriorityBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </DockPanel>
                     <TabControl Margin="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource DunePluginDetailsControl}" x:Name="DunePluginDetails" Grid.Row="1">
                         <!--Tab Overview-->
@@ -323,7 +330,7 @@
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, ElementName=DuneAchievementsDetails}" Value="True">
+                                        <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Achievements" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneAchievementsDetails" /></PriorityBinding></DataTrigger.Binding>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -355,7 +362,7 @@
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, ElementName=DuneLanguagesDetails}" Value="True">
+                                        <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Languages" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneLanguagesDetails" /></PriorityBinding></DataTrigger.Binding>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -377,7 +384,7 @@
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, ElementName=DuneDlcDetails}" Value="True">
+                                        <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Dlc" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneDlcDetails" /></PriorityBinding></DataTrigger.Binding>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -463,7 +470,7 @@
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, ElementName=DuneHowLongToBeatDetails}" Value="True">
+                                        <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.HowLongToBeat" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneHowLongToBeatDetails" /></PriorityBinding></DataTrigger.Binding>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -518,7 +525,7 @@
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, ElementName=DuneActivityDetails}" Value="True">
+                                        <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Activity" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneActivityDetails" /></PriorityBinding></DataTrigger.Binding>
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -551,6 +558,8 @@
                 </Grid>
             </Grid>
             </ContentControl>
+            <StackPanel x:Name="DuneFollowingContent">
+                <StackPanel.RenderTransform><TranslateTransform /></StackPanel.RenderTransform>
             <TabControl x:Name="DuneOverviewTabs" Style="{DynamicResource DuneOverviewTabControl}">
                 <TabItem x:Name="DescriptionTab" Header="{DynamicResource LOCOverviewLabel}" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}"></TabItem>
                 <TabItem Header="{DynamicResource LOCDuneRelatedGames}" Tag="{DynamicResource DuneShowRelations}" x:Name="DuneRelationsTab" FontSize="{DynamicResource FontSize}" FontFamily="{DynamicResource FontFamily}">
@@ -872,6 +881,7 @@
                     </Grid>
                 </Border>
             </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Fragments>
