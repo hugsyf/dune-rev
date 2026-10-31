@@ -8,6 +8,8 @@ A dark, Fluent-inspired theme for Playnite Desktop.
 
 面向 Playnite 桌面模式的深色 Fluent 风格主题。
 
+**Stable release / 正式版：[2.3.1](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.1)**
+
 [English](#english) · [简体中文](#简体中文) · [Screenshots / 截图](#screenshots--截图) · [Changelog](CHANGELOG.md)
 
 **Stable release / 稳定版：[2.3.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.0)**
