@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.3.1 - 2026-10-31
+
+- Fix tag filtering when clicking a tag in Details and Grid Details views (#7).
+
 ## v2.3.0 - 2026-10-08
 
 ### Added

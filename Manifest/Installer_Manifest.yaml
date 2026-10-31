@@ -1,5 +1,11 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.3.1
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-10-31
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.3.1/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_3_1.pthm
+    Changelog:
+      - Fix tag filtering when clicking a tag in Details and Grid Details views (#7).
   - Version: 2.3.0
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-08

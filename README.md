@@ -10,7 +10,7 @@ A dark, Fluent-inspired theme for Playnite Desktop.
 
 [English](#english) · [简体中文](#简体中文) · [Screenshots / 截图](#screenshots--截图) · [Changelog](CHANGELOG.md)
 
-**Current release / 当前版本：[2.3.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.0)**
+**Current release / 当前版本：[2.3.1](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.1)**
 
 ## Screenshots / 截图
 

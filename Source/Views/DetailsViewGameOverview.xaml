@@ -1631,7 +1631,7 @@
                                                                 <ItemsControl.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <Button Content="{Binding Name}" Margin="0,2,4,2" Style="{DynamicResource PropertyItemTagButton}"
-                                                                                Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetFeatureFilterCommand}"
+                                                                                Command="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=DataContext.SetTagFilterCommand}"
                                                                                 CommandParameter="{Binding}" />
                                                                     </DataTemplate>
                                                                 </ItemsControl.ItemTemplate>
