@@ -43,9 +43,16 @@ function Assert-ZipFile($archive, $entryName, $sourcePath) {
 $source = Join-Path $project 'Source'
 $theme = [IO.Compression.ZipFile]::OpenRead((Join-Path $output $themeName))
 try {
-    foreach ($file in Get-ChildItem -LiteralPath $source -Recurse -File | Where-Object { $_.Extension -in @('.xaml', '.yaml') }) {
-        $relative = $file.FullName.Substring($source.Length + 1).Replace('\', '/')
-        Assert-ZipFile $theme $relative $file.FullName
+    # Toolbox omits design files and files identical to Playnite's defaults.
+    # Compare the shipped markup with source and require the release's core files.
+    foreach ($entry in $theme.Entries) {
+        $relative = $entry.FullName.Replace([char]92, [char]47)
+        if ([IO.Path]::GetExtension($relative) -in @('.xaml', '.yaml')) {
+            Assert-ZipFile $theme $relative (Join-Path $source $relative)
+        }
+    }
+    foreach ($relative in @('theme.yaml', 'Common.xaml', 'Constants.xaml', 'thememodifier.yaml', 'Views/DetailsViewGameOverview.xaml', 'Views/GridViewGameOverview.xaml')) {
+        Assert-ZipFile $theme $relative (Join-Path $source $relative)
     }
 } finally { $theme.Dispose() }
 if ($includeExtension) {
