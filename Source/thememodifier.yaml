@@ -6,9 +6,6 @@ Constants:
     - PopupSurfaceColor: 'Popup and notification surface / 浮层与通知表面'
     - SurfaceBorderColor: 'Surface border / 表面边框'
 
-    - "Materials (Dune Materials extension) / 材质（配套 Dune Materials 扩展）"
-    - DuneMaterialsEnabled: 'Enable translucent materials / 启用半透明材质'
-    - DuneMaterialBlurRadius(0,120): 'Shared material blur radius / 统一材质模糊半径'
     - "Global layout / 全局布局"
     - TopPanelHeight(48,84): 'Top bar height / 顶栏高度'
     - GameLogoMaxWidth(160,720): 'Details logo maximum width / 详情页 Logo 最大宽度'
@@ -67,7 +64,6 @@ Constants:
     - GridViewGameCoverShowPlatformBanner: 'Grid covers: show platform/source labels / 网格封面：显示平台／来源标签'
     - GridViewGameCoverPreferSourceBanner: 'Grid covers: prefer store/source labels for PC games / 网格封面：PC 游戏优先显示商店／来源标签'
     - DuneManualGamesPreferPlatformBanner: 'Playnite/manual games: prefer platform labels / Playnite／手动添加游戏：优先显示平台标签'
-    - GridViewPlatformBannerHeight(20,64): 'Grid covers: platform banner height / 网格封面：平台标签高度'
     - GridViewGameCoverShowFavorite: 'Grid covers: show favorite icon / 网格封面：显示收藏图标'
     - GridViewGameCoverUseRoundedCorners: 'Grid covers: use rounded corners / 网格封面：使用圆角'
     - GridViewGameCoverShowShineAnimation: 'Grid covers: show hover shine / 网格封面：显示悬停光泽动画'

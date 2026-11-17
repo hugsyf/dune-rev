@@ -191,8 +191,7 @@
                 <Label Grid.Column="2" Content="{DynamicResource LOCDuneMainStoryLabel}" ToolTip="{DynamicResource LOCDuneMainStory}" Margin="0" />
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
                     <ContentControl x:Name="DuneHowLongToBeatProviderIcon" Tag="{Binding Text, ElementName=DuneHowLongToBeatIconPath}" Content="" Style="{StaticResource DuneLocalPluginIcon}"></ContentControl>
-                    <TextBlock x:Name="DuneHowLongToBeatOpenChevron" Tag="{Binding IsChecked, ElementName=DuneHowLongToBeatToggle}" Style="{StaticResource DuneSummaryChevron}" />
-<ContentControl Width="0" Height="0" IsHitTestVisible="False" DataContext="{Binding ElementName=DuneHowLongToBeatOpenChevron}" Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Chevron, FallbackValue={x:Null}}" />
+                    <TextBlock x:Name="DuneHowLongToBeatOpenChevron" Tag="{Binding IsChecked, ElementName=DuneHowLongToBeatToggle}" Style="{StaticResource DuneExpansionChevron}" />
                 </StackPanel>
             </Grid>
             <Grid x:Name="DuneHowLongToBeatValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
@@ -254,8 +253,7 @@
                 <Label Grid.Column="2" Content="{DynamicResource LOCDuneLastSession}" Margin="0" />
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
                     <ContentControl x:Name="DuneActivityProviderIcon" Tag="{Binding Text, ElementName=DuneActivityIconPath}" Content="" Style="{StaticResource DuneLocalPluginIcon}"></ContentControl>
-                    <TextBlock x:Name="DuneActivityOpenChevron" Tag="{Binding IsChecked, ElementName=DuneActivityToggle}" Style="{StaticResource DuneSummaryChevron}" />
-<ContentControl Width="0" Height="0" IsHitTestVisible="False" DataContext="{Binding ElementName=DuneActivityOpenChevron}" Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Chevron, FallbackValue={x:Null}}" />
+                    <TextBlock x:Name="DuneActivityOpenChevron" Tag="{Binding IsChecked, ElementName=DuneActivityToggle}" Style="{StaticResource DuneExpansionChevron}" />
                 </StackPanel>
             </Grid>
             <Grid x:Name="DuneActivityValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
@@ -302,8 +300,7 @@
                 <Label Grid.Column="2" Content="{DynamicResource LOCDuneAchievements}" Margin="0" />
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0" IsHitTestVisible="False">
                     <ContentControl x:Name="DuneAchievementsProviderIcon" Tag="{Binding Text, ElementName=DuneAchievementsIconPath}" Content="" Style="{StaticResource DuneLocalPluginIcon}" />
-                    <TextBlock x:Name="DuneAchievementsOpenChevron" Tag="{Binding IsChecked, ElementName=DuneAchievementsToggle}" Style="{StaticResource DuneSummaryChevron}" />
-<ContentControl Width="0" Height="0" IsHitTestVisible="False" DataContext="{Binding ElementName=DuneAchievementsOpenChevron}" Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Chevron, FallbackValue={x:Null}}" />
+                    <TextBlock x:Name="DuneAchievementsOpenChevron" Tag="{Binding IsChecked, ElementName=DuneAchievementsToggle}" Style="{StaticResource DuneExpansionChevron}" />
                 </StackPanel>
             </Grid>
             <Grid x:Name="DuneAchievementsValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
@@ -434,8 +431,7 @@
                     </Label>
                     <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="8,0,0,0" IsHitTestVisible="False">
                         <ContentControl x:Name="DuneLanguagesCatalogProviderIcon" Tag="{Binding Text, ElementName=DuneLanguagesIconPath}" Content="" Style="{StaticResource DuneLocalPluginIcon}"></ContentControl>
-                        <TextBlock x:Name="DuneLanguagesOpenChevron" Tag="{Binding IsChecked, ElementName=DuneLanguagesToggle}" Style="{StaticResource DuneSummaryChevron}" Visibility="{Binding Visibility, ElementName=DuneLanguagesToggle}" />
-<ContentControl Width="0" Height="0" IsHitTestVisible="False" DataContext="{Binding ElementName=DuneLanguagesOpenChevron}" Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Chevron, FallbackValue={x:Null}}" />
+                        <TextBlock x:Name="DuneLanguagesOpenChevron" Tag="{Binding IsChecked, ElementName=DuneLanguagesToggle}" Style="{StaticResource DuneExpansionChevron}" Visibility="{Binding Visibility, ElementName=DuneLanguagesToggle}" />
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="DuneLanguagesCatalogValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">
@@ -558,8 +554,7 @@
                     </Label>
                     <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="8,0,0,0" IsHitTestVisible="False">
                         <TextBlock x:Name="DuneDlcCatalogProviderIcon" Text="" Style="{StaticResource DuneSummaryProviderGlyph}" />
-                        <TextBlock x:Name="DuneDlcOpenChevron" Tag="{Binding IsChecked, ElementName=DuneDlcToggle}" Style="{StaticResource DuneSummaryChevron}" Visibility="{Binding Visibility, ElementName=DuneDlcToggle}" />
-<ContentControl Width="0" Height="0" IsHitTestVisible="False" DataContext="{Binding ElementName=DuneDlcOpenChevron}" Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Chevron, FallbackValue={x:Null}}" />
+                        <TextBlock x:Name="DuneDlcOpenChevron" Tag="{Binding IsChecked, ElementName=DuneDlcToggle}" Style="{StaticResource DuneExpansionChevron}" Visibility="{Binding Visibility, ElementName=DuneDlcToggle}" />
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="DuneDlcCatalogValue" Grid.Row="2" MinHeight="28" VerticalAlignment="Top">

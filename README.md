@@ -8,29 +8,26 @@ A dark, Fluent-inspired theme for Playnite Desktop.
 
 面向 Playnite 桌面模式的深色 Fluent 风格主题。
 
-**Stable release / 正式版：[2.3.1](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.1)**
+**Stable release / 正式版：[2.4.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.4.0)**
 
 [English](#english) · [简体中文](#简体中文) · [Screenshots / 截图](#screenshots--截图) · [Changelog](CHANGELOG.md)
 
-**Stable release / 稳定版：[2.3.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.3.0)**
+Version 2.4.0 includes consistent controls, manual Hero media selection, basic
+panel motion and proportional cover banners. Install the `.pthm` theme package.
+**Dune Materials / Helper is optional and is not included in this release.**
+Theme options continue to use ThemeModifier.
 
-**Opt-in preview / 预览版：[2.4.0 Preview 1 + Dune Materials 0.5.0](https://github.com/hugsyf/dune-rev/releases/tag/v2.4.0-preview.1)**
+2.4.0 统一基础控件，内置 Hero 手动媒体切换与基础动效，并修复封面横幅缩放比例。
+安装 `.pthm` 主题包即可使用，**无需安装 Dune Materials / Helper**；主题选项继续使用 ThemeModifier。
 
-The preview adds shared realtime materials and Hero background/screenshot/video
-selection. Install both the `.pthm` theme and `.pext` extension from the preview
-release. Existing material preferences are retained; new installations use
-Realtime by default. Automatic media playback is off by default.
+If you installed the earlier Dune Materials preview, disable it before using
+this standalone stable release. Realtime glass and advanced companion features
+remain in development.
 
-预览版新增统一的实时材质，以及 Hero 背景／商店截图／视频切换。
-请安装预览页中的主题与配套扩展两个包。已有材质设置会保留，新安装默认使用实时模式，
-自动轮播／播放默认关闭。
+此前安装过 Dune Materials 预览扩展的用户，请先停用该预览扩展。
+实时玻璃及配套扩展的进阶功能仍在开发中。
 
-See [preview installation, optional plugins, feedback and rollback / 预览版安装、可选插件、反馈与回退](docs/releases/v2.4.0-preview.1.md).
-ThemeModifier controls appearance and layout; Dune Materials controls translucent
-materials. The theme remains usable without optional plugins.
-
-ThemeModifier 调整主题外观与布局，Dune Materials 控制半透明材质；可选插件缺失时主题仍可使用。
-
+See [release notes and installation / 更新与安装说明](docs/releases/v2.4.0.md).
 
 ## Screenshots / 截图
 
@@ -206,20 +203,16 @@ in **ScreenshotsVisualizer** as well as the theme preference. Set preferred lang
 in **CheckLocalizations** for its summary. GameActivity performance charts require
 performance data recorded by the plugin.
 
-Hero selects ready media in this order: **ExtraMetadata Loader video → Steam Store
-Screenshots Viewer screenshots → Playnite background**. Available media types have
-separate selectors; the screenshot selector has fading side previews (one image
-has no side previews, two images have only one neighboring preview). Hero and the
-store gallery share selection. The global backdrop always stays on Playnite artwork.
+The theme provides manual background, store screenshot and video selection.
+Screenshot controls include previous, next and open-gallery actions. Video
+controls include play, pause and mute. Install Steam Store Screenshots Viewer
+for store images and ExtraMetadata Loader for video content.
 
-Install **Dune Materials 0.4.5** for the media selector and automatic playback.
-**Auto** is shown only when screenshots/video are available and defaults to off;
-video is selected as a paused preview. Auto cycles screenshots every six seconds
-or plays video muted within the selected media type. Background disables Auto.
-Manual video play/pause and mute remain available. Automatic playback pauses when
-Hero leaves the viewport or the window is inactive; hovering the selector pauses
-the slideshow. The Auto preference is saved, while each game starts with the
-media priority above. Without the companion extension, still-image fallback remains.
+Dune Materials adds enhanced media previews and optional automatic playback.
+With the extension, Hero selects ready media in this order: video, store
+screenshots, then background. Automatic playback is off by default. It pauses
+when Hero leaves the viewport or the window is inactive. Hero and the store
+gallery share screenshot selection. The page backdrop keeps Playnite artwork.
 
 #### Custom cover banners
 
@@ -357,16 +350,13 @@ Dune Rev 基于 sakasakiking 的 [Dune](https://github.com/sakasakiking/Dune)，
 和主题开关。语言摘要的首选语言在 **CheckLocalizations** 中设置。
 GameActivity 的性能图表需要插件已经记录了性能数据。
 
-Hero 按 **ExtraMetadata Loader 视频 → Steam Store Screenshots Viewer 商店截图 →
-Playnite 背景图** 选择已就绪媒体。三个入口按实际可用内容显示；截图缩略框两侧显示渐隐预览，
-单张不显示侧图，两张只显示一个相邻预览。截图与下方商店截图页签共享选择。
-全局页面背景始终使用 Playnite 背景，不随 Hero 切换。
+主题内置背景、商店截图与视频的手动切换。截图支持上一张、下一张和打开图库，
+视频支持播放、暂停与静音。商店图片由 Steam Store Screenshots Viewer 提供，
+视频内容由 ExtraMetadata Loader 提供。
 
-媒体选择与自动播放需要配套 **Dune Materials 0.4.5**。有截图或视频时显示 **Auto**，
-首次默认关闭，视频优先选中但以暂停预览显示。开启后，截图每六秒轮播，视频静音自动播放，
-不跨媒体类型轮换；选择背景时 Auto 置灰。视频保留手动播放／暂停与静音按钮。
-Hero 滚出可视区域或窗口失焦时暂停，鼠标悬停媒体选择区时暂停截图轮播。
-自动开关会保存，每次切换游戏则重新按优先级选择媒体。未安装配套扩展时保留静态图片回退。
+Dune Materials 提供增强媒体预览和可选自动播放。安装后，Hero 按视频、商店截图、
+背景的顺序选择已就绪媒体。自动播放默认关闭，Hero 滚出可视区域或窗口失焦时暂停。
+Hero 与下方商店图库共享截图选择；全局页面背景保持 Playnite 背景图。
 
 #### 自定义封面横幅
 
@@ -387,16 +377,9 @@ Hero 滚出可视区域或窗口失焦时暂停，鼠标悬停媒体选择区时
 
 ### 帮助与反馈
 
-配套 Dune Materials 扩展可为卡片、展开面板、导航与筛选面板、Hero 操作按钮、搜索框和下拉菜单提供磨砂材质。
-需同时安装匹配的主题与扩展并重启 Playnite；ThemeModifier 的「磨砂材质：卡片、导航、
-按钮与控件」为总开关。菜单与通知采用更深的遮罩以保证可读性，关闭开关或未安装扩展时
-使用主题原有背景。构建与支持范围见 [扩展说明](MaterialExtension/README.md)。
-
-开发中的 Dune Materials 0.6.7 将材质统一为背景、内容、浮层三级。卡片、展开区、详情栏、
-筛选器与顶栏共用内容材质，菜单和通知采用更浓的遮罩；各层共享背景采样与模糊，
-搭配柔和高光和可选细颗粒。Hero 图片与视频保持清晰。
-扩展设置保留实时材质开关、颗粒与减少交互过渡；ThemeModifier 可调整统一模糊半径，
-默认 48。旧兼容模式设置自动迁移至实时渲染，材质关闭或无法渲染时使用普通主题背景。
+Dune Materials 的实时玻璃、精细布局、增强媒体预览与自动播放功能仍在开发中。
+本次正式版提供独立主题，基础控件、手动媒体切换及轻量动效均可直接使用。
+开发进度见 [扩展说明](MaterialExtension/README.md)。
 
 如果缺少卡片或页签，请检查对应扩展是否安装、插件主题集成与主题开关是否开启，
 以及当前游戏是否有相应数据。Play Notes 没有笔记时也会显示新建提示。

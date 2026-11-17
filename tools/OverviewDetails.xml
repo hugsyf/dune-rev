@@ -63,6 +63,7 @@
                     </ToggleButton.Style>
                 </ToggleButton>
             </WrapPanel>
+            <Grid MaxHeight="{Binding ActualHeight, ElementName=PART_ScrollViewHost, FallbackValue=600}">
             <ContentControl x:Name="DuneExpansionSizing" Style="{StaticResource DuneExpansionSizingHost}"
                             MaxHeight="{DynamicResource DuneAchievementsPanelMaxHeight}">
             <Grid x:Name="DuneExpansionSurface" Margin="{DynamicResource DuneSectionBottomMargin}">
@@ -327,7 +328,7 @@
                     <Grid x:Name="DunePluginBodies" Grid.Row="2">
                         <Grid x:Name="DuneAchievementsDetailsBody">
                             <Grid.Style>
-                                <Style TargetType="Grid">
+                                <Style TargetType="Grid" BasedOn="{StaticResource DunePluginEntrance}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
                                         <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Achievements" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneAchievementsDetails" /></PriorityBinding></DataTrigger.Binding>
@@ -359,7 +360,7 @@
                         </Grid>
                         <Grid x:Name="DuneLanguagesDetailsBody">
                             <Grid.Style>
-                                <Style TargetType="Grid">
+                                <Style TargetType="Grid" BasedOn="{StaticResource DunePluginEntrance}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
                                         <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Languages" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneLanguagesDetails" /></PriorityBinding></DataTrigger.Binding>
@@ -381,7 +382,7 @@
                         </Grid>
                         <Grid x:Name="DuneDlcDetailsBody">
                             <Grid.Style>
-                                <Style TargetType="Grid">
+                                <Style TargetType="Grid" BasedOn="{StaticResource DunePluginEntrance}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
                                         <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Dlc" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneDlcDetails" /></PriorityBinding></DataTrigger.Binding>
@@ -467,7 +468,7 @@
                         </Grid>
                         <Grid x:Name="DuneHowLongToBeatDetailsBody">
                             <Grid.Style>
-                                <Style TargetType="Grid">
+                                <Style TargetType="Grid" BasedOn="{StaticResource DunePluginEntrance}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
                                         <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.HowLongToBeat" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneHowLongToBeatDetails" /></PriorityBinding></DataTrigger.Binding>
@@ -522,7 +523,7 @@
                         </Grid>
                         <Grid x:Name="DuneActivityDetailsBody">
                             <Grid.Style>
-                                <Style TargetType="Grid">
+                                <Style TargetType="Grid" BasedOn="{StaticResource DunePluginEntrance}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
                                         <DataTrigger Value="True"><DataTrigger.Binding><PriorityBinding><Binding Path="Tag.Activity" ElementName="DuneExpansionSizing" /><Binding Path="IsSelected" ElementName="DuneActivityDetails" /></PriorityBinding></DataTrigger.Binding>
@@ -558,6 +559,7 @@
                 </Grid>
             </Grid>
             </ContentControl>
+            </Grid>
             <StackPanel x:Name="DuneFollowingContent">
                 <StackPanel.RenderTransform><TranslateTransform /></StackPanel.RenderTransform>
             <TabControl x:Name="DuneOverviewTabs" Style="{DynamicResource DuneOverviewTabControl}">

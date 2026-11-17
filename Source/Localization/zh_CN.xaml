@@ -31,6 +31,13 @@
     <sys:String x:Key="LOCDuneEmptyDlcCategory">此分类暂无 DLC。</sys:String>
     <sys:String x:Key="LOCDuneSource">来源：</sys:String>
     <sys:String x:Key="LOCDuneOpenPlugin">在插件中打开</sys:String>
+    <sys:String x:Key="LOCDuneMediaBackground">背景</sys:String>
+    <sys:String x:Key="LOCDuneMediaVideo">视频</sys:String>
+    <sys:String x:Key="LOCDuneMediaPlay">播放视频</sys:String>
+    <sys:String x:Key="LOCDuneMediaPause">暂停视频</sys:String>
+    <sys:String x:Key="LOCDuneMediaMute">静音</sys:String>
+    <sys:String x:Key="LOCDuneMediaPrevious">上一张截图</sys:String>
+    <sys:String x:Key="LOCDuneMediaNext">下一张截图</sys:String>
     <sys:String x:Key="LOCDuneCollapseDetails">收起</sys:String>
     <sys:String x:Key="LOCDuneEmbeddedUnavailable">此插件当前没有可展开的详情。</sys:String>
     <sys:String x:Key="LOCDuneSolo">单人</sys:String>

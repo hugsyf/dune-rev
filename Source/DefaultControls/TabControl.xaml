@@ -78,7 +78,7 @@
 
     <ControlTemplate x:Key="DuneTabItemTemplate" TargetType="{x:Type TabItem}">
                     <Grid x:Name="TabGrid" Margin="0,0,8,0">
-                        <Border x:Name="HoverBg"  CornerRadius="{DynamicResource ControlCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
+                        <Border x:Name="HoverBg"  CornerRadius="{DynamicResource DuneInputCornerRadius}" Opacity="0" Background="{DynamicResource ControlOverlayBrush}"/>
                         <TextBlock x:Name="TextContent" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"
                                    Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}">
                             <ContentPresenter x:Name="ContentSite" RecognizesAccessKey="True" ContentSource="Header" HorizontalAlignment="Center" Margin="0"

@@ -165,7 +165,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
+    <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="CalendarDayButtonStyle" Value="{DynamicResource CalendarDayButtonStyle}"/>
         <Setter Property="CalendarButtonStyle" Value="{DynamicResource CalendarButtonStyle}"/>
@@ -173,7 +173,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Calendar">
-                    <Grid Name="PART_Root">
+                    <Grid Name="PART_Root"><Border Style="{DynamicResource PopupBorder}" />
                         <CalendarItem Name="PART_CalendarItem" ClipToBounds="False"
                                       Style="{DynamicResource CalendarItemStyle}"
                                       VerticalAlignment="Center" />
@@ -183,7 +183,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type DatePicker}">
+    <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Background" Value="{DynamicResource DuneInputFillBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="TextBlock.Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
@@ -191,30 +194,25 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DatePicker">
-                    <Grid Height="28">
-                        <Border x:Name="HoverBg" BorderThickness="0"  CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.08" Background="{DynamicResource ControlOverlayBrush}"/>
-                        <Border x:Name="SelectedBg" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0" BorderBrush="{DynamicResource ControlOverlayBrush}"/>
-                        <DockPanel Margin="6,0,6,0">
-                            <Popup x:Name="PART_Popup" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=Border}" />
-                            <ToggleButton x:Name="PART_Button" DockPanel.Dock="Right" Content="&#xe163;"
+                    <Grid x:Name="DateRoot" MinHeight="{DynamicResource DuneInputMinHeight}">
+                        <Border x:Name="Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource DuneInputCornerRadius}" />
+                        <Border x:Name="BottomStroke" Height="1" Margin="4,0" VerticalAlignment="Bottom" Background="{DynamicResource DuneInputBottomBrush}" />
+                        <DockPanel Margin="8,0,4,0">
+                            <Popup x:Name="PART_Popup" Style="{DynamicResource DuneMenuPopup}" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" VerticalOffset="4" PlacementTarget="{Binding ElementName=DateRoot}" />
+                            <ToggleButton x:Name="PART_Button" DockPanel.Dock="Right" Content="&#xE787;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
                                           Style="{DynamicResource DataPickerToggleButton}"
-                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <DatePickerTextBox x:Name="PART_TextBox" DockPanel.Dock="Left" VerticalAlignment="Center" />
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                            <DatePickerTextBox x:Name="PART_TextBox" VerticalAlignment="Center" />
                         </DockPanel>
-
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger SourceName="PART_TextBox"  Property="IsFocused" Value="True">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
-                            <Setter Property="Opacity" Value="0.16" TargetName="SelectedBg" />
+                        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="BottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="BottomStroke" Property="Height" Value="2" />
                         </Trigger>
-                        <Trigger SourceName="PART_Button"  Property="IsFocused" Value="True">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
-                            <Setter Property="Opacity" Value="0.16" TargetName="SelectedBg" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.16" TargetName="HoverBg" />
-                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True"><Setter TargetName="BottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" /></Trigger>
+                        <Trigger Property="Validation.HasError" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="{DynamicResource DuneValidationBrush}" /></Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -223,6 +221,7 @@
     </Style>
 
     <Style TargetType="{x:Type DatePickerTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />

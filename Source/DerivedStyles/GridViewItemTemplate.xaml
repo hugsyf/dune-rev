@@ -112,7 +112,7 @@
                                     <!-- Keep the strip inside the cover's shared rounded mask. Platform
                                          lookups are independent of ThemeExtras' source-first cache, so
                                          disabling source labels cannot leave a store banner selected. -->
-                                    <Grid x:Name="DuneCoverPlatformHeader" Height="{DynamicResource GridViewPlatformBannerHeight}"
+                                    <Grid x:Name="DuneCoverPlatformHeader"
                                           Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}" IsHitTestVisible="False"
                                           Background="{DynamicResource CardSurfaceBrush}" ClipToBounds="True">
                                         <Grid.Style>
@@ -219,9 +219,9 @@
                                                 </Style>
                                             </TextBlock.Style>
                                         </TextBlock>
-                                        <!-- Fill removes letterboxing; the outer cover mask rounds the
-                                             strip's top corners at exactly the cover's own dimensions. -->
-                                        <Image x:Name="DuneCoverBannerImage" Stretch="Fill" RenderOptions.BitmapScalingMode="Fant"
+                                        <!-- The auto-sized row follows the image aspect ratio at the cover width.
+                                             The shared cover mask keeps the strip's top corners rounded. -->
+                                        <Image x:Name="DuneCoverBannerImage" Stretch="Uniform" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="Fant"
                                                Tag="{DynamicResource GridViewGameCoverPreferSourceBanner}">
                                             <Image.Style>
                                                 <Style TargetType="Image">

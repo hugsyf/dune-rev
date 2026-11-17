@@ -7,6 +7,7 @@
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="MinHeight" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Background" Value="{DynamicResource DuneInputFillBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DuneInputBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
@@ -19,46 +20,56 @@
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />
-        <Setter Property="Padding" Value="6,4,6,4" />
+        <Setter Property="Padding" Value="{DynamicResource DuneInputPadding}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource DuneInputCornerRadius}" />
-                        <Border x:Name="HoverBg" Background="{DynamicResource ControlOverlayBrush}" Opacity="0"
-                                CornerRadius="{DynamicResource DuneInputCornerRadius}" />
-                        <Border x:Name="BottomStroke" Height="1" Margin="4,0" VerticalAlignment="Bottom"
-                                Background="{DynamicResource DuneInputBottomBrush}" />
-                        <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
-                                HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}" />
+                        <Border x:Name="Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource DuneInputCornerRadius}">
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="True" Focusable="False"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" />
+                        </Border>
+                        <Border x:Name="BottomStroke" Height="1" Margin="4,0" VerticalAlignment="Bottom" Background="{DynamicResource DuneInputBottomBrush}" IsHitTestVisible="False" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" Value="0.04" TargetName="HoverBg" />
+                        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
+                        <Trigger Property="IsReadOnly" Value="True"><Setter TargetName="Surface" Property="Background" Value="Transparent" /></Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="BottomStroke" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="BottomStroke" Property="Height" Value="2" />
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="true">
-                            <Setter Property="Opacity" Value="0" TargetName="HoverBg" />
-                            <Setter Property="Height" Value="2" TargetName="BottomStroke" />
-                            <Setter Property="Background" Value="{DynamicResource AccentBrush}" TargetName="BottomStroke" />
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="Surface" Property="BorderBrush" Value="{DynamicResource DuneValidationBrush}" />
+                            <Setter TargetName="BottomStroke" Property="Background" Value="{DynamicResource DuneValidationBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="AcceptsReturn" Value="False" />
+                    <Condition Property="TextWrapping" Value="NoWrap" />
+                </MultiTrigger.Conditions>
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6" />
+                <Setter Property="Opacity" Value="{DynamicResource DuneDisabledOpacity}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!-- The top search box shares the input surface and focus feedback. -->
     <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="0" />
         <Setter Property="Padding" Value="0" />
     </Style>
     <!--@FilterPanel-->
     <Style x:Key="SearchSmallTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />
@@ -77,6 +88,7 @@
     </Style>
 
     <Style x:Key="DetailViewTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />

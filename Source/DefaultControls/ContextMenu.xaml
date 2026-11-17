@@ -14,11 +14,29 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
-                    <Border Style="{DynamicResource PopupBorder}">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="8,8,8,8">
-                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                        </ScrollViewer>
-                    </Border>
+                    <Grid>
+                        <Border x:Name="MotionPreference" Tag="{DynamicResource DuneReduceMotion}" Visibility="Collapsed" />
+                        <Border x:Name="Surface" Style="{DynamicResource DuneMenuSurface}" Grid.IsSharedSizeScope="True">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True" MaxHeight="{DynamicResource DuneMenuMaxHeight}">
+                                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsOpen, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Tag, ElementName=MotionPreference}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="DuneMenuEntrance"><Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Surface" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.12" FillBehavior="Stop" />
+                                </Storyboard></BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions><RemoveStoryboard BeginStoryboardName="DuneMenuEntrance" /></MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

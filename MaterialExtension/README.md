@@ -1,8 +1,11 @@
-# Dune Materials 0.6.7
+# Dune Materials 0.6.8
 
 Companion extension for the next Dune Rev 2.4.0 preview. Install the matching
 `.pext` and `.pthm` packages together, then restart Playnite.
-The theme works with ordinary surfaces if this extension is absent.
+The theme includes ordinary surfaces, expansion indicator motion, basic panel
+entrance effects, viewport height limits and manual Hero media controls.
+Dune Materials adds realtime glass, precise panel alignment, continuous panel
+transitions, enhanced media previews and automatic playback.
 
 ## Settings
 
@@ -19,7 +22,7 @@ background uses ordinary theme surfaces. The ThemeModifier material switch also
 disables materials.
 
 Plugin panels open, close and switch with eased height transitions and fades;
-their expansion indicators rotate. Enable **Reduce interface motion** in
+the theme also rotates expansion indicators without this extension. Enable **Reduce interface motion** in
 ThemeModifier for immediate changes. Windows animation preferences are also
 respected. These interface effects remain available when realtime materials are
 turned off in the extension settings.

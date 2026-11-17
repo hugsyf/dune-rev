@@ -86,7 +86,6 @@
         <sys:Boolean x:Key="GridViewGameCoverShowPlatformBanner">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverPreferSourceBanner">True</sys:Boolean>
         <sys:Boolean x:Key="DuneManualGamesPreferPlatformBanner">True</sys:Boolean>
-        <sys:Double x:Key="GridViewPlatformBannerHeight">32</sys:Double>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">False</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
@@ -256,6 +255,20 @@
     <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="Transparent" />
 
     <!--InputStyle-->
+    <!-- Shared control metrics. Local compact/large styles can override them. -->
+    <sys:Double x:Key="DuneItemMinHeight">32</sys:Double>
+    <sys:Double x:Key="DuneInputMinHeight">32</sys:Double>
+    <sys:Double x:Key="DuneMenuMaxHeight">480</sys:Double>
+    <sys:Double x:Key="DuneDisabledOpacity">0.55</sys:Double>
+    <Thickness x:Key="DuneInputPadding">8,5</Thickness>
+    <Thickness x:Key="DuneButtonPadding">12,5</Thickness>
+    <Thickness x:Key="DuneItemPadding">8,5</Thickness>
+    <Thickness x:Key="DuneFlyoutPadding">6</Thickness>
+    <Color x:Key="DuneSelectionColor">#334F9FC7</Color>
+    <Color x:Key="DuneHoverColor">#18FFFFFF</Color>
+    <SolidColorBrush x:Key="DuneSelectionFillBrush" Color="{DynamicResource DuneSelectionColor}" />
+    <SolidColorBrush x:Key="DuneValidationBrush" Color="#FF8A80" />
+
     <CornerRadius x:Key="DuneInputCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="DuneFlyoutCornerRadius">8</CornerRadius>
     <!-- Expanded lists obscure underlying text; the closed input remains translucent. -->

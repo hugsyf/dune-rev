@@ -38,8 +38,8 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
-                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
+            <Popup Style="{DynamicResource DuneMenuPopup}" Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
+                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="{DynamicResource DuneFlyoutPadding}">
                     <ItemsControl x:Name="PART_ItemsPanel" />
                 </Border>
             </Popup>
@@ -61,7 +61,7 @@
     <Style x:Key="FilterSelectionBoxItemStyle" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
         <Setter Property="Padding" Value="8,4" />
         <Setter Property="Margin" Value="4,1" />
-        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="MinHeight" Value="{DynamicResource DuneInputMinHeight}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource DuneInputHoverBrush}" /></Trigger>
         </Style.Triggers>
@@ -70,7 +70,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Height" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Template" Value="{DynamicResource FilterSelectionBoxTemplate}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -82,7 +82,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Height" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Template" Value="{DynamicResource FilterSelectionBoxTemplate}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -94,7 +94,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Height" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Template" Value="{DynamicResource FilterSelectionBoxTemplate}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">

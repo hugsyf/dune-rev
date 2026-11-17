@@ -1,17 +1,16 @@
 # Changelog
 
-## Unreleased
+## v2.4.0 - 2026-11-17
 
-- Fix a crash when plugin transitions encounter a read-only transform.
-- Reduce page layout and compositing work during plugin transitions and scrolling; skip material refreshes outside the visible scroll area.
-- Keep collapsed plugin panels out of layout and limit animation updates to active transitions.
-- Animate plugin panel expansion, collapse and switching with rotating indicators; add a reduced interface motion preference.
-- Use uniform material tints and edge-local highlights to reduce horizontal shading bands on cards.
-- Fix window background registration so realtime materials can render on cards, side panels and notifications.
-- Fix a Dune Materials startup crash when initializing shared blur settings.
-- Unify realtime materials into background, content and flyout layers with shared blur, softer highlights, restrained artwork colors and fine grain.
-- Give cards, expanded panels, details, filters and the top bar a matching content surface; use a stronger tint for notifications and menus.
-- Add a shared material blur setting and simplify Dune Materials settings. Compatibility mode is replaced by realtime rendering, with ordinary theme surfaces when materials are unavailable or disabled.
+- Unify menus, dropdowns, tooltips, inputs, lists, tables and navigation controls with consistent spacing, selection and keyboard focus.
+- Match text, password, numeric, date and path inputs. Align standard buttons and inputs at a 32 DIP minimum height while retaining compact icon buttons and multiline editors.
+- Add table sort indicators, input validation feedback and larger slider handles.
+- Include manual Hero background, screenshot and video controls without Dune Materials. Keep media selection independent of playback commands and stabilize control placement.
+- Include expansion indicator motion, light panel entrance effects and viewport height limits. Keep short DLC panels compact and honor reduced motion.
+- Preserve cover banner proportions when changing cover width.
+- Refine Hero layout, media placement and detail-page scrolling.
+
+See [installation and release notes](docs/releases/v2.4.0.md).
 
 ## v2.4.0-preview.1 - 2026-10-24
 

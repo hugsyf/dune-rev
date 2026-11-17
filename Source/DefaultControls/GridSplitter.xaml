@@ -8,5 +8,13 @@
 
     <Style TargetType="{x:Type GridSplitter}">
         <Setter Property="Background" Value="{DynamicResource PanelSeparatorBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DuneKeyboardFocus}" />
+        <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="GridSplitter">
+            <Border x:Name="Grip" Background="{TemplateBinding Background}" />
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Grip" Property="Background" Value="{DynamicResource AccentBrush}" /></Trigger>
+                <Trigger Property="IsDragging" Value="True"><Setter TargetName="Grip" Property="Background" Value="{DynamicResource AccentBrush}" /></Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate></Setter.Value></Setter>
     </Style>
 </ResourceDictionary>

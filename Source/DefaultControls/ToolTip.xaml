@@ -6,7 +6,8 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
-    <Style TargetType="{x:Type ToolTip}">
+    <Style TargetType="{x:Type ToolTip}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
@@ -19,7 +20,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolTip}">
                     <Border Uid="Dune.Material.Popup" Tag="{DynamicResource DuneMaterialsEnabled}" x:Name="Border" BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource DuneInputCornerRadius}" BorderBrush="{DynamicResource PopupBorderBrush}">
+                            CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource PopupBorderBrush}">
                         <Border.Background>
                             <PriorityBinding>
                                 <Binding RelativeSource="{RelativeSource Self}" Converter="{PluginConverter Plugin=DuneMaterials, Converter=MaterialBrushConverter}" ConverterParameter="Resource:PopupBackgroundBrush" />

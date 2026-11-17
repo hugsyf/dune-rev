@@ -27,6 +27,11 @@
 
     </Style>
 
+    <Style x:Key="DuneMenuSurface" TargetType="Border" BasedOn="{StaticResource PopupBorder}">
+        <Setter Property="Padding" Value="{DynamicResource DuneFlyoutPadding}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
     <Style x:Key="DuneDropdownPopupBorder" TargetType="Border" BasedOn="{StaticResource PopupBorder}">
         <Setter Property="Background">
             <Setter.Value>

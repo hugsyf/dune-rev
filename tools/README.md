@@ -186,34 +186,24 @@ Release output is ignored by Git. Theme and installer metadata are maintained in
 `Source/theme.yaml` and `Manifest/Installer_Manifest.yaml`; the installer download
 URL must match the published `.pthm` asset.
 
-## Preview releases
+## Releases
 
-Development uses `main`; version tags preserve stable and preview snapshots.
-Release versions, source branch, tag and notes are listed in `Release.psd1`. Increment the
-theme and extension manifests independently when their shipped contents change;
-release tags identify the tested pair. Playnite manifests use numeric versions,
-while GitHub marks the release as a prerelease.
-
-Run in Windows PowerShell 5.1:
+Development uses `main`. Tags preserve stable and preview snapshots.
+Set the tag, versions and notes in `Release.psd1`. `IncludeExtension = $false`
+builds a standalone theme. Use Windows PowerShell 5.1:
 
 ```powershell
+./tools/Update-Theme.ps1
+# Commit release sources before building.
 ./tools/Build-Release.ps1 -ToolboxPath "$env:LOCALAPPDATA/Playnite/toolbox.exe"
+./tools/Publish-Release.ps1
 ```
 
-This regenerates shared theme sources, compiles the extension and packages the
-theme through `package.ps1`. The two installable packages are written under
-`dist/releases/<tag>/`. Install them in Playnite to review the result.
-The SDK defaults to `.local-archive/material-sdk/Playnite.SDK.dll` and stays local.
+The stable publisher uploads the theme and SHA256SUMS.txt. It uses existing Git
+credentials, pushes the branch and tag without force, uploads a draft and then
+publishes it as Latest. Update `Manifest/Installer_Manifest.yaml` after the release
+assets are available. Its download URL must match the theme asset filename.
 
-After reviewing and committing the changes on the configured branch, publish:
-
-```powershell
-./tools/Publish-Preview.ps1
-```
-
-Publishing requires existing GitHub credentials in Git's credential helper. It
-checks the clean source branch and package files, pushes the branch and tag
-without force, creates a draft, uploads both packages, then publishes
-it as a prerelease without replacing Latest. It keeps the Playnite add-on feed
-unchanged. Interrupted draft uploads can be resumed by
-running the same command; existing published releases are never overwritten.
+`Publish-Preview.ps1` remains available for paired development previews. Set a
+preview tag and `IncludeExtension = $true` when preparing one. Preview releases
+do not change the stable installer feed.

@@ -2,7 +2,13 @@
     <!-- One native provider per overview: both Hero and the gallery bind to it. -->
     <ContentControl x:Name="SteamScreenshots_SteamScreenshotsViewControl" Width="0" Height="0"
                     Opacity="0" IsHitTestVisible="False" Focusable="False" />
-    <Border x:Name="DuneHeroMediaSelection" Tag="{Binding Content.Selected, ElementName=DuneHeroMedia, FallbackValue=Screenshots}" Visibility="Collapsed" />
+    <Border x:Name="DuneMotionPreference" Tag="{DynamicResource DuneReduceMotion}" Visibility="Collapsed" />
+    <Border x:Name="DuneHeroMediaSelection" Visibility="Collapsed">
+        <Border.Tag><PriorityBinding>
+            <Binding Path="Content.Selected" ElementName="DuneHeroMedia" />
+            <Binding Path="Uid" ElementName="DuneHeroNativeMedia" FallbackValue="Background" />
+        </PriorityBinding></Border.Tag>
+    </Border>
     <ContentControl x:Name="DuneHeroMaterialSourceRegistration" Width="0" Height="0" IsHitTestVisible="False"
                     DataContext="{Binding Parent, ElementName=HeroBanner}"
                     Content="{Binding RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=DuneMaterials, Converter=MaterialElementConverter}, ConverterParameter=Source, FallbackValue={x:Null}}">

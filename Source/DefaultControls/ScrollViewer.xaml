@@ -34,10 +34,12 @@
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Grip" Property="Opacity" Value="1" />
+                            <Setter TargetName="Grip" Property="Margin" Value="2" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="True">
                             <Setter TargetName="Grip" Property="Background" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="Grip" Property="Opacity" Value="1" />
+                            <Setter TargetName="Grip" Property="Margin" Value="2" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

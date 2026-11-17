@@ -103,7 +103,6 @@ namespace DuneMaterials.Rendering
             var host = value as FrameworkElement; if (host == null) return null;
             string role = parameter as string;
             if (role == "RoundedClip") return new RoundedClipRegistration(host);
-            if (role == "Chevron") return new ChevronMotionRegistration(host);
             if (role == "WindowSource") return new SourceRegistration(runtime, host, false, true);
             if (role == "Source" || role == "LiveSource") return new SourceRegistration(runtime, host, role == "LiveSource");
             if (role == "Background") return new BackgroundPresenter(runtime, host);

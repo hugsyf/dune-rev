@@ -11,7 +11,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource DuneCheckBoxStrokeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="{DynamicResource DuneItemMinHeight}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -63,7 +63,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6" />
+                <Setter Property="Opacity" Value="{DynamicResource DuneDisabledOpacity}" />
             </Trigger>
         </Style.Triggers>
     </Style>

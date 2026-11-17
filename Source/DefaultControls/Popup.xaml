@@ -10,4 +10,19 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowsTransparency" Value="True" />
     </Style>
+    <Style x:Key="DuneMenuPopup" TargetType="Popup" BasedOn="{StaticResource {x:Type Popup}}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Tag" Value="{DynamicResource DuneReduceMotion}" />
+        <Setter Property="PopupAnimation" Value="None" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="False" />
+                    <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                    <Condition Binding="{Binding Source={x:Static SystemParameters.MenuAnimation}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="PopupAnimation" Value="Fade" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

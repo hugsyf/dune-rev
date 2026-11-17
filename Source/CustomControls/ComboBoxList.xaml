@@ -36,8 +36,8 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
-                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
+            <Popup Style="{DynamicResource DuneMenuPopup}" Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
+                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="{DynamicResource DuneFlyoutPadding}">
                     <ItemsControl x:Name="PART_ItemsPanel" />
                 </Border>
             </Popup>
@@ -95,8 +95,8 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
-                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="0,4">
+            <Popup Style="{DynamicResource DuneMenuPopup}" Placement="Bottom" Focusable="False" AllowsTransparency="True" Name="Popup" IsOpen="{Binding IsChecked, ElementName=MainToggle, Mode=TwoWay, Delay=100}" StaysOpen="False" MaxHeight="300" MinWidth="{Binding ActualWidth, ElementName=MainToggle}" VerticalOffset="4">
+                <Border Style="{DynamicResource DuneDropdownPopupBorder}" CornerRadius="{DynamicResource DuneFlyoutCornerRadius}" BorderBrush="{DynamicResource DuneInputBorderBrush}" BorderThickness="1" Padding="{DynamicResource DuneFlyoutPadding}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -133,12 +133,12 @@
     </Style>
     <Style TargetType="{x:Type ComboBoxList}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Height" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Template" Value="{DynamicResource ComboBoxListBaseTemplate}" />
     </Style>
     <Style TargetType="{x:Type DdItemListSelectionBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Height" Value="{DynamicResource DuneInputMinHeight}" />
         <Setter Property="Template" Value="{DynamicResource FilterComboBoxListTemplate}" />
     </Style>
 </ResourceDictionary>
