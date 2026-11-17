@@ -1,5 +1,15 @@
 AddonId: DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40
 Packages:
+  - Version: 2.4.0
+    RequiredApiVersion: 2.10.0
+    ReleaseDate: 2026-11-17
+    PackageUrl: https://github.com/hugsyf/dune-rev/releases/download/v2.4.0/DuneRev_aa8df0f9-9406-4ea6-a31a-3bd13853fd40_2_4_0.pthm
+    Changelog:
+      - Requires Playnite 10.57 or newer. Dune Materials or Helper is optional.
+      - Unify menus, dropdowns, tooltips, inputs, lists, tables and navigation controls with consistent spacing and feedback.
+      - Align standard buttons and inputs, improve validation and sort indicators, and enlarge slider handles.
+      - Add built-in manual Hero background, screenshot and video controls, basic panel motion and viewport height limits.
+      - Preserve cover banner proportions and refine Hero layout and scrolling. If using the old Dune Materials preview, disable it before updating.
   - Version: 2.3.1
     RequiredApiVersion: 2.10.0
     ReleaseDate: 2026-10-31
